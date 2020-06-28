@@ -17,8 +17,21 @@ from django.contrib import admin
 from django.urls import path
 from collection.views import *
 
+
+collection_view = CollectionView.as_view({'get': 'list', 'put': 'create'})
+collection_single = CollectionView.as_view(
+    {'get': 'retrieve', 'delete': 'destroy', 'post': 'partial_update'})
+
+
+'''
+GET      /api/collections
+PUT      /api/collections
+GET      /api/collection/<id>
+POST     /api/collection/<id>
+DELETE   /api/collection/<id>
+'''
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('api/collections', all_collection_view),
-    path('api/collection/create', create_collection_view),
+    path('api/collections', collection_view),
+    path('api/collection/<int:pk>', collection_single),
 ]
