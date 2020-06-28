@@ -13,7 +13,7 @@ DELETE   /api/collection/<id>
 '''
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('collections', CollectionSingleView.as_view(
+    path('collections', CollectionAllView.as_view(
         {'get': 'list', 'put': 'create'})),
     path('collection/<int:pk>', CollectionSingleView.as_view(
         {'get': 'retrieve', 'delete': 'destroy', 'post': 'partial_update'})),

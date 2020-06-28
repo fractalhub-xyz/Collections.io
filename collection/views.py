@@ -15,6 +15,9 @@ class CollectionAllView(ModelViewSet):
     serializer_class = CollectionSerializer
     queryset = Collection.objects.all()
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
 
 class CollectionSingleView(ModelViewSet):
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
