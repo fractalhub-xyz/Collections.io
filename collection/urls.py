@@ -1,22 +1,13 @@
-from django.contrib import admin
-from django.urls import path
-from collection.views import *
-from django.views.decorators.csrf import csrf_exempt
+from django.urls import path, include
+from collection import views
+from rest_framework.routers import DefaultRouter
 
+router = DefaultRouter()
+router.register(r'snippets', views.SnippetViewSet)
+router.register(r'users', views.UserViewSet)
 
-'''
-GET      /api/collections
-PUT      /api/collections
-GET      /api/collection/<id>
-POST     /api/collection/<id>
-DELETE   /api/collection/<id>
-'''
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('collections', CollectionAllView.as_view(
-        {'get': 'list', 'put': 'create'})),
-    path('collection/<int:pk>', CollectionSingleView.as_view(
-        {'get': 'retrieve', 'delete': 'destroy', 'post': 'partial_update'})),
-    path('login', login_view),
-    path('logout', logout_view),
+    path('', include(router.urls)),
+    # path('login', login_view),
+    # path('logout', logout_view),
 ]

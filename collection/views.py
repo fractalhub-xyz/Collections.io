@@ -1,45 +1,46 @@
-from .models import *
-from .serializers import *
-from .permissions import *
-
 from django.contrib.auth import login, logout, authenticate
 
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from collection.models import Snippet
+from collection.serializers import SnippetSerializer, UserSerializer
+from django.contrib.auth.models import User
+from collection.permissions import IsOwnerOrReadOnly
+from rest_framework import permissions
+from rest_framework import viewsets
+from rest_framework import status
 
+    
+class SnippetViewSet(viewsets.ModelViewSet):
 
-class CollectionAllView(ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    serializer_class = CollectionSerializer
-    queryset = Collection.objects.all()
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        serializer.save(owner=self.request.user)
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
-class CollectionSingleView(ModelViewSet):
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
-    serializer_class = CollectionSerializer
-    queryset = Collection.objects.all()
+# Need to refactor 
+
+# @api_view(['POST'])
+# def login_view(request):
+#     username = request.POST.get('username', '')
+#     password = request.POST.get('password', '')
+#     user = authenticate(username=username, password=password)
+#     print(f"USERNMAE:{username} PASSWORD: {password} USER: {user}")
+
+#     if user is not None:
+#         login(request, user)
+#         return Response({'success': True}, status.HTTP_200_OK)
+#     else:
+#         return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
 
 
-@api_view(['POST'])
-def login_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    user = authenticate(username=username, password=password)
-    print(f"USERNMAE:{username} PASSWORD: {password} USER: {user}")
-
-    if user is not None:
-        login(request, user)
-        return Response({'success': True}, 200)
-    else:
-        return Response({'success': False}, 401)
-
-
-@api_view(['GET'])
-def logout_view(request):
-    logout(request)
-    return Response({'success': True}, 200)
+# @api_view(['GET'])
+# def logout_view(request):
+#     logout(request)
+#     return Response({'success': True}, status.HTTP_200_OK)

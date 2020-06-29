@@ -1,12 +1,17 @@
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField, CurrentUserDefault
-from .models import *
+from rest_framework import serializers
+from collection.models import *
+from django.contrib.auth.models import User
 
 
-class CollectionSerializer(ModelSerializer):
-    created_by = PrimaryKeyRelatedField(
-        read_only=True)
+class SnippetSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        model = Snippet
+        fields = ['id', 'owner', 'title', 'timestamp', 'type_of', 'link']
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail', read_only=True)
 
     class Meta:
-        model = Collection
-        fields = '__all__'
-        read_only_fields = ['created_by']
+        model = User
+        fields = ['id', 'username', 'snippets']
