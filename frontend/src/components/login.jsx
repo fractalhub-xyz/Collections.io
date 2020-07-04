@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { postLogin } from "../helpers/api";
 
 export default function Login() {
@@ -6,18 +7,21 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const history = useHistory();
+
   const handleOnClick = async (e) => {
     e.preventDefault();
     const data = { username, password };
     try {
       const response = await postLogin(data);
       if (response.data.success) {
-        // success
+        alert("successs");
+        history.replace("/");
       } else {
-        setError("Credentials are not valid");
+        setError("Got response but not success");
       }
     } catch {
-      setError("Uh oh something happened");
+      setError("Credentials are not valid");
     }
   };
 
@@ -29,15 +33,17 @@ export default function Login() {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
       </div>
 
       <div className="form-group">
         <label>Password</label>
         <input
-          type="text"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </div>
 

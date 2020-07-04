@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-
+import json
 from collection.models import Snippet, Collection
 from collection.serializers import SnippetSerializer, UserSerializer, CollectionSerializer
 from django.contrib.auth.models import User
@@ -40,10 +40,11 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 @api_view(['POST'])
 def login_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
+    json_body = json.loads(request.body.decode('utf-8'))
+    username = json_body.get('username', '')
+    password = json_body.get('password', '')
     user = authenticate(username=username, password=password)
-
+    print(f'Username: {username} Password: {password}')
     if user is not None:
         login(request, user)
         return Response({'success': True}, status.HTTP_200_OK)
