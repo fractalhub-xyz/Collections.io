@@ -4,10 +4,11 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'snippets', views.SnippetViewSet)
+router.register(r'collections', views.CollectionViewSet)
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('login', login_view),
-    # path('logout', logout_view),
+    path('login', views.login_view),
+    path('logout', views.logout_view),
 ]
