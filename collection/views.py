@@ -40,7 +40,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 @api_view(['GET'])
 def is_logged_in_view(request):
-    if request.user.is_authenticated is not None:
+    if request.user.is_authenticated:
         print("HELLOOO", request.user, request.user.is_authenticated)
         return Response({'success': True, 'user': request.user.username}, status.HTTP_200_OK)
     else:
