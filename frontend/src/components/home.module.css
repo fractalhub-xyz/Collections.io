@@ -5,8 +5,7 @@
 }
 
 .super {
-  font-size: 3rem;
-  color: white;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +14,52 @@
   background-color: rgba(0, 0, 0, .5)
 }
 
-.a {
-    color: white;
-    text-decoration: none;
+.title {
+  font-size: 3rem;
+  color: white;
+  border-bottom: 1px solid white;
+}
+.subtitle {
+  padding-top: 10px;
+  font-size: 1rem;
+  color:rgba(255, 255, 255, 0.7);
+}
+
+
+.formContainer {
+  padding-top: 4%;
+}
+
+.inputbox {
+  font-size: 1.1rem;
+  padding: 10px 0px;
+  border-bottom: 2px solid white;
+  color: white;
+}
+
+.inputbox input {
+  border: none;
+  outline: none;
+  background: none;
+  width: 350px;
+  color: white;
+  font-size: 1.1rem;
+  padding-left: 15px;
+}
+
+.msg {
+  padding-top: 15px;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.submit {
+  padding: 30px 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+}
+
+.proceed {
+  font-size: 3rem;
 }

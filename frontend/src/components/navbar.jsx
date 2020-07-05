@@ -57,7 +57,7 @@ function Navbar() {
           <div>Login</div>
         )}
       </div>
-      <div>{isLogged && <button onClick={handleLogout}>Logout</button>}</div>
+      {/* <div>{isLogged && <button onClick={handleLogout}>Logout</button>}</div> */}
     </div>
   );
 }
