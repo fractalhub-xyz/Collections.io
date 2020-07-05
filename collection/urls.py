@@ -11,4 +11,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('login', views.login_view),
     path('logout', views.logout_view),
+    path('isLoggedIn', views.is_logged_in_view),
 ]

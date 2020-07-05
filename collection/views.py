@@ -38,6 +38,15 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 # Need to refactor
 
+@api_view(['GET'])
+def is_logged_in_view(request):
+    if request.user.is_authenticated is not None:
+        print("HELLOOO", request.user, request.user.is_authenticated)
+        return Response({'success': True, 'user': request.user.username}, status.HTTP_200_OK)
+    else:
+        return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
+
+
 @api_view(['POST'])
 def login_view(request):
     json_body = json.loads(request.body.decode('utf-8'))
@@ -46,8 +55,9 @@ def login_view(request):
     user = authenticate(username=username, password=password)
     print(f'Username: {username} Password: {password}')
     if user is not None:
+        print("USER", user)
         login(request, user)
-        return Response({'success': True, 'User': username}, status.HTTP_200_OK)
+        return Response({'success': True, 'user': username}, status.HTTP_200_OK)
     else:
         return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
 

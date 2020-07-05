@@ -15,7 +15,8 @@ export default function Login() {
     try {
       const response = await postLogin(data);
       if (response.data.success) {
-        alert("successs");
+        const username = response.data.user;
+        localStorage.setItem("logged_in_user", username);
         history.replace("/");
       } else {
         setError("Got response but not success");

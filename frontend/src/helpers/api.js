@@ -13,3 +13,7 @@ export function getLogout() {
 export function getCollections() {
   return axios.get(base_url + "/collections");
 }
+
+export function getIsLoggedIn() {
+  return axios.get(base_url + "/isLoggedIn");
+}
