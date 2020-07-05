@@ -12,6 +12,7 @@ class Collection(models.Model):
         User, related_name='collections', on_delete=models.CASCADE)
     name = models.CharField(max_length=300)
     timestamp = models.DateTimeField(auto_now_add=True)
+    desc = models.CharField(max_length=500, default=" ")
 
     def __str__(self):
         return self.name 

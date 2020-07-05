@@ -1,0 +1,18 @@
+.nav {
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 1.5rem;    
+}
+
+.label {
+    padding-left: 10px;
+    text-decoration: none;
+    color: white;
+
+}

@@ -18,7 +18,7 @@ class CollectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Collection
-        fields = ['id', 'owner', 'name', 'timestamp', 'snippets']
+        fields = ['id', 'owner', 'name', 'timestamp', 'snippets', 'desc']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

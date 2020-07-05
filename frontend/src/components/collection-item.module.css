@@ -1,0 +1,21 @@
+.card {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    width: 25%;
+    height: 400px;
+    text-align: center;
+}
+
+.card:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#name {
+    font-size: 1.7rem;
+}
+
+#owner {
+    font-size: 1rem;
+}

@@ -5,13 +5,10 @@ import Login from "./components/login";
 import Home from "./components/home";
 import Collections from "./components/collections";
 
-import "./App.css";
-
 function App() {
   return (
     <div className="App">
       <Router>
-        <h1>Collections.io</h1>
         <Switch>
           <Route path="/" exact>
             <Home />

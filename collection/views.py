@@ -47,7 +47,7 @@ def login_view(request):
     print(f'Username: {username} Password: {password}')
     if user is not None:
         login(request, user)
-        return Response({'success': True}, status.HTTP_200_OK)
+        return Response({'success': True, 'User': username}, status.HTTP_200_OK)
     else:
         return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getCollections } from "../helpers/api";
+import Navbar from "./navbar";
 import CollectionItem from "./collection-item";
+import styles from "./collections.module.css";
 
 export default function Collections() {
   const [collections, setCollections] = useState([]);
@@ -8,7 +10,7 @@ export default function Collections() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    async function doStuff() {
+    async function fetchCollection() {
       try {
         const response = await getCollections();
         setCollections(response.data);
@@ -18,16 +20,27 @@ export default function Collections() {
       setIsLoading(false);
     }
 
-    doStuff();
+    fetchCollection();
   }, []);
 
   return (
-    <div>
-      <h1>All collections</h1>
-      {isLoading && "Loading..."}
-      {error ? error : null}
-      {!!collections.length &&
-        collections.map((coll) => <CollectionItem {...coll} />)}
+    <div className={styles.main}>
+      <div className={styles.body}>
+        <Navbar />
+        <div className={styles.title}>Collections</div>
+        <div className={styles.container}>
+          {isLoading && "Loading..."}
+          {error ? error : null}
+          {collections.map((coll) => (
+            <CollectionItem 
+            key={coll.name} 
+            name={coll.name}
+            owner={coll.owner}
+            desc={coll.desc}
+             />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
