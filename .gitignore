@@ -106,3 +106,5 @@ dist
 db.sqlite3
 *.pyc
 .vscode/
+.__pycache__/ 
+collection/migrations/

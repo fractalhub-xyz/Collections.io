@@ -13,6 +13,9 @@ class Collection(models.Model):
     name = models.CharField(max_length=300)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name 
+
 
 class Snippet(models.Model):
     collection = models.ForeignKey(
@@ -28,4 +31,4 @@ class Snippet(models.Model):
         ordering = ['timestamp']
 
     def __str__(self):
-        return self.title + " by " + self.created_by
+        return self.title
