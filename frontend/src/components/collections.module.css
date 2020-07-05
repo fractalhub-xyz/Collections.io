@@ -14,9 +14,13 @@
 
 }
 
-.container {
+/* .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
   padding: 1% 10%;
+  flex-wrap: wrap;
+  flex-direction: row;
+} */
+
+.slider {
 }

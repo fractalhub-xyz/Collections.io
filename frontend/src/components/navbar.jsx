@@ -48,7 +48,7 @@ function Navbar() {
           size="xl"
           style={{ color: "white" }}
         />
-        <span className={styles.label}>Collections.IO</span>
+        <span className={styles.label}>COLLECTIONS.IO</span>
       </a>
       <div>
         {isLogged ? (

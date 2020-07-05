@@ -1,7 +1,5 @@
 import React from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-
-import Login from "./components/login";
 import Home from "./components/home";
 import Collections from "./components/collections";
 
@@ -13,11 +11,6 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-
-          <Route path="/login">
-            <Login />
-          </Route>
-
           <Route path="/collections">
             <Collections />
           </Route>
