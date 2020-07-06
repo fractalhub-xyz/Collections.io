@@ -7,29 +7,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Navbar() {
   const [isLogged, setisLogged] = useState(false);
 
-  useEffect(() => {
-    async function check() {
-      console.log("Running...");
-      try {
-        await getIsLoggedIn();
-        setisLogged(true);
-      } catch {
-        setisLogged(false);
-      }
-    }
-
-    check();
-  }, []);
-
   const handleLogout = async () => {
     try {
       await getLogout();
       setisLogged(false);
-      localStorage.removeItem("logged_in_user");
+      localStorage.removeItem("username");
     } catch {
       alert("Oops failed");
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('username') !== null) {
+      console.log('LoggedIn')
+      setisLogged(true);
+      localStorage.setItem("loggedin", true);
+    } else {
+      console.log('LoggedOut')
+      setisLogged(false);
+      localStorage.setItem("loggedin", false);
+    }
+  }, []);
 
   return (
     <div className={styles.nav}>
@@ -52,9 +50,16 @@ function Navbar() {
       </a>
       <div>
         {isLogged ? (
-          <div>{localStorage["logged_in_user"]}</div>
+          <div>
+            {localStorage["username"]}|
+            <span>
+              {isLogged && <button onClick={handleLogout}>Logout</button>}
+            </span>
+          </div>
         ) : (
-          <div>Login</div>
+          <div>
+            <a href="/">Login</a>
+          </div>
         )}
       </div>
       {/* <div>{isLogged && <button onClick={handleLogout}>Logout</button>}</div> */}

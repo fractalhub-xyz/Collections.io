@@ -18,14 +18,14 @@ export default function Home() {
     try {
       const response = await postLogin(data);
       if (response.data.success) {
-        const username = response.data.user;
-        localStorage.setItem("logged_in_user", username);
+        localStorage.setItem("username", username);
         history.replace("/collections");
       } else {
         setError("Got response but not success");
       }
     } catch {
       setError("Credentials are not valid");
+      localStorage.setItem("username", null);
     }
   };
 

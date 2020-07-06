@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getCollections } from "../helpers/api";
 import Navbar from "./navbar";
 import CollectionItem from "./collection-item";
@@ -6,11 +6,17 @@ import styles from "./collections.module.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function Collections() {
   const [collections, setCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+
+  //temp
+  const [loggedIn, setLoggedIn] = useState(true);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -36,10 +42,27 @@ export default function Collections() {
 
   return (
     <div className={styles.main}>
+      <Navbar />
       <div className={styles.body}>
-        <Navbar />
-        <div className={styles.slider}>
-          <div className={styles.title}>Collections</div>
+        <div>
+          <div className={styles.title}>
+            Collections
+            <span>
+              {loggedIn ? (
+                <FontAwesomeIcon
+                  className={`${styles.addCollection} ${styles.loggedIn}`}
+                  icon={faPlusCircle}
+                  style={{ color: "white" }}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  className={`${styles.addCollection} ${styles.loggedOut}`}
+                  icon={faPlusCircle}
+                  style={{ color: "white" }}
+                />
+              )}
+            </span>
+          </div>
           <Slider {...settings}>
             {collections.map((coll) => (
               <CollectionItem
