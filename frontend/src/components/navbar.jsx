@@ -18,11 +18,11 @@ function Navbar() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('username') !== null) {
-      console.log('LoggedIn')
+    if (localStorage.getItem("username") !== null) {
+      console.log("LoggedIn");
       setisLogged(true);
     } else {
-      console.log('LoggedOut')
+      console.log("LoggedOut");
       setisLogged(false);
     }
   }, []);
@@ -30,23 +30,16 @@ function Navbar() {
   return (
     <div className={styles.nav}>
       <div>
-        <a>
+        <a className={styles.icon} href="/collections">
           <FontAwesomeIcon
             icon={faBrain}
             size="lx"
             style={{ color: "white" }}
           />
+          <span className={styles.label}>COLLECTIONS.IO</span>
         </a>
       </div>
-      <a href="/">
-        <FontAwesomeIcon
-          icon={faAlignJustify}
-          size="lx"
-          style={{ color: "white" }}
-        />
-        <span className={styles.label}>COLLECTIONS.IO</span>
-      </a>
-      <div>
+      <div className={styles.usercontrol}>
         {isLogged ? (
           <div>
             {localStorage["username"]}|
@@ -56,7 +49,7 @@ function Navbar() {
           </div>
         ) : (
           <div>
-            <a href="/">Login</a>
+            <a href="/">LOGIN</a>
           </div>
         )}
       </div>

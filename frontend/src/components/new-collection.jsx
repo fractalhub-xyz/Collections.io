@@ -8,7 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function NewCollection() {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
-  const isLoggedin = true;
+
+  //temp
+  const isLoggedin = false;
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -33,13 +35,17 @@ function NewCollection() {
           <div className={styles.logo}></div>
           <div className={styles.title}>New collection</div>
           <div className={styles.subtitle}>
-            {isLoggedin? <span>by {localStorage.getItem("username")}</span> : <div className={styles.info}>
+            {isLoggedin ? (
+              <span>by {localStorage.getItem("username")}</span>
+            ) : (
+              <div className={styles.info}>
                 <FontAwesomeIcon
                   icon={faExclamationTriangle}
                   style={{ color: "grey" }}
                 />
                 &nbsp; Login to create your own Collection
-              </div>}
+              </div>
+            )}
           </div>
           <div className={styles.fields}>
             <div className={styles.name}>
@@ -64,13 +70,14 @@ function NewCollection() {
                 }}
               />
             </div>
+
             <button
               className={styles.submitbutton}
               onClick={submitForm}
               disabled={!isLoggedin}
             >
               {" "}
-              Create!
+              {isLoggedin ? <span>Create!</span> : <span>Login to create :(</span>}
             </button>
           </div>
         </div>

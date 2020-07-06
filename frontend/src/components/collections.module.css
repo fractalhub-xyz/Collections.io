@@ -1,6 +1,6 @@
 .main {
-  /* frontend\src\assets\images\cover.jpeg */
-  background: url("../assets/images/cover-collections-dark.jpeg") center / cover;
+  background: #282c34;
+  /* background: url(../assets/images/cover-collections-dark.jpeg) center ; */
   min-height: 100vh;
 }
 .body {
