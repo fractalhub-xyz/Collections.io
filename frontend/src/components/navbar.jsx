@@ -33,7 +33,7 @@ function Navbar() {
         <a>
           <FontAwesomeIcon
             icon={faBrain}
-            size="xl"
+            size="lx"
             style={{ color: "white" }}
           />
         </a>
@@ -41,7 +41,7 @@ function Navbar() {
       <a href="/">
         <FontAwesomeIcon
           icon={faAlignJustify}
-          size="xl"
+          size="lx"
           style={{ color: "white" }}
         />
         <span className={styles.label}>COLLECTIONS.IO</span>

@@ -39,7 +39,7 @@ export default function Home() {
           <div className={styles.inputbox}>
             <FontAwesomeIcon
               icon={faUserCircle}
-              size="xl"
+              size="lx"
               style={{ color: "white" }}
             />
             <input
@@ -55,7 +55,7 @@ export default function Home() {
           <div className={styles.inputbox}>
             <FontAwesomeIcon
               icon={faAdjust}
-              size="xl"
+              size="lx"
               style={{ color: "white" }}
             />
             <input
@@ -75,7 +75,7 @@ export default function Home() {
           <a href="/collections">
             <FontAwesomeIcon className={styles.proceed}
               icon={faAngleRight}
-              size="xl"
+              size="lx"
               style={{ color: "white" }}
             />
           </a>

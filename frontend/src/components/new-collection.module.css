@@ -4,7 +4,7 @@
 
 .body {
   margin: 0;
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
   overflow: hidden;
   font-family: "Lato", sans-serif;
@@ -19,7 +19,8 @@
 .logindiv {
   width: 800px;
   height: 580px;
-  padding: 35px 35px 35px 35px;
+  padding: 34px 35px 35px 35px;
+  margin: 0px 10px;
   border-radius: 40px;
   background-color: #ecf0f3;
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
@@ -93,4 +94,12 @@
 
 .submitbutton:active {
   background: #00fff2;
+}
+
+.info {
+  text-align: center;
+  padding-top: 8px;
+  font-weight: 100;
+  font-size: 94%;
+  letter-spacing: 3.5px;
 }
