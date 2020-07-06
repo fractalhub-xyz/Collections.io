@@ -20,3 +20,24 @@
     text-decoration: none;
     color: white;
 }
+
+.btn {
+  background: none;
+  border: none; /* Remove borders */
+  cursor: pointer; /* Mouse pointer on hover */
+  transition: 0.3s;
+  color:grey;
+  font-size: 1.4rem;   
+}
+
+.btn:hover {
+  color: white;
+}
+
+.icon {
+ color: white;
+}
+
+.icon:hover {
+  color: #00b8af;
+}

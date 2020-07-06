@@ -31,20 +31,20 @@ function Navbar() {
     <div className={styles.nav}>
       <div>
         <a className={styles.icon} href="/collections">
-          <FontAwesomeIcon
-            icon={faBrain}
-            size="lx"
-            style={{ color: "white" }}
-          />
+          <FontAwesomeIcon icon={faBrain} />
           <span className={styles.label}>COLLECTIONS.IO</span>
         </a>
       </div>
       <div className={styles.usercontrol}>
         {isLogged ? (
           <div>
-            {localStorage["username"]}|
+            {localStorage["username"]} &nbsp;|
             <span>
-              {isLogged && <button onClick={handleLogout}>Logout</button>}
+              {isLogged && (
+                <button class={styles.btn} onClick={handleLogout}>
+                  LOGOUT
+                </button>
+              )}
             </span>
           </div>
         ) : (

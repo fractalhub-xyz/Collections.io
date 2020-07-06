@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { postLogin } from "../helpers/api";
-import { faAngleRight, faUserCircle, faAdjust } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleRight,
+  faUserCircle,
+  faAdjust,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./home.module.css";
 
@@ -32,8 +36,9 @@ export default function Home() {
     <div className={styles.main}>
       <div className={styles.super}>
         <div className={styles.title}>Welcome to Collections</div>
-        <div className={styles.subtitle}>A simple playlist manager for podcasts and articles</div>
-        
+        <div className={styles.subtitle}>
+          A simple playlist manager for podcasts and articles
+        </div>
 
         <div className={styles.formContainer}>
           <div className={styles.inputbox}>
@@ -70,16 +75,15 @@ export default function Home() {
 
           {error && <div className={styles.msg}>{error}</div>}
         </div>
-        <div className={styles.submit} >
-          <button onClick={handleOnClick}>Login</button>
-          <a href="/collections">
-            <FontAwesomeIcon className={styles.proceed}
-              icon={faAngleRight}
-              size="lx"
-              style={{ color: "white" }}
-            />
-          </a>
-        </div>
+
+        <button class={styles.btn} onClick={handleOnClick}>
+          <FontAwesomeIcon
+            icon={faAngleRight}
+            size="xl"
+            style={{ color: "white" }}
+          />
+        </button>
+        <a className={styles.info} href="/collections">Click here to continue without logging in</a>
       </div>
     </div>
   );
