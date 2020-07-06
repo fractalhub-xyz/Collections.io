@@ -21,11 +21,9 @@ function Navbar() {
     if (localStorage.getItem('username') !== null) {
       console.log('LoggedIn')
       setisLogged(true);
-      localStorage.setItem("loggedin", true);
     } else {
       console.log('LoggedOut')
       setisLogged(false);
-      localStorage.setItem("loggedin", false);
     }
   }, []);
 

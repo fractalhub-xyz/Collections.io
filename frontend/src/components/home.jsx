@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { getLogout } from "../helpers/api";
 import { useHistory } from "react-router-dom";
 import { postLogin } from "../helpers/api";
 import { faAngleRight, faUserCircle, faAdjust } from "@fortawesome/free-solid-svg-icons";
@@ -26,15 +25,6 @@ export default function Home() {
     } catch {
       setError("Credentials are not valid");
       localStorage.setItem("username", null);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await getLogout();
-      history.push("/login");
-    } catch {
-      alert("Oops error happened");
     }
   };
 

@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Collections() {
   const [collections, setCollections] = useState([]);
@@ -49,11 +49,13 @@ export default function Collections() {
             Collections
             <span>
               {loggedIn ? (
-                <FontAwesomeIcon
-                  className={`${styles.addCollection} ${styles.loggedIn}`}
-                  icon={faPlusCircle}
-                  style={{ color: "white" }}
-                />
+                <a href="/newcollection">
+                  <FontAwesomeIcon
+                    className={`${styles.addCollection} ${styles.loggedIn}`}
+                    icon={faPlusCircle}
+                    style={{ color: "white" }}
+                  />
+                </a>
               ) : (
                 <FontAwesomeIcon
                   className={`${styles.addCollection} ${styles.loggedOut}`}
