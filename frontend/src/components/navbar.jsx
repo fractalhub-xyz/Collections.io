@@ -48,7 +48,7 @@ function Navbar() {
             </span>
           </div>
         ) : (
-          <div>
+          <div className={styles.login}>
             <a href="/">LOGIN</a>
           </div>
         )}

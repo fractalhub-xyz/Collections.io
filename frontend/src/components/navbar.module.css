@@ -27,7 +27,7 @@
   cursor: pointer; /* Mouse pointer on hover */
   transition: 0.3s;
   color:grey;
-  font-size: 1.4rem;   
+  font-size: 1.3rem;   
 }
 
 .btn:hover {
@@ -40,4 +40,15 @@
 
 .icon:hover {
   color: #00b8af;
+}
+
+.login a {
+  transition: 0.3s;
+  color:grey;
+  font-size: 1.4rem;
+  font-size: 1.3rem; 
+}
+
+.login a:hover {
+  color: white;
 }

@@ -4,7 +4,7 @@ import { postLogin } from "../helpers/api";
 import {
   faAngleRight,
   faUserCircle,
-  faAdjust,
+  faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./home.module.css";
@@ -40,7 +40,7 @@ export default function Home() {
           A simple playlist manager for podcasts and articles
         </div>
 
-        <div className={styles.formContainer}>
+        <form className={styles.formContainer}>
           <div className={styles.inputbox}>
             <FontAwesomeIcon
               icon={faUserCircle}
@@ -59,7 +59,7 @@ export default function Home() {
 
           <div className={styles.inputbox}>
             <FontAwesomeIcon
-              icon={faAdjust}
+              icon={faKey}
               size="lx"
               style={{ color: "white" }}
             />
@@ -74,16 +74,17 @@ export default function Home() {
           </div>
 
           {error && <div className={styles.msg}>{error}</div>}
-        </div>
+          <button class={styles.btn} onClick={handleOnClick} type="submit">
+            <FontAwesomeIcon icon={faAngleRight} style={{ color: "white" }} />
+          </button>
+        </form>
 
-        <button class={styles.btn} onClick={handleOnClick}>
-          <FontAwesomeIcon
-            icon={faAngleRight}
-            size="xl"
-            style={{ color: "white" }}
-          />
-        </button>
-        <a className={styles.info} href="/collections">Click here to continue without logging in</a>
+        <a className={styles.info} href="/register">
+          New Here? Click here to register
+        </a>
+        <a className={styles.info} href="/collections">
+          Click here to continue without logging in
+        </a>
       </div>
     </div>
   );
