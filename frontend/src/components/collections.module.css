@@ -1,0 +1,29 @@
+.collectionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 2px solid white;
+  flex-wrap: wrap;
+}
+.collection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 25px 12px;
+  height: 200px;
+  width: 200px;
+  background-color: royalblue;
+  border-radius: 25px;
+}
+
+.collection:hover {
+  background-color: darkblue;
+}
+.name {
+
+    font-size: 2rem;
+}
+.owner {
+    font-size: 1rem;
+}

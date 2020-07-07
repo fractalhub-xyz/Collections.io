@@ -4,9 +4,9 @@ import "./home.css";
 // Components
 import Login from "./login";
 import Navbar from "./navbar";
+import Collections from "./collections"
 //Context
-export const Log = React.createContext()
-
+export const Log = React.createContext();
 
 function Home() {
   //states
@@ -19,7 +19,9 @@ function Home() {
           <Navbar />
         </div>
         <div className={!loggedin ? "super" : "super sm"}>
-          <div className="welcome">Welcome to Collections!</div>
+          <div className="welcome">
+            Welcome to Collections! {localStorage.getItem("user")}
+          </div>
           <div className="welcomesub">
             A simple playlist manager for podcasts and articles
           </div>
@@ -27,22 +29,11 @@ function Home() {
           <div className={!loggedin ? "show" : "hide"}>
             <Login />
           </div>
-          {/* temp   */}
-          {/* <button
-            onClick={() => {
-              setLoginView(!loggedin);
-            }}
-          >
-            [TEMP] Toggle login view
-          </button> */}
-          {/* temp */}
         </div>
 
-        <div
-          className={
-            loggedin ? "collectionContainer" : "collectionContainer hide"
-          }
-        ></div>
+        <div className={loggedin ? "bodyContainer" : "bodyContainer hide"}>
+          <Collections/>
+        </div>
       </Log.Provider>
     </div>
   );

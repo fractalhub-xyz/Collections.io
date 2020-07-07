@@ -29,6 +29,12 @@ display: none;
 display: block;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .welcome {
     font-size: 3.5rem;
     
@@ -56,7 +62,8 @@ display: block;
   opacity: 1;
 }
 
-.collectionContainer {
+.bodyContainer {
   height: 200vh;
   background-color: rosybrown;
+  padding: 25px 70px;
 }
