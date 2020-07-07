@@ -11,6 +11,7 @@ function Collections() {
 
   useEffect(() => {
     async function fetchCollection() {
+      console.log("fetching collection data")
       try {
         const response = await getCollections();
         setCollections(response.data);
@@ -24,18 +25,27 @@ function Collections() {
   }, []);
 
   const open = (pk) => {
-      alert(`SUP BOI ${pk}`)
-
-  }
+    alert(`SUP BOI ${pk}`);
+  };
 
   return (
-    <div className={styles.collectionContainer}>
-      {collections.map((collection) => (
-        <div className={styles.collection} onClick={()=>{open(collection.id)}}>
-          <div className={styles.name}>{collection.name}</div>
-          <div className={styles.owner}>by&nbsp;{collection.owner}</div>
-        </div>
-      ))}
+    <div className={styles.main}>
+      <div className={styles.collectionContainer}>
+        {error && <div className={styles.info}>{error}</div>}
+        {isLoading && <div className={styles.loader}>Loader</div>}
+        {collections.map((collection) => (
+          <div
+            key={collection.id}
+            className={styles.collection}
+            onClick={() => {
+              open(collection.id);
+            }}
+          >
+            <div className={styles.name}>{collection.name}</div>
+            <div className={styles.owner}>by&nbsp;{collection.owner}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

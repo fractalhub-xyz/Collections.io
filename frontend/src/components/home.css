@@ -7,26 +7,26 @@
   background: none;
 }
 .super {
-    background: url(../assets/images/cover.jpeg) center / cover;
-    background-attachment: fixed;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    transition: 0.3s;
+  background: url(../assets/images/cover.jpeg) center / cover;
+  background-attachment: fixed;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: 0.3s;
 }
 
 .sm {
-  height: 57vh;
+  height: 8vh;
 }
 
 .hide {
-display: none;
+  display: none;
 }
 
 .show {
-display: block;
+  display: block;
 }
 
 .center {
@@ -36,21 +36,30 @@ display: block;
 }
 
 .welcome {
-    font-size: 3.5rem;
-    
+  font-size: 3.5rem;
+  transition: 0.3s;
+}
+.username {
+  text-transform: capitalize;
+  color: rosybrown;
 }
 .welcomesub {
-    font-size: 1.2rem;
-    padding-bottom: 35px;
+  font-size: 1.2rem;
+  padding-bottom: 35px;
+  transition: 0.3s;
+}
+.shrink {
+  transform: scale(0.47);
+  transition: 0.7s;
 }
 .loginForm {
-    display: none;
+  display: none;
 }
-.nav{
+.nav {
   position: fixed;
   top: 0px;
   left: 0px;
-  height: 7%;
+  height: 8%;
   width: 100%;
   opacity: 0.02;
   transition: 0.5s;
@@ -63,7 +72,8 @@ display: block;
 }
 
 .bodyContainer {
-  height: 200vh;
-  background-color: rosybrown;
-  padding: 25px 70px;
+  background: url(../assets/images/land.jpeg) center / cover;
+  padding-top: 45px;
+  min-height: 86vh;
+  /* background-attachment: fixed; */
 }

@@ -1,9 +1,14 @@
+.main{
+
+}
 .collectionContainer {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   border: 2px solid white;
   flex-wrap: wrap;
+  margin: 0 70px;;
+  padding: 0 70px;;
 }
 .collection {
   display: flex;
@@ -13,12 +18,13 @@
   margin: 25px 12px;
   height: 200px;
   width: 200px;
-  background-color: royalblue;
+  background-color: white;
+  color:black;
   border-radius: 25px;
 }
 
 .collection:hover {
-  background-color: darkblue;
+  background-color: rosybrown;
 }
 .name {
 
@@ -26,4 +32,12 @@
 }
 .owner {
     font-size: 1rem;
+}
+
+.info {
+  
+}
+
+.loader {
+
 }
