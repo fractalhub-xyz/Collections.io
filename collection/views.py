@@ -50,9 +50,8 @@ def is_logged_in_view(request):
 
 @api_view(['POST'])
 def login_view(request):
-    json_body = json.loads(request.body.decode('utf-8'))
-    username = json_body.get('username', '')
-    password = json_body.get('password', '')
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
     user = authenticate(username=username, password=password)
     if user is not None:
         print(f'Username: {username} Password: {password}')
