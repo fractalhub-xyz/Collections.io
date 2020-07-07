@@ -23,13 +23,12 @@ function Home() {
     e.preventDefault();
     // temp
     const payload = {
-      Authorization: `Token ${localStorage.getItem("token")}`,
       name: "created from react",
       desc: "pls wurk",
     };
-    const data = payload;
+
     try {
-      const response = await postNewCollection(data);
+      const response = await postNewCollection(payload);
       console.log(response);
       console.log("Succesfully created new collection");
     } catch {

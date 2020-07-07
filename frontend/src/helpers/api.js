@@ -1,16 +1,38 @@
 import axios from "axios";
 
-const base_url = "http://127.0.0.1:8000";
+const baseURL = "http://127.0.0.1:8000";
+
+const api = axios.create({
+  baseURL,
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+  transformRequest: [
+    (data, headers) => {
+      if (localStorage.getItem("token")) {
+        headers["Authorization"] = `Token ${localStorage.getItem("token")}`;
+      }
+
+      if (Object.keys(data)) {
+        const formData = new FormData();
+        Object.keys(data).forEach((key) => {
+          formData.set(key, data[key]);
+        });
+        return formData;
+      }
+      return data;
+    },
+  ],
+});
 
 export function postLogin(data) {
-  return axios.post(base_url + "/login", data);
+  return api.post("/login", data);
 }
 
 export function postNewCollection(data) {
-  return axios.post(base_url + "/collections/", data);
+  return api.post("/collections/", data);
 }
 
 export function getCollections() {
-  return axios.get(base_url + "/collections");
+  return api.get("/collections");
 }
-
