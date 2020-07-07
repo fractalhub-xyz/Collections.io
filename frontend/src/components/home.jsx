@@ -11,7 +11,8 @@ export const Log = React.createContext();
 
 function Home() {
   //states
-  const [loggedin, setLoggedin] = useState(false);
+  const isLoggedIn = !!localStorage.getItem("token");
+  const [loggedin, setLoggedin] = useState(isLoggedIn);
   //funcs
 
   // csrfmiddlewaretoken: Hr0ug4QPiu18HlyE7rM5CoxIPut5F0XOhInwlKHUELnkRYRRF1BvqojAHHiOhuhz;
@@ -43,7 +44,8 @@ function Home() {
         </div>
         <div className={!loggedin ? "super" : "super sm"}>
           <div className={!loggedin ? "welcome" : "welcome shrink"}>
-            Welcome to Collections! <span className="username">{localStorage.getItem("user")}</span>
+            Welcome to Collections!{" "}
+            <span className="username">{localStorage.getItem("user")}</span>
           </div>
           <div className={!loggedin ? "welcomesub" : "hide"}>
             A simple playlist manager for podcasts and articles
