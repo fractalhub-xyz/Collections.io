@@ -7,19 +7,10 @@ export function postLogin(data) {
 }
 
 export function postNewCollection(data) {
-  return axios.post(base_url + "/collections", data);
-}
-
-export function getLogout() {
-  return axios.get(base_url + "/logout");
+  return axios.post(base_url + "/collections/", data);
 }
 
 export function getCollections() {
   return axios.get(base_url + "/collections");
 }
-
-export function getIsLoggedIn() {
-  return axios.get(base_url + "/isLoggedIn");
-}
-
 

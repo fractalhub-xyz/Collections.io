@@ -29,8 +29,8 @@ ALLOWED_HOSTS = []
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication', 
         'rest_framework.authentication.BasicAuthentication',
-        'root.authentication.CsrfExemptSessionAuthentication',
     ]
 }
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'collection',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [

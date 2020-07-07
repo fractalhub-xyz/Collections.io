@@ -9,6 +9,7 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
@@ -53,11 +54,10 @@ def login_view(request):
     username = json_body.get('username', '')
     password = json_body.get('password', '')
     user = authenticate(username=username, password=password)
-    print(f'Username: {username} Password: {password}')
     if user is not None:
-        print("USER", user)
+        print(f'Username: {username} Password: {password}')
         login(request, user)
-        return Response({'success': True, 'user': username}, status.HTTP_200_OK)
+        return Response({'success': True, 'token': f"Token {token}"}, status.HTTP_200_OK)
     else:
         return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
 

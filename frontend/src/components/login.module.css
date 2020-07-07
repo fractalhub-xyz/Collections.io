@@ -1,34 +1,9 @@
-.main {
-  /* frontend\src\assets\images\cover.jpeg */
-  background: url("../assets/images/cover.jpeg") center / cover;
-  min-height: 100vh;
-}
-
-.super {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, .5)
-}
-
-.title {
-  font-size: 3rem;
-  color: white;
-  border-bottom: 1px solid white;
-}
-.subtitle {
-  padding-top: 10px;
-  font-size: 1rem;
-  color:rgba(255, 255, 255, 0.7);
-}
-
-
 .formContainer {
-  padding-top: 4%;
+border-radius: 20px;
+padding: 20px 15px;
+background:rgba(0, 0, 0, 0.3);
 }
+
 
 .inputbox {
   font-size: 1.1rem;
@@ -78,9 +53,12 @@
   font-weight: 500;
   font-size: 70%;
   letter-spacing: 2.5px;
-  color: white;
   transition: 0.3s;
   padding-bottom: 10px;
+}
+
+.info a {
+      color: white;
 }
 
 .info:hover {

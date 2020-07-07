@@ -1,0 +1,62 @@
+.root {
+  background-color: #282c34;
+}
+.input {
+  border: none;
+  outline: none;
+  background: none;
+}
+.super {
+    background: url(../assets/images/cover.jpeg) center / cover;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.sm {
+  height: 57vh;
+}
+
+.hide {
+display: none;
+}
+
+.show {
+display: block;
+}
+
+.welcome {
+    font-size: 3.5rem;
+    
+}
+.welcomesub {
+    font-size: 1.2rem;
+    padding-bottom: 35px;
+}
+.loginForm {
+    display: none;
+}
+.nav{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 7%;
+  width: 100%;
+  opacity: 0.02;
+  transition: 0.5s;
+  overflow: hidden;
+  /* temp */
+}
+
+.visible {
+  opacity: 1;
+}
+
+.collectionContainer {
+  height: 200vh;
+  background-color: rosybrown;
+}
