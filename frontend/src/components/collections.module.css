@@ -1,14 +1,12 @@
-.main{
-
+.main {
 }
 .collectionContainer {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   border: 2px solid white;
-  flex-wrap: wrap;
-  margin: 0 70px;;
-  padding: 0 70px;;
+  margin: 0 30px;
+  overflow-x: scroll;
 }
 .collection {
   display: flex;
@@ -17,27 +15,40 @@
   flex-direction: column;
   margin: 25px 12px;
   height: 200px;
-  width: 200px;
+  min-width: 200px;
   background-color: white;
-  color:black;
-  border-radius: 25px;
+  color: black;
+  border-radius: 10px;
+  transition: all ease-in-out 0.3s;
 }
 
 .collection:hover {
   background-color: rosybrown;
+  transform: scale(1.1, 1.2);
+  justify-content: space-between;
 }
-.name {
 
-    font-size: 2rem;
+.collection:hover .desc {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.name {
+  font-size: 2rem;
 }
 .owner {
-    font-size: 1rem;
+  font-size: 1rem;
+}
+
+.desc {
+  text-align: center;
+  transform: scale(0);
+  opacity: 0;
+  transition: opacity ease-in 0.3s;
 }
 
 .info {
-  
 }
 
 .loader {
-
 }

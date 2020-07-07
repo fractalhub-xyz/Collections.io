@@ -11,11 +11,12 @@ function Collections() {
 
   useEffect(() => {
     async function fetchCollection() {
-      console.log("fetching collection data")
+      console.log("fetching collection data");
       try {
         const response = await getCollections();
         setCollections(response.data);
       } catch (error) {
+        console.error(error);
         setError("Error happened");
       }
       setIsLoading(false);
@@ -41,8 +42,12 @@ function Collections() {
               open(collection.id);
             }}
           >
-            <div className={styles.name}>{collection.name}</div>
-            <div className={styles.owner}>by&nbsp;{collection.owner}</div>
+            <div className={styles.name}>
+              {collection.name}
+              <br />
+              <span className={styles.owner}>by&nbsp;{collection.owner}</span>
+            </div>
+            <div className={styles.desc}>{collection.desc}</div>
           </div>
         ))}
       </div>

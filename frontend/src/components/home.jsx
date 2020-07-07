@@ -29,7 +29,6 @@ function Home() {
 
     try {
       const response = await postNewCollection(payload);
-      console.log(response);
       console.log("Succesfully created new collection");
     } catch {
       console.log("Failed to create a new collection");
@@ -56,7 +55,7 @@ function Home() {
         </div>
 
         <div className={loggedin ? "bodyContainer" : "bodyContainer hide"}>
-          <Collections />
+          {loggedin && <Collections />}
           <button onClick={createCollection}>Create collection</button>
         </div>
       </Log.Provider>

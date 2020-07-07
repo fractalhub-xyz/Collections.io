@@ -13,7 +13,7 @@ const api = axios.create({
         headers["Authorization"] = `Token ${localStorage.getItem("token")}`;
       }
 
-      if (Object.keys(data)) {
+      if (data) {
         const formData = new FormData();
         Object.keys(data).forEach((key) => {
           formData.set(key, data[key]);
