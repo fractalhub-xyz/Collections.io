@@ -1,15 +1,7 @@
-.main {
-}
 .sliderContainer {
-  margin: 0 30px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  /* border: 2px solid white; */
-  overflow-x: scroll;
-  overflow-y: visible;
-  height: 50vh;
+  margin: 30px;
 }
+
 .card {
   display: flex;
   align-items: center;
@@ -17,7 +9,7 @@
   flex-direction: column;
   margin: 0px 6px;
   height: 170px;
-  min-width: 300px;
+  width: 300px !important;
   background-color: white;
   color: black;
   border-radius: 2px;
@@ -25,20 +17,11 @@
   cursor: pointer;
 }
 
-.slickCustom {
-  width: 300px !important;
-}
-
 .card:hover {
   background-color: rosybrown;
-  min-width: 380px;
-  height: 300px;
-  justify-content: center;
-}
-
-.slickCustom:hover {
   height: 200px;
   width: 330px;
+  justify-content: center;
 }
 
 .card:hover .desc {
@@ -67,12 +50,11 @@
 }
 
 .btn {
+  display: inline-block;
   padding: 0 15px;
-  display: flex;
-  align-items: center;
-  cursor: pointer; /* Mouse pointer on hover */
+  cursor: pointer;
   transition: 0.3s;
-  height: 50%;
+  vertical-align: -3px;
 }
 
 .btn:hover {
@@ -197,6 +179,6 @@
 }
 
 .slickContainer {
-  width: 90%;
+  width: 95%;
   margin: 0px auto;
 }

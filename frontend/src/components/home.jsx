@@ -19,7 +19,6 @@ function Home() {
   // name: example8;
   // desc: xxxx;
 
-
   return (
     <div className="root">
       <Log.Provider value={[loggedin, setLoggedin]}>
@@ -41,7 +40,6 @@ function Home() {
         </div>
 
         <div className={loggedin ? "bodyContainer" : "bodyContainer hide"}>
-          <div className="cellHeader">List of Collections</div>
           {loggedin && <Collections />}
           {/* <button onClick={createCollection}>Create collection</button> */}
         </div>
@@ -52,20 +50,19 @@ function Home() {
 
 export default Home;
 
-
 // import { postNewCollection } from "../helpers/api";
-  // const createCollection = async (e) => {
-  //   e.preventDefault();
-  //   // temp
-  //   const payload = {
-  //     name: "created from react",
-  //     desc: "pls wurk",
-  //   };
+// const createCollection = async (e) => {
+//   e.preventDefault();
+//   // temp
+//   const payload = {
+//     name: "created from react",
+//     desc: "pls wurk",
+//   };
 
-  //   try {
-  //     const response = await postNewCollection(payload);
-  //     console.log("Succesfully created new collection");
-  //   } catch {
-  //     console.log("Failed to create a new collection");
-  //   }
-  // };
+//   try {
+//     const response = await postNewCollection(payload);
+//     console.log("Succesfully created new collection");
+//   } catch {
+//     console.log("Failed to create a new collection");
+//   }
+// };
