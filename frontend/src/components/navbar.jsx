@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 //CSS
 import styles from "./navbar.module.css";
 //modules
 import { faBrain } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
 //compoonents
 
 //context

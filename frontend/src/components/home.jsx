@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState } from "react";
 // CSS
 import "./home.css";
 // Components
 import Login from "./login";
 import Navbar from "./navbar";
 import Collections from "./collections";
-import { postNewCollection } from "../helpers/api";
+
 //Context
 export const Log = React.createContext();
 
@@ -19,21 +19,7 @@ function Home() {
   // name: example8;
   // desc: xxxx;
 
-  const createCollection = async (e) => {
-    e.preventDefault();
-    // temp
-    const payload = {
-      name: "created from react",
-      desc: "pls wurk",
-    };
 
-    try {
-      const response = await postNewCollection(payload);
-      console.log("Succesfully created new collection");
-    } catch {
-      console.log("Failed to create a new collection");
-    }
-  };
   return (
     <div className="root">
       <Log.Provider value={[loggedin, setLoggedin]}>
@@ -55,8 +41,9 @@ function Home() {
         </div>
 
         <div className={loggedin ? "bodyContainer" : "bodyContainer hide"}>
+          <div className="cellHeader">List of Collections</div>
           {loggedin && <Collections />}
-          <button onClick={createCollection}>Create collection</button>
+          {/* <button onClick={createCollection}>Create collection</button> */}
         </div>
       </Log.Provider>
     </div>
@@ -64,3 +51,21 @@ function Home() {
 }
 
 export default Home;
+
+
+// import { postNewCollection } from "../helpers/api";
+  // const createCollection = async (e) => {
+  //   e.preventDefault();
+  //   // temp
+  //   const payload = {
+  //     name: "created from react",
+  //     desc: "pls wurk",
+  //   };
+
+  //   try {
+  //     const response = await postNewCollection(payload);
+  //     console.log("Succesfully created new collection");
+  //   } catch {
+  //     console.log("Failed to create a new collection");
+  //   }
+  // };

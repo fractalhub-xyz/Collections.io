@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 //CSS
 import styles from "./login.module.css";
 //components
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { postLogin } from "../helpers/api";
 import { Log } from "./home"
 //modules
@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Login() {
   //states
-  const history = useHistory();
+  // const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

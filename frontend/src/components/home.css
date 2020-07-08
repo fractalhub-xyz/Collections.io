@@ -75,5 +75,10 @@
   background: url(../assets/images/land.jpeg) center / cover;
   padding-top: 45px;
   min-height: 86vh;
-  /* background-attachment: fixed; */
+  background-attachment: fixed;
+}
+
+.cellHeader {
+    padding-left: 45px;
+    font-size: 2rem;
 }

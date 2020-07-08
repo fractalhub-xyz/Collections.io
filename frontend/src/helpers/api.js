@@ -36,3 +36,6 @@ export function postNewCollection(data) {
 export function getCollections() {
   return api.get("/collections");
 }
+export function getSnippets() {
+  return api.get("/snippets");
+}
