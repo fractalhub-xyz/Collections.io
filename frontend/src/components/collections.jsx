@@ -102,7 +102,17 @@ function Collections() {
 
   return (
     <div className={styles.main}>
-      <div className="cellHeader">List of Collections </div>
+      <div className="cellHeader">
+        List of Collection
+        <span
+          className={styles.btn}
+          onClick={() => {
+            setCreateCollectionDiv(!createCollectionDiv);
+          }}
+        >
+          <FontAwesomeIcon icon={faPlus} className={styles.addCollectionIcon} />
+        </span>
+      </div>
 
       {/* ALL COLLECTIONS SLIDER */}
       <div className={styles.sliderContainer}>
@@ -118,7 +128,7 @@ function Collections() {
                   openCollection(
                     collection.name,
                     collection.owner,
-                    collection.snippets,
+                    collection.snippets
                   );
                 }}
               >
@@ -134,37 +144,6 @@ function Collections() {
             ))}
           </Slider>
         </div>
-      </div>
-
-      {/* COLLECTIONS DETAIL VIEW */}
-      <div className={`${styles.collectionDetailView} ${hideCollectionDetail}`}>
-        <h1>
-          {collectionName} <span>by {collectionOwner}</span>
-        </h1>
-        <div className={styles.snippetsContainer}>
-          {snippets.map((snippet) => (
-            <Snippets key={snippet.id} snippet={snippet} />
-          ))}
-        </div>
-        <button
-          onClick={() => {
-            setCollectionDetailDiv(false);
-          }}
-        >
-          CLOSE
-        </button>
-      </div>
-
-      <div className="cellHeader">
-        Create a new collection{" "}
-        <span
-          className={styles.btn}
-          onClick={() => {
-            setCreateCollectionDiv(!createCollectionDiv);
-          }}
-        >
-          <FontAwesomeIcon icon={faPlus} className={styles.addCollectionIcon} />
-        </span>
       </div>
 
       {/* NEW COLLECTION CELL  */}
@@ -195,6 +174,25 @@ function Collections() {
           </div>
           <div className={styles.sides} />
         </div>
+      </div>
+
+      {/* COLLECTIONS DETAIL VIEW */}
+      <div className={`${styles.collectionDetailView} ${hideCollectionDetail}`}>
+        <h1>
+          {collectionName} <span>by {collectionOwner}</span>
+        </h1>
+        <div className={styles.snippetsContainer}>
+          {snippets.map((snippet) => (
+            <Snippets key={snippet.id} snippet={snippet} />
+          ))}
+        </div>
+        <button
+          onClick={() => {
+            setCollectionDetailDiv(false);
+          }}
+        >
+          CLOSE
+        </button>
       </div>
 
       {/* ALL SNIPPETS SLIDER */}
