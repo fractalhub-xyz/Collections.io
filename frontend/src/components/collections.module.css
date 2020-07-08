@@ -76,7 +76,7 @@
 }
 
 .newCollectionDiv {
-  padding: 0 30px;
+  padding: 0px;
 
   height: 60vh;
   background-color: rgba(89, 0, 255, 0.7);
@@ -104,14 +104,86 @@
 
 .newCollectionDiv h4 {
   text-align: center;
-  font-size: 2rem;
-  margin-top: 50px;
+  font-size: 1.8rem;
+  margin-top: 30px;
+  margin-bottom: 20px;
   text-transform: uppercase;
 }
 
 .collectionDetailView h1 span {
-  color: #F6F7EB;
+  color: #f6f7eb;
 }
 .footer {
   height: 30vh;
+}
+
+/* HELPERS  */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.sides {
+  height: 100%;
+  width: 25%;
+  background: url(../assets/images/shelf.jpg) center / cover;
+  opacity: 0.6;
+
+}
+
+.focus {
+  height: 100%;
+  width: 60%;
+  color: white;
+  flex-direction: column;
+  height: 100%;
+}
+
+.focus input {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: rgb(190, 190, 190);
+  padding: 18px 5px 15px 25px;
+  box-shadow: inset 8px 8px 8px #00000017, inset -8px -8px 8px #fafafa17;
+  width: 80%;
+}
+
+.singleLineInput {
+  margin-bottom: 30px;
+  border-radius: 25px;
+  height: 100px;
+}
+.multiLineInput {
+  margin-bottom: 30px;
+  border-radius: 25px;
+  height: 200px;
+}
+
+.submitbutton {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 85%; 
+  height: 80px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  background: #00b8af3d;
+  box-shadow: 3px 3px 8px #393e4941, -3px -3px 8px #0e10132a;
+  transition: 0.5s;
+  margin-bottom: 30px;
+}
+
+.submitbutton:hover {
+  background: #00d9ce;
+}
+
+.submitbutton:active {
+  background: #00fff2;
 }
