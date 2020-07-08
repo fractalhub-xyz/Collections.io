@@ -25,11 +25,20 @@
   cursor: pointer;
 }
 
+.slickCustom {
+  width: 300px !important;
+}
+
 .card:hover {
   background-color: rosybrown;
   min-width: 380px;
   height: 300px;
   justify-content: center;
+}
+
+.slickCustom:hover {
+  height: 200px;
+  width: 330px;
 }
 
 .card:hover .desc {
@@ -130,7 +139,6 @@
   width: 25%;
   background: url(../assets/images/shelf.jpg) center / cover;
   opacity: 0.6;
-
 }
 
 .focus {
@@ -167,7 +175,7 @@
   outline: none;
   border: none;
   cursor: pointer;
-  width: 85%; 
+  width: 85%;
   height: 80px;
   border-radius: 30px;
   font-size: 15px;
@@ -186,4 +194,9 @@
 
 .submitbutton:active {
   background: #00fff2;
+}
+
+.slickContainer {
+  width: 90%;
+  margin: 0px auto;
 }

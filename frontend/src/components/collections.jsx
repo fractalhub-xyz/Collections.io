@@ -8,6 +8,7 @@ import Snippets from "./snippets";
 //modules
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Slider from "react-slick";
 
 function Collections() {
   const [collections, setCollections] = useState([]);
@@ -69,8 +70,9 @@ function Collections() {
     e.preventDefault();
     const payload = { name, desc };
     try {
-      const response = await postNewCollection(payload);
-      console.log("Succesfully created new collection");
+      const { data } = await postNewCollection(payload);
+      const newCollections = [data, ...collections];
+      setCollections(newCollections);
       setCreateCollectionDiv(false);
     } catch {
       console.log("Failed to create a new collection");
@@ -85,6 +87,17 @@ function Collections() {
     setCollectionName(name);
     setCollectionOwner(owner);
     setSnippets(snippets);
+  };
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    swipeToSlide: true,
+    slidesToScroll: 1,
+    variableWidth: true,
+    className: "customSlider",
   };
 
   return (
@@ -113,7 +126,7 @@ function Collections() {
                 openCollection(
                   collection.name,
                   collection.owner,
-                  collection.snippets
+                  collection.snippets,
                 );
               }}
             >
@@ -128,10 +141,35 @@ function Collections() {
         </div>
       </div>
 
+      <div className={styles.slickContainer}>
+        <Slider {...settings}>
+          {collections.map((collection) => (
+            <div
+              key={collection.id}
+              className={`${styles.card} ${styles.slickCustom}`}
+              onClick={() => {
+                openCollection(
+                  collection.name,
+                  collection.owner,
+                  collection.snippets,
+                );
+              }}
+            >
+              <div className={styles.name}>
+                {collection.name}
+                <br />
+                <span className={styles.owner}>by&nbsp;{collection.owner}</span>
+              </div>
+              <div className={styles.desc}>{collection.desc}</div>
+            </div>
+          ))}
+        </Slider>
+      </div>
+
       {/* NEW COLLECTION CELL  */}
       <div className={`${styles.newCollectionDiv} ${hideCreateCollectionDiv}`}>
         <div className={styles.center}>
-          <div className={styles.sides}/>
+          <div className={styles.sides} />
           <div className={`${styles.focus} ${styles.center}`}>
             <h4>Create New collection!</h4>
             <input
@@ -154,7 +192,7 @@ function Collections() {
               Create
             </button>
           </div>
-          <div className={styles.sides}/>
+          <div className={styles.sides} />
         </div>
       </div>
 

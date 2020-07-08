@@ -18,3 +18,13 @@ code {
 a {
   text-decoration: none;
 }
+
+.customSlider .slick-track {
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.customSlider .slick-slide {
+  height: auto;
+}
