@@ -6,7 +6,7 @@ import { getCollections, getSnippets } from "../helpers/api";
 import { postNewCollection } from "../helpers/api";
 import Snippets from "./snippets";
 //modules
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Slider from "react-slick";
 
@@ -177,22 +177,31 @@ function Collections() {
       </div>
 
       {/* COLLECTIONS DETAIL VIEW */}
-      <div className={`${styles.collectionDetailView} ${hideCollectionDetail}`}>
-        <h1>
-          {collectionName} <span>by {collectionOwner}</span>
-        </h1>
-        <div className={styles.snippetsContainer}>
-          {snippets.map((snippet) => (
-            <Snippets key={snippet.id} snippet={snippet} />
-          ))}
-        </div>
-        <button
-          onClick={() => {
-            setCollectionDetailDiv(false);
-          }}
+      <div className={styles.bgbooks}>
+        <div
+          className={`${styles.collectionDetailView} ${hideCollectionDetail}`}
         >
-          CLOSE
-        </button>
+          <h1>
+            {collectionName} <span>by {collectionOwner}</span>
+            <span
+              className={styles.closeDetailView}
+              onClick={() => {
+                setCollectionDetailDiv(false);
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faTimes}
+                className={styles.addCollectionIcon}
+              />
+            </span>
+          </h1>
+
+          <div className={styles.snippetsContainer}>
+            {snippets.map((snippet) => (
+              <Snippets key={snippet.id} snippet={snippet} />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* ALL SNIPPETS SLIDER */}

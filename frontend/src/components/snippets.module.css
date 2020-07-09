@@ -1,4 +1,44 @@
-.snippetContainer h1 {
-    color: blue;
-    font-size: 1rem;
+.row {
+  display: flex;
+  align-self: center;
+  /* border: 2px solid black; */
+  justify-content: space-evenly;
+  margin: 10px 0px;
+  width: 80%;
+  margin: 0 auto;
+}
+.col {
+  text-transform: capitalize;
+  width: 100%;
+  /* background: blue; */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+  padding: 12px 0px;;
+  margin: 0px 2px;
+}
+.sm {
+  width: 6%;
+  /* border-bottom: none; */
+}
+.md {
+    width: 30%;
+}
+.snipIcon {
+    color: black;
+    vertical-align: -4px;
+    padding: 0px;
+    padding-left: 10px;;
+}
+
+.col a {
+  color: white;
+  opacity: 0.7;
+  text-transform: none;
+}
+
+.col a:hover {
+  opacity: 1;
+}
+
+.col a .snipIcon {
+    color: white;
 }

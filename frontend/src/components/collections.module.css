@@ -74,14 +74,15 @@
   transition: 0.5s;
   overflow: hidden;
 }
-
+.bgbooks {
+  /* background: url(../assets/images/books.jpeg) center; */
+}
 .collectionDetailView {
   padding: 0 30px;
-
   height: 60vh;
-  background-color: rgba(230, 21, 21, 0.7);
   transition: 0.5s;
   overflow: hidden;
+  background: rgba(0, 0, 0, 0.56);
 }
 
 .collectionDetailView h1 {
@@ -104,6 +105,17 @@
 .collectionDetailView h1 span {
   color: #f6f7eb;
 }
+
+.closeDetailView {
+  float: right;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+.closeDetailView:hover {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
 .footer {
   height: 30vh;
 }
