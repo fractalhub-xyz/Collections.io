@@ -74,15 +74,17 @@
   transition: 0.5s;
   overflow: hidden;
 }
+
 .bgbooks {
   /* background: url(../assets/images/books.jpeg) center; */
+  background: rgba(0, 255, 221, 0.493);
 }
 .collectionDetailView {
-  padding: 0 30px;
+  padding: 0 130px;
   height: 60vh;
   transition: 0.5s;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.56);
+  background: rgba(202, 0, 0, 0.56);
 }
 
 .collectionDetailView h1 {
@@ -90,8 +92,61 @@
   text-transform: uppercase;
 }
 
-.hide {
-  height: 0vh;
+.addSnippetToCollectionIcon {
+  margin: 20px 0px;
+  text-align: center;
+}
+
+.addSnippetToCollectionIcon .addCollectionIcon {
+  color: white;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+.addSnippetToCollectionIcon .addCollectionIcon:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.snippetsContainer {
+  height: 36vh;
+  overflow-y: scroll;
+}
+.newSnippetDiv {
+  padding: 0px;
+  height: 250px;
+  transition: 0.5s;
+  overflow: hidden;
+  background: rgba(0, 195, 202, 0.56);
+}
+.newSnippetDiv h1 {
+  text-align: center;
+  margin: 0px;
+  margin-top: 12px;
+  font-size: 1.5rem;
+}
+.addSnippetFormContainer {
+  padding: 10px 130px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.newSnippetDiv .input {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  padding: 15px 0px;
+  margin-top: 15px;
+  color: rgb(190, 190, 190);
+  box-shadow: inset 8px 8px 8px #00000017, inset -8px -8px 8px #fafafa17;
+  width: 600px;
+  text-align: center;
+  border-radius: 20px;
+  color: white;
+}
+
+.newSnippetDiv .sm {
+  width: 400px;
 }
 
 .newCollectionDiv h4 {
@@ -193,4 +248,8 @@
 .slickContainer {
   width: 95%;
   margin: 0px auto;
+}
+
+.hide {
+  height: 0vh;
 }

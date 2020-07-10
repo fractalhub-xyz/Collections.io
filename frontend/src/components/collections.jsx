@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import styles from "./collections.module.css";
 //components
 import { getCollections, getSnippets } from "../helpers/api";
-import { postNewCollection } from "../helpers/api";
+import { postNewCollection, postNewSnippet } from "../helpers/api";
 import Snippets from "./snippets";
 //modules
-import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Slider from "react-slick";
 
@@ -27,11 +27,16 @@ function Collections() {
   //selection Collection
   const [collectionName, setCollectionName] = useState("");
   const [collectionOwner, setCollectionOwner] = useState("");
+  const [collectionID, setCollectionID] = useState(0);
   const [snippets, setSnippets] = useState([]);
   //createCollection
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   //createSnippet
+  const [title, setTitle] = useState("");
+  const [link, setLink] = useState("");
+  const [type, setType] = useState("podcast");
+  const [category, setCategory] = useState("");
   // title, typeof, link collection
 
   useEffect(() => {
@@ -80,13 +85,38 @@ function Collections() {
       alert("Failed");
     }
   };
+  const createSnippet = async (e) => {
+    e.preventDefault();
+    const payload = {
+      title: title,
+      type_of: type,
+      link: link,
+      collection: collectionID,
+    };
+    try {
+      const { data } = await postNewSnippet(payload);
+      const newSnippets = [data, ...snippets];
+      setSnippets(newSnippets);
+      setCreateSnippetDiv(false);
+      console.log("Successfully pushed snippet to collection");
+      setTitle("")
+      setLink("")
+      setType("podcast")
+      setCategory("")
+    } catch {
+      console.log("Failed to create a new collection");
+      // add error message
+      alert("Failed");
+    }
+  };
 
-  const openCollection = (name, owner, snippets) => {
+  const openCollection = (name, owner, snippets, id) => {
     setCreateCollectionDiv(false);
     setCollectionDetailDiv(true);
     setCollectionName(name);
     setCollectionOwner(owner);
     setSnippets(snippets);
+    setCollectionID(id);
   };
 
   const settings = {
@@ -128,7 +158,8 @@ function Collections() {
                   openCollection(
                     collection.name,
                     collection.owner,
-                    collection.snippets
+                    collection.snippets,
+                    collection.id
                   );
                 }}
               >
@@ -187,6 +218,7 @@ function Collections() {
               className={styles.closeDetailView}
               onClick={() => {
                 setCollectionDetailDiv(false);
+                setCreateSnippetDiv(false);
               }}
             >
               <FontAwesomeIcon
@@ -201,23 +233,77 @@ function Collections() {
               <Snippets key={snippet.id} snippet={snippet} />
             ))}
           </div>
+          <div className={styles.addSnippetToCollectionIcon}>
+            <FontAwesomeIcon
+              icon={faPlus}
+              className={styles.addCollectionIcon}
+              onClick={() => {
+                setCreateSnippetDiv(!createSnippetDiv);
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      <div className={`${styles.newSnippetDiv} ${hideCreateSnippetDiv}`}>
+        <h1>
+          Add a new snippet to Collection {collectionName} by{" "}
+          {localStorage.getItem("user")}
+        </h1>
+        <div className={styles.addSnippetFormContainer}>
+          <div>
+            <input
+              className={styles.input}
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              placeholder="TITLE"
+            ></input>
+          </div>
+          <div>
+            <input
+              className={styles.input}
+              type="text"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              required
+              placeholder="LINK"
+            ></input>
+          </div>
+          <div>
+            <input
+              className={styles.input}
+              type="text"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              required
+              placeholder="TYPE"
+            ></input>
+          </div>
+          <div>
+            <input
+              className={styles.input}
+              type="text"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+              placeholder="CATEGORY"
+            ></input>
+          </div>
+          <div className={styles.addSnippetToCollectionIcon}>
+            <FontAwesomeIcon
+              icon={faPaperPlane}
+              className={styles.addCollectionIcon}
+              onClick={createSnippet}
+            />
+          </div>
         </div>
       </div>
 
       {/* ALL SNIPPETS SLIDER */}
       <div className={styles.sliderContainer}>
         <div className={styles.slickContainer}>
-          <div
-            className={styles.btn}
-            onClick={() => {
-              setCreateSnippetDiv(!createSnippetDiv);
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faPlus}
-              className={styles.addCollectionIcon}
-            />
-          </div>
+          <div>All Snippets</div>
           {errorSnippets && <div className={styles.info}>{error}</div>}
           {isLoadingSnippets && <div className={styles.loader}>Loader</div>}
           <Slider {...settings}>
@@ -238,12 +324,6 @@ function Collections() {
             ))}
           </Slider>
         </div>
-      </div>
-
-      {/* NEW SNIPPET CELL*/}
-
-      <div className={`${styles.newCollectionDiv} ${hideCreateSnippetDiv}`}>
-        <h4>Create New SNIPPET!</h4>
       </div>
 
       {/* FOOTER */}

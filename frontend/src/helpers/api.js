@@ -32,6 +32,9 @@ export function postLogin(data) {
 export function postNewCollection(data) {
   return api.post("/collections/", data);
 }
+export function postNewSnippet(data) {
+  return api.post("/snippets/", data);
+}
 
 export function getCollections() {
   return api.get("/collections");

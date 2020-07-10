@@ -15,7 +15,6 @@ function Snippets(snippet) {
     } else {
       setIsOwner(false);
     }
-    console.log("CHECK STATUS: ", isOwner)
   }, []);
   return (
     <div className={styles.row}>
@@ -40,9 +39,6 @@ function Snippets(snippet) {
           <FontAwesomeIcon icon={faUserSlash} className={styles.snipIcon} />
         </div>
       )}
-      {/* <h1>{snippet.title}</h1>
-      <h1>{snippet.owner}</h1>
-      <h1>{snippet.link}</h1> */}
     </div>
   );
 }
