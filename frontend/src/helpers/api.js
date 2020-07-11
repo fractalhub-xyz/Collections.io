@@ -42,3 +42,6 @@ export function getCollections() {
 export function getSnippets() {
   return api.get("/snippets");
 }
+export function deleteSnippet(id) {
+  return api.delete(`/snippets/${id}`);
+}
