@@ -64,7 +64,7 @@
   opacity: 0.02;
   transition: 0.5s;
   overflow: hidden;
-  /* temp */
+  z-index: 9999999;
 }
 
 .visible {
@@ -79,6 +79,6 @@
 }
 
 .cellHeader {
-    padding-left: 45px;
-    font-size: 2rem;
+  padding-left: 45px;
+  font-size: 2rem;
 }

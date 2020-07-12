@@ -6,7 +6,11 @@ import { getCollections, getSnippets } from "../helpers/api";
 import { postNewCollection, postNewSnippet } from "../helpers/api";
 import Snippets from "./snippets";
 //modules
-import { faPlus, faTimes, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faTimes,
+  faPaperPlane,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Slider from "react-slick";
 
@@ -95,14 +99,14 @@ function Collections() {
     };
     try {
       const { data } = await postNewSnippet(payload);
-      const newSnippets = [data, ...snippets];
+      const newSnippets = [...snippets, data];
       setSnippets(newSnippets);
       setCreateSnippetDiv(false);
       console.log("Successfully pushed snippet to collection");
-      setTitle("")
-      setLink("")
-      setType("podcast")
-      setCategory("")
+      setTitle("");
+      setLink("");
+      setType("podcast");
+      setCategory("");
     } catch {
       console.log("Failed to create a new collection");
       // add error message
@@ -159,7 +163,7 @@ function Collections() {
                     collection.name,
                     collection.owner,
                     collection.snippets,
-                    collection.id
+                    collection.id,
                   );
                 }}
               >
@@ -230,7 +234,11 @@ function Collections() {
 
           <div className={styles.snippetsContainer}>
             {snippets.map((snippet) => (
-              <Snippets key={snippet.id} snippet={snippet} />
+              <Snippets
+                key={snippet.id}
+                snip={snippet}
+                collectionID={collectionID}
+              />
             ))}
           </div>
           <div className={styles.addSnippetToCollectionIcon}>

@@ -11,12 +11,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //components
-import { deleteSnippet } from "../helpers/api";
+import { editSnippet, deleteSnippet } from "../helpers/api";
 
-function Snippets(snippet) {
-  snippet = snippet.snippet;
+function Snippets({ snip, collectionID }) {
   //states
   const [isOwner, setIsOwner] = useState(false);
+  // input states
+  const [snippet, setSnippet] = useState(snip);
+  const [title, setTitle] = useState(snippet.title);
+  const [link, setLink] = useState(snippet.link);
+  const [typeOf, setTypeOf] = useState(snippet.type_of);
+
   //lifecycle funcs
   useEffect(() => {
     if (localStorage.getItem("user") === snippet.owner) {
@@ -27,6 +32,24 @@ function Snippets(snippet) {
   }, []);
 
   //functions
+  const editSnip = async (e) => {
+    e.preventDefault();
+    try {
+      const data = {
+        title: title,
+        link: link,
+        type_of: typeOf,
+        collection: collectionID,
+      };
+      const response = await editSnippet(snip.id, data);
+      setSnippet(response.data);
+    } catch {
+      setTitle(snip.title);
+      setLink(snip.link);
+      setTypeOf(snip.type_of);
+      alert("Error happened");
+    }
+  };
   const deletesnip = async (e) => {
     e.preventDefault();
     try {
@@ -74,13 +97,22 @@ function Snippets(snippet) {
       <div className={`${styles.row} ${hideEdit}`}>
         <div className={styles.editRow}>
           <span className={styles.inputcontainer}>
-            <input placeholder={snippet.title}></input>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
           </span>
           <span className={styles.inputcontainer}>
-            <input placeholder={snippet.link}></input>
+            <input
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+            ></input>
           </span>
           <span className={styles.inputcontainer}>
-            <input placeholder={snippet.type_of}></input>
+            <input
+              value={typeOf}
+              onChange={(e) => setTypeOf(e.target.value)}
+            ></input>
           </span>
           <a
             onClick={() => {
@@ -92,7 +124,7 @@ function Snippets(snippet) {
           <a onClick={deletesnip}>
             <FontAwesomeIcon icon={faTrashAlt} />
           </a>
-          <a onClick={deletesnip}>
+          <a onClick={editSnip}>
             <FontAwesomeIcon icon={faEdit} />
           </a>
         </div>

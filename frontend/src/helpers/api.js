@@ -43,5 +43,8 @@ export function getSnippets() {
   return api.get("/snippets");
 }
 export function deleteSnippet(id) {
-  return api.delete(`/snippets/${id}`);
+  return api.delete(`/snippets/${id}/`);
+}
+export function editSnippet(id, data) {
+  return api.put(`/snippets/${id}/`, data);
 }
