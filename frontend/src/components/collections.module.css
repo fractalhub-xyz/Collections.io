@@ -77,13 +77,13 @@
 
 .bgbooks {
   /* background: url(../assets/images/books.jpeg) center; */
-  background: rgba(0, 255, 221, 0.493);
+  /* background: rgba(0, 255, 221, 0.493); */
 }
+
 .collectionDetailView {
-  padding: 0 130px;
-  height: 60vh;
+  padding: 50px 130px;
+  height: auto;
   transition: 0.5s;
-  overflow: hidden;
   background: rgba(202, 0, 0, 0.56);
 }
 
@@ -252,4 +252,5 @@
 
 .hide {
   height: 0vh;
+  padding: 0;
 }
