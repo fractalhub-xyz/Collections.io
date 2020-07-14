@@ -1,0 +1,85 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  background-color: teal;
+  transition: 1s;
+}
+
+.pageToNav {
+  width: 18vw;
+  background-color: black;
+}
+
+.title {
+  transition: 0.5s;
+}
+
+.cyan {
+  color: #00fff0;
+}
+
+.loginForm {
+  padding: 25px;
+  width: 25vw;
+  background-color: white;
+  transition: 0.5s;
+}
+
+.loginForm h5 {
+  color: black;
+  text-align: center;
+  padding: 0;
+  font-weight: lighter;
+  letter-spacing: 2px;
+}
+
+
+.inputfield {
+  border: none;
+  display: block;
+  width: 95%;
+  margin: 0 auto;
+  padding: 8px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  background-color: lightgrey;
+  color: black;
+}
+
+.formButtom {
+  border: none;
+  display: block;
+  width: 99%;
+  margin: 0 auto;
+  padding: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.4s;
+  background-color: #00a79b;
+}
+.formButtom:hover {
+  background-color: teal;
+  color: white;
+}
+.info {
+  color: black;
+  font-weight: lighter;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.4s;
+  margin-bottom: 0px;
+  
+}
+.info:hover {
+  transform: scale(1.05);
+}
+.hide {
+  opacity: 0;
+}

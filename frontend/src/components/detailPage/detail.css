@@ -1,0 +1,100 @@
+.root {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.sidenav {
+  width: 18vw;
+  height: 100vh;
+  position: fixed;
+  background-color: black;
+}
+
+.main {
+  margin-left: 18vw;
+  background-color: #282828;
+  height: 100vh;
+  width: 82vw;
+}
+.nav {
+  width: 95%;
+  margin: 0px auto;
+  padding-top: 20px;
+}
+
+.backIcon {
+  color: #b1d4e0;
+  font-size: 1.3rem;
+  padding-left: 10px;
+    transition: 0.3s;
+}
+
+.backIcon:hover{
+    transform: scale(1.1);
+    color: #00fff0;
+}
+
+.nav h1 {
+  float: right;
+  font-size: 1.3rem;
+  font-weight: lighter;
+  text-transform: capitalize;
+  color: #b1d4e0;
+  margin: 0;
+}
+
+.moreIcon {
+  padding-left: 10px;
+  position: relative;
+  top: 2px;
+  cursor: pointer;
+}
+
+.moreIcon:hover {
+  color: #00fff0;
+}
+
+.container {
+  width: 95%;
+  margin: 0px auto;
+  padding-top: 20px;
+}
+
+.container h1 {
+  display: inline;
+    color: #b1d4e0;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.container h3 {
+  color: #2e8bc0;
+  font-weight: normal;
+  letter-spacing: 2.5px;
+  margin-bottom: 2px;
+}
+
+.line {
+  height: 2px;
+  background: #00fff0;
+  margin-bottom: 25px;
+}
+
+.collection {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.cardShowcase {
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #c4c4c4;
+  height: 27vh;
+  width: 27vh;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
