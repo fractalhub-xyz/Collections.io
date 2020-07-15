@@ -4,12 +4,22 @@
   padding: 0;
 }
 
-
 .main {
   margin-left: 18vw;
   background-color: #282828;
   height: 100vh;
-  width: 82vw;
+  animation-name: expand;
+  animation-duration: 0.25s;
+  overflow: hidden;
+}
+
+@keyframes expand {
+  0% {
+    width: 0vw;
+  }
+  100% {
+    width: 82vw;
+  }
 }
 .nav {
   width: 95%;
@@ -206,6 +216,11 @@
 
 .edit:hover {
   opacity: 1;
+}
+
+.loader {
+  text-align: center;
+  font-size: 200%;
 }
 
 .oops {

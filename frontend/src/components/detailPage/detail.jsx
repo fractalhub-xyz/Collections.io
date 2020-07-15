@@ -18,7 +18,6 @@ function Detail() {
   const [liked, setLiked] = useState(true);
   const [collection, setCollection] = useState({});
   const [snippets, setSnippets] = useState([]);
-  const [isEmpty, setIsEmpty] = useState(true);
 
   //lifcycle funcs
   useEffect(() => {
@@ -85,7 +84,8 @@ function Detail() {
             <div className="edicol">EDIT</div>
           </div>
           <div>
-            {!snippets.length && (
+            {isLoading && <div className="loader">ISA LOADING</div>}
+            {(!snippets.length) && (
               <h4 className="oops">
                 ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
                 <br />
