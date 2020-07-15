@@ -3,6 +3,7 @@ import "./home.css";
 import Navbar from "./navbar";
 //API
 import { getCollections } from "../../helpers/api";
+//components
 import Collections from "./collections";
 import SideNav from "./sidenav";
 

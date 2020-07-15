@@ -39,6 +39,9 @@ export function postNewSnippet(data) {
 export function getCollections() {
   return api.get("/collections");
 }
+export function getCollectionFromID(id) {
+  return api.get(`/collections/${id}`)
+}
 export function getSnippets() {
   return api.get("/snippets");
 }

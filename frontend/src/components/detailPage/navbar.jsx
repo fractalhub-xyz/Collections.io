@@ -6,11 +6,21 @@ import {
   faBookmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//MODULES
+import { useHistory } from "react-router-dom";
 
 function Navbar() {
+  let history = useHistory();
+  const redirect = () => {
+    history.push("/home");
+  };
   return (
     <div className="nav">
-      <FontAwesomeIcon className="backIcon" icon={faChevronLeft} />
+      <FontAwesomeIcon
+        onClick={redirect}
+        className="backIcon"
+        icon={faChevronLeft}
+      />
       <h1 className="moreIcon">
         <FontAwesomeIcon icon={faChevronDown} />
       </h1>

@@ -27,12 +27,13 @@
   color: #b1d4e0;
   font-size: 1.3rem;
   padding-left: 10px;
-    transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
-.backIcon:hover{
-    transform: scale(1.1);
-    color: #00fff0;
+.backIcon:hover {
+  transform: scale(1.1);
+  color: #00fff0;
 }
 
 .nav h1 {
@@ -61,40 +62,154 @@
   padding-top: 20px;
 }
 
-.container h1 {
-  display: inline;
-    color: #b1d4e0;
-  font-size: 2rem;
-  letter-spacing: 2px;
+.cardDetails {
+  width: 100%;
+  height: 240px;
+  padding: 0;
+  display: flex;
+  margin-bottom: 20px;
 }
-
-.container h3 {
-  color: #2e8bc0;
-  font-weight: normal;
-  letter-spacing: 2.5px;
-  margin-bottom: 2px;
+.collectioncard {
+  height: 100%;
+  width: 240px;
+  background-color: #c4c4c4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  text-align: center;
+  text-transform: capitalize;
 }
-
-.line {
-  height: 2px;
-  background: #00fff0;
-  margin-bottom: 25px;
-}
-
-.collection {
-  display: inline-block;
+.collectionText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
   margin-left: 10px;
 }
 
-.cardShowcase {
-  display: inline-block;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #c4c4c4;
-  height: 27vh;
-  width: 27vh;
-  font-size: 1.6rem;
-  text-align: center;
+.likes {
+  font-size: 80%;
+  color: #e5e5e5;
 }
 
+.like {
+  font-size: 2.6rem;
+  transition: 0.4s;
+  cursor: pointer;
+  padding: 10px 0px;
+}
+
+.like:hover {
+  transform: scale(1.1);
+}
+
+.teal {
+  color: #00fff0;
+  text-transform: uppercase;
+}
+
+.type {
+  color: #bbbbbb;
+}
+
+.name {
+  color: #e5e5e5;
+  font-size: 140%;
+  margin-bottom: 10px;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.desc {
+  color: #e5e5e5;
+}
+
+.count {
+  margin-bottom: 10px;
+  color: #bbbbbb;
+}
+
+.container input {
+  width: 90%;
+  padding: 12px;
+  border-radius: 25px;
+  margin-bottom: 15px;
+  border: none;
+  background: #b1d4e0;
+}
+
+.addSnippet {
+  font-size: 2.3rem;
+  color: #b1d4e0;
+  position: relative;
+  top: 10px;
+  margin-left: 25px;
+  transform: scale(1.1);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.addSnippet:hover {
+  transform: scale(1.2);
+  color: white;
+}
+
+.tableheaders {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #04d2ff;
+  color: #6c6c6c;
+}
+.tablerows {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0px;
+  border-bottom: 1px solid #6c6c6c;
+}
+
+.likecol {
+  width: 7%;
+  text-align: center;
+}
+.titlecol {
+  width: 43%;
+}
+.ownercol {
+  width: 14%;
+  text-align: center;
+  text-transform: capitalize;
+}
+.typecol {
+  width: 10%;
+  text-align: center;
+}
+.datecol {
+  width: 10%;
+  overflow: hidden;
+  text-align: center;
+}
+.linkcol {
+  width: 8%;
+  text-align: center;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.linkcol:hover {
+  opacity: 1;
+}
+.edicol {
+  width: 8%;
+  text-align: center;
+  color: rgb(99, 99, 99);
+}
+.edit {
+  color: white;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.edit:hover {
+  opacity: 1;
+}
