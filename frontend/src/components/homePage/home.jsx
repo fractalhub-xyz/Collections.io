@@ -12,6 +12,7 @@ function Home() {
   const [collections, setCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [refresh, setRefresh] = useState(false);
   //lifecycle funcs
   useEffect(() => {
     console.log("rendering Home View");
@@ -28,12 +29,13 @@ function Home() {
       setIsLoading(false);
     }
 
-    fetchCollection();
-  }, []);
+    fetchCollection(refresh);
+    setRefresh(false);
+  }, [refresh]);
 
   return (
     <div className="root">
-        <SideNav />
+      <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar />
         <div className="container">

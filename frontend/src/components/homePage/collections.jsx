@@ -17,7 +17,7 @@ function Collections({ collections }) {
             }}
             className="card"
           >
-            <img src={""}></img>
+            {/* <img src={""} alt="TEMP"></img> */}
             <p>{collection.name}</p>
           </div>
           <p className="card-text">

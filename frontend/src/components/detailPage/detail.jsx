@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./detail.css";
 import SideNav from "../homePage/sidenav";
 import Navbar from "./navbar";
+import NewSnippet from "./newsnippet";
 //API
 import { getCollectionFromID } from "../../helpers/api";
 //components
@@ -18,7 +19,8 @@ function Detail() {
   const [liked, setLiked] = useState(true);
   const [collection, setCollection] = useState({});
   const [snippets, setSnippets] = useState([]);
-
+  const [modalView, setModalView] = useState(false);
+  const [refresh, setRefresh] = useState(false)
   //lifcycle funcs
   useEffect(() => {
     console.log("rendering Detail View");
@@ -36,7 +38,13 @@ function Detail() {
       setIsLoading(false);
     }
     fetchCollection();
-  }, []);
+    setRefresh(false);
+  }, [refresh]);
+  
+  // useEffect(() => {
+  //   console.log("refreshing for updates");
+  // }, [refresh]);
+
 
   return (
     <div className="root">
@@ -68,7 +76,9 @@ function Detail() {
           </div>
           <input placeholder="SEARCH" />
           <FontAwesomeIcon
-            onClick={() => {}}
+            onClick={() => {
+              setModalView(true);
+            }}
             className="addSnippet"
             icon={faPlusCircle}
           />
@@ -85,7 +95,7 @@ function Detail() {
           </div>
           <div>
             {isLoading && <div className="loader">ISA LOADING</div>}
-            {(!snippets.length) && (
+            {!snippets.length && (
               <h4 className="oops">
                 ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
                 <br />
@@ -93,10 +103,19 @@ function Detail() {
               </h4>
             )}
             {snippets.map((snippet) => (
-              <Snippet snippet={snippet} />
+              <Snippet key={snippet.id} snippet={snippet} />
             ))}
           </div>
         </div>
+      </div>
+      <div>
+        {modalView && (
+          <NewSnippet
+            setModalView={setModalView}
+            collectionID={collection.id}
+            setRefresh={setRefresh}
+          />
+        )}
       </div>
     </div>
   );
