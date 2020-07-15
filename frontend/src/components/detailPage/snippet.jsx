@@ -6,11 +6,15 @@ import {
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//components
+import EditSnippet from "./editsnippet";
 
-function Snippet({ snippet }) {
+function Snippet({ snippet, setRefresh }) {
   //states
   const [isOwner, setIsOwner] = useState(false);
   const [isLiked, setIsLiked] = useState(true);
+  const [editModal, setEditModal] = useState(false);
+
   //lifecycle funs
   useEffect(() => {
     if (localStorage.getItem("user") === snippet.owner) {
@@ -39,9 +43,18 @@ function Snippet({ snippet }) {
       </div>
       <div className="edicol">
         {isOwner ? (
-          <FontAwesomeIcon className="edit" icon={faUserEdit} />
+          <FontAwesomeIcon onClick={()=>{setEditModal(true);}} className="edit" icon={faUserEdit} />
         ) : (
           <FontAwesomeIcon icon={faUserAltSlash} />
+        )}
+      </div>
+      <div>
+        {editModal && (
+          <EditSnippet
+            setEditModal={setEditModal}
+            setRefresh={setRefresh}
+            snippet={snippet}
+          />
         )}
       </div>
     </div>

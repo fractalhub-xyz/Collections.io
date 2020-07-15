@@ -103,7 +103,11 @@ function Detail() {
               </h4>
             )}
             {snippets.map((snippet) => (
-              <Snippet key={snippet.id} snippet={snippet} />
+              <Snippet
+                key={snippet.id}
+                snippet={snippet}
+                setRefresh={setRefresh}
+              />
             ))}
           </div>
         </div>
