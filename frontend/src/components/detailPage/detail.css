@@ -4,12 +4,6 @@
   padding: 0;
 }
 
-.sidenav {
-  width: 18vw;
-  height: 100vh;
-  position: fixed;
-  background-color: black;
-}
 
 .main {
   margin-left: 18vw;
@@ -212,4 +206,9 @@
 
 .edit:hover {
   opacity: 1;
+}
+
+.oops {
+  text-align: center;
+  font-size: 200%;
 }

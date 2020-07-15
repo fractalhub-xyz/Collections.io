@@ -8,11 +8,7 @@ import { getCollectionFromID } from "../../helpers/api";
 import Snippet from "./snippet";
 
 //ICONS
-import {
-  faHeart,
-  faPlusCircle,
-  faExternalLinkAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Detail() {
@@ -22,6 +18,7 @@ function Detail() {
   const [liked, setLiked] = useState(true);
   const [collection, setCollection] = useState({});
   const [snippets, setSnippets] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(true);
 
   //lifcycle funcs
   useEffect(() => {
@@ -77,7 +74,9 @@ function Detail() {
             icon={faPlusCircle}
           />
           <div className="tableheaders">
-            <div className="likecol">HEART</div>
+            <div className="likecol">
+              <FontAwesomeIcon icon={faHeart} />
+            </div>
             <div className="titlecol">TITLE</div>
             <div className="ownercol">OWNER</div>
             <div className="typecol">TYPE</div>
@@ -86,6 +85,13 @@ function Detail() {
             <div className="edicol">EDIT</div>
           </div>
           <div>
+            {!snippets.length && (
+              <h4 className="oops">
+                ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
+                <br />
+                ISA EMPTY
+              </h4>
+            )}
             {snippets.map((snippet) => (
               <Snippet snippet={snippet} />
             ))}
