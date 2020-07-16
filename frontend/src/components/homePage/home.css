@@ -6,7 +6,7 @@
 .main {
   margin-left: 18vw;
   background-color: #282828;
-  height: 100vh;
+  min-height: 100vh;
   width: 82vw;
 }
 .nav {
@@ -241,6 +241,7 @@ textarea {
   letter-spacing: 2px;
   background: #02dfd0;
   transition: 0.2s;
+  margin: 0px 15px;
 }
 
 .buttonHolder button:hover {

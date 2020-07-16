@@ -40,7 +40,7 @@ export function getCollections() {
   return api.get("/collections");
 }
 export function getCollectionFromID(id) {
-  return api.get(`/collections/${id}`)
+  return api.get(`/collections/${id}`);
 }
 export function getSnippets() {
   return api.get("/snippets");
@@ -48,6 +48,12 @@ export function getSnippets() {
 export function deleteSnippet(id) {
   return api.delete(`/snippets/${id}/`);
 }
+export function deleteCollection(id) {
+  return api.delete(`/collections/${id}/`);
+}
 export function editSnippet(id, data) {
   return api.put(`/snippets/${id}/`, data);
+}
+export function editCollection(id, data) {
+  return api.put(`/collections/${id}/`, data);
 }

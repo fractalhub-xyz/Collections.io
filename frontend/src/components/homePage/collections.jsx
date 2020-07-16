@@ -10,7 +10,7 @@ function Collections({ collections }) {
   return (
     <div>
       {collections.map((collection) => (
-        <div className="collection">
+        <div key={collection.id} className="collection">
           <div
             onClick={() => {
               openCollection(collection.id);

@@ -90,6 +90,19 @@
   justify-content: space-around;
   height: 100%;
   margin-left: 10px;
+  width: 70%;
+}
+
+.deleteIcon {
+  font-size: 1.7rem;
+  padding-top: 26px;
+  padding-left: 41px;
+  opacity: 0.7;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.deleteIcon:hover {
+  opacity: 1;
 }
 
 .likes {

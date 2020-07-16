@@ -21,17 +21,11 @@ function SideNav({ setRefresh }) {
     e.preventDefault();
     const payload = { name, desc };
     try {
-      const { data } = await postNewCollection(payload);
-      // addCollectionToExisting(data);
+      await postNewCollection(payload);
       setModalView(false);
       setRefresh(true);
-      //NOTIFICATION HERE
-      //
-      //
-      //
     } catch {
       console.log("Failed to create a new collection");
-      // add error message
       alert("Failed");
     }
   };

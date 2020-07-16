@@ -7,10 +7,16 @@ import NewSnippet from "./newsnippet";
 import { getCollectionFromID } from "../../helpers/api";
 //components
 import Snippet from "./snippet";
+import EditCollection from "./editcollection"
 
 //ICONS
-import { faHeart, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faPlusCircle,
+  faUserEdit,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Collections from "../homePage/collections";
 
 function Detail() {
   //states
@@ -20,7 +26,9 @@ function Detail() {
   const [collection, setCollection] = useState({});
   const [snippets, setSnippets] = useState([]);
   const [modalView, setModalView] = useState(false);
-  const [refresh, setRefresh] = useState(false)
+  const [editCollectionModal, setEditCollectionModal] = useState(false)
+  const [refresh, setRefresh] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
   //lifcycle funcs
   useEffect(() => {
     console.log("rendering Detail View");
@@ -40,15 +48,19 @@ function Detail() {
     fetchCollection();
     setRefresh(false);
   }, [refresh]);
-  
-  // useEffect(() => {
-  //   console.log("refreshing for updates");
-  // }, [refresh]);
 
+  //lifecycle funs
+  useEffect(() => {
+    if (localStorage.getItem("user") === collection.owner) {
+      setIsOwner(true);
+    } else {
+      setIsOwner(false);
+    }
+  }, [collection]);
 
   return (
     <div className="root">
-      <SideNav />
+      <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar />
         <div className="container">
@@ -73,6 +85,17 @@ function Detail() {
                 created by <span className="teal">{collection.owner}</span>
               </div>
             </div>
+            <div>
+              {isOwner && (
+                <FontAwesomeIcon
+                  onClick={() => {
+                    setEditCollectionModal(true);
+                  }}
+                  className="deleteIcon"
+                  icon={faUserEdit}
+                />
+              )}
+            </div>
           </div>
           <input placeholder="SEARCH" />
           <FontAwesomeIcon
@@ -93,7 +116,7 @@ function Detail() {
             <div className="linkcol">LINK</div>
             <div className="edicol">EDIT</div>
           </div>
-          <div>
+          <div className="snippetList">
             {isLoading && <div className="loader">ISA LOADING</div>}
             {!snippets.length && (
               <h4 className="oops">
@@ -118,6 +141,15 @@ function Detail() {
             setModalView={setModalView}
             collectionID={collection.id}
             setRefresh={setRefresh}
+          />
+        )}
+      </div>
+      <div>
+        {editCollectionModal && (
+          <EditCollection
+            setEditCollectionModal={setEditCollectionModal}
+            setRefresh={setRefresh}
+            collection={collection}
           />
         )}
       </div>

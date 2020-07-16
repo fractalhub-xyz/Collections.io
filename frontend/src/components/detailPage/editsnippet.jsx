@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //API
-import { postNewSnippet } from "../../helpers/api";
+import { editSnippet, deleteSnippet } from "../../helpers/api";
 
 function EditSnippet({ setEditModal, setRefresh, snippet }) {
   //createSnippet
@@ -11,29 +11,37 @@ function EditSnippet({ setEditModal, setRefresh, snippet }) {
   const [link, setLink] = useState(snippet.link);
   const [type, setType] = useState(snippet.type_of);
 
-  //   const createSnippet = async (e) => {
-  //     e.preventDefault();
-  //     const payload = {
-  //       title: title,
-  //       type_of: type,
-  //       link: link,
-  //       collection: collectionID,
-  //     };
-  //     try {
-  //       const { data } = await postNewSnippet(payload);
-  //       //   addSnippetToCollection(data);
-  //       console.log("Successfully pushed snippet to collection");
-  //       setModalView(false);
-  //       setRefresh(true);
-  //     } catch {
-  //       console.log("Failed to create a new collection");
-  //       alert("Failed");
-  //     }
+    const editSelected = async (e) => {
+      e.preventDefault();
+      const payload = {
+        title: title,
+        type_of: type,
+        link: link,
+        collection: snippet.id,
+      };
+      try {
+        await editSnippet(snippet.id, payload);
+        console.log("Successfully editted snippet");
+        setEditModal(false);
+        setRefresh(true);
+      } catch {
+        console.log("Failed to edit snippet");
+        alert("Failed");
+      }
+    };
 
-  //     setTitle("");
-  //     setLink("");
-  //     setType("podcast");
-  //   };
+  const deleteSelected = async (e) => {
+    e.preventDefault();
+    try {
+      await deleteSnippet(snippet.id);
+      console.log("Successfully removed snippet from collection");
+      setEditModal(false);
+      setRefresh(true);
+    } catch {
+      console.log("Failed to remove snippet from collection");
+      alert("Failed");
+    }
+  };
 
   return (
     <div className="modal">
@@ -75,7 +83,8 @@ function EditSnippet({ setEditModal, setRefresh, snippet }) {
           </div>
         </div>
         <div className="buttonHolder">
-          <button>EDIT</button>
+          <button onClick={editSelected}>EDIT</button>
+          <button onClick={deleteSelected}>DELETE</button>
         </div>
       </div>
     </div>
