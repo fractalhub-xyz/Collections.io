@@ -4,6 +4,9 @@ import "./login.css";
 import { useHistory } from "react-router-dom";
 //api
 import { postLogin } from "../../helpers/api";
+//ICONS
+import { faChevronCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Login() {
   //setup
@@ -66,7 +69,8 @@ function Login() {
           />
           <h5>{error}</h5>
           <button className="formButtom" type="submit">
-            LOGIN
+            LOG IN&nbsp;
+            <FontAwesomeIcon icon={faChevronCircleRight} />
           </button>
           <h3
             className="info"
@@ -97,8 +101,10 @@ function Login() {
             type="password"
             placeholder="Enter a password again"
           />
+
           <button className="formButtom" type="submit">
-            REGISTER
+            REGISTER&nbsp;
+            <FontAwesomeIcon icon={faChevronCircleRight} />
           </button>
           <h3
             className="info"

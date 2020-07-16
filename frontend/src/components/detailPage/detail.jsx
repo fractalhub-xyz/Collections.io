@@ -7,7 +7,7 @@ import NewSnippet from "./newsnippet";
 import { getCollectionFromID } from "../../helpers/api";
 //components
 import Snippet from "./snippet";
-import EditCollection from "./editcollection"
+import EditCollection from "./editcollection";
 
 //ICONS
 import {
@@ -16,7 +16,6 @@ import {
   faUserEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Collections from "../homePage/collections";
 
 function Detail() {
   //states
@@ -26,7 +25,7 @@ function Detail() {
   const [collection, setCollection] = useState({});
   const [snippets, setSnippets] = useState([]);
   const [modalView, setModalView] = useState(false);
-  const [editCollectionModal, setEditCollectionModal] = useState(false)
+  const [editCollectionModal, setEditCollectionModal] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   //lifcycle funcs
@@ -64,6 +63,7 @@ function Detail() {
       <div className="main">
         <Navbar />
         <div className="container">
+          <div>{error && <h1>{error}</h1>}</div>
           <div className="cardDetails">
             <div className="collectioncard">{collection.name}</div>
             <div className="collectionText">
@@ -80,7 +80,9 @@ function Detail() {
               <div className="type">COLLECTION</div>
               <div className="name">{collection.name}</div>
               <div className="desc">{collection.desc}</div>
-                <div className="count">12 Articles, 2 Podcast, {snippets.length} Total</div>
+              <div className="count">
+                12 Articles, 2 Podcast, {snippets.length} Total
+              </div>
               <div className="owner">
                 created by <span className="teal">{collection.owner}</span>
               </div>

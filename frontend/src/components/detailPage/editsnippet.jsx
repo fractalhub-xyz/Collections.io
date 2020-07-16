@@ -86,7 +86,7 @@ function EditSnippet({ setEditModal, setRefresh, snippet }) {
         </div>
         <div className="errorText">{error}</div>
         <div className="buttonHolder">
-          <button onClick={editSelected}>EDIT</button>
+          <button onClick={editSelected}>SAVE</button>
           <button onClick={deleteSelected}>DELETE</button>
         </div>
       </div>

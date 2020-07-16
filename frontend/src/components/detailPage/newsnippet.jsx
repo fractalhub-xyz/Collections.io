@@ -21,8 +21,7 @@ function NewSnippet({ setModalView, collectionID, setRefresh }) {
       collection: collectionID,
     };
     try {
-      const { data } = await postNewSnippet(payload);
-      //   addSnippetToCollection(data);
+      await postNewSnippet(payload);
       console.log("Successfully pushed snippet to collection");
       setModalView(false);
       setRefresh(true);
@@ -74,7 +73,7 @@ function NewSnippet({ setModalView, collectionID, setRefresh }) {
             />
           </div>
         </div>
-            <div className="errorText">{error}</div>
+        <div className="errorText">{error}</div>
         <div className="buttonHolder">
           <button onClick={createSnippet}>ADD</button>
         </div>

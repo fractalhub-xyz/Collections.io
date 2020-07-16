@@ -77,7 +77,7 @@ function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
           </div>
           <div className="errorText">{error}</div>
           <div className="buttonHolder">
-            <button onClick={editSelection}>EDIT</button>
+            <button onClick={editSelection}>SAVE</button>
             <button onClick={deleteSelection}>DELETE</button>
           </div>
         </div>
