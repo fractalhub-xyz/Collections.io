@@ -13,6 +13,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Navbar() {
   let history = useHistory();
   const [showMore, setShowMore] = useState(false);
+  const redirect = () => {
+    history.push("/home");
+  };
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -22,6 +25,11 @@ function Navbar() {
   };
   return (
     <div className="nav">
+      <FontAwesomeIcon
+        onClick={redirect}
+        className="backIcon"
+        icon={faChevronLeft}
+      />
       <span>
         {showMore && (
           <h1 onClick={logout} className="logout">
