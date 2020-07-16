@@ -22,7 +22,7 @@ function Home() {
       try {
         const response = await getCollections();
         setCollections(response.data);
-        localStorage.setItem("collections", collections);
+        localStorage.setItem("collections", response.data);
       } catch (error) {
         console.error(error);
         setError("Error happened");

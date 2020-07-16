@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //ICONS
 import {
   faHome,
@@ -17,6 +17,8 @@ function SideNav({ setRefresh }) {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [modalView, setModalView] = useState(false);
+  const [error, setError] = useState("");
+
   const createCollection = async (e) => {
     e.preventDefault();
     const payload = { name, desc };
@@ -26,7 +28,7 @@ function SideNav({ setRefresh }) {
       setRefresh(true);
     } catch {
       console.log("Failed to create a new collection");
-      alert("Failed");
+      setError("Invalid Entry");
     }
   };
 
@@ -101,6 +103,7 @@ function SideNav({ setRefresh }) {
                   <input />
                 </div>
               </div>
+              <div className="errorText">{error}</div>
               <div className="buttonHolder">
                 <button onClick={createCollection}>CREATE</button>
               </div>

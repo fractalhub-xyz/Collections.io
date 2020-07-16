@@ -11,6 +11,7 @@ function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
   let history = useHistory();
   const [name, setName] = useState(collection.name);
   const [desc, setDesc] = useState(collection.desc);
+  const [error, setError] = useState("");
 
   const editSelection = async (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
     } catch (error) {
       console.log(error);
       console.log("Failed to edit");
-      alert("Failed");
+      setError("Invalid Entry");
     }
   };
   const deleteSelection = async (e) => {
@@ -50,7 +51,9 @@ function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
           />
         </div>
         <div className="form">
-          <h4>CREATE NEW COLLECTION</h4>
+          <h4>
+            EDIT <span className="teal">{collection.name}</span>
+          </h4>
           <div className="formContainer">
             <div className="formCard" />
             <div className="formText">
@@ -72,6 +75,7 @@ function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
               <input />
             </div>
           </div>
+          <div className="errorText">{error}</div>
           <div className="buttonHolder">
             <button onClick={editSelection}>EDIT</button>
             <button onClick={deleteSelection}>DELETE</button>

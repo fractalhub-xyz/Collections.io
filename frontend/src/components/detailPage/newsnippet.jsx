@@ -10,6 +10,7 @@ function NewSnippet({ setModalView, collectionID, setRefresh }) {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [type, setType] = useState("podcast");
+  const [error, setError] = useState("");
 
   const createSnippet = async (e) => {
     e.preventDefault();
@@ -25,14 +26,13 @@ function NewSnippet({ setModalView, collectionID, setRefresh }) {
       console.log("Successfully pushed snippet to collection");
       setModalView(false);
       setRefresh(true);
+      setTitle("");
+      setLink("");
+      setType("podcast");
     } catch {
       console.log("Failed to create a new collection");
-      alert("Failed");
+      setError("Invalid Entry");
     }
-
-    setTitle("");
-    setLink("");
-    setType("podcast");
   };
 
   return (
@@ -74,6 +74,7 @@ function NewSnippet({ setModalView, collectionID, setRefresh }) {
             />
           </div>
         </div>
+            <div className="errorText">{error}</div>
         <div className="buttonHolder">
           <button onClick={createSnippet}>ADD</button>
         </div>

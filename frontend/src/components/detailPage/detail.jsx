@@ -80,7 +80,7 @@ function Detail() {
               <div className="type">COLLECTION</div>
               <div className="name">{collection.name}</div>
               <div className="desc">{collection.desc}</div>
-              <div className="count">12 Articles, 2 Podcast</div>
+                <div className="count">12 Articles, 2 Podcast, {snippets.length} Total</div>
               <div className="owner">
                 created by <span className="teal">{collection.owner}</span>
               </div>

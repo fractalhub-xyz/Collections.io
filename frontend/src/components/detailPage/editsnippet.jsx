@@ -10,25 +10,27 @@ function EditSnippet({ setEditModal, setRefresh, snippet }) {
   const [title, setTitle] = useState(snippet.title);
   const [link, setLink] = useState(snippet.link);
   const [type, setType] = useState(snippet.type_of);
+  const [error, setError] = useState("");
 
-    const editSelected = async (e) => {
-      e.preventDefault();
-      const payload = {
-        title: title,
-        type_of: type,
-        link: link,
-        collection: snippet.id,
-      };
-      try {
-        await editSnippet(snippet.id, payload);
-        console.log("Successfully editted snippet");
-        setEditModal(false);
-        setRefresh(true);
-      } catch {
-        console.log("Failed to edit snippet");
-        alert("Failed");
-      }
+  const editSelected = async (e) => {
+    e.preventDefault();
+    const payload = {
+      title: title,
+      type_of: type,
+      link: link,
+      collection: snippet.collection,
     };
+    try {
+      await editSnippet(snippet.id, payload);
+      console.log("Successfully editted snippet");
+      setEditModal(false);
+      setRefresh(true);
+    } catch (error) {
+      console.log(error);
+      console.log("Failed to edit snippet");
+      setError("Invalid Entry");
+    }
+  };
 
   const deleteSelected = async (e) => {
     e.preventDefault();
@@ -82,6 +84,7 @@ function EditSnippet({ setEditModal, setRefresh, snippet }) {
             />
           </div>
         </div>
+        <div className="errorText">{error}</div>
         <div className="buttonHolder">
           <button onClick={editSelected}>EDIT</button>
           <button onClick={deleteSelected}>DELETE</button>
