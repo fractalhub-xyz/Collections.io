@@ -16,7 +16,6 @@ function Home() {
   //lifecycle funcs
   useEffect(() => {
     console.log("rendering Home View");
-    localStorage.removeItem("collectionId");
     async function fetchCollection() {
       console.log("fetching collection data");
       try {

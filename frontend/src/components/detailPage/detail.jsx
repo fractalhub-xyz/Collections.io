@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./detail.css";
 import SideNav from "../homePage/sidenav";
+import { useParams } from "react-router-dom";
 import Navbar from "./navbar";
 import NewSnippet from "./newsnippet";
 //API
@@ -18,6 +19,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Detail() {
+  // params
+  const params = useParams();
   //states
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -26,15 +29,19 @@ function Detail() {
   const [snippets, setSnippets] = useState([]);
   const [modalView, setModalView] = useState(false);
   const [editCollectionModal, setEditCollectionModal] = useState(false);
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
   //lifcycle funcs
   useEffect(() => {
     console.log("rendering Detail View");
-    const id = localStorage.getItem("collectionId");
+    if (!refresh) {
+      return;
+    }
+
     async function fetchCollection() {
-      console.log(`fetching collection ${id} details`);
       try {
+        const id = params.id;
+        console.log(`fetching collection ${id} details`);
         const response = await getCollectionFromID(id);
         setCollection(response.data);
         setSnippets(response.data.snippets);
@@ -56,6 +63,9 @@ function Detail() {
       setIsOwner(false);
     }
   }, [collection]);
+
+  const podcasts = snippets.filter((snip) => snip.type_of === "podcast").length;
+  const articles = snippets.filter((snip) => snip.type_of === "article").length;
 
   return (
     <div className="root">
@@ -81,7 +91,7 @@ function Detail() {
               <div className="name">{collection.name}</div>
               <div className="desc">{collection.desc}</div>
               <div className="count">
-                12 Articles, 2 Podcast, {snippets.length} Total
+                {articles} Articles, {podcasts} Podcast, {snippets.length} Total
               </div>
               <div className="owner">
                 created by <span className="teal">{collection.owner}</span>

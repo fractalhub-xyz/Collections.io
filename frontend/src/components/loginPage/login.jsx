@@ -78,7 +78,7 @@ function Login() {
               setRegister(true);
             }}
           >
-            Already have an account? Click here to login !
+            New Here? Click here to register !
           </h3>
         </form>
       ) : (
@@ -112,7 +112,7 @@ function Login() {
               setRegister(false);
             }}
           >
-            New Here? Click here to register !
+            Already have an account? Click here to login !
           </h3>
         </form>
       )}

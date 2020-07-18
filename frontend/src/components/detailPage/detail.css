@@ -10,7 +10,7 @@
   height: 100vh;
   animation-name: expand;
   animation-duration: 0.25s;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 @keyframes expand {
@@ -239,6 +239,20 @@
 .oops {
   text-align: center;
   font-size: 200%;
+  animation-name: fade-in;
+  animation-duration: 0.2s;
+  animation-delay: 0.25s;
+  animation-fill-mode: both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .formText input {

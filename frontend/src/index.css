@@ -17,6 +17,11 @@ code {
 
 a {
   text-decoration: none;
+  color: white;
+}
+
+a:visited {
+  color: white;
 }
 
 .customSlider .slick-track {
@@ -27,4 +32,9 @@ a {
 
 .customSlider .slick-slide {
   height: auto;
+}
+
+input:focus,
+button:focus {
+  outline: none;
 }

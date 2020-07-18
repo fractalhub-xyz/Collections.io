@@ -39,7 +39,6 @@
   letter-spacing: 2px;
 }
 
-
 .inputfield {
   border: none;
   display: block;
@@ -55,6 +54,11 @@
   border-radius: 20px;
 }
 
+.inputfield:active,
+.inputfield:focus {
+  outline: none;
+}
+
 .formButtom {
   border: none;
   display: block;
@@ -67,11 +71,12 @@
   transition: 0.4s;
   background: none;
   border-radius: 20px;
-  color: #00fff0;;
+  color: #00fff0;
 }
 .formButtom:hover {
   background-color: #00fff0;
   color: black;
+  outline: none;
 }
 .info {
   color: black;
@@ -81,8 +86,7 @@
   cursor: pointer;
   transition: 0.4s;
   margin-bottom: 0px;
-  color: white
-  
+  color: white;
 }
 .info:hover {
   transform: scale(1.05);

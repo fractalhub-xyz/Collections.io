@@ -4,9 +4,9 @@ import { useHistory } from "react-router-dom";
 function Collections({ collections }) {
   let history = useHistory();
   const openCollection = (id) => {
-    localStorage.setItem("collectionId", id);
-    history.push("/detail");
+    history.push("/detail/" + id);
   };
+
   return (
     <div>
       {collections.map((collection) => (

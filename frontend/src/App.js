@@ -4,7 +4,6 @@ import Login from "./components/loginPage/login";
 import Home from "./components/homePage/home";
 import Detail from "./components/detailPage/detail";
 
-
 function App() {
   return (
     <div className="App">
@@ -16,7 +15,7 @@ function App() {
           <Route path="/home" exact>
             <Home />
           </Route>
-          <Route path="/detail" exact>
+          <Route path="/detail/:id">
             <Detail />
           </Route>
         </Switch>

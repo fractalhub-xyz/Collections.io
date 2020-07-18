@@ -39,11 +39,19 @@ function Snippet({ snippet, setRefresh }) {
       <div className="typecol">{snippet.type_of}</div>
       <div className="datecol">{snippet.timestamp.substr(0, 10)}</div>
       <div className="linkcol">
-        <FontAwesomeIcon icon={faExternalLinkAlt} />
+        <a href={snippet.link} target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faExternalLinkAlt} />
+        </a>
       </div>
       <div className="edicol">
         {isOwner ? (
-          <FontAwesomeIcon onClick={()=>{setEditModal(true);}} className="edit" icon={faUserEdit} />
+          <FontAwesomeIcon
+            onClick={() => {
+              setEditModal(true);
+            }}
+            className="edit"
+            icon={faUserEdit}
+          />
         ) : (
           <FontAwesomeIcon icon={faUserAltSlash} />
         )}
