@@ -12,6 +12,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
+
 TYPES = (
     ('podcast', 'podcast'),
     ('article', 'article'),
@@ -21,17 +22,20 @@ TYPES = (
 class Collection(models.Model):
     owner = models.ForeignKey(
         User, related_name='collections', on_delete=models.CASCADE)
+    followers = models.ManyToManyField(
+        User, related_name="followed_collections")
     name = models.CharField(max_length=300)
     timestamp = models.DateTimeField(auto_now_add=True)
     desc = models.CharField(max_length=500, default=" ")
 
     def __str__(self):
-        return self.name 
+        return self.name
 
 
 class Snippet(models.Model):
     collection = models.ForeignKey(
         Collection, on_delete=models.CASCADE, related_name="snippets")
+    hearts = models.ManyToManyField(User, related_name="hearted_snippets")
     timestamp = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
     link = models.CharField(max_length=500)

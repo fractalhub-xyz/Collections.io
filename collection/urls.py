@@ -9,9 +9,10 @@ router.register(r'collections', views.CollectionViewSet)
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
+    path('snippets/<int:snip_id>/heart', views.HeartSnippetView.as_view()),
+    path('collections/<int:coll_id>/follow',
+         views.FollowCollectionView.as_view()),
     path('', include(router.urls)),
     path('login', auth.obtain_auth_token),
-    # path('login', views.login_view),
     path('logout', views.logout_view),
-    path('isLoggedIn', views.is_logged_in_view),
 ]

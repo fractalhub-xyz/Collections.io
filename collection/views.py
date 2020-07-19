@@ -7,6 +7,7 @@ from collection.permissions import IsOwnerOrReadOnly
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
@@ -37,8 +38,57 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
 
 
-# Need to refactor
+class HeartSnippetView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
 
+    def post(self, request, snip_id):
+        try:
+            snip = Snippet.objects.get(id=snip_id)
+        except:
+            return Response({'success': False}, status=status.HTTP_404_NOT_FOUND)
+
+        user = request.user
+        action = ''
+        if user not in snip.hearts.all():
+            action = 'added'
+            snip.hearts.add(user)
+        else:
+            action = 'removed'
+            snip.hearts.remove(user)
+        snip.save()
+
+        return Response(
+            {'success': True, 'action': action},
+            status=status.HTTP_200_OK
+        )
+
+
+class FollowCollectionView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, coll_id):
+        try:
+            coll = Collection.objects.get(id=coll_id)
+        except:
+            return Response({'success': False}, status=status.HTTP_404_NOT_FOUND)
+
+        user = request.user
+        action = ''
+        if user not in coll.followers.all():
+            action = 'followed'
+            coll.followers.add(user)
+        else:
+            action = 'unfollowed'
+            coll.followers.remove(user)
+        coll.save()
+
+        return Response(
+            {'success': True, 'action': action},
+            status=status.HTTP_200_OK
+        )
+
+
+# Need to refactor
 @api_view(['GET'])
 def is_logged_in_view(request):
     if request.user.is_authenticated:
