@@ -76,12 +76,15 @@ function EditSnippet({ setEditModal, setRefresh, snippet, collectionName }) {
               }}
             />
             <h5>TYPE</h5>
-            <input
+            <select
               value={type}
               onChange={(e) => {
                 setType(e.target.value);
               }}
-            />
+            >
+              <option value="podcast">Podcast</option>
+              <option value="article">Article</option>
+            </select>
           </div>
         </div>
         <div className="errorText">{error}</div>

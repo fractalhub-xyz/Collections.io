@@ -233,7 +233,8 @@
   width: 370px;
 }
 .form input,
-textarea {
+textarea,
+select {
   margin: 0;
   border: none;
   padding: 5px;
@@ -244,6 +245,10 @@ textarea {
 
 .form textarea {
   height: 70px;
+}
+
+.form select {
+  width: 103%;
 }
 
 .buttonHolder {

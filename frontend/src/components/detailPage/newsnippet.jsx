@@ -65,12 +65,21 @@ function NewSnippet({ setModalView, collection, setRefresh }) {
               }}
             />
             <h5>TYPE</h5>
-            <input
+            <select
               value={type}
               onChange={(e) => {
                 setType(e.target.value);
               }}
-            />
+            >
+              <option value="podcast">Podcast</option>
+              <option value="article">Article</option>
+            </select>
+            {/* <input
+              value={type}
+              onChange={(e) => {
+                setType(e.target.value);
+              }}
+            /> */}
           </div>
         </div>
         <div className="errorText">{error}</div>
