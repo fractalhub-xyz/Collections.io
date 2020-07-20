@@ -25,8 +25,8 @@ class CollectionSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    snippets = SnippetSerializer(many=True, read_only=True)
+    collections = CollectionSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'snippets']
+        fields = ['id', 'username', 'collections']

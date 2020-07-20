@@ -32,6 +32,7 @@ function Detail() {
   const [editCollectionModal, setEditCollectionModal] = useState(false);
   const [refresh, setRefresh] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
+  const [searchText, setSearchText] = useState("");
   //lifcycle funcs
   useEffect(() => {
     console.log("rendering Detail View");
@@ -123,7 +124,13 @@ function Detail() {
               )}
             </div>
           </div>
-          <input placeholder="SEARCH" />
+          <input
+            placeholder="SEARCH"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value, searchText);
+            }}
+          />
           <FontAwesomeIcon
             onClick={() => {
               setModalView(true);
@@ -142,7 +149,12 @@ function Detail() {
             <div className="linkcol">LINK</div>
             <div className="edicol">EDIT</div>
           </div>
-          <div className="snippetList">
+
+          <div
+            className={
+              !searchText.length ? "snippetList" : "snippetList dispnone"
+            }
+          >
             {isLoading && <div className="loader">ISA LOADING</div>}
             {!snippets.length && (
               <h4 className="oops">
@@ -157,6 +169,31 @@ function Detail() {
                 snippet={snippet}
                 setRefresh={setRefresh}
               />
+            ))}
+          </div>
+          <div
+            className={
+              !!searchText.length ? "snippetList" : "snippetList dispnone"
+            }
+          >
+            {isLoading && <div className="loader">ISA LOADING</div>}
+            {!snippets.length && (
+              <h4 className="oops">
+                ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
+                <br />
+                ISA EMPTY
+              </h4>
+            )}
+            {snippets.map((snippet) => (
+              <div>
+                {snippet.title.includes(searchText) && (
+                  <Snippet
+                    key={snippet.id}
+                    snippet={snippet}
+                    setRefresh={setRefresh}
+                  />
+                )}
+              </div>
             ))}
           </div>
         </div>
