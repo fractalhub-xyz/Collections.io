@@ -10,23 +10,36 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Navbar() {
+function Navbar({ searchText, setSearchText }) {
   let history = useHistory();
   const [showMore, setShowMore] = useState(false);
 
   const logout = () => {
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    localStorage.removeItem('collections')
-    history.push("/")
-  }
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("collections");
+    history.push("/");
+  };
   return (
     <div className="nav">
-      <input placeholder="Search" />
+      <input
+        className={!searchText.length ? "search" : "search search-active"}
+        placeholder="Search"
+        value={searchText}
+        onChange={(e) => {
+          setSearchText(e.target.value);
+        }}
+      />
 
       <FontAwesomeIcon className="searchIcon" icon={faSearch} />
 
-      <span>{showMore && <h1 onClick={logout} className="logout">&nbsp;Logout</h1>}</span>
+      <span>
+        {showMore && (
+          <h1 onClick={logout} className="logout">
+            &nbsp;Logout
+          </h1>
+        )}
+      </span>
 
       {showMore ? (
         <h1 className="moreIcon">

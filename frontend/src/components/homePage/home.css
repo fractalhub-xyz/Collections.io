@@ -14,7 +14,7 @@
   margin: 0px auto;
   padding-top: 20px;
 }
-.nav input {
+.search {
   border: 0;
   margin: 0px;
   padding-left: 20px;
@@ -22,6 +22,11 @@
   background-color: #b1d4e0;
   font-size: 1.3rem;
   width: 30%;
+  transition: 0.2s;
+}
+
+.search-active {
+  width: 70%;
 }
 
 .searchIcon {
@@ -264,4 +269,8 @@ textarea {
 .logout:hover {
   transform: scale(1.07);
   color: #00fff0;
+}
+
+.dispnone {
+  display: none;
 }
