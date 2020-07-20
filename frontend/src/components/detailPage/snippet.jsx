@@ -8,28 +8,40 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //components
 import EditSnippet from "./editsnippet";
+//API
+import { postHeartSnippet } from "../../helpers/api";
 
 function Snippet({ snippet, setRefresh }) {
   //states
   const [isOwner, setIsOwner] = useState(false);
   const [isLiked, setIsLiked] = useState(true);
   const [editModal, setEditModal] = useState(false);
-
   //lifecycle funs
   useEffect(() => {
-    if (localStorage.getItem("user") === snippet.owner) {
+    const user = localStorage.getItem("user");
+    if (user === snippet.owner) {
       setIsOwner(true);
     } else {
       setIsOwner(false);
     }
+    setIsLiked(snippet.hearts.includes(user));
   }, []);
+
+  //functions
+  const heartSnippet = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await postHeartSnippet(snippet.id);
+      setIsLiked(response.data.action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="tablerows">
       <div className="likecol">
         <FontAwesomeIcon
-          onClick={() => {
-            setIsLiked(!isLiked);
-          }}
+          onClick={heartSnippet}
           className={isLiked ? "liked teal" : "liked"}
           icon={faHeart}
         />

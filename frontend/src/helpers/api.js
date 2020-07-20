@@ -57,3 +57,7 @@ export function editSnippet(id, data) {
 export function editCollection(id, data) {
   return api.put(`/collections/${id}/`, data);
 }
+
+export function postHeartSnippet(id) {
+  return api.post(`/snippets/${id}/heart`)
+}

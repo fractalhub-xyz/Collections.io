@@ -48,12 +48,12 @@ class HeartSnippetView(APIView):
             return Response({'success': False}, status=status.HTTP_404_NOT_FOUND)
 
         user = request.user
-        action = ''
+        action = False
         if user not in snip.hearts.all():
-            action = 'added'
+            action = True
             snip.hearts.add(user)
         else:
-            action = 'removed'
+            action = False
             snip.hearts.remove(user)
         snip.save()
 
