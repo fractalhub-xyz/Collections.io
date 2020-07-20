@@ -33,6 +33,7 @@ function Detail() {
   const [refresh, setRefresh] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [totLikes, setTotLikes] = useState(0);
   //lifcycle funcs
   useEffect(() => {
     console.log("rendering Detail View");
@@ -70,6 +71,15 @@ function Detail() {
     // console.log(followers.includes(user));
   }, [collection]);
 
+  useEffect(() => {
+    var len = snippets.length;
+    var likes = 0;
+    for (var i = 0; i < len; i++) {
+      likes = likes + snippets[i].hearts.length;
+    }
+    setTotLikes(likes);
+  }, [snippets]);
+
   //functions
   const followCollection = async (e) => {
     e.preventDefault();
@@ -94,7 +104,7 @@ function Detail() {
           <div className="cardDetails">
             <div className="collectioncard">{collection.name}</div>
             <div className="collectionText">
-              <div className="likes">31263 HEARTS</div>
+              <div className="likes">{totLikes} HEARTS</div>
               <div>
                 <FontAwesomeIcon
                   onClick={followCollection}
