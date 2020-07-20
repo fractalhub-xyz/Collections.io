@@ -68,9 +68,10 @@ function Detail() {
       setIsOwner(false);
     }
     const followers = collection.followers;
-    console.log(followers);
-    // console.log(followers.includes(user));
-    // setTotFollowers(collection.followers.length);
+    if (followers) {
+      setIsFollowed(followers.includes(user));
+      setTotFollowers(collection.followers.length);
+    }
   }, [collection]);
 
   useEffect(() => {

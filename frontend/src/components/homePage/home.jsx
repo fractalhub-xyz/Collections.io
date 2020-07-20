@@ -51,6 +51,8 @@ function Home() {
           <h1>COLLECTIONS</h1>
           <h3>POPULAR COLLECTIONS</h3>
           <div className="line" />
+          {error && <h4>{error}</h4>}
+          {isLoading && <h4>Loading..</h4>}
           <Collections collections={collections} />
         </div>
 
