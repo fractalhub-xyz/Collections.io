@@ -185,13 +185,9 @@ function Detail() {
               </h4>
             )}
             {snippets.map((snippet) => (
-              <div>
+              <div key={snippet.id}>
                 {snippet.title.includes(searchText) && (
-                  <Snippet
-                    key={snippet.id}
-                    snippet={snippet}
-                    setRefresh={setRefresh}
-                  />
+                  <Snippet snippet={snippet} setRefresh={setRefresh} />
                 )}
               </div>
             ))}
@@ -202,7 +198,7 @@ function Detail() {
         {modalView && (
           <NewSnippet
             setModalView={setModalView}
-            collectionID={collection.id}
+            collection={collection}
             setRefresh={setRefresh}
           />
         )}

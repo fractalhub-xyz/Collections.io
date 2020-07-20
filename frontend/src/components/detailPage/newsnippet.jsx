@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //API
 import { postNewSnippet } from "../../helpers/api";
 
-function NewSnippet({ setModalView, collectionID, setRefresh }) {
+function NewSnippet({ setModalView, collection, setRefresh }) {
   //createSnippet
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
@@ -18,7 +18,7 @@ function NewSnippet({ setModalView, collectionID, setRefresh }) {
       title: title,
       type_of: type,
       link: link,
-      collection: collectionID,
+      collection: collection.id,
     };
     try {
       await postNewSnippet(payload);
@@ -48,7 +48,7 @@ function NewSnippet({ setModalView, collectionID, setRefresh }) {
       <div className="form">
         <h4>ADD SNIPPET TO COLLECTION</h4>
         <div className="formContainer">
-          <div className="formCard" />
+          <div className="formCard">{collection.name}</div>
           <div className="formText">
             <h5>TITLE</h5>
             <input

@@ -55,7 +55,7 @@ function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
             EDIT <span className="teal">{collection.name}</span>
           </h4>
           <div className="formContainer">
-            <div className="formCard" />
+            <div className="formCard">{collection.name}</div>
             <div className="formText">
               <h5>Name</h5>
               <input
