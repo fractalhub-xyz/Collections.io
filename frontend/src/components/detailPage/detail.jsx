@@ -6,6 +6,7 @@ import Navbar from "./navbar";
 import NewSnippet from "./newsnippet";
 //API
 import { getCollectionFromID } from "../../helpers/api";
+import { postFollowCollection } from "../../helpers/api";
 //components
 import Snippet from "./snippet";
 import EditCollection from "./editcollection";
@@ -24,7 +25,7 @@ function Detail() {
   //states
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [liked, setLiked] = useState(true);
+  const [isFollowed, setIsFollowed] = useState(false);
   const [collection, setCollection] = useState({});
   const [snippets, setSnippets] = useState([]);
   const [modalView, setModalView] = useState(false);
@@ -57,12 +58,27 @@ function Detail() {
 
   //lifecycle funs
   useEffect(() => {
-    if (localStorage.getItem("user") === collection.owner) {
+    const user = localStorage.getItem("user");
+    if (user === collection.owner) {
       setIsOwner(true);
     } else {
       setIsOwner(false);
     }
+    const followers = collection.followers;
+    console.log(followers);
+    // console.log(followers.includes(user));
   }, [collection]);
+
+  //functions
+  const followCollection = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await postFollowCollection(collection.id);
+      setIsFollowed(response.data.followed);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const podcasts = snippets.filter((snip) => snip.type_of === "podcast").length;
   const articles = snippets.filter((snip) => snip.type_of === "article").length;
@@ -80,10 +96,8 @@ function Detail() {
               <div className="likes">31263 HEARTS</div>
               <div>
                 <FontAwesomeIcon
-                  onClick={() => {
-                    setLiked(!liked);
-                  }}
-                  className={liked ? "like teal" : "like"}
+                  onClick={followCollection}
+                  className={isFollowed ? "like teal" : "like"}
                   icon={faHeart}
                 />
               </div>

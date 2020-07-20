@@ -73,17 +73,17 @@ class FollowCollectionView(APIView):
             return Response({'success': False}, status=status.HTTP_404_NOT_FOUND)
 
         user = request.user
-        action = ''
+        followed = False
         if user not in coll.followers.all():
-            action = 'followed'
+            followed = True
             coll.followers.add(user)
         else:
-            action = 'unfollowed'
+            followed = False
             coll.followers.remove(user)
         coll.save()
 
         return Response(
-            {'success': True, 'action': action},
+            {'success': True, 'followed': followed},
             status=status.HTTP_200_OK
         )
 

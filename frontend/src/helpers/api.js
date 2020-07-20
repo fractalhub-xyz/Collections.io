@@ -61,3 +61,6 @@ export function editCollection(id, data) {
 export function postHeartSnippet(id) {
   return api.post(`/snippets/${id}/heart`)
 }
+export function postFollowCollection(id) {
+  return api.post(`/collections/${id}/follow`)
+}
