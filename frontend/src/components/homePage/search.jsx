@@ -2,7 +2,7 @@ import React from "react";
 
 function Search({ searchText }) {
   return (
-    <div>
+    <div className={!!searchText.length ? "container" : "container dispnone"}>
       <h1>{searchText}</h1>
     </div>
   );

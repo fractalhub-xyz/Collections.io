@@ -53,11 +53,8 @@ function Home() {
           <div className="line" />
           <Collections collections={collections} />
         </div>
-        <div
-          className={!!searchText.length ? "container" : "container dispnone"}
-        >
-          <Search searchText={searchText} />
-        </div>
+
+        <Search searchText={searchText} />
       </div>
     </div>
   );
