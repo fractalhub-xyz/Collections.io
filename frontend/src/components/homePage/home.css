@@ -10,9 +10,10 @@
   width: 82vw;
 }
 .nav {
-  width: 95%;
+  width: 100%;
   margin: 0px auto;
-  padding-top: 20px;
+  padding: 20px 2.5%;
+  background: rgba(0, 0, 0, 0.2);
 }
 .search {
   border: 0;
@@ -77,6 +78,7 @@
   color: #b1d4e0;
   font-size: 2rem;
   letter-spacing: 2px;
+  margin: 0px;
 }
 
 .container h3 {
