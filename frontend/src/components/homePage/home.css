@@ -22,7 +22,7 @@
   background-color: #b1d4e0;
   font-size: 1.3rem;
   width: 30%;
-  transition: 0.2s;
+  transition: 0.6s;
 }
 
 .search-active {
@@ -59,6 +59,18 @@
   width: 95%;
   margin: 0px auto;
   padding-top: 20px;
+  animation-name: fade-in;
+  animation-duration: 0.4s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .container h1 {
@@ -253,15 +265,15 @@ textarea {
   background: #00fff0;
 }
 
-.errorText{
+.errorText {
   text-align: center;
   font-size: 0.7rem;
   letter-spacing: 0.3rem;
-  color:teal;
+  color: teal;
   padding-top: 5px;
 }
 
-.logout{
+.logout {
   cursor: pointer;
   transition: 0.3s;
 }

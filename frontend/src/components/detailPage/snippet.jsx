@@ -32,7 +32,7 @@ function Snippet({ snippet, setRefresh }) {
     e.preventDefault();
     try {
       const response = await postHeartSnippet(snippet.id);
-      setIsLiked(response.data.action);
+      setIsLiked(response.data.liked);
     } catch (error) {
       console.log(error);
     }

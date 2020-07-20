@@ -8,19 +8,27 @@
   margin-left: 18vw;
   background-color: #282828;
   height: 100vh;
-  animation-name: expand;
-  animation-duration: 0.25s;
+  animation-name: fade-in;
+  animation-duration: 0.2s;
   overflow-x: hidden;
+  animation-timing-function: ease-in;
 }
 
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+/* play around with this */
 @keyframes expand {
   0% {
     width: 0vw;
+    opacity: 0;
   }
-  100% {
+  40% {
     width: 82vw;
   }
+  100% {
+    opacity: 1;
+  }
 }
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
 .nav {
   width: 95%;
   margin: 0px auto;
@@ -241,7 +249,7 @@
   font-size: 200%;
   animation-name: fade-in;
   animation-duration: 0.2s;
-  animation-delay: 0.25s;
+  animation-delay: 0.4s;
   animation-fill-mode: both;
 }
 
