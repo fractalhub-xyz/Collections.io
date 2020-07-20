@@ -168,6 +168,7 @@ function Detail() {
                 key={snippet.id}
                 snippet={snippet}
                 setRefresh={setRefresh}
+                collectionName={collection.name}
               />
             ))}
           </div>
@@ -187,7 +188,11 @@ function Detail() {
             {snippets.map((snippet) => (
               <div key={snippet.id}>
                 {snippet.title.includes(searchText) && (
-                  <Snippet snippet={snippet} setRefresh={setRefresh} />
+                  <Snippet
+                    snippet={snippet}
+                    setRefresh={setRefresh}
+                    collectionName={collection.name}
+                  />
                 )}
               </div>
             ))}

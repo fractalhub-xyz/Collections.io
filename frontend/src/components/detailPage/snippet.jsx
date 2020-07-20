@@ -11,7 +11,7 @@ import EditSnippet from "./editsnippet";
 //API
 import { postHeartSnippet } from "../../helpers/api";
 
-function Snippet({ snippet, setRefresh }) {
+function Snippet({ snippet, setRefresh, collectionName }) {
   //states
   const [isOwner, setIsOwner] = useState(false);
   const [isLiked, setIsLiked] = useState(true);
@@ -74,6 +74,7 @@ function Snippet({ snippet, setRefresh }) {
             setEditModal={setEditModal}
             setRefresh={setRefresh}
             snippet={snippet}
+            collectionName={collectionName}
           />
         )}
       </div>

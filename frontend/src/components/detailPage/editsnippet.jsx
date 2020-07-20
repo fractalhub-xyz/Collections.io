@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //API
 import { editSnippet, deleteSnippet } from "../../helpers/api";
 
-function EditSnippet({ setEditModal, setRefresh, snippet }) {
+function EditSnippet({ setEditModal, setRefresh, snippet, collectionName }) {
   //createSnippet
   const [title, setTitle] = useState(snippet.title);
   const [link, setLink] = useState(snippet.link);
@@ -59,7 +59,7 @@ function EditSnippet({ setEditModal, setRefresh, snippet }) {
       <div className="form">
         <h4>EDIT SNIPPET</h4>
         <div className="formContainer">
-          <div className="formCard" />
+          <div className="formCard">{collectionName}</div>
           <div className="formText">
             <h5>TITLE</h5>
             <input
