@@ -47,7 +47,7 @@ function Login() {
     const data = { username, email, password };
     try {
       if (password === password2) {
-        const response = await postRegister(data);
+        await postRegister(data);
         setRegister(false);
         setUsername("");
         setPassword("");
