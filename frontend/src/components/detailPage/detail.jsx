@@ -10,6 +10,8 @@ import { postFollowCollection } from "../../helpers/api";
 //components
 import Snippet from "./snippet";
 import EditCollection from "./editcollection";
+//modules
+import ReactTooltip from "react-tooltip";
 
 //ICONS
 import {
@@ -112,6 +114,7 @@ function Detail() {
               </div>
               <div>
                 <FontAwesomeIcon
+                  data-tip={isFollowed ? "Unfollow Collection" : "Follow Collection"}
                   onClick={followCollection}
                   className={isFollowed ? "like teal" : "like"}
                   icon={faHeart}
@@ -127,12 +130,13 @@ function Detail() {
                 created by <span className="teal">{collection.owner}</span>
               </div>
             </div>
-            <div>
+            <div >
               {isOwner && (
                 <FontAwesomeIcon
                   onClick={() => {
                     setEditCollectionModal(true);
                   }}
+                  data-tip="Edit Collection"
                   className="deleteIcon"
                   icon={faUserEdit}
                 />
@@ -147,6 +151,7 @@ function Detail() {
             }}
           />
           <FontAwesomeIcon
+            data-tip="add snippet"
             onClick={() => {
               setModalView(true);
             }}
@@ -232,6 +237,7 @@ function Detail() {
           />
         )}
       </div>
+      <ReactTooltip />
     </div>
   );
 }

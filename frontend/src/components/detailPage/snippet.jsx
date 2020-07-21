@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditSnippet from "./editsnippet";
 //API
 import { postHeartSnippet } from "../../helpers/api";
+//modules
+import ReactTooltip from "react-tooltip";
 
 function Snippet({ snippet, setRefresh, collectionName }) {
   //states
@@ -51,11 +53,11 @@ function Snippet({ snippet, setRefresh, collectionName }) {
       <div className="typecol">{snippet.type_of}</div>
       <div className="datecol">{snippet.timestamp.substr(0, 10)}</div>
       <div className="linkcol">
-        <a href={snippet.link} target="_blank" rel="noopener noreferrer">
+        <a data-tip={snippet.link} href={snippet.link} target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faExternalLinkAlt} />
         </a>
       </div>
-      <div className="edicol">
+      <div data-tip={isOwner ? "edit snippet" : ""} className="edicol">
         {isOwner ? (
           <FontAwesomeIcon
             onClick={() => {
@@ -78,6 +80,7 @@ function Snippet({ snippet, setRefresh, collectionName }) {
           />
         )}
       </div>
+      <ReactTooltip />
     </div>
   );
 }
