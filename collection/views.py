@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from collection.permissions import IsOwnerOrReadOnly
 from rest_framework import permissions
 from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -115,3 +116,9 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return Response({'success': True}, status.HTTP_200_OK)
+
+
+class UserCreateAPIView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny]

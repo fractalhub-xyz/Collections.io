@@ -15,4 +15,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('login', auth.obtain_auth_token),
     path('logout', views.logout_view),
+    path('register', views.UserCreateAPIView.as_view())
 ]
