@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./login.css";
 import { useHistory } from "react-router-dom";
 //api
-import { postLogin } from "../../helpers/api";
+import { postLogin, postRegister } from "../../helpers/api";
 //ICONS
 import { faChevronCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,16 +11,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Login() {
   //setup
   let history = useHistory();
+
   //states
   const [success, setSuccess] = useState(false);
   const [register, setRegister] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [registerstatus, setRegisterstatus] = useState("");
+
   //functions
   const redirect = () => {
     history.push("/home");
   };
+
   const loginReq = async (e) => {
     e.preventDefault();
     const data = { username, password };
@@ -35,8 +41,28 @@ function Login() {
       setError("Credentials are not valid");
     }
   };
-  const registerReq = () => {
-    alert("implement register");
+
+  const registerReq = async (e) => {
+    e.preventDefault();
+    const data = { username, email, password };
+    try {
+      if (password === password2) {
+        const response = await postRegister(data);
+        setRegister(false);
+        setUsername("");
+        setPassword("");
+        setPassword2("");
+        setError("");
+        setRegisterstatus("Succesfully registered, log in to continue");
+      } else {
+        setError("Passwords didnt match");
+        setPassword("");
+        setPassword2("");
+      }
+    } catch {
+      console.log("bad request");
+      setError("Credentials are not valid");
+    }
   };
 
   return (
@@ -49,6 +75,7 @@ function Login() {
           onSubmit={loginReq}
           className={success ? "loginForm hide" : "loginForm"}
         >
+          <h5>{registerstatus}</h5>
           <input
             value={username}
             onChange={(e) => {
@@ -76,6 +103,9 @@ function Login() {
             className="info"
             onClick={() => {
               setRegister(true);
+              setUsername("");
+              setPassword("");
+              setError("");
             }}
           >
             New Here? Click here to register !
@@ -87,21 +117,42 @@ function Login() {
           className={success ? "loginForm hide" : "loginForm"}
         >
           <input
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
             className="inputfield"
             type="text"
             placeholder="What should we call you"
           />
           <input
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             className="inputfield"
-            type="password"
-            placeholder="Enter a password"
+            type="text"
+            placeholder="Where should we contact you"
           />
           <input
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             className="inputfield"
             type="password"
-            placeholder="Enter a password again"
+            placeholder="Security key"
           />
-
+          <input
+            value={password2}
+            onChange={(e) => {
+              setPassword2(e.target.value);
+            }}
+            className="inputfield"
+            type="password"
+            placeholder="Re-enter the key"
+          />
+          <h5>{error}</h5>
           <button className="formButtom" type="submit">
             REGISTER&nbsp;
             <FontAwesomeIcon icon={faChevronCircleRight} />

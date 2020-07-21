@@ -28,6 +28,9 @@ const api = axios.create({
 export function postLogin(data) {
   return api.post("/login", data);
 }
+export function postRegister(data) {
+  return api.post("/register", data);
+}
 
 export function postNewCollection(data) {
   return api.post("/collections/", data);
