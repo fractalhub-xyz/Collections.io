@@ -53,7 +53,13 @@ function Snippet({ snippet, setRefresh, collectionName }) {
       <div className="typecol">{snippet.type_of}</div>
       <div className="datecol">{snippet.timestamp.substr(0, 10)}</div>
       <div className="linkcol">
-        <a data-tip={snippet.link} href={snippet.link} target="_blank" rel="noopener noreferrer">
+        <a
+          data-text-color="#00fff0"
+          data-tip={snippet.link}
+          href={snippet.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FontAwesomeIcon icon={faExternalLinkAlt} />
         </a>
       </div>

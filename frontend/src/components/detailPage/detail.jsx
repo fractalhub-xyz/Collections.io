@@ -114,7 +114,10 @@ function Detail() {
               </div>
               <div>
                 <FontAwesomeIcon
-                  data-tip={isFollowed ? "Unfollow Collection" : "Follow Collection"}
+                  data-tip={
+                    isFollowed ? "Unfollow Collection" : "Follow Collection"
+                  }
+                  data-type="warning"
                   onClick={followCollection}
                   className={isFollowed ? "like teal" : "like"}
                   icon={faHeart}
@@ -130,7 +133,7 @@ function Detail() {
                 created by <span className="teal">{collection.owner}</span>
               </div>
             </div>
-            <div >
+            <div>
               {isOwner && (
                 <FontAwesomeIcon
                   onClick={() => {
@@ -152,6 +155,7 @@ function Detail() {
           />
           <FontAwesomeIcon
             data-tip="add snippet"
+            data-type="info"
             onClick={() => {
               setModalView(true);
             }}
