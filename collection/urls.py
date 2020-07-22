@@ -12,8 +12,9 @@ urlpatterns = [
     path('snippets/<int:snip_id>/heart', views.HeartSnippetView.as_view()),
     path('collections/<int:coll_id>/follow',
          views.FollowCollectionView.as_view()),
-    path('', include(router.urls)),
+    path('search', views.search_view),
     path('login', auth.obtain_auth_token),
     path('logout', views.logout_view),
-    path('register', views.UserCreateAPIView.as_view())
+    path('register', views.UserCreateAPIView.as_view()),
+    path('', include(router.urls))
 ]

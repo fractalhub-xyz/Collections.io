@@ -3,6 +3,12 @@ from collection.models import *
 from django.contrib.auth.models import User
 
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ["name"]
+
+
 class SnippetSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     hearts = serializers.StringRelatedField(many=True, read_only=True)
@@ -17,23 +23,32 @@ class CollectionSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     snippets = SnippetSerializer(many=True, read_only=True)
     followers = serializers.StringRelatedField(many=True, read_only=True)
+    tags = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Collection
         fields = ['id', 'owner', 'name', 'timestamp', 'followers',
-                  'snippets', 'desc']
+                  'snippets', 'desc', 'tags']
+
+
+class CollectionSearchSerialiser(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = Collection
+        fields = ['id', 'name', 'desc', 'owner']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
     collections = CollectionSerializer(many=True, read_only=True)
 
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'password', 'collections']
-
     def create(self, validated_data):
         user = super(UserSerializer, self).create(validated_data)
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password', 'collections']

@@ -1,8 +1,9 @@
 from django.contrib.auth import login, logout, authenticate
 import json
-from collection.models import Snippet, Collection
-from collection.serializers import SnippetSerializer, UserSerializer, CollectionSerializer
+from collection.models import Snippet, Collection, Tag
+from collection.serializers import *
 from django.contrib.auth.models import User
+from django.db.models import Q
 from collection.permissions import IsOwnerOrReadOnly
 from rest_framework import permissions
 from rest_framework import viewsets
@@ -31,7 +32,8 @@ class CollectionViewSet(viewsets.ModelViewSet):
                           IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        s = serializer.save(owner=self.request.user)
+        print(s)
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -89,11 +91,42 @@ class FollowCollectionView(APIView):
         )
 
 
-# Need to refactor
+@api_view(['GET'])
+def search_view(request):
+    query = request.GET.get('query', '')
+    query = query.strip()
+    if query == '':
+        return Response({'success': False, 'error': 'Bad params: Empty query'}, status.HTTP_400_BAD_REQUEST)
+
+    MAX_LIMIT = 5
+
+    # Qs help construct OR sql statement.
+    # More about it: https://docs.djangoproject.com/en/3.0/topics/db/queries/#complex-lookups-with-q-objects
+    colls = Collection.objects.filter(Q(
+        Q(name__icontains=query) | Q(desc__icontains=query)
+    ))[:MAX_LIMIT]
+    snips = Snippet.objects.filter(Q(
+        Q(title__icontains=query) | Q(link__icontains=query)
+    ))[:MAX_LIMIT]
+    tags = Tag.objects.filter(name__icontains=query)[:MAX_LIMIT]
+
+    result = {
+        'collections': CollectionSearchSerialiser(colls, many=True).data,
+        'snippets': SnippetSerializer(snips, many=True).data,
+        'tags': TagSerializer(tags, many=True).data,
+    }
+
+    print(result)
+
+    return Response({
+        'success': True,
+        'result': result,
+    }, status.HTTP_200_OK)
+
+
 @api_view(['GET'])
 def is_logged_in_view(request):
     if request.user.is_authenticated:
-        print("HELLOOO", request.user, request.user.is_authenticated)
         return Response({'success': True, 'user': request.user.username}, status.HTTP_200_OK)
     else:
         return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
@@ -105,7 +138,6 @@ def login_view(request):
     password = request.POST.get('password', '')
     user = authenticate(username=username, password=password)
     if user is not None:
-        print(f'Username: {username} Password: {password}')
         login(request, user)
         return Response({'success': True, 'token': f"Token {token}"}, status.HTTP_200_OK)
     else:
