@@ -31,14 +31,12 @@ export function postLogin(data) {
 export function postRegister(data) {
   return api.post("/register", data);
 }
-
 export function postNewCollection(data) {
   return api.post("/collections/", data);
 }
 export function postNewSnippet(data) {
   return api.post("/snippets/", data);
 }
-
 export function getCollections() {
   return api.get("/collections");
 }
@@ -63,10 +61,12 @@ export function editSnippet(id, data) {
 export function editCollection(id, data) {
   return api.put(`/collections/${id}/`, data);
 }
-
 export function postHeartSnippet(id) {
   return api.post(`/snippets/${id}/heart`)
 }
 export function postFollowCollection(id) {
   return api.post(`/collections/${id}/follow`)
+}
+export function getSearchResults(query) {
+  return api.get(`/search?query=${query}`);
 }

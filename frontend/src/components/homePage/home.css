@@ -114,7 +114,7 @@
 
 .card:hover {
   transform: scale(1.05);
-  color:black
+  color: black;
 }
 
 .card-text {
@@ -295,4 +295,75 @@ select {
 
 .dispnone {
   display: none;
+}
+.sectionSM {
+  min-height: 340px;
+  width: 50%;
+  padding-top: 20px;
+  display: inline-block;
+}
+.sectionLG {
+  min-height: 200px;
+  width: 100%;
+  padding-top: 20px;
+  display: inline-block;
+}
+
+.sectionSM h2 {
+  margin: 0;
+  border-bottom: 2px solid white;
+  margin-right: 20px;
+}
+.sectionLG h2 {
+  margin: 0;
+  border-bottom: 2px solid white;
+  margin-right: 20px;
+}
+
+.snippetSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin-top: 10px;
+}
+
+.snippetContainer {
+  width: 46%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px 10px;
+  cursor: pointer;
+}
+.snippetContainer:hover{
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.snippetCard {
+  width: 100px;
+  height: 100px;
+  background: #92ff7d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+.typeIcon {
+  margin: 0px;
+  padding: 0px;
+  font-size: 2rem;
+}
+
+.snippetText {
+  padding-left: 20px;
+  color: grey;
+}
+
+.snippetText .snippetTitle {
+  color: white;
+  font-weight: bolder;
+}
+
+.bgTeal {
+  background: #00fff0;
 }

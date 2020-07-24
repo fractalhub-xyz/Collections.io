@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./home.css";
 
 //API
-import { getCollections } from "../../helpers/api";
+import { getCollections} from "../../helpers/api";
 //components
 import Collections from "./collections";
 import SideNav from "./sidenav";

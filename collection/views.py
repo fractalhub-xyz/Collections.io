@@ -98,7 +98,7 @@ def search_view(request):
     if query == '':
         return Response({'success': False, 'error': 'Bad params: Empty query'}, status.HTTP_400_BAD_REQUEST)
 
-    MAX_LIMIT = 5
+    MAX_LIMIT = 4
 
     # Qs help construct OR sql statement.
     # More about it: https://docs.djangoproject.com/en/3.0/topics/db/queries/#complex-lookups-with-q-objects

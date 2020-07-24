@@ -38,7 +38,7 @@ function Snippet({ snippet, setRefresh, collectionName }) {
     try {
       const response = await postHeartSnippet(snippet.id);
       if (response.data.success === true) {
-        if (response.data.liked == false) {
+        if (response.data.liked === false) {
           setLikes(likes - 1);
         } else {
           setLikes(likes + 1);

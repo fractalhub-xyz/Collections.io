@@ -20,13 +20,15 @@ function Collections({ collection }) {
   //lifecycle function
   useEffect(() => {
     if (collection) {
-      var len = collection.snippets.length;
-      var likes = 0;
-      for (var i = 0; i < len; i++) {
-        likes = likes + collection.snippets[i].hearts.length;
+      if (collection.snippets) {
+        var len = collection.snippets.length;
+        var likes = 0;
+        for (var i = 0; i < len; i++) {
+          likes = likes + collection.snippets[i].hearts.length;
+        }
+        setTotLikes(likes);
+        setTotFollowers(collection.followers.length);
       }
-      setTotLikes(likes);
-      setTotFollowers(collection.followers.length);
     }
   }, []);
 

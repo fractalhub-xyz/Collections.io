@@ -102,8 +102,8 @@ function Detail() {
     try {
       const response = await postFollowCollection(collection.id);
       setIsFollowed(response.data.followed);
-      if (response.data.success == true) {
-        if (response.data.followed == true) {
+      if (response.data.success === true) {
+        if (response.data.followed === true) {
           setTotFollowers(totFollowers + 1);
         } else {
           setTotFollowers(totFollowers - 1);
