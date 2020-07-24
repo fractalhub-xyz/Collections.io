@@ -6,6 +6,7 @@ import {
   faBookmark,
   faChevronRight,
   faChevronLeft,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -18,10 +19,17 @@ function Navbar() {
 
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("userID");
     localStorage.removeItem("token");
     localStorage.removeItem("collections");
     history.push("/");
   };
+
+  const myAccount = () => {
+    const id = localStorage.getItem("userID");
+    history.push(`/user/${id}`);
+  };
+
   return (
     <div className="nav">
       <FontAwesomeIcon
@@ -31,9 +39,14 @@ function Navbar() {
       />
       <span>
         {showMore && (
-          <h1 onClick={logout} className="logout">
-            &nbsp;Logout
-          </h1>
+          <span>
+            <h1 onClick={myAccount} className="logout">
+              &nbsp; &nbsp;MyAccount
+            </h1>
+            <h1 onClick={logout} className="logout">
+              &nbsp;Logout
+            </h1>
+          </span>
         )}
       </span>
 

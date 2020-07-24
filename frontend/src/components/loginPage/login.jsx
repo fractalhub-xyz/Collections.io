@@ -34,6 +34,7 @@ function Login() {
       const response = await postLogin(data);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", username);
+      localStorage.setItem("userID", 1);
       setSuccess(!success);
       setTimeout(redirect, 1000);
     } catch {

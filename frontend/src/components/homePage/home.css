@@ -193,6 +193,8 @@
   background-color: #3a3a3a;
   border-radius: 25px;
   padding: 25px;
+  animation-name: fade-in;
+  animation-duration: 0.3s;
 }
 
 .form h4 {
