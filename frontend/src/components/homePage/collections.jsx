@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { randomColor } from "randomcolor";
 
 function Collections({ collection }) {
   //states
   const [totLikes, setTotLikes] = useState(0);
-  const [totFollowers, setTotFollowers] = useState(0)
+  const [totFollowers, setTotFollowers] = useState(0);
 
   //utility fucntions
   let history = useHistory();
   const openCollection = (id) => {
     history.push("/detail/" + id);
   };
+  const color = randomColor({
+    luminosity: "light",
+    hue: "rgba",
+  });
 
   //lifecycle function
   useEffect(() => {
@@ -25,6 +30,10 @@ function Collections({ collection }) {
     }
   }, []);
 
+  const mystyle = {
+    background: color,
+  };
+
   return (
     <div className="collection">
       <div
@@ -32,6 +41,7 @@ function Collections({ collection }) {
           openCollection(collection.id);
         }}
         className="card"
+        style={mystyle}
       >
         {/* <img src={""} alt="TEMP"></img> */}
         <p>{collection.name}</p>

@@ -104,16 +104,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #c4c4c4;
   height: 27vh;
   width: 27vh;
   font-size: 1.6rem;
   cursor: pointer;
   text-align: center;
+  transition: 0.2s;
 }
 
 .card:hover {
-  background-color: #4b4b4bf6;
+  transform: scale(1.05);
+  color:black
 }
 
 .card-text {

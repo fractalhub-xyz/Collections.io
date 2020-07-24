@@ -12,6 +12,7 @@ import Snippet from "./snippet";
 import EditCollection from "./editcollection";
 //modules
 import ReactTooltip from "react-tooltip";
+import { randomColor } from "randomcolor";
 
 //ICONS
 import {
@@ -37,6 +38,16 @@ function Detail() {
   const [searchText, setSearchText] = useState("");
   const [totLikes, setTotLikes] = useState(0);
   const [totFollowers, setTotFollowers] = useState(0);
+  
+  //utitlity funcs
+  const color = randomColor({
+    luminosity: "light",
+    hue: "rgba",
+  });
+
+   const mystyle = {
+     background: color,
+   };
   //lifcycle funcs
   useEffect(() => {
     console.log("rendering Detail View");
@@ -61,7 +72,6 @@ function Detail() {
     setRefresh(false);
   }, [refresh]);
 
-  //lifecycle funs
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user === collection.owner) {
@@ -107,7 +117,9 @@ function Detail() {
         <div className="container">
           <div>{error && <h1>{error}</h1>}</div>
           <div className="cardDetails">
-            <div className="collectioncard">{collection.name}</div>
+            <div className="collectioncard" style={mystyle}>
+              {collection.name}
+            </div>
             <div className="collectionText">
               <div className="likes">
                 {totLikes} HEARTS, {totFollowers} FOLLOWERS
