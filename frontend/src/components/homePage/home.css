@@ -320,14 +320,14 @@ select {
   margin-right: 20px;
 }
 
-.snippetSection {
+.dispSection {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
   margin-top: 10px;
 }
 
-.snippetContainer {
+.searchContainer {
   width: 46%;
   display: flex;
   justify-content: start;
@@ -335,11 +335,11 @@ select {
   padding: 10px 10px;
   cursor: pointer;
 }
-.snippetContainer:hover{
+.searchContainer:hover{
   background: rgba(0, 0, 0, 0.2);
 }
 
-.snippetCard {
+.searchCard {
   width: 100px;
   height: 100px;
   background: #92ff7d;
@@ -354,12 +354,12 @@ select {
   font-size: 2rem;
 }
 
-.snippetText {
+.searchText {
   padding-left: 20px;
   color: grey;
 }
 
-.snippetText .snippetTitle {
+.searchText .searchTitle {
   color: white;
   font-weight: bolder;
 }

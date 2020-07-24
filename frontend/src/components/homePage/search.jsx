@@ -3,6 +3,7 @@ import { getSearchResults } from "../../helpers/api";
 import { useHistory } from "react-router-dom";
 import { randomColor } from "randomcolor";
 import SnippetSearch from "./snippetSearch";
+import CollectionSearch from "./searchCollection";
 
 function Search({ searchText }) {
   //states
@@ -22,6 +23,7 @@ function Search({ searchText }) {
   });
   const mystyle = {
     background: color,
+    color: "black",
   };
 
   //functions
@@ -48,32 +50,17 @@ function Search({ searchText }) {
       {!!collectionMatches.length && (
         <div className="sectionLG">
           <h2>Collections</h2>
-          {collectionMatches.map((collection) => (
-            <div className="collection" key={collection.id}>
-              <div
-                onClick={() => {
-                  openCollection(collection.id);
-                }}
-                className="card"
-                style={mystyle}
-              >
-                {/* <img src={""} alt="TEMP"></img> */}
-                <p>{collection.name}</p>
-              </div>
-              <p className="card-text">
-                created by <span className="cyan">{collection.owner}</span>
-              </p>
-              <p className="card-text">
-                {/* {totLikes} HEARTS, {totFollowers} FOLLOWERS */}
-              </p>
-            </div>
-          ))}
+          <div className="dispSection">
+            {collectionMatches.map((collection) => (
+              <CollectionSearch collection={collection} key={collection.id} />
+            ))}
+          </div>
         </div>
       )}
       {!!snippetMatches.length && (
         <div className="sectionSM">
           <h2>Snippets</h2>
-          <div className="snippetSection">
+          <div className="dispSection">
             {snippetMatches.map((snippet) => (
               <SnippetSearch key={snippet.id} snippet={snippet} />
             ))}
@@ -83,7 +70,7 @@ function Search({ searchText }) {
       {!!snippetMatches.length && (
         <div className="sectionSM">
           <h2>Tags</h2>
-          <div className="snippetSection">
+          <div className="dispSection">
             {snippetMatches.map((snippet) => (
               <SnippetSearch key={snippet.id} snippet={snippet} />
             ))}

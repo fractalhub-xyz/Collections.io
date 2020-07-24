@@ -17,16 +17,16 @@ function SnippetSearch({ snippet }) {
   }, []);
 
   return (
-    <div className="snippetContainer">
-      <div className={isPodcast ? "snippetCard bgTeal" : "snippetCard"}>
+    <div className="searchContainer">
+      <div className={isPodcast ? "searchCard bgTeal" : "searchCard"}>
         {!isPodcast ? (
           <FontAwesomeIcon className="typeIcon" icon={faNewspaper} />
         ) : (
           <FontAwesomeIcon className="typeIcon" icon={faPodcast} />
         )}
       </div>
-      <div className="snippetText">
-        <span className="snippetTitle">{snippet.title}</span>
+      <div className="searchText">
+        <span className="searchTitle">{snippet.title}</span>
         <br />
         Collection {snippet.collection}
         <br />
