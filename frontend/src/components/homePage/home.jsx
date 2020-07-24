@@ -10,6 +10,7 @@ import Navbar from "./navbar";
 import Search from "./search";
 
 function Home() {
+
   //states
   const [collections, setCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +54,11 @@ function Home() {
           <div className="line" />
           {error && <h4>{error}</h4>}
           {isLoading && <h4>Loading..</h4>}
-          <Collections collections={collections} />
+          <div>
+            {collections.map((collection) => (
+              <Collections key={collection.id} collection={collection} />
+            ))}
+          </div>
         </div>
 
         <Search searchText={searchText} />
