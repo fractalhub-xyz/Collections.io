@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 function Collections({ collection }) {
   //states
   const [totLikes, setTotLikes] = useState(0);
+  const [totFollowers, setTotFollowers] = useState(0)
 
   //utility fucntions
   let history = useHistory();
@@ -20,6 +21,7 @@ function Collections({ collection }) {
         likes = likes + collection.snippets[i].hearts.length;
       }
       setTotLikes(likes);
+      setTotFollowers(collection.followers.length);
     }
   }, []);
 
@@ -37,7 +39,9 @@ function Collections({ collection }) {
       <p className="card-text">
         created by <span className="cyan">{collection.owner}</span>
       </p>
-      <p className="card-text">{totLikes} HEARTS</p>
+      <p className="card-text">
+        {totLikes} HEARTS, {totFollowers} FOLLOWERS
+      </p>
     </div>
   );
 }

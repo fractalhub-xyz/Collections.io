@@ -10,7 +10,6 @@ import Navbar from "./navbar";
 import Search from "./search";
 
 function Home() {
-
   //states
   const [collections, setCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +24,6 @@ function Home() {
       try {
         const response = await getCollections();
         setCollections(response.data);
-        localStorage.setItem("collections", response.data);
       } catch (error) {
         console.error(error);
         setError("Error happened");
@@ -40,6 +38,21 @@ function Home() {
   useEffect(() => {
     console.log(searchText);
   }, [searchText]);
+
+  useEffect(() => {
+    // list.sort((a, b) =>
+    //   a.color > b.color
+    //     ? 1
+    //     : a.color === b.color
+    //     ? a.size > b.size
+    //       ? 1
+    //       : -1
+    //     : -1
+    // );
+    collections.sort((a, b) =>
+      a.followers.length < b.followers.length ? 1 : -1
+    );
+  }, [collections]);
 
   return (
     <div className="root">
