@@ -30,12 +30,6 @@
   width: 70%;
 }
 
-.searchIcon {
-  color: #b1d4e0;
-  font-size: 1.3rem;
-  padding-left: 10px;
-}
-
 .nav h1 {
   float: right;
   font-size: 1.3rem;
@@ -335,7 +329,7 @@ select {
   padding: 10px 10px;
   cursor: pointer;
 }
-.searchContainer:hover{
+.searchContainer:hover {
   background: rgba(0, 0, 0, 0.2);
 }
 

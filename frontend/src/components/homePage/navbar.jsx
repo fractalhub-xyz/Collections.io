@@ -7,6 +7,7 @@ import {
   faBookmark,
   faChevronRight,
   faChevronLeft,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -26,7 +27,7 @@ function Navbar({ searchText, setSearchText }) {
     const id = localStorage.getItem("userID");
     history.push(`/user/${id}`);
   };
-  
+
   return (
     <div className="nav">
       <input
@@ -37,8 +38,15 @@ function Navbar({ searchText, setSearchText }) {
           setSearchText(e.target.value);
         }}
       />
-
-      <FontAwesomeIcon className="searchIcon" icon={faSearch} />
+      {!!searchText.length && (
+        <FontAwesomeIcon
+          onClick={() => {
+            setSearchText("");
+          }}
+          className="moreIcon"
+          icon={faTimes}
+        />
+      )}
 
       <span>
         {showMore && (
