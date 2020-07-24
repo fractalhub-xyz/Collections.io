@@ -68,6 +68,12 @@
   color: #00fff0;
 }
 
+.loading-error {
+  text-align: center;
+  padding-top: 25px;
+  font-size: 1.4rem;
+}
+
 .container {
   width: 95%;
   margin: 0px auto;

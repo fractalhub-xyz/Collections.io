@@ -38,16 +38,16 @@ function Detail() {
   const [searchText, setSearchText] = useState("");
   const [totLikes, setTotLikes] = useState(0);
   const [totFollowers, setTotFollowers] = useState(0);
-  
+
   //utitlity funcs
   const color = randomColor({
     luminosity: "light",
     hue: "blue",
   });
 
-   const mystyle = {
-     background: color,
-   };
+  const mystyle = {
+    background: "#31004a",
+  };
 
   //lifcycle funcs
   useEffect(() => {
@@ -65,7 +65,7 @@ function Detail() {
         setSnippets(response.data.snippets);
       } catch (error) {
         console.error(error);
-        setError("Error happened");
+        setError(`Failed to load collection with ID: ${params.id}`);
       }
       setIsLoading(false);
     }
@@ -102,6 +102,13 @@ function Detail() {
     try {
       const response = await postFollowCollection(collection.id);
       setIsFollowed(response.data.followed);
+      if (response.data.success == true) {
+        if (response.data.followed == true) {
+          setTotFollowers(totFollowers + 1);
+        } else {
+          setTotFollowers(totFollowers - 1);
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -115,127 +122,131 @@ function Detail() {
       <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar />
-        <div className="container">
-          <div>{error && <h1>{error}</h1>}</div>
-          <div className="cardDetails">
-            <div className="collectioncard" style={mystyle}>
-              {collection.name}
-            </div>
-            <div className="collectionText">
-              <div className="likes">
-                {totLikes} HEARTS, {totFollowers} FOLLOWERS
+        {error ? (
+          <div className="loading-error">{error}</div>
+        ) : (
+          <div className="container">
+            <div className="cardDetails">
+              <div className="collectioncard" style={mystyle}>
+                {collection.name}
+              </div>
+              <div className="collectionText">
+                <div className="likes">
+                  {totLikes} HEARTS, {totFollowers} FOLLOWERS
+                </div>
+                <div>
+                  <FontAwesomeIcon
+                    data-tip={
+                      isFollowed ? "Unfollow Collection" : "Follow Collection"
+                    }
+                    data-type="warning"
+                    onClick={followCollection}
+                    className={isFollowed ? "like teal" : "like"}
+                    icon={faHeart}
+                  />
+                </div>
+                <div className="type">COLLECTION</div>
+                <div className="name">{collection.name}</div>
+                <div className="desc">{collection.desc}</div>
+                <div className="count">
+                  {articles} Articles, {podcasts} Podcast, {snippets.length}{" "}
+                  Total
+                </div>
+                <div className="owner">
+                  created by <span className="teal">{collection.owner}</span>
+                </div>
               </div>
               <div>
-                <FontAwesomeIcon
-                  data-tip={
-                    isFollowed ? "Unfollow Collection" : "Follow Collection"
-                  }
-                  data-type="warning"
-                  onClick={followCollection}
-                  className={isFollowed ? "like teal" : "like"}
-                  icon={faHeart}
-                />
-              </div>
-              <div className="type">COLLECTION</div>
-              <div className="name">{collection.name}</div>
-              <div className="desc">{collection.desc}</div>
-              <div className="count">
-                {articles} Articles, {podcasts} Podcast, {snippets.length} Total
-              </div>
-              <div className="owner">
-                created by <span className="teal">{collection.owner}</span>
-              </div>
-            </div>
-            <div>
-              {isOwner && (
-                <FontAwesomeIcon
-                  onClick={() => {
-                    setEditCollectionModal(true);
-                  }}
-                  data-tip="Edit Collection"
-                  className="deleteIcon"
-                  icon={faUserEdit}
-                />
-              )}
-            </div>
-          </div>
-          <input
-            placeholder="SEARCH"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value, searchText);
-            }}
-          />
-          <FontAwesomeIcon
-            data-tip="add snippet"
-            data-type="info"
-            onClick={() => {
-              setModalView(true);
-            }}
-            className="addSnippet"
-            icon={faPlusCircle}
-          />
-          <div className="tableheaders">
-            <div className="likecol">
-              <FontAwesomeIcon icon={faHeart} />
-            </div>
-            <div className="titlecol">TITLE</div>
-            <div className="likescol">HEARTS</div>
-            <div className="ownercol">OWNER</div>
-            <div className="typecol">TYPE</div>
-            <div className="datecol">CREATED ON</div>
-            <div className="linkcol">LINK</div>
-            <div className="edicol">EDIT</div>
-          </div>
-
-          <div
-            className={
-              !searchText.length ? "snippetList" : "snippetList dispnone"
-            }
-          >
-            {isLoading && <div className="loader">ISA LOADING</div>}
-            {!snippets.length && (
-              <h4 className="oops">
-                ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
-                <br />
-                ISA EMPTY
-              </h4>
-            )}
-            {snippets.map((snippet) => (
-              <Snippet
-                key={snippet.id}
-                snippet={snippet}
-                setRefresh={setRefresh}
-                collectionName={collection.name}
-              />
-            ))}
-          </div>
-          <div
-            className={
-              !!searchText.length ? "snippetList" : "snippetList dispnone"
-            }
-          >
-            {isLoading && <div className="loader">ISA LOADING</div>}
-            {!snippets.length && (
-              <h4 className="oops">
-                ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
-                <br />
-                ISA EMPTY
-              </h4>
-            )}
-            {snippets.map((snippet) => (
-              <div key={snippet.id}>
-                {snippet.title.includes(searchText) && (
-                  <Snippet
-                    snippet={snippet}
-                    setRefresh={setRefresh}
-                    collectionName={collection.name}
+                {isOwner && (
+                  <FontAwesomeIcon
+                    onClick={() => {
+                      setEditCollectionModal(true);
+                    }}
+                    data-tip="Edit Collection"
+                    className="deleteIcon"
+                    icon={faUserEdit}
                   />
                 )}
               </div>
-            ))}
+            </div>
+            <input
+              placeholder="SEARCH"
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value, searchText);
+              }}
+            />
+            <FontAwesomeIcon
+              data-tip="add snippet"
+              data-type="info"
+              onClick={() => {
+                setModalView(true);
+              }}
+              className="addSnippet"
+              icon={faPlusCircle}
+            />
+            <div className="tableheaders">
+              <div className="likecol">
+                <FontAwesomeIcon icon={faHeart} />
+              </div>
+              <div className="titlecol">TITLE</div>
+              <div className="likescol">HEARTS</div>
+              <div className="ownercol">OWNER</div>
+              <div className="typecol">TYPE</div>
+              <div className="datecol">CREATED ON</div>
+              <div className="linkcol">LINK</div>
+              <div className="edicol">EDIT</div>
+            </div>
+
+            <div
+              className={
+                !searchText.length ? "snippetList" : "snippetList dispnone"
+              }
+            >
+              {isLoading && <div className="loader">ISA LOADING</div>}
+              {!snippets.length && (
+                <h4 className="oops">
+                  ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
+                  <br />
+                  ISA EMPTY
+                </h4>
+              )}
+              {snippets.map((snippet) => (
+                <Snippet
+                  key={snippet.id}
+                  snippet={snippet}
+                  setRefresh={setRefresh}
+                  collectionName={collection.name}
+                />
+              ))}
+            </div>
+            <div
+              className={
+                !!searchText.length ? "snippetList" : "snippetList dispnone"
+              }
+            >
+              {isLoading && <div className="loader">ISA LOADING</div>}
+              {!snippets.length && (
+                <h4 className="oops">
+                  ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
+                  <br />
+                  ISA EMPTY
+                </h4>
+              )}
+              {snippets.map((snippet) => (
+                <div key={snippet.id}>
+                  {snippet.title.includes(searchText) && (
+                    <Snippet
+                      snippet={snippet}
+                      setRefresh={setRefresh}
+                      collectionName={collection.name}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div>
         {modalView && (
