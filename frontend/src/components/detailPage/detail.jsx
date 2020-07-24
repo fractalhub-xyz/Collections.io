@@ -42,12 +42,13 @@ function Detail() {
   //utitlity funcs
   const color = randomColor({
     luminosity: "light",
-    hue: "rgba",
+    hue: "blue",
   });
 
    const mystyle = {
      background: color,
    };
+
   //lifcycle funcs
   useEffect(() => {
     console.log("rendering Detail View");
@@ -179,6 +180,7 @@ function Detail() {
               <FontAwesomeIcon icon={faHeart} />
             </div>
             <div className="titlecol">TITLE</div>
+            <div className="likescol">HEARTS</div>
             <div className="ownercol">OWNER</div>
             <div className="typecol">TYPE</div>
             <div className="datecol">CREATED ON</div>

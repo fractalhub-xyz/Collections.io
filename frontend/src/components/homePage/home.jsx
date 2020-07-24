@@ -36,10 +36,6 @@ function Home() {
   }, [refresh]);
 
   useEffect(() => {
-    console.log(searchText);
-  }, [searchText]);
-
-  useEffect(() => {
     // list.sort((a, b) =>
     //   a.color > b.color
     //     ? 1

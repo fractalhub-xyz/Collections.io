@@ -18,6 +18,8 @@ function Snippet({ snippet, setRefresh, collectionName }) {
   const [isOwner, setIsOwner] = useState(false);
   const [isLiked, setIsLiked] = useState(true);
   const [editModal, setEditModal] = useState(false);
+  const [likes, setLikes] = useState(0);
+
   //lifecycle funs
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -27,6 +29,7 @@ function Snippet({ snippet, setRefresh, collectionName }) {
       setIsOwner(false);
     }
     setIsLiked(snippet.hearts.includes(user));
+    setLikes(snippet.hearts.length);
   }, []);
 
   //functions
@@ -34,6 +37,13 @@ function Snippet({ snippet, setRefresh, collectionName }) {
     e.preventDefault();
     try {
       const response = await postHeartSnippet(snippet.id);
+      if (response.data.success === true) {
+        if (response.data.liked == false) {
+          setLikes(likes - 1);
+        } else {
+          setLikes(likes + 1);
+        }
+      }
       setIsLiked(response.data.liked);
     } catch (error) {
       console.log(error);
@@ -49,6 +59,7 @@ function Snippet({ snippet, setRefresh, collectionName }) {
         />
       </div>
       <div className="titlecol">{snippet.title}</div>
+      <div className="likescol">{likes}</div>
       <div className="ownercol">{snippet.owner}</div>
       <div className="typecol">{snippet.type_of}</div>
       <div className="datecol">{snippet.timestamp.substr(0, 10)}</div>

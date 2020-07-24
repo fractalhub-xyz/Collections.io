@@ -198,7 +198,11 @@
   text-align: center;
 }
 .titlecol {
-  width: 43%;
+  width: 35%;
+}
+.likescol {
+  width: 8%;
+  text-align: center;
 }
 .ownercol {
   width: 14%;
