@@ -43,6 +43,9 @@ export function getCollections() {
 export function getCollectionFromID(id) {
   return api.get(`/collections/${id}`);
 }
+export function getSnippetFromID(id) {
+  return api.get(`/snippets/${id}`);
+}
 export function getUserFromID(id) {
   return api.get(`/users/${id}`);
 }

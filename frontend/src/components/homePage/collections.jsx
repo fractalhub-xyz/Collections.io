@@ -14,7 +14,7 @@ function Collections({ collection }) {
   };
   const color = randomColor({
     luminosity: "light",
-    hue: "rgba",
+    hue: "rgb",
   });
 
   //lifecycle function

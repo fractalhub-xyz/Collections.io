@@ -12,6 +12,7 @@ import EditSnippet from "./editsnippet";
 import { postHeartSnippet } from "../../helpers/api";
 //modules
 import ReactTooltip from "react-tooltip";
+import { useHistory } from "react-router-dom";
 
 function Snippet({ snippet, setRefresh, collectionName }) {
   //states
@@ -19,6 +20,7 @@ function Snippet({ snippet, setRefresh, collectionName }) {
   const [isLiked, setIsLiked] = useState(true);
   const [editModal, setEditModal] = useState(false);
   const [likes, setLikes] = useState(0);
+
 
   //lifecycle funs
   useEffect(() => {
@@ -58,7 +60,9 @@ function Snippet({ snippet, setRefresh, collectionName }) {
           icon={faHeart}
         />
       </div>
-      <div className="titlecol">{snippet.title}</div>
+      <div className="titlecol">
+        <a href={`${snippet.collection}/${snippet.id}`}>{snippet.title}</a>
+      </div>
       <div className="likescol">{likes}</div>
       <div className="ownercol">{snippet.owner}</div>
       <div className="typecol">{snippet.type_of}</div>
@@ -94,6 +98,7 @@ function Snippet({ snippet, setRefresh, collectionName }) {
             setRefresh={setRefresh}
             snippet={snippet}
             collectionName={collectionName}
+            redirect={false}
           />
         )}
       </div>

@@ -282,3 +282,40 @@
   border-radius: 0px;
   background-color: white;
 }
+
+.snippetContainer {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px 10px;
+}
+.snippetCard {
+  width: 150px;
+  height: 150px;
+  background: #92ff7d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+.searchText .link {
+  color: inherit;
+  cursor: pointer;
+}
+
+.searchText .link:hover {
+  color: white;
+}
+
+.snippetSettings {
+  height: 100%;
+  text-align: right;
+  width: 300px;
+}
+
+
+.bgTeal {
+  background: #00fff0;
+}

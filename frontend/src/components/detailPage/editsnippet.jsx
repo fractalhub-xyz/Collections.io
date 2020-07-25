@@ -4,13 +4,22 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //API
 import { editSnippet, deleteSnippet } from "../../helpers/api";
+//Modules
+import { useHistory } from "react-router-dom";
 
-function EditSnippet({ setEditModal, setRefresh, snippet, collectionName }) {
+function EditSnippet({
+  setEditModal,
+  setRefresh,
+  snippet,
+  collectionName,
+  redirect,
+}) {
   //createSnippet
   const [title, setTitle] = useState(snippet.title);
   const [link, setLink] = useState(snippet.link);
   const [type, setType] = useState(snippet.type_of);
   const [error, setError] = useState("");
+  let history = useHistory();
 
   const editSelected = async (e) => {
     e.preventDefault();
@@ -37,8 +46,12 @@ function EditSnippet({ setEditModal, setRefresh, snippet, collectionName }) {
     try {
       await deleteSnippet(snippet.id);
       console.log("Successfully removed snippet from collection");
-      setEditModal(false);
-      setRefresh(true);
+      if (redirect) {
+        history.push(`/detail/${snippet.collection}`);
+      } else {
+        setEditModal(false);
+        setRefresh(true);
+      }
     } catch {
       console.log("Failed to remove snippet from collection");
       alert("Failed");

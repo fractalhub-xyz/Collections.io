@@ -33,6 +33,26 @@ function NewSnippet({ setModalView, collection, setRefresh }) {
       setError("Invalid Entry");
     }
   };
+  const createAnotherSnippet = async (e) => {
+    e.preventDefault();
+    const payload = {
+      title: title,
+      type_of: type,
+      link: link,
+      collection: collection.id,
+    };
+    try {
+      await postNewSnippet(payload);
+      console.log("Successfully pushed snippet to collection");
+      setRefresh(true);
+      setTitle("");
+      setLink("");
+      setType("podcast");
+    } catch {
+      console.log("Failed to create a new collection");
+      setError("Invalid Entry");
+    }
+  };
 
   return (
     <div className="modal">
@@ -84,7 +104,8 @@ function NewSnippet({ setModalView, collection, setRefresh }) {
         </div>
         <div className="errorText">{error}</div>
         <div className="buttonHolder">
-          <button onClick={createSnippet}>ADD</button>
+          <button onClick={createSnippet}>SAVE</button>
+          <button onClick={createAnotherSnippet}>ADD +</button>
         </div>
       </div>
     </div>

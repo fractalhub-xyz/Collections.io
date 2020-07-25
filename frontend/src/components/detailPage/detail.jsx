@@ -121,7 +121,7 @@ function Detail() {
     <div className="root">
       <SideNav setRefresh={setRefresh} />
       <div className="main">
-        <Navbar />
+        <Navbar add={"/home"} />
         {error ? (
           <div className="loading-error">{error}</div>
         ) : (
