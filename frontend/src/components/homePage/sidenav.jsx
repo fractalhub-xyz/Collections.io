@@ -23,8 +23,9 @@ function SideNav({ setRefresh }) {
     e.preventDefault();
     const payload = { name, desc };
     try {
-      await postNewCollection(payload);
+      const response = await postNewCollection(payload);
       setModalView(false);
+      history.push(`/detail/${response.data.id}`);
       setRefresh(true);
     } catch {
       console.log("Failed to create a new collection");
