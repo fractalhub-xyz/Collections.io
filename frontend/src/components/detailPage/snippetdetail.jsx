@@ -151,6 +151,8 @@ function SnippetDetail() {
                 )}
               </div>
             </div>
+            <div>- Other Similar Snippets</div>
+            <div>- Comment Section</div>
           </div>
         )}
       </div>
