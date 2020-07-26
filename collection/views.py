@@ -91,6 +91,12 @@ class FollowCollectionView(APIView):
         )
 
 
+class AllTagsView(generics.ListAPIView):
+    queryset = Tag.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = TagSerializer
+
+
 @api_view(['GET'])
 def search_view(request):
     query = request.GET.get('query', '')

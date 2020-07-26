@@ -12,6 +12,7 @@ urlpatterns = [
     path('snippets/<int:snip_id>/heart', views.HeartSnippetView.as_view()),
     path('collections/<int:coll_id>/follow',
          views.FollowCollectionView.as_view()),
+    path('tags', views.AllTagsView.as_view()),
     path('search', views.search_view),
     path('login', auth.obtain_auth_token),
     path('logout', views.logout_view),
