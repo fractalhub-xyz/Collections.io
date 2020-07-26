@@ -70,6 +70,15 @@ class FollowedCollectionViewset(generics.ListAPIView):
         return colls
 
 
+class CollectionsForTagViewset(generics.ListAPIView):
+    permissions_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = ShortCollectionSerialiser
+
+    def get_queryset(self):
+        tag_name = self.kwargs.get('tag_name')
+        return Collection.objects.filter(tags__name=tag_name)
+
+
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -134,8 +143,27 @@ class AllTagsView(generics.ListAPIView):
 class TagsToCollection(APIView):
     permission_classes = [IsOwnerOrReadOnly]
 
-    def post(request, coll_id):
-        pass
+    def post(self, request, coll_id):
+        tags = request.POST.get('tags', '')
+        tags = tags.split(',')
+
+        try:
+            collection = Collection.objects.get(id=coll_id)
+        except:
+            return Response({'error': 'Collection Not Found'}, status.HTTP_404_NOT_FOUND)
+
+        collection.tags.all().delete()
+
+        for tag_name in tags:
+            try:
+                tag = Tag.objects.get(name=tag_name)
+            except:
+                print(f"Creating new tag {tag_name}")
+                tag = Tag(name=tag_name)
+                tag.save()
+            collection.tags.add(tag)
+
+        return Response({'success': True}, status.HTTP_200_OK)
 
 
 @api_view(['GET'])
