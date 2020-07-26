@@ -89,7 +89,7 @@
 }
 
 .collection {
-  display: inline-block;
+  display: block;
   margin-left: 10px;
 }
 
@@ -98,8 +98,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 27vh;
-  width: 27vh;
+  height: 200px;
+  width: 200px;
   font-size: 1.6rem;
   cursor: pointer;
   text-align: center;
@@ -373,4 +373,15 @@ select {
   font-size: 17px;
   line-height: 22px;
   color: #b1d4e0;
+}
+
+.carousel-container {
+  display: block;
+  width: inherit;
+  overflow-x: hidden;
+}
+
+.carousel-items {
+  display: flex;
+  transition: all ease-in 0.3s;
 }

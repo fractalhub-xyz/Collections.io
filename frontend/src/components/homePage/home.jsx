@@ -8,6 +8,7 @@ import Collections from "./collections";
 import SideNav from "./sidenav";
 import Navbar from "./navbar";
 import Search from "./search";
+import Carousel from "./carousel";
 
 function Home() {
   //states
@@ -59,15 +60,13 @@ function Home() {
           className={!searchText.length ? "container" : "container dispnone"}
         >
           <h1>COLLECTIONS</h1>
-          <h3>POPULAR COLLECTIONS</h3>
-          <div className="line" />
           {error && <h4>{error}</h4>}
           {isLoading && <h4>Loading..</h4>}
-          <div>
+          <Carousel title="Popular Collections">
             {collections.map((collection) => (
               <Collections key={collection.id} collection={collection} />
             ))}
-          </div>
+          </Carousel>
         </div>
 
         <Search searchText={searchText} />
