@@ -14,7 +14,7 @@ import AddTag from "./addtag";
 //modules
 import ReactTooltip from "react-tooltip";
 import { randomColor } from "randomcolor";
-
+import { useHistory } from "react-router-dom";
 //ICONS
 import {
   faHeart,
@@ -28,6 +28,7 @@ function Detail() {
   // params
   const params = useParams();
   const [id, setID] = useState(params.id);
+  let history = useHistory();
   //states
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -168,7 +169,13 @@ function Detail() {
                 <div>
                   <span>
                     {tags.map((tag) => (
-                      <button>{tag}</button>
+                      <button
+                        onClick={() => {
+                          history.push(`/tag/${tag}`);
+                        }}
+                      >
+                        {tag}
+                      </button>
                     ))}
                   </span>
                   <FontAwesomeIcon

@@ -132,6 +132,10 @@
   color: white;
 }
 
+.sidenav-container h4 {
+  font-weight: lighter;
+  letter-spacing: 2px;
+}
 .dotdotdot {
   font-size: 2.5rem;
   position: relative;
@@ -153,6 +157,7 @@
 
 .addCollection {
   font-size: 1.34rem;
+  font-weight: lighter;
 }
 
 .modal {
@@ -369,10 +374,14 @@ select {
 .followed-colls a {
   display: block;
   margin: 10px 0;
-  font-weight: bold;
+  text-transform: capitalize;
+  font-weight: 500;
   font-size: 17px;
   line-height: 22px;
-  color: #b1d4e0;
+  color: grey;
+}
+.followed-colls a:hover {
+  color: white;
 }
 
 .carousel-container {
