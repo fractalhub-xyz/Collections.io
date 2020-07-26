@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-
+//ICONS
+import {
+  faChevronRight,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Carousel({ children, title }) {
   const [currentIdx, setIdx] = useState(0);
   const length = children.length;
@@ -23,11 +28,20 @@ function Carousel({ children, title }) {
     <div>
       <h3>
         {title.toUpperCase()}
-        <button disabled={currentIdx - maxPerRow < 0} onClick={prev}>
-          {"<"}
+
+        <button
+          className="carousel-navbuttom"
+          disabled={currentIdx + maxPerRow >= length}
+          onClick={next}
+        >
+          <FontAwesomeIcon icon={faChevronRight} />
         </button>
-        <button disabled={currentIdx + maxPerRow >= length} onClick={next}>
-          {">"}
+        <button
+          className="carousel-navbuttom"
+          disabled={currentIdx - maxPerRow < 0}
+          onClick={prev}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
       </h3>
       <div className="line" />

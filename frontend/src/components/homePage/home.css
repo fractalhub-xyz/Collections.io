@@ -241,7 +241,7 @@ select {
 }
 
 .form textarea {
-  height: 70px;
+  height: 130px;
 }
 
 .form select {
@@ -383,5 +383,19 @@ select {
 
 .carousel-items {
   display: flex;
-  transition: all ease-in 0.3s;
+  transition: all ease 0.3s;
+}
+
+.carousel-navbuttom {
+  float: right;
+  background: none;
+  color: white;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.carousel-navbuttom:hover {
+  color: #00fff0;
 }

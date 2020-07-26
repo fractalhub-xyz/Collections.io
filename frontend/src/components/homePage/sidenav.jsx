@@ -120,8 +120,6 @@ function SideNav({ setRefresh }) {
                       setDesc(e.target.value);
                     }}
                   />
-                  <h5>Tag</h5>
-                  <input />
                 </div>
               </div>
               <div className="errorText">{error}</div>

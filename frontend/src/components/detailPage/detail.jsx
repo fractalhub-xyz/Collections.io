@@ -10,6 +10,7 @@ import { postFollowCollection } from "../../helpers/api";
 //components
 import Snippet from "./snippet";
 import EditCollection from "./editcollection";
+import AddTag from "./addtag";
 //modules
 import ReactTooltip from "react-tooltip";
 import { randomColor } from "randomcolor";
@@ -19,6 +20,7 @@ import {
   faHeart,
   faPlusCircle,
   faUserEdit,
+  faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -32,8 +34,10 @@ function Detail() {
   const [isFollowed, setIsFollowed] = useState(false);
   const [collection, setCollection] = useState({});
   const [snippets, setSnippets] = useState([]);
+  const [tags, setTags] = useState([]);
   const [modalView, setModalView] = useState(false);
   const [editCollectionModal, setEditCollectionModal] = useState(false);
+  const [tagsModal, setTagsModal] = useState(false);
   const [refresh, setRefresh] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -68,6 +72,7 @@ function Detail() {
         const response = await getCollectionFromID(id);
         setCollection(response.data);
         setSnippets(response.data.snippets);
+        setTags(response.data.tags);
       } catch (error) {
         console.error(error);
         setError(`Failed to load collection with ID: ${params.id}`);
@@ -150,15 +155,31 @@ function Detail() {
                     icon={faHeart}
                   />
                 </div>
-                <div className="type">COLLECTION</div>
+                <div className="type">
+                  COLLECTION created by{" "}
+                  <span className="teal">{collection.owner}</span>
+                  <div className="count">
+                    {articles} Articles, {podcasts} Podcast, {snippets.length}{" "}
+                    Total
+                  </div>
+                </div>
                 <div className="name">{collection.name}</div>
                 <div className="desc">{collection.desc}</div>
-                <div className="count">
-                  {articles} Articles, {podcasts} Podcast, {snippets.length}{" "}
-                  Total
-                </div>
-                <div className="owner">
-                  created by <span className="teal">{collection.owner}</span>
+                <div>
+                  <span>
+                    {tags.map((tag) => (
+                      <button>{tag}</button>
+                    ))}
+                  </span>
+                  <FontAwesomeIcon
+                    className="add-tag-button"
+                    data-tip="Add Tag"
+                    data-type="dark"
+                    icon={faPlusCircle}
+                    onClick={() => {
+                      setTagsModal(true);
+                    }}
+                  />
                 </div>
               </div>
               <div>
@@ -268,6 +289,15 @@ function Detail() {
             setEditCollectionModal={setEditCollectionModal}
             setRefresh={setRefresh}
             collection={collection}
+          />
+        )}
+      </div>
+      <div>
+        {tagsModal && (
+          <AddTag
+            setTagsModal={setTagsModal}
+            collection={collection}
+            setRefresh={setRefresh}
           />
         )}
       </div>

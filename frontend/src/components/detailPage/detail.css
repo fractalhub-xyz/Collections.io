@@ -105,6 +105,18 @@
   margin-left: 10px;
   width: 70%;
 }
+.collectionText button {
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-right: 6px;
+  text-transform: uppercase;
+}
+
+.collectionText button:hover {
+  background: #b1d4e0;
+}
 
 .deleteIcon {
   font-size: 1.7rem;
@@ -146,13 +158,13 @@
 .name {
   color: #e5e5e5;
   font-size: 140%;
-  margin-bottom: 10px;
   font-weight: bolder;
   text-transform: uppercase;
 }
 
 .desc {
   color: #e5e5e5;
+  margin-bottom: 5px;
 }
 
 .count {
@@ -315,7 +327,18 @@
   width: 300px;
 }
 
-
 .bgTeal {
   background: #00fff0;
+}
+
+.tags {
+  width: 95%;
+}
+
+.add-tag-button {
+  font-size: 1.5rem;
+  vertical-align: -7px;
+  margin-left: 10px;
+  color: #00fff0;
+  cursor: pointer;
 }
