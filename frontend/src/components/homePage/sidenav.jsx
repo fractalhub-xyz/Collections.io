@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //ICONS
 import {
   faHome,
@@ -8,9 +8,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //MODULES
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 //API
-import { postNewCollection } from "../../helpers/api";
+import { postNewCollection, getFollowedCollections } from "../../helpers/api";
 
 function SideNav({ setRefresh }) {
   let history = useHistory();
@@ -18,6 +18,22 @@ function SideNav({ setRefresh }) {
   const [desc, setDesc] = useState("");
   const [modalView, setModalView] = useState(false);
   const [error, setError] = useState("");
+  const [followed, setFollowed] = useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await getFollowedCollections();
+        console.log(response);
+        const followed = response.data;
+        setFollowed(followed);
+      } catch (error) {
+        setError(error);
+      }
+    }
+
+    getData();
+  }, []);
 
   const createCollection = async (e) => {
     e.preventDefault();
@@ -57,7 +73,11 @@ function SideNav({ setRefresh }) {
         </div>
         <div className="line" />
         <h4>YOUR COLLECTIONS</h4>
-        <p>TEMP FETCH COLLECTIONS FROM THE OWNER</p>
+        <div className="followed-colls">
+          {followed.map((coll) => (
+            <Link to={`/detail/${coll.id}`}>{coll.name}</Link>
+          ))}
+        </div>
         <div className="line" />
         <div
           onClick={() => {

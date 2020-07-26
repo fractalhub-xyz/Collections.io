@@ -40,6 +40,12 @@ export function postNewSnippet(data) {
 export function getCollections() {
   return api.get("/collections");
 }
+export function getPopularCollections(limit = 10) {
+  return api.get("/collections/popular?limit=" + limit);
+}
+export function getFollowedCollections(limit = 10) {
+  return api.get("/collections/followed?limit=" + limit);
+}
 export function getCollectionFromID(id) {
   return api.get(`/collections/${id}`);
 }
@@ -65,10 +71,10 @@ export function editCollection(id, data) {
   return api.put(`/collections/${id}/`, data);
 }
 export function postHeartSnippet(id) {
-  return api.post(`/snippets/${id}/heart`)
+  return api.post(`/snippets/${id}/heart`);
 }
 export function postFollowCollection(id) {
-  return api.post(`/collections/${id}/follow`)
+  return api.post(`/collections/${id}/follow`);
 }
 export function getSearchResults(query) {
   return api.get(`/search?query=${query}`);

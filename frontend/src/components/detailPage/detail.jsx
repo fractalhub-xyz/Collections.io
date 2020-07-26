@@ -25,6 +25,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Detail() {
   // params
   const params = useParams();
+  const [id, setID] = useState(params.id);
   //states
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -49,6 +50,11 @@ function Detail() {
     background: "#31004a",
   };
 
+  useEffect(() => {
+    setID(params.id);
+    setRefresh(true);
+  }, [params]);
+
   //lifcycle funcs
   useEffect(() => {
     console.log("rendering Detail View");
@@ -58,7 +64,6 @@ function Detail() {
 
     async function fetchCollection() {
       try {
-        const id = params.id;
         console.log(`fetching collection ${id} details`);
         const response = await getCollectionFromID(id);
         setCollection(response.data);
@@ -71,7 +76,7 @@ function Detail() {
     }
     fetchCollection();
     setRefresh(false);
-  }, [refresh]);
+  }, [refresh, id]);
 
   useEffect(() => {
     const user = localStorage.getItem("user");

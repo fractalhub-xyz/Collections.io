@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./home.css";
 
 //API
-import { getCollections} from "../../helpers/api";
+import { getPopularCollections } from "../../helpers/api";
 //components
 import Collections from "./collections";
 import SideNav from "./sidenav";
@@ -22,7 +22,7 @@ function Home() {
     async function fetchCollection() {
       console.log("fetching collection data");
       try {
-        const response = await getCollections();
+        const response = await getPopularCollections();
         setCollections(response.data);
       } catch (error) {
         console.error(error);
@@ -46,7 +46,7 @@ function Home() {
     //     : -1
     // );
     collections.sort((a, b) =>
-      a.followers.length < b.followers.length ? 1 : -1
+      a.followers.length < b.followers.length ? 1 : -1,
     );
   }, [collections]);
 
