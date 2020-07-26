@@ -79,7 +79,9 @@ export function postFollowCollection(id) {
 export function getSearchResults(query) {
   return api.get(`/search?query=${query}`);
 }
-
 export function postTagsToCollection(id, data) {
-  return api.post(`/collections/${id}/tags`, data)
+  return api.post(`/collections/${id}/tags`, data);
+}
+export function getCollectionsFromTag(tag) {
+  return api.get(`tag/${tag}`);
 }

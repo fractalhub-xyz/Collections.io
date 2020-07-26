@@ -10,11 +10,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Navbar({add}) {
+function Navbar() {
   let history = useHistory();
   const [showMore, setShowMore] = useState(false);
   const redirect = () => {
-    history.push(add);
+    history.goBack();
   };
 
   const logout = () => {

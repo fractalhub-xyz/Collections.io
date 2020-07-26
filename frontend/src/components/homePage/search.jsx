@@ -3,6 +3,7 @@ import { getSearchResults } from "../../helpers/api";
 import { randomColor } from "randomcolor";
 import SnippetSearch from "./snippetSearch";
 import CollectionSearch from "./searchCollection";
+import TagSearch from "./tagSearch"
 
 function Search({ searchText }) {
   //states
@@ -10,7 +11,7 @@ function Search({ searchText }) {
   const [snippetMatches, setSnippetMatches] = useState([]);
   const [tagMatches, setTagMatches] = useState([]);
   const [numResults, setNumResults] = useState(0);
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false);
   //utility fucntions
   const color = randomColor({
     luminosity: "light",
@@ -29,9 +30,11 @@ function Search({ searchText }) {
       const response = await getSearchResults(searchText);
       setCollectionMatches(response.data.result.collections);
       setSnippetMatches(response.data.result.snippets);
+      setTagMatches(response.data.result.tags);
       setNumResults(
         response.data.result.collections.length +
-          response.data.result.snippets.length
+          response.data.result.snippets.length +
+          response.data.result.tags.length
       );
       setSuccess(true);
     } catch (error) {
@@ -41,11 +44,7 @@ function Search({ searchText }) {
   return (
     <div className={!!searchText.length ? "container" : "container dispnone"}>
       <div onClick={Search}>Search</div>
-      <h1>
-        {success && (
-          <span>{numResults} Results</span>
-        )}
-      </h1>
+      <h1>{success && <span>{numResults} Results</span>}</h1>
 
       {!!collectionMatches.length && (
         <div className="sectionLG">
@@ -67,12 +66,12 @@ function Search({ searchText }) {
           </div>
         </div>
       )}
-      {!!snippetMatches.length && (
+      {!!tagMatches.length && (
         <div className="sectionSM">
           <h2>Tags</h2>
           <div className="dispSection">
-            {snippetMatches.map((snippet) => (
-              <SnippetSearch key={snippet.id} snippet={snippet} />
+            {tagMatches.map((tag) => (
+              <TagSearch key={tag.name} tag={tag} />
             ))}
           </div>
         </div>

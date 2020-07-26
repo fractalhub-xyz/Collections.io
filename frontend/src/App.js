@@ -5,6 +5,7 @@ import Home from "./components/homePage/home";
 import Detail from "./components/detailPage/detail";
 import User from "./components/userPage/user";
 import SnippetDetail from "./components/detailPage/snippetdetail";
+import Tag from "./components/tagPage/tag";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path="/user/:id">
             <User />
+          </Route>
+          <Route path="/tag/:tag">
+            <Tag />
           </Route>
           <Route path="/detail/:id/:snip" exact>
             <SnippetDetail />

@@ -97,7 +97,7 @@ function SnippetDetail() {
     <div className="root">
       <SideNav setRefresh={setRefresh} />
       <div className="main">
-        <Navbar add={`/detail/${snippet.collection}`} />
+        <Navbar/>
         {error ? (
           <div className="loading-error">{error}</div>
         ) : (
