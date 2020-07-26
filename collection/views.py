@@ -3,8 +3,10 @@ import json
 from collection.models import Snippet, Collection, Tag
 from collection.serializers import *
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, Count, Sum
 from collection.permissions import IsOwnerOrReadOnly
+from datetime import datetime, timedelta
+
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework import generics
@@ -26,14 +28,46 @@ class SnippetViewSet(viewsets.ModelViewSet):
 
 
 class CollectionViewSet(viewsets.ModelViewSet):
-    queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
 
+    def get_queryset(self):
+        return Collection.objects.all()
+
     def perform_create(self, serializer):
         s = serializer.save(owner=self.request.user)
         print(s)
+
+
+class PopularCollectionViewset(generics.ListAPIView):
+    permissions_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = ShortCollectionSerialiser
+
+    def get_queryset(self):
+        colls = Collection.objects.all() \
+            .filter(timestamp__gte=datetime.now() - timedelta(days=30)) \
+            .annotate(foll_count=Count('followers')) \
+            .order_by('-foll_count', '-timestamp')
+
+        limit = int(self.request.GET.get('limit', '0'))
+        if limit and limit > 0:
+            colls = colls[:limit]
+        return colls
+
+
+class FollowedCollectionViewset(generics.ListAPIView):
+    permissions_classes = [permissions.IsAuthenticated]
+    serializer_class = ShortCollectionSerialiser
+
+    def get_queryset(self):
+        user = self.request.user
+        colls = user.followed_collections.all().order_by('-timestamp')
+
+        limit = int(self.request.GET.get('limit', '0'))
+        if limit and limit > 0:
+            colls = colls[:limit]
+        return colls
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -97,6 +131,13 @@ class AllTagsView(generics.ListAPIView):
     serializer_class = TagSerializer
 
 
+class TagsToCollection(APIView):
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def post(request, coll_id):
+        pass
+
+
 @api_view(['GET'])
 def search_view(request):
     query = request.GET.get('query', '')
@@ -117,7 +158,7 @@ def search_view(request):
     tags = Tag.objects.filter(name__icontains=query)[:MAX_LIMIT]
 
     result = {
-        'collections': CollectionSearchSerialiser(colls, many=True).data,
+        'collections': ShortCollectionSerialiser(colls, many=True).data,
         'snippets': SnippetSerializer(snips, many=True).data,
         'tags': TagSerializer(tags, many=True).data,
     }

@@ -31,12 +31,13 @@ class CollectionSerializer(serializers.ModelSerializer):
                   'snippets', 'desc', 'tags']
 
 
-class CollectionSearchSerialiser(serializers.ModelSerializer):
+class ShortCollectionSerialiser(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    followers = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Collection
-        fields = ['id', 'name', 'desc', 'owner']
+        fields = ['id', 'name', 'desc', 'owner', 'followers']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
