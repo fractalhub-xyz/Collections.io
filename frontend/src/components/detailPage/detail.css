@@ -387,3 +387,30 @@
   color: #00fff0;
   cursor: pointer;
 }
+
+.other-snippet-container {
+  display: flex;
+}
+
+.other-snippet-card {
+  padding: 15px;
+  margin: 0px 10px;
+  background: rgb(108, 140, 209);
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s;
+}
+.other-snippet-card h4 {
+  color: white;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.other-snippet-card:hover {
+  background: rgb(105, 0, 190);
+  transform: scale(1.1);
+  
+}

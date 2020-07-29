@@ -4,10 +4,15 @@ import SideNav from "../homePage/sidenav";
 import { useParams } from "react-router-dom";
 import Navbar from "./navbar";
 //API
-import { getSnippetFromID, postHeartSnippet } from "../../helpers/api";
+import {
+  getSnippetFromID,
+  getCollectionFromID,
+  postHeartSnippet,
+} from "../../helpers/api";
 // import { postFollowCollection } from "../../helpers/api";
 //components
 import EditSnippet from "./editsnippet";
+import { useHistory } from "react-router-dom";
 //modules
 import ReactTooltip from "react-tooltip";
 
@@ -23,17 +28,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function SnippetDetail() {
   // params
   const params = useParams();
+  let history = useHistory();
   //states
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [editModal, setEditModal] = useState(false);
-  const [refresh, setRefresh] = useState(true);
+  const [refresh, setRefresh] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [totLikes, setTotLikes] = useState(0);
   const [isPodcast, setIsPodcast] = useState(true);
   const [isLiked, setIsLiked] = useState(false);
   const [snippet, setSnippet] = useState({});
+  const [otherSnippets, setOtherSnippets] = useState([]);
+  const [collection, setCollection] = useState({});
+  const [id, setID] = useState(null);
+  const [snipID, setSnipID] = useState(null);
   //lifcycle funcs
+
+  useEffect(() => {
+    setID(params.id);
+    setSnipID(params.snip);
+    console.log(snipID, id);
+    setRefresh(true);
+  }, [params]);
 
   useEffect(() => {
     console.log("rendering Detail View");
@@ -42,10 +59,8 @@ function SnippetDetail() {
     }
     async function fetchSnippet() {
       try {
-        const id = params.id;
-        const snip = params.snip;
-        console.log(`fetching snippet ${snip} from collectino ${id}`);
-        const response = await getSnippetFromID(snip);
+        console.log(`fetching snippet ${snipID} from collectino ${id}`);
+        const response = await getSnippetFromID(snipID);
         setSnippet(response.data);
         console.log(response.data);
       } catch (error) {
@@ -56,7 +71,24 @@ function SnippetDetail() {
     }
     fetchSnippet();
     setRefresh(false);
-  }, [refresh]);
+  }, [refresh, id]);
+
+  //lifcycle funcs
+  useEffect(() => {
+    if (snippet.collection) {
+      async function fetchCollection() {
+        try {
+          const response = await getCollectionFromID(snippet.collection);
+          setCollection(response.data);
+          setOtherSnippets(response.data.snippets);
+        } catch (error) {
+          console.error(error);
+        }
+        setIsLoading(false);
+      }
+      fetchCollection();
+    }
+  }, [snippet]);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -97,7 +129,7 @@ function SnippetDetail() {
     <div className="root">
       <SideNav setRefresh={setRefresh} />
       <div className="main">
-        <Navbar/>
+        <Navbar />
         {error ? (
           <div className="loading-error">{error}</div>
         ) : (
@@ -127,7 +159,7 @@ function SnippetDetail() {
                   {snippet.link}
                 </a>
                 <br />
-                Collection {snippet.collection}
+                Collection {collection.name}
                 <br />
                 {snippet.type_of}
                 <br />
@@ -151,8 +183,28 @@ function SnippetDetail() {
                 )}
               </div>
             </div>
-            <div>- Other Similar Snippets</div>
-            <div>- Comment Section</div>
+            <h2>Other Snippets fron collection {collection.name}</h2>
+            <div className="line" />
+            <div className="other-snippet-container">
+              {otherSnippets
+                .filter((snip) => snip.title != snippet.title)
+                .map((snippet) => (
+                  <div
+                    className="other-snippet-card"
+                    onClick={() => {
+                      history.push(
+                        `/detail/${snippet.collection}/${snippet.id}`
+                      );
+                    }}
+                  >
+                    <h4>{snippet.title}</h4>
+                    - {snippet.owner}
+                    {}
+                  </div>
+                ))}
+            </div>
+            <h2>Comment Section</h2>
+            <div className="line" />
           </div>
         )}
       </div>

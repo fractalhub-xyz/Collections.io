@@ -54,6 +54,7 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
           <div className="formText tags">
             <div>
               <div className="tags-list">
+                {!tags.length && <span>Start adding tags</span>}
                 {tags.map((tag) => (
                   <span key={tag} className="tag">
                     {tag} &nbsp;{" "}
