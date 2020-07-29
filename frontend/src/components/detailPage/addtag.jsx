@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //ICONS
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //API
 import { postTagsToCollection } from "../../helpers/api";
@@ -10,6 +10,7 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
   //createSnippet
   const [error, setError] = useState("");
   const [tags, setTags] = useState(collection.tags);
+  const [newTag, setNewTag] = useState("");
 
   const addTag = async (e) => {
     e.preventDefault();
@@ -24,6 +25,17 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
       setError("Failed to Add Tag");
     }
   };
+
+  function arrayRemove(arr, value) {
+    return arr.filter(function (geeks) {
+      return geeks != value;
+    });
+  }
+
+  function arrayAdd() {
+    setTags(tags.concat(newTag));
+    setNewTag("");
+  }
 
   return (
     <div className="modal">
@@ -40,12 +52,37 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
         <h4>ADD TAGS</h4>
         <div className="formContainer">
           <div className="formText tags">
-            <input
-              value={tags}
-              onChange={(e) => {
-                setTags(e.target.value);
-              }}
-            />
+            <div>
+              <div className="tags-list">
+                {tags.map((tag) => (
+                  <span key={tag} className="tag">
+                    {tag} &nbsp;{" "}
+                    <FontAwesomeIcon
+                      className="del-tag"
+                      icon={faTimes}
+                      onClick={() => {
+                        setTags(arrayRemove(tags, tag));
+                      }}
+                    />
+                  </span>
+                ))}
+              </div>
+
+              <input
+                value={newTag}
+                onChange={(e) => {
+                  setNewTag(e.target.value);
+                }}
+                placeholder="#newtag"
+              />
+              <span>
+                <FontAwesomeIcon
+                  className="add-tag"
+                  icon={faPlusCircle}
+                  onClick={arrayAdd}
+                />
+              </span>
+            </div>
             {/* <h5>TITLE</h5>
 
             <h5>LINK</h5>

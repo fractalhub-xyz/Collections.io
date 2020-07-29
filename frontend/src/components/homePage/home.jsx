@@ -36,21 +36,6 @@ function Home() {
     setRefresh(false);
   }, [refresh]);
 
-  useEffect(() => {
-    // list.sort((a, b) =>
-    //   a.color > b.color
-    //     ? 1
-    //     : a.color === b.color
-    //     ? a.size > b.size
-    //       ? 1
-    //       : -1
-    //     : -1
-    // );
-    collections.sort((a, b) =>
-      a.followers.length < b.followers.length ? 1 : -1,
-    );
-  }, [collections]);
-
   return (
     <div className="root">
       <SideNav setRefresh={setRefresh} />

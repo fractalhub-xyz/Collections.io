@@ -20,7 +20,7 @@ import {
   faHeart,
   faPlusCircle,
   faUserEdit,
-  faTimesCircle,
+  faTasks,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -180,9 +180,9 @@ function Detail() {
                   </span>
                   <FontAwesomeIcon
                     className="add-tag-button"
-                    data-tip="Add Tag"
+                    data-tip="Edit Tags"
                     data-type="dark"
-                    icon={faPlusCircle}
+                    icon={faTasks}
                     onClick={() => {
                       setTagsModal(true);
                     }}
