@@ -1,0 +1,21 @@
+.username {
+  text-transform: capitalize;
+}
+
+.stats-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat {
+  background: grey;
+  width: 32%;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
