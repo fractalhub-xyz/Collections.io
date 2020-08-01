@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./home.css";
-
+//Modules
+import { useParams } from "react-router-dom";
 //API
 import { getPopularCollections } from "../../helpers/api";
 //components
@@ -16,7 +17,10 @@ function Explore() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [refresh, setRefresh] = useState(false);
+  
+  // const params = useParams();
   const [searchText, setSearchText] = useState("");
+
   //lifecycle funcs
   useEffect(() => {
     console.log("rendering Home View");

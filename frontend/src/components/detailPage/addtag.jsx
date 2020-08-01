@@ -33,7 +33,9 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
   }
 
   function arrayAdd() {
-    setTags(tags.concat(newTag));
+    if (!!newTag.length && !tags.includes(newTag)) {
+      setTags(tags.concat(newTag));
+    }
     setNewTag("");
   }
 
@@ -84,25 +86,6 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
                 />
               </span>
             </div>
-            {/* <h5>TITLE</h5>
-
-            <h5>LINK</h5>
-            <textarea
-              value={link}
-              onChange={(e) => {
-                setLink(e.target.value);
-              }}
-            />
-            <h5>TYPE</h5>
-            <select
-              value={type}
-              onChange={(e) => {
-                setType(e.target.value);
-              }}
-            >
-              <option value="podcast">Podcast</option>
-              <option value="article">Article</option>
-            </select> */}
           </div>
         </div>
         <div className="errorText">{error}</div>

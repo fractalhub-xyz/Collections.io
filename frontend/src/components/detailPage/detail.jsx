@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
+//CSS
 import "./detail.css";
-import SideNav from "../homePage/sidenav";
-import { useParams } from "react-router-dom";
-import Navbar from "./navbar";
-import NewSnippet from "./newsnippet";
 //API
 import { getCollectionFromID } from "../../helpers/api";
 import { postFollowCollection } from "../../helpers/api";
@@ -11,10 +8,14 @@ import { postFollowCollection } from "../../helpers/api";
 import Snippet from "./snippet";
 import EditCollection from "./editcollection";
 import AddTag from "./addtag";
+import SideNav from "../homePage/sidenav";
+import Navbar from "./navbar";
+import NewSnippet from "./newsnippet";
 //modules
 import ReactTooltip from "react-tooltip";
 import { randomColor } from "randomcolor";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 //ICONS
 import {
   faHeart,

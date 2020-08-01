@@ -20,6 +20,7 @@ function User() {
   const [error, setError] = useState("");
   const [refresh, setRefresh] = useState(true);
   const [userCollectinos, setUserCollectinos] = useState([]);
+  const [numSnippets, setNumSnippets] = useState(0);
 
   //lifcycle funcs
   useEffect(() => {
@@ -47,17 +48,13 @@ function User() {
 
   const refreshCount = () => {
     var colLen = userCollectinos.length;
-    var likes = 0;
+    var len = 0;
     for (var i = 0; i < colLen; i++) {
       var snipLen = userCollectinos[i].snippets.length;
-      console.log(userCollectinos[i].name);
       if (snipLen !== 0) {
-        for (var j = 0; j < snipLen; j++) {
-          likes = likes + userCollectinos[i].snippets[j].hearts.length;
-        }
-        console.log(likes);
-        likes = 0;
+        len = len + snipLen;
       }
+      setNumSnippets(len);
     }
   };
 
@@ -84,7 +81,7 @@ function User() {
               <span>Collections</span>
             </div>
             <div className="stat">
-              <h1>32</h1>
+              <h1>{numSnippets}</h1>
               <span>Snippets</span>
             </div>
           </div>

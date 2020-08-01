@@ -90,10 +90,10 @@ function SideNav({ setRefresh }) {
           &nbsp;Profile
         </div>
         <div className="line" />
-        <h4>YOUR COLLECTIONS</h4>
+        <h4>COLLECTIONS</h4>
         <div className="followed-colls">
           {followed.map((coll) => (
-            <Link to={`/detail/${coll.id}`}>{coll.name}</Link>
+            <Link key={coll.id} to={`/detail/${coll.id}`}>{coll.name}</Link>
           ))}
         </div>
         <div className="line" />
