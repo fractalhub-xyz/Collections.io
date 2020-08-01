@@ -5,6 +5,10 @@ import {
   faFolderOpen,
   faPlusCircle,
   faTimes,
+  faHashtag,
+  faBed,
+  faBell,
+  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //MODULES
@@ -53,7 +57,11 @@ function SideNav({ setRefresh }) {
     history.push("/home");
   };
   const rediretExplore = () => {
-    history.push("/");
+    history.push("/explore");
+  };
+  const redirectUser = () => {
+    const id = localStorage.getItem("userID");
+    history.push(`/user/${id}`);
   };
   return (
     <div className="sidenav">
@@ -64,12 +72,22 @@ function SideNav({ setRefresh }) {
         <div className="sidenav-link" onClick={redirectHome}>
           {" "}
           <FontAwesomeIcon icon={faHome} />
-          &nbsp;HOME
+          &nbsp;Home
         </div>
         <div className="sidenav-link" onClick={rediretExplore}>
           {" "}
-          <FontAwesomeIcon icon={faFolderOpen} />
-          &nbsp;EXLPORE - TEMP(LOGIN)
+          <FontAwesomeIcon icon={faHashtag} />
+          &nbsp;Explore
+        </div>
+        <div className="sidenav-link">
+          {" "}
+          <FontAwesomeIcon icon={faBell} />
+          &nbsp;Notification
+        </div>
+        <div className="sidenav-link" onClick={redirectUser}>
+          {" "}
+          <FontAwesomeIcon icon={faUserCircle} />
+          &nbsp;Profile
         </div>
         <div className="line" />
         <h4>YOUR COLLECTIONS</h4>

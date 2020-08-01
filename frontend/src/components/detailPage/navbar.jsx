@@ -25,11 +25,6 @@ function Navbar() {
     history.push("/");
   };
 
-  const myAccount = () => {
-    const id = localStorage.getItem("userID");
-    history.push(`/user/${id}`);
-  };
-
   return (
     <div className="nav">
       <FontAwesomeIcon
@@ -40,9 +35,6 @@ function Navbar() {
       <span>
         {showMore && (
           <span>
-            <h1 onClick={myAccount} className="logout">
-              &nbsp; &nbsp;MyAccount
-            </h1>
             <h1 onClick={logout} className="logout">
               &nbsp;Logout
             </h1>

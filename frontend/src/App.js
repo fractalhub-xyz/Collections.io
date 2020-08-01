@@ -6,6 +6,7 @@ import Detail from "./components/detailPage/detail";
 import User from "./components/userPage/user";
 import SnippetDetail from "./components/detailPage/snippetdetail";
 import Tag from "./components/tagPage/tag";
+import Explore from "./components/homePage/explore";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route path="/home" exact>
             <Home />
+          </Route>
+          <Route path="/explore" exact>
+            <Explore />
           </Route>
           <Route path="/detail/:id" exact>
             <Detail />

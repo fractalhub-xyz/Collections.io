@@ -72,6 +72,7 @@ function User() {
         <Navbar />
 
         <div className="container">
+          {error && <h4>{error}</h4>}
           <h1 className="username">{user.username}</h1>
           <div className="stats-container">
             <div className="stat">
@@ -87,7 +88,7 @@ function User() {
               <span>Snippets</span>
             </div>
           </div>
-          {error && <h4>{error}</h4>}
+
           {isLoading && <h4>Loading..</h4>}
           <Carousel title="Your Collections">
             {userCollectinos.map((collection) => (

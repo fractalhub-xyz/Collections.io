@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 //ICONS
 import {
-  faSearch,
   faBookmark,
   faChevronRight,
   faChevronLeft,
@@ -21,11 +20,6 @@ function Navbar({ searchText, setSearchText }) {
     localStorage.removeItem("token");
     localStorage.removeItem("collections");
     history.push("/");
-  };
-
-  const myAccount = () => {
-    const id = localStorage.getItem("userID");
-    history.push(`/user/${id}`);
   };
 
   return (
@@ -51,9 +45,6 @@ function Navbar({ searchText, setSearchText }) {
       <span>
         {showMore && (
           <span>
-            <h1 onClick={myAccount} className="logout">
-              &nbsp; &nbsp;MyAccount
-            </h1>
             <h1 onClick={logout} className="logout">
               &nbsp;Logout
             </h1>

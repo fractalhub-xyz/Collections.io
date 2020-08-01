@@ -172,6 +172,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: 99;
 }
 
 .closeForm {
@@ -179,6 +180,7 @@
   text-align: right;
   font-size: 2rem;
   margin-bottom: 10px;
+  z-index: 99;
 }
 
 .closeIcon {
@@ -187,6 +189,7 @@
 }
 
 .form {
+  z-index: 99;
   height: 310px;
   width: 600px;
   background-color: #3a3a3a;
@@ -388,6 +391,7 @@ select {
   display: block;
   width: inherit;
   overflow-x: hidden;
+  z-index: 0;
 }
 
 .carousel-items {
@@ -407,4 +411,15 @@ select {
 
 .carousel-navbuttom:hover {
   color: #00fff0;
+}
+
+.follow-message {
+  text-align: center;
+  width: 100%;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.follow-message:hover {
+  color: #b1d4e0;
 }
