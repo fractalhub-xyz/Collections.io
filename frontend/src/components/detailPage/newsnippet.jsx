@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-//ICONS
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //API
 import { postNewSnippet } from "../../helpers/api";
 
@@ -55,58 +52,47 @@ function NewSnippet({ setModalView, collection, setRefresh }) {
   };
 
   return (
-    <div className="modal">
-      <div className="closeForm">
-        <FontAwesomeIcon
-          className="closeIcon sidenav-link"
-          onClick={() => {
-            setModalView(false);
-          }}
-          icon={faTimes}
-        />
-      </div>
-      <div className="form">
-        <h4>ADD SNIPPET TO COLLECTION</h4>
-        <div className="formContainer">
-          <div className="formCard">{collection.name}</div>
-          <div className="formText">
-            <h5>TITLE</h5>
-            <input
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-            <h5>LINK</h5>
-            <textarea
-              value={link}
-              onChange={(e) => {
-                setLink(e.target.value);
-              }}
-            />
-            <h5>TYPE</h5>
-            <select
-              value={type}
-              onChange={(e) => {
-                setType(e.target.value);
-              }}
-            >
-              <option value="podcast">Podcast</option>
-              <option value="article">Article</option>
-            </select>
-            {/* <input
+    <div className="form">
+      <h4>ADD SNIPPET TO COLLECTION</h4>
+      <div className="formContainer">
+        <div className="formCard">{collection.name}</div>
+        <div className="formText">
+          <h5>TITLE</h5>
+          <input
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <h5>LINK</h5>
+          <textarea
+            value={link}
+            onChange={(e) => {
+              setLink(e.target.value);
+            }}
+          />
+          <h5>TYPE</h5>
+          <select
+            value={type}
+            onChange={(e) => {
+              setType(e.target.value);
+            }}
+          >
+            <option value="podcast">Podcast</option>
+            <option value="article">Article</option>
+          </select>
+          {/* <input
               value={type}
               onChange={(e) => {
                 setType(e.target.value);
               }}
             /> */}
-          </div>
         </div>
-        <div className="errorText">{error}</div>
-        <div className="buttonHolder">
-          <button onClick={createSnippet}>SAVE</button>
-          <button onClick={createAnotherSnippet}>ADD +</button>
-        </div>
+      </div>
+      <div className="errorText">{error}</div>
+      <div className="buttonHolder">
+        <button onClick={createSnippet}>SAVE</button>
+        <button onClick={createAnotherSnippet}>ADD +</button>
       </div>
     </div>
   );

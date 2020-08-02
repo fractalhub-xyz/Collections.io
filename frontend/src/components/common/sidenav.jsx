@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory, Link } from "react-router-dom";
 //API
 import { postNewCollection, getFollowedCollections } from "../../helpers/api";
+import Modal from "./modal";
 
 function SideNav({ setRefresh }) {
   let history = useHistory();
@@ -111,16 +112,7 @@ function SideNav({ setRefresh }) {
       </div>
       <div>
         {modalView && (
-          <div className="modal">
-            <div className="closeForm">
-              <FontAwesomeIcon
-                className="closeIcon sidenav-link"
-                onClick={() => {
-                  setModalView(false);
-                }}
-                icon={faTimes}
-              />
-            </div>
+          <Modal setModalView={setModalView}>
             <div className="form">
               <h4>CREATE NEW COLLECTION</h4>
               <div className="formContainer">
@@ -147,7 +139,7 @@ function SideNav({ setRefresh }) {
                 <button onClick={createCollection}>CREATE</button>
               </div>
             </div>
-          </div>
+          </Modal>
         )}
       </div>
     </div>

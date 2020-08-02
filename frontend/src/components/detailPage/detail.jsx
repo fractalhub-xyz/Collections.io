@@ -23,6 +23,7 @@ import {
   faTasks,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "../common/modal";
 
 function Detail() {
   // params
@@ -282,11 +283,13 @@ function Detail() {
       </div>
       <div>
         {modalView && (
-          <NewSnippet
-            setModalView={setModalView}
-            collection={collection}
-            setRefresh={setRefresh}
-          />
+          <Modal setModalView={setModalView}>
+            <NewSnippet
+              setModalView={setModalView}
+              collection={collection}
+              setRefresh={setRefresh}
+            />
+          </Modal>
         )}
       </div>
       <div>
