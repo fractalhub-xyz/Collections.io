@@ -5,7 +5,7 @@ import "./home.css";
 import { getFollowedCollections } from "../../helpers/api";
 //components
 import Collections from "./collections";
-import SideNav from "./sidenav";
+import SideNav from "../common/sidenav";
 import Navbar from "./navbar";
 import Search from "./search";
 import Carousel from "./carousel";
@@ -41,7 +41,6 @@ function Home() {
 
   return (
     <div className="root">
-      <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar searchText={searchText} setSearchText={setSearchText} />
         <div
@@ -52,9 +51,12 @@ function Home() {
           {isLoading && <h4>Loading..</h4>}
           <Carousel title="Followed Collections">
             {!collections.length && (
-              <h4 className="follow-message" onClick={()=> {
-                history.push("/explore")
-              }} >
+              <h4
+                className="follow-message"
+                onClick={() => {
+                  history.push("/explore");
+                }}
+              >
                 Follow collections to get started !<br />
                 <br />
                 ───▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄───

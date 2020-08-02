@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 //components
-import SideNav from "../homePage/sidenav";
 import Navbar from "../detailPage/navbar";
 import Carousel from "../homePage/carousel";
 import Collections from "../homePage/collections";
@@ -31,9 +30,9 @@ function User() {
 
     async function fetchUserInfo() {
       try {
-        const id = params.id;
-        console.log(`fetching user ${id} details`);
-        const response = await getUserFromID(id);
+        const username = params.username;
+        console.log(`fetching user ${username} details`);
+        const response = await getUserFromID(username);
         setUser(response.data);
         setUserCollectinos(response.data.collections);
       } catch (error) {
@@ -64,7 +63,6 @@ function User() {
 
   return (
     <div className="root">
-      <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar />
 

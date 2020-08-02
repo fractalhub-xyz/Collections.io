@@ -7,6 +7,7 @@ import User from "./components/userPage/user";
 import SnippetDetail from "./components/detailPage/snippetdetail";
 import Tag from "./components/tagPage/tag";
 import Explore from "./components/homePage/explore";
+import SideNav from "./components/common/sidenav";
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
           <Route path="/" exact>
             <Login />
           </Route>
+        </Switch>
+
+        <SideNav />
+
+        <Switch>
           <Route path="/home" exact>
             <Home />
           </Route>
@@ -25,7 +31,7 @@ function App() {
           <Route path="/detail/:id" exact>
             <Detail />
           </Route>
-          <Route path="/user/:id">
+          <Route path="/user/:username">
             <User />
           </Route>
           <Route path="/tag/:tag">

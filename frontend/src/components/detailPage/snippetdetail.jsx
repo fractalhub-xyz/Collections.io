@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./detail.css";
-import SideNav from "../homePage/sidenav";
 import { useParams } from "react-router-dom";
 import Navbar from "./navbar";
 //API
@@ -127,7 +126,6 @@ function SnippetDetail() {
   };
   return (
     <div className="root">
-      <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar />
         {error ? (
@@ -193,12 +191,11 @@ function SnippetDetail() {
                     className="other-snippet-card"
                     onClick={() => {
                       history.push(
-                        `/detail/${snippet.collection}/${snippet.id}`
+                        `/detail/${snippet.collection}/${snippet.id}`,
                       );
                     }}
                   >
-                    <h4>{snippet.title}</h4>
-                    - {snippet.owner}
+                    <h4>{snippet.title}</h4>- {snippet.owner}
                     {}
                   </div>
                 ))}

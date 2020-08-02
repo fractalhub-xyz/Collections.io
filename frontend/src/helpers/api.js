@@ -52,8 +52,8 @@ export function getCollectionFromID(id) {
 export function getSnippetFromID(id) {
   return api.get(`/snippets/${id}`);
 }
-export function getUserFromID(id) {
-  return api.get(`/users/${id}`);
+export function getUserFromID(username) {
+  return api.get(`/users/${username}`);
 }
 export function getSnippets() {
   return api.get("/snippets");

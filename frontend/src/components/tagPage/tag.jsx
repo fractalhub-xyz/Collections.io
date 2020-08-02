@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 //components
-import SideNav from "../homePage/sidenav";
 import Navbar from "../detailPage/navbar";
 
 //API
@@ -14,7 +13,7 @@ function Tag() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [refresh, setRefresh] = useState(true);
-  const [collections, setCollections] = useState([])
+  const [collections, setCollections] = useState([]);
 
   //lifcycle funcs
   useEffect(() => {
@@ -39,17 +38,17 @@ function Tag() {
     setRefresh(false);
   }, [refresh]);
 
-
   return (
     <div className="root">
-      <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar />
         {error ? (
           <div className="loading-error">{error}</div>
         ) : (
           <div className="container">
-            {collections.map(collection => <div>{collection.name}</div>)}
+            {collections.map((collection) => (
+              <div>{collection.name}</div>
+            ))}
           </div>
         )}
       </div>

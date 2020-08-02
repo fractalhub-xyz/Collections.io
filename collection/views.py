@@ -80,6 +80,7 @@ class CollectionsForTagViewset(generics.ListAPIView):
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'username'
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

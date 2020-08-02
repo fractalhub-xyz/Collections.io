@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { getPopularCollections } from "../../helpers/api";
 //components
 import Collections from "./collections";
-import SideNav from "./sidenav";
 import Navbar from "./navbar";
 import Search from "./search";
 import Carousel from "./carousel";
@@ -17,7 +16,7 @@ function Explore() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [refresh, setRefresh] = useState(false);
-  
+
   // const params = useParams();
   const [searchText, setSearchText] = useState("");
 
@@ -42,7 +41,6 @@ function Explore() {
 
   return (
     <div className="root">
-      <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar searchText={searchText} setSearchText={setSearchText} />
         <div

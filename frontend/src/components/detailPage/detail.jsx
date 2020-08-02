@@ -8,7 +8,6 @@ import { postFollowCollection } from "../../helpers/api";
 import Snippet from "./snippet";
 import EditCollection from "./editcollection";
 import AddTag from "./addtag";
-import SideNav from "../homePage/sidenav";
 import Navbar from "./navbar";
 import NewSnippet from "./newsnippet";
 //modules
@@ -131,7 +130,6 @@ function Detail() {
 
   return (
     <div className="root">
-      <SideNav setRefresh={setRefresh} />
       <div className="main">
         <Navbar />
         {error ? (

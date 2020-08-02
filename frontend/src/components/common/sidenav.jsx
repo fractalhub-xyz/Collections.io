@@ -60,8 +60,8 @@ function SideNav({ setRefresh }) {
     history.push("/explore");
   };
   const redirectUser = () => {
-    const id = localStorage.getItem("userID");
-    history.push(`/user/${id}`);
+    const username = localStorage.getItem("user");
+    history.push(`/user/${username}`);
   };
   return (
     <div className="sidenav">
@@ -93,7 +93,9 @@ function SideNav({ setRefresh }) {
         <h4>COLLECTIONS</h4>
         <div className="followed-colls">
           {followed.map((coll) => (
-            <Link key={coll.id} to={`/detail/${coll.id}`}>{coll.name}</Link>
+            <Link key={coll.id} to={`/detail/${coll.id}`}>
+              {coll.name}
+            </Link>
           ))}
         </div>
         <div className="line" />
