@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q, Count, Sum
 from collection.permissions import IsOwnerOrReadOnly
 from datetime import datetime, timedelta
+from collection.api import get_images_for_tag
 
 from rest_framework import permissions
 from rest_framework import viewsets
@@ -161,6 +162,7 @@ class TagsToCollection(APIView):
             except:
                 print(f"Creating new tag {tag_name}")
                 tag = Tag(name=tag_name)
+                tag.image_urls = get_images_for_tag(tag_name)
                 tag.save()
             collection.tags.add(tag)
 

@@ -21,6 +21,7 @@ TYPES = (
 
 class Tag(models.Model):
     name = models.CharField(max_length=10, primary_key=True)
+    image_urls = models.CharField(max_length=2000, default='')
 
     def __str__(self):
         return self.name

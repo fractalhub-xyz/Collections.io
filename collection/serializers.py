@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ["name"]
+        fields = ["name", "image_urls"]
 
 
 class SnippetSerializer(serializers.ModelSerializer):
@@ -23,7 +23,7 @@ class CollectionSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     snippets = SnippetSerializer(many=True, read_only=True)
     followers = serializers.StringRelatedField(many=True, read_only=True)
-    tags = serializers.StringRelatedField(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Collection
@@ -34,10 +34,11 @@ class CollectionSerializer(serializers.ModelSerializer):
 class ShortCollectionSerialiser(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     followers = serializers.StringRelatedField(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Collection
-        fields = ['id', 'name', 'desc', 'owner', 'followers']
+        fields = ['id', 'name', 'desc', 'owner', 'followers', 'tags']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
