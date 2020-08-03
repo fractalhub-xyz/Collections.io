@@ -19,7 +19,8 @@ function Collections({ collection }) {
   useEffect(() => {
     if (collection.tags) {
       if (collection.tags[0]) {
-        setBg(collection.tags[0].image_urls);
+        console.log(collection.tags)
+        setBg(collection.tags[Math.floor(Math.random() * collection.tags.length)].image_urls);
       }
     }
   }, [collection]);
