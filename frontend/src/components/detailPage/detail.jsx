@@ -12,7 +12,6 @@ import Navbar from "./navbar";
 import NewSnippet from "./newsnippet";
 //modules
 import ReactTooltip from "react-tooltip";
-import { randomColor } from "randomcolor";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 //ICONS
@@ -45,15 +44,13 @@ function Detail() {
   const [searchText, setSearchText] = useState("");
   const [totLikes, setTotLikes] = useState(0);
   const [totFollowers, setTotFollowers] = useState(0);
+  const [bg, setBg] = useState(
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
+  );
 
   //utitlity funcs
-  const color = randomColor({
-    luminosity: "light",
-    hue: "blue",
-  });
-
   const mystyle = {
-    background: "#31004a",
+    background: `url(${bg}) center / cover`,
   };
 
   useEffect(() => {
@@ -96,6 +93,11 @@ function Detail() {
     if (followers) {
       setIsFollowed(followers.includes(user));
       setTotFollowers(collection.followers.length);
+    }
+    if (collection.tags) {
+      if (collection.tags[0]) {
+        setBg(collection.tags[0].image_urls);
+      }
     }
   }, [collection]);
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { randomColor } from "randomcolor";
 
 function Collections({ collection }) {
   //utility fucntions
@@ -8,15 +7,22 @@ function Collections({ collection }) {
   const openCollection = (id) => {
     history.push("/detail/" + id);
   };
+  const [bg, setBg] = useState(
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
+  );
 
-  const color = randomColor({
-    luminosity: "light",
-    hue: "rgb",
-  });
-
+  //utitlity funcs
   const mystyle = {
-    background: color,
+    background: `url(${bg}) center / cover`,
   };
+
+  useEffect(() => {
+    if (collection.tags) {
+      if (collection.tags[0]) {
+        setBg(collection.tags[0].image_urls);
+      }
+    }
+  }, [collection]);
 
   return (
     <div className="collection">
