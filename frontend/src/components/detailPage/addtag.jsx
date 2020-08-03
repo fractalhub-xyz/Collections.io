@@ -14,7 +14,13 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
 
   const addTag = async (e) => {
     e.preventDefault();
-    const payload = { tags };
+    var payload = [];
+    for (var i = 0; i < tags.length; i++) {
+      console.log(tags[i]);
+      payload.push(tags[i].name);
+    }
+    payload = { tags: payload };
+    console.log(payload);
     try {
       await postTagsToCollection(collection.id, payload);
       setTagsModal(false);
@@ -34,7 +40,7 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
 
   function arrayAdd() {
     if (!!newTag.length && !tags.includes(newTag)) {
-      setTags(tags.concat(newTag));
+      setTags(tags.concat({ name: newTag, image_urls: [] }));
     }
     setNewTag("");
   }
@@ -58,8 +64,8 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
               <div className="tags-list">
                 {!tags.length && <span>Start adding tags</span>}
                 {tags.map((tag) => (
-                  <span key={tag} className="tag">
-                    {tag} &nbsp;{" "}
+                  <span key={tag.name} className="tag">
+                    {tag.name} &nbsp;{" "}
                     <FontAwesomeIcon
                       className="del-tag"
                       icon={faTimes}

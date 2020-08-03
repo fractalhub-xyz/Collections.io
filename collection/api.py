@@ -5,7 +5,7 @@ BASE_URL = 'https://api.unsplash.com/search/photos'
 
 
 def get_images_for_tag(tag_name):
-    client_id = os.environ.get("UNSPLASH_CLIENT_ID", False)
+    # client_id = os.environ.get("UNSPLASH_CLIENT_ID", False)
     if not client_id:
         print("CLIENT ID NOT SET")
         return []

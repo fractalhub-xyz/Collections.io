@@ -171,10 +171,10 @@ function Detail() {
                     {tags.map((tag) => (
                       <button
                         onClick={() => {
-                          history.push(`/tag/${tag}`);
+                          history.push(`/tag/${tag.name}`);
                         }}
                       >
-                        {tag}
+                        {tag.name}
                       </button>
                     ))}
                   </span>
