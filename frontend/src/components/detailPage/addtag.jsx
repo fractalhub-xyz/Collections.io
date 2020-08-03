@@ -14,13 +14,7 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
 
   const addTag = async (e) => {
     e.preventDefault();
-    var payload = [];
-    for (var i = 0; i < tags.length; i++) {
-      console.log(tags[i]);
-      payload.push(tags[i].name);
-    }
-    payload = { tags: payload };
-    console.log(payload);
+    const payload = { tags: tags.map((tag) => tag.name) };
     try {
       await postTagsToCollection(collection.id, payload);
       setTagsModal(false);
@@ -39,7 +33,7 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
   }
 
   function arrayAdd() {
-    if (!!newTag.length && !tags.includes(newTag)) {
+    if (!!newTag.length && !tags.map((tag) => tag.name).includes(newTag)) {
       setTags(tags.concat({ name: newTag, image_urls: [] }));
     }
     setNewTag("");
