@@ -90,9 +90,12 @@ function SnippetDetail() {
     }
     var code = snippet.link;
     if (code) {
+      code = code.split("/");
       setPodcast(
-        `https://open.spotify.com/embed-podcast/episode/${code.split("/")[4]}`
+        `https://open.spotify.com/embed-podcast/${code[3]}/${code[4]}`
       );
+      console.log("type->", code[3]);
+      console.log("code->", code[4]);
     }
   }, [snippet]);
 
