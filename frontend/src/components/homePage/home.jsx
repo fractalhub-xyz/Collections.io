@@ -76,7 +76,6 @@ function Home() {
             ))}
           </Carousel>
         </div>
-
         <Search searchText={searchText} />
       </div>
     </div>

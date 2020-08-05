@@ -42,6 +42,7 @@ function SnippetDetail() {
   const [collection, setCollection] = useState({});
   const [id, setID] = useState(null);
   const [snipID, setSnipID] = useState(null);
+  const [podcast, setPodcast] = useState(null);
   //lifcycle funcs
 
   useEffect(() => {
@@ -86,6 +87,12 @@ function SnippetDetail() {
         setIsLoading(false);
       }
       fetchCollection();
+    }
+    var code = snippet.link;
+    if (code) {
+      setPodcast(
+        `https://open.spotify.com/embed-podcast/episode/${code.split("/")[4]}`
+      );
     }
   }, [snippet]);
 
@@ -191,7 +198,7 @@ function SnippetDetail() {
                     className="other-snippet-card"
                     onClick={() => {
                       history.push(
-                        `/detail/${snippet.collection}/${snippet.id}`,
+                        `/detail/${snippet.collection}/${snippet.id}`
                       );
                     }}
                   >
@@ -202,6 +209,18 @@ function SnippetDetail() {
             </div>
             <h2>Comment Section</h2>
             <div className="line" />
+            {isPodcast && (
+              <div>
+                <iframe
+                  src={podcast}
+                  width="100%"
+                  height="200"
+                  frameborder="0"
+                  allowtransparency="true"
+                  allow="encrypted-media"
+                ></iframe>
+              </div>
+            )}
           </div>
         )}
       </div>
