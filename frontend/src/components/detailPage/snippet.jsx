@@ -15,12 +15,12 @@ import ReactTooltip from "react-tooltip";
 import { useHistory } from "react-router-dom";
 
 function Snippet({ snippet, setRefresh, collectionName }) {
+  let history = useHistory();
   //states
   const [isOwner, setIsOwner] = useState(false);
   const [isLiked, setIsLiked] = useState(true);
   const [editModal, setEditModal] = useState(false);
   const [likes, setLikes] = useState(0);
-
 
   //lifecycle funs
   useEffect(() => {
@@ -60,8 +60,13 @@ function Snippet({ snippet, setRefresh, collectionName }) {
           icon={faHeart}
         />
       </div>
-      <div className="titlecol">
-        <a href={`${snippet.collection}/${snippet.id}`}>{snippet.title}</a>
+      <div
+        className="titlecol"
+        onClick={() => {
+          history.push(`${snippet.collection}/${snippet.id}`);
+        }}
+      >
+        {snippet.title}
       </div>
       <div className="likescol">{likes}</div>
       <div className="ownercol">{snippet.owner}</div>

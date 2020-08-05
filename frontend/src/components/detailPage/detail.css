@@ -209,14 +209,20 @@
   justify-content: space-between;
   padding: 20px 0px;
   border-bottom: 1px solid #6c6c6c;
+  transition: 0.4s;
 }
+.tablerows:hover {
+  background: rgba(0, 0, 0, 0.4);
 
+}
 .likecol {
   width: 7%;
   text-align: center;
+  cursor: pointer;
 }
 .titlecol {
   width: 35%;
+  cursor: pointer;
 }
 .likescol {
   width: 8%;
@@ -379,7 +385,6 @@
   margin-bottom: 5px;
   margin-top: 5px;
   text-transform: capitalize;
-
 }
 
 .tag:hover {
