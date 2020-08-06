@@ -146,7 +146,7 @@ class TagsToCollection(APIView):
     permission_classes = [IsOwnerOrReadOnly]
 
     def post(self, request, coll_id):
-        tags = request.POST.get('tags', '')
+        tags = request.POST.get('tags', '').lower()
         tags = tags.split(',')
 
         try:

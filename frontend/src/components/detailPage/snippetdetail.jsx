@@ -195,7 +195,7 @@ function SnippetDetail() {
                         }}
                         data-tip="Edit Snippet"
                         icon={faCog}
-                        className="deleteIcon"
+                        className="liked"
                       />
                     </span>
                   )}

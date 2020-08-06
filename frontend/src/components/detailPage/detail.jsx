@@ -22,7 +22,7 @@ import {
   faHeart,
   faPlusCircle,
   faCog,
-  faPlayCircle,
+  faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "../common/modal";
@@ -99,6 +99,7 @@ function Detail() {
     }
     if (collection.tags) {
       if (collection.tags[0]) {
+        console.log("tag",collection.tags[0])
         setBg(collection.tags[0].image_urls);
       }
     }
@@ -154,7 +155,7 @@ function Detail() {
           <div className="container">
             <div className="cardDetails">
               <div className="collectioncard" style={mystyle}>
-                <FontAwesomeIcon icon={faPlayCircle} />
+                <FontAwesomeIcon icon={faWallet} />
               </div>
               <div className="collectionText">
                 <div className="likes">

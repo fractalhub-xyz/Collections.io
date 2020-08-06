@@ -335,11 +335,17 @@
 .snippetTools button {
   padding: 7px 25px;
   border-radius: 15px;
-  background: #00fff0;
   border: none;
   letter-spacing: 2px;
   transition: 0.4s;
+  color: grey;
   cursor: pointer;
+  background: #282828;
+  box-shadow: 7px 7px 14px #1d1d1d, -7px -7px 14px #333333;
+}
+
+.snippetTools button:hover {
+  color: white;
 }
 
 .deleteIcon {
@@ -357,14 +363,17 @@
 }
 
 .liked {
-  font-size: 150%;
+  font-size: 130%;
   cursor: pointer;
   transition: 0.4s;
-  vertical-align: -9px;
-  padding-left: 15px;
+  vertical-align: -13px;
+  margin-left: 15px;
+  padding: 6px;
+  border-radius: 10px;
+  background: #282828;
+  box-shadow: 5px 5px 10px #1d1d1d, -5px -5px 10px #333333;
 }
 
-.deleteIcon:hover,
 .liked:hover {
   color: white;
   opacity: 1;
@@ -442,7 +451,7 @@
   transition: 0.4s;
 }
 
-.add-tag-button:hover{
+.add-tag-button:hover {
   opacity: 1;
 }
 
@@ -457,17 +466,20 @@
   width: 46%;
   /* border: 2px solid black; */
   margin-top: 10px;
+  margin-bottom: 15px;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.2);
   padding: 15px;
   border-radius: 20px;
   transition: 0.4s;
   display: flex;
   justify-content: stretch;
+  background: #282828;
+  box-shadow: 5px 5px 10px #1d1d1d, -5px -5px 10px #333333;
 }
 
 .ot-snippet:hover {
-  background: rgba(0, 0, 0, 0.7);
+  background: #1f1f1f;
+  box-shadow: 5px 5px 10px #161616, -5px -5px 10px #282828;
 }
 
 .ot-snip-card {
