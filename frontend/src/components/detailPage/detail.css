@@ -93,17 +93,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 3rem;
   text-align: center;
   text-transform: capitalize;
+  border-radius: 20px;
 }
 .collectionText {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-end;
   height: 100%;
-  margin-left: 10px;
-  width: 70%;
+  margin-left: 20px;
+  width: 75%;
 }
 .collectionText button {
   border-radius: 10px;
@@ -145,18 +146,24 @@
 
 .name {
   color: #e5e5e5;
-  font-size: 140%;
+  font-size: 200%;
   font-weight: bolder;
-  text-transform: uppercase;
+  text-transform: capitalize;
+  display: inline;
+}
+
+.by {
+  font-size: 40%;
 }
 
 .desc {
   color: #e5e5e5;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 90%;
 }
 
 .count {
-  margin-bottom: 10px;
   color: #bbbbbb;
 }
 
@@ -341,6 +348,7 @@
   transition: 0.4s;
   vertical-align: -9px;
   padding-left: 15px;
+  opacity: 0.6;
 }
 
 .likedText {
@@ -359,6 +367,7 @@
 .deleteIcon:hover,
 .liked:hover {
   color: white;
+  opacity: 1;
 }
 
 .snippetText button:hover {
@@ -425,11 +434,18 @@
 
 .add-tag-button {
   font-size: 1.5rem;
-  vertical-align: -7px;
+  vertical-align: -9px;
   margin-left: 10px;
-  color: #00fff0;
+  opacity: 0.5;
+  color: white;
   cursor: pointer;
+  transition: 0.4s;
 }
+
+.add-tag-button:hover{
+  opacity: 1;
+}
+
 .ot-snippet-container {
   display: flex;
   flex-wrap: wrap;
@@ -476,4 +492,9 @@
 
 .player {
   margin-top: 60px;
+}
+
+.loader {
+  text-align: center;
+  padding: 50px 0px;
 }

@@ -14,13 +14,14 @@ import EditSnippet from "./editsnippet";
 import { useHistory } from "react-router-dom";
 //modules
 import ReactTooltip from "react-tooltip";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 //ICONS
 import {
   faHeart,
   faNewspaper,
   faPodcast,
-  faUserEdit,
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,9 +35,7 @@ function SnippetDetail() {
   const [error, setError] = useState("");
   const [editModal, setEditModal] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
   const [totLikes, setTotLikes] = useState(0);
-  const [isPodcast, setIsPodcast] = useState(true);
   const [isLiked, setIsLiked] = useState(false);
   const [snippet, setSnippet] = useState({});
   const [otherSnippets, setOtherSnippets] = useState([]);
@@ -104,19 +103,8 @@ function SnippetDetail() {
   }, [snippet]);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user === snippet.owner) {
-      setIsOwner(true);
-    } else {
-      setIsOwner(false);
-    }
-    if (snippet.type_of === "podcast") {
-      setIsPodcast(true);
-    } else {
-      setIsPodcast(false);
-    }
     if (snippet.hearts) {
-      setIsLiked(snippet.hearts.includes(user));
+      setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
       setTotLikes(snippet.hearts.length);
     }
   }, [snippet]);
@@ -157,12 +145,22 @@ function SnippetDetail() {
         <Navbar />
         {error ? (
           <div className="loading-error">{error}</div>
+        ) : isLoading ? (
+          <div className="loader">
+            <Loader
+              type="Grid"
+              color="#00BFFF"
+              height={50}
+              width={50}
+              timeout={3000} //3 secs
+            />
+          </div>
         ) : (
           <div className="container">
             {isLoading && <h4>Loading..</h4>}
             <div className="snippetContainer">
               <div className="snippetCard" style={mystyle}>
-                {!isPodcast ? (
+                {!(snippet.type_of === "podcast") ? (
                   <FontAwesomeIcon className="typeIcon" icon={faNewspaper} />
                 ) : (
                   <FontAwesomeIcon className="typeIcon" icon={faPodcast} />
@@ -189,7 +187,7 @@ function SnippetDetail() {
                     icon={faHeart}
                   />
                   <span className="likedText">{totLikes} HEARTS </span>
-                  {isOwner && (
+                  {localStorage.getItem("user") === snippet.owner && (
                     <span>
                       <FontAwesomeIcon
                         onClick={() => {
@@ -204,7 +202,7 @@ function SnippetDetail() {
                 </div>
               </div>
             </div>
-            {isPodcast && (
+            {snippet.type_of === "podcast" && (
               <div className="player">
                 <iframe
                   src={podcast}

@@ -66,6 +66,7 @@ function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
               />
               <h5>Description</h5>
               <textarea
+                maxlength="200"
                 value={desc}
                 onChange={(e) => {
                   setDesc(e.target.value);

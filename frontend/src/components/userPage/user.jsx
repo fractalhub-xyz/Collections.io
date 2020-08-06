@@ -9,6 +9,9 @@ import Collections from "../homePage/collections";
 import { getUserFromID } from "../../helpers/api";
 //CSS
 import "./user.css";
+//Modules
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 function User() {
   // params
@@ -66,31 +69,44 @@ function User() {
       <div className="main">
         <Navbar />
 
-        <div className="container">
-          {error && <h4>{error}</h4>}
-          <h1 className="username">{user.username}</h1>
-          <div className="stats-container">
-            <div className="stat">
-              <h1>-</h1>
-              <span>Followers</span>
-            </div>
-            <div className="stat">
-              <h1>{userCollectinos.length}</h1>
-              <span>Collections</span>
-            </div>
-            <div className="stat">
-              <h1>{numSnippets}</h1>
-              <span>Snippets</span>
-            </div>
+        {error ? (
+          <h4>{error}</h4>
+        ) : isLoading ? (
+          <div className="loader">
+            <Loader
+              type="Grid"
+              color="#00BFFF"
+              height={50}
+              width={50}
+              timeout={3000} //3 secs
+            />
           </div>
+        ) : (
+          <div className="container">
+            <h1 className="username">{user.username}</h1>
+            <div className="stats-container">
+              <div className="stat">
+                <h1>-</h1>
+                <span>Followers</span>
+              </div>
+              <div className="stat">
+                <h1>{userCollectinos.length}</h1>
+                <span>Collections</span>
+              </div>
+              <div className="stat">
+                <h1>{numSnippets}</h1>
+                <span>Snippets</span>
+              </div>
+            </div>
 
-          {isLoading && <h4>Loading..</h4>}
-          <Carousel title="Your Collections">
-            {userCollectinos.map((collection) => (
-              <Collections key={collection.id} collection={collection} />
-            ))}
-          </Carousel>
-        </div>
+            {isLoading && <h4>Loading..</h4>}
+            <Carousel title="Your Collections">
+              {userCollectinos.map((collection) => (
+                <Collections key={collection.id} collection={collection} />
+              ))}
+            </Carousel>
+          </div>
+        )}
       </div>
     </div>
   );

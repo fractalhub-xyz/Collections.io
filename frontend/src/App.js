@@ -8,6 +8,7 @@ import SnippetDetail from "./components/detailPage/snippetdetail";
 import Tag from "./components/tagPage/tag";
 import Explore from "./components/homePage/explore";
 import SideNav from "./components/common/sidenav";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 function App() {
   return (

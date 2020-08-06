@@ -14,12 +14,15 @@ import NewSnippet from "./newsnippet";
 import ReactTooltip from "react-tooltip";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 //ICONS
 import {
+  faTasks,
   faHeart,
   faPlusCircle,
-  faUserEdit,
-  faTasks,
+  faCog,
+  faPlayCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "../common/modal";
@@ -137,11 +140,21 @@ function Detail() {
         <Navbar />
         {error ? (
           <div className="loading-error">{error}</div>
+        ) : isLoading ? (
+          <div className="loader">
+            <Loader
+              type="Grid"
+              color="#00BFFF"
+              height={50}
+              width={50}
+              timeout={3000} //3 secs
+            />
+          </div>
         ) : (
           <div className="container">
             <div className="cardDetails">
               <div className="collectioncard" style={mystyle}>
-                {collection.name}
+                <FontAwesomeIcon icon={faPlayCircle} />
               </div>
               <div className="collectionText">
                 <div className="likes">
@@ -158,15 +171,17 @@ function Detail() {
                     icon={faHeart}
                   />
                 </div>
-                <div className="type">
-                  COLLECTION created by{" "}
-                  <span className="teal">{collection.owner}</span>
-                  <div className="count">
-                    {articles} Articles, {podcasts} Podcast, {snippets.length}{" "}
-                    Total
-                  </div>
+                <div className="name">
+                  {collection.name}{" "}
+                  <span className="by">
+                    by <span className="teal">{collection.owner}</span>
+                  </span>
                 </div>
-                <div className="name">{collection.name}</div>
+                <div className="count">
+                  {articles} Articles, {podcasts} Podcast, {snippets.length}{" "}
+                  Total
+                </div>
+
                 <div className="desc">{collection.desc}</div>
                 <div>
                   <span>
@@ -189,19 +204,19 @@ function Detail() {
                       setTagsModal(true);
                     }}
                   />
+                  <span>
+                    {isOwner && (
+                      <FontAwesomeIcon
+                        onClick={() => {
+                          setEditCollectionModal(true);
+                        }}
+                        data-tip="Edit Collection"
+                        className="deleteIcon"
+                        icon={faCog}
+                      />
+                    )}
+                  </span>
                 </div>
-              </div>
-              <div>
-                {isOwner && (
-                  <FontAwesomeIcon
-                    onClick={() => {
-                      setEditCollectionModal(true);
-                    }}
-                    data-tip="Edit Collection"
-                    className="deleteIcon"
-                    icon={faUserEdit}
-                  />
-                )}
               </div>
             </div>
             <input

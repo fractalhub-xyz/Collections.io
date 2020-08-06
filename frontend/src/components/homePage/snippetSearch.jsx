@@ -25,26 +25,22 @@ function SnippetSearch({ snippet }) {
 
   return (
     <div
-      className="searchContainer"
+      className="searchRowContainer"
       onClick={() => {
         history.push(`detail/${snippet.collection}/${snippet.id}`);
       }}
     >
-      <div className={isPodcast ? "searchCard bgTeal" : "searchCard"}>
+      <div className={isPodcast ? "searchRowIcon bgTeal" : "searchRowIcon"}>
         {!isPodcast ? (
-          <FontAwesomeIcon className="typeIcon" icon={faNewspaper} />
+          <FontAwesomeIcon icon={faNewspaper} />
         ) : (
-          <FontAwesomeIcon className="typeIcon" icon={faPodcast} />
+          <FontAwesomeIcon icon={faPodcast} />
         )}
       </div>
-      <div className="searchText">
-        <span className="searchTitle">{snippet.title}</span>
-        <br />
-        Collection {snippet.collection}
-        <br />
-        {snippet.type_of}
-        <br />
-        {likes} <FontAwesomeIcon icon={faHeart} />
+      <div className="searchRowText">
+        <h4>
+          {snippet.title} <span className="lighter"> {likes} HEARTS</span>
+        </h4>
       </div>
     </div>
   );

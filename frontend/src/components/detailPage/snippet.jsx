@@ -17,20 +17,13 @@ import { useHistory } from "react-router-dom";
 function Snippet({ snippet, setRefresh, collectionName }) {
   let history = useHistory();
   //states
-  const [isOwner, setIsOwner] = useState(false);
   const [isLiked, setIsLiked] = useState(true);
   const [editModal, setEditModal] = useState(false);
   const [likes, setLikes] = useState(0);
 
   //lifecycle funs
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user === snippet.owner) {
-      setIsOwner(true);
-    } else {
-      setIsOwner(false);
-    }
-    setIsLiked(snippet.hearts.includes(user));
+    setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
     setLikes(snippet.hearts.length);
   }, []);
 
@@ -83,8 +76,13 @@ function Snippet({ snippet, setRefresh, collectionName }) {
           <FontAwesomeIcon icon={faExternalLinkAlt} />
         </a>
       </div>
-      <div data-tip={isOwner ? "edit snippet" : ""} className="edicol">
-        {isOwner ? (
+      <div
+        data-tip={
+          localStorage.getItem("user") === snippet.owner ? "edit snippet" : ""
+        }
+        className="edicol"
+      >
+        {localStorage.getItem("user") === snippet.owner ? (
           <FontAwesomeIcon
             onClick={() => {
               setEditModal(true);

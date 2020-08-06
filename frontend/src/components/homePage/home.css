@@ -334,15 +334,19 @@ select {
 }
 
 .searchContainer {
-  width: 46%;
+  width: 46.5%;
   display: flex;
   justify-content: start;
   align-items: center;
   padding: 10px 10px;
   cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+  transition: 0.4s;
+  border-radius: 10px;
+  margin: 7px;
 }
 .searchContainer:hover {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .searchCard {
@@ -353,6 +357,7 @@ select {
   justify-content: center;
   align-items: center;
   color: black;
+  border-radius: 50%;
 }
 .typeIcon {
   margin: 0px;
@@ -363,6 +368,7 @@ select {
 .searchText {
   padding-left: 20px;
   color: grey;
+  text-overflow: ellipsis;
 }
 
 .searchText .searchTitle {
@@ -372,6 +378,48 @@ select {
 
 .bgTeal {
   background: #00fff0;
+}
+
+.searchRowContainer {
+  width: 93%;
+  background: rgba(0, 0, 0, 0.2);
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.searchRowContainer:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.searchRowIcon {
+  width: 50px;
+  height: 50px;
+  background: #92ff7d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border-radius: 50%;
+  font-size: 1.3rem;
+}
+
+.searchRowText {
+  padding-left: 15px;
+  display: flex;
+  align-self: center;
+}
+
+.searchRowText h4 {
+  font-size: 1rem;
+  margin: 0;
+  display: inline;
+}
+.lighter {
+  font-weight: lighter;
+  font-size: 60%;
 }
 
 .followed-colls {
