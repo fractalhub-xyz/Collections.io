@@ -39,6 +39,18 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
     setNewTag("");
   }
 
+  function handleKeyDown(e) {
+    if ((e.metaKey || e.ctrlKey) && e.which) {
+      addTag(e);
+      return;
+    }
+
+    if (e.which == 13) {
+      arrayAdd();
+      return;
+    }
+  }
+
   return (
     <div className="modal">
       <div className="closeForm">
@@ -76,6 +88,7 @@ function AddTag({ setTagsModal, collection, setRefresh }) {
                 onChange={(e) => {
                   setNewTag(e.target.value);
                 }}
+                onKeyDown={handleKeyDown}
                 placeholder="#newtag"
               />
               <span>
