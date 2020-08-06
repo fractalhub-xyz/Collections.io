@@ -21,6 +21,7 @@ import {
   faNewspaper,
   faPodcast,
   faUserEdit,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -43,6 +44,9 @@ function SnippetDetail() {
   const [id, setID] = useState(null);
   const [snipID, setSnipID] = useState(null);
   const [podcast, setPodcast] = useState(null);
+  const [bg, setBg] = useState(
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
+  );
   //lifcycle funcs
 
   useEffect(() => {
@@ -117,6 +121,19 @@ function SnippetDetail() {
     }
   }, [snippet]);
 
+  useEffect(() => {
+    if (collection.tags) {
+      if (collection.tags[0]) {
+        setBg(collection.tags[0].image_urls);
+      }
+    }
+  }, [collection]);
+
+  //utitlity funcs
+  const mystyle = {
+    background: `url(${bg}) center / cover`,
+  };
+
   //functions
   const heartSnippet = async (e) => {
     e.preventDefault();
@@ -144,76 +161,51 @@ function SnippetDetail() {
           <div className="container">
             {isLoading && <h4>Loading..</h4>}
             <div className="snippetContainer">
-              <div className={isPodcast ? "snippetCard bgTeal" : "snippetCard"}>
+              <div className="snippetCard" style={mystyle}>
                 {!isPodcast ? (
                   <FontAwesomeIcon className="typeIcon" icon={faNewspaper} />
                 ) : (
                   <FontAwesomeIcon className="typeIcon" icon={faPodcast} />
                 )}
               </div>
-              <div className="searchText">
-                <span className="searchTitle">{snippet.title}</span>
-                <br />
-                Created by <span className="teal">{snippet.owner}</span> on{" "}
-                {snippet.timestamp}
-                <br />
-                Link: &nbsp;
-                <a
-                  href={snippet.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link"
-                >
-                  {snippet.link}
-                </a>
-                <br />
-                Collection {collection.name}
-                <br />
-                {snippet.type_of}
-                <br />
-                {totLikes}{" "}
-                <FontAwesomeIcon
-                  onClick={heartSnippet}
-                  className={isLiked ? "liked teal" : "liked"}
-                  icon={faHeart}
-                />
-              </div>
-              <div className="snippetSettings">
-                {isOwner && (
-                  <FontAwesomeIcon
+              <div className="snippetText">
+                <span className="snippetType">
+                  {snippet.type_of} &nbsp; &nbsp;
+                </span>
+                <div className="snippetTitle">{snippet.title} &nbsp; </div>
+                Created by {snippet.owner} on {snippet.timestamp}
+                <div>{collection.name}</div>
+                <div className="snippetTools">
+                  <button
                     onClick={() => {
-                      setEditModal(true);
-                    }}
-                    data-tip="Edit Snippet"
-                    className="deleteIcon"
-                    icon={faUserEdit}
-                  />
-                )}
-              </div>
-            </div>
-            <h2>Other Snippets fron collection {collection.name}</h2>
-            <div className="line" />
-            <div className="other-snippet-container">
-              {otherSnippets
-                .filter((snip) => snip.title != snippet.title)
-                .map((snippet) => (
-                  <div
-                    className="other-snippet-card"
-                    onClick={() => {
-                      history.push(
-                        `/detail/${snippet.collection}/${snippet.id}`
-                      );
+                      history.push(`${snippet.link}/`);
                     }}
                   >
-                    <h4>{snippet.title}</h4>- {snippet.owner}
-                    {}
-                  </div>
-                ))}
+                    OPEN
+                  </button>
+                  <FontAwesomeIcon
+                    onClick={heartSnippet}
+                    className={isLiked ? "liked teal" : "liked"}
+                    icon={faHeart}
+                  />
+                  <span className="likedText">{totLikes} HEARTS </span>
+                  {isOwner && (
+                    <span>
+                      <FontAwesomeIcon
+                        onClick={() => {
+                          setEditModal(true);
+                        }}
+                        data-tip="Edit Snippet"
+                        icon={faCog}
+                        className="deleteIcon"
+                      />
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
-            <h2>Comment Section</h2>
-            <div className="line" />
             {isPodcast && (
-              <div>
+              <div className="player">
                 <iframe
                   src={podcast}
                   width="100%"
@@ -224,6 +216,45 @@ function SnippetDetail() {
                 ></iframe>
               </div>
             )}
+            <h2>Other snippets you might like</h2>
+            <div className="line" />
+            <div className="ot-snippet-container">
+              {otherSnippets
+                .filter((snip) => snip.title != snippet.title)
+                .map((snippet) => (
+                  <div
+                    className="ot-snippet"
+                    onClick={() => {
+                      history.push(
+                        `/detail/${snippet.collection}/${snippet.id}`
+                      );
+                    }}
+                  >
+                    <div className="ot-snip-card" style={mystyle}>
+                      {!(snippet.type_of === "podcast") ? (
+                        <FontAwesomeIcon
+                          className="typeIcon"
+                          icon={faNewspaper}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          className="typeIcon"
+                          icon={faPodcast}
+                        />
+                      )}
+                    </div>
+                    <div className="ot-snip-text">
+                      <div>{snippet.title}</div>
+                      <div>Added on {snippet.timestamp}</div>
+                      <div>{snippet.hearts.length} HEARTS</div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            {/* </div> */}
+            <h2>Comment Section</h2>
+            <div className="line" />
           </div>
         )}
       </div>

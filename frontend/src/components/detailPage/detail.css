@@ -118,18 +118,6 @@
   background: #b1d4e0;
 }
 
-.deleteIcon {
-  font-size: 1.7rem;
-  padding-top: 26px;
-  padding-left: 41px;
-  opacity: 0.7;
-  transition: 0.3s;
-  cursor: pointer;
-}
-.deleteIcon:hover {
-  opacity: 1;
-}
-
 .likes {
   font-size: 80%;
   color: #e5e5e5;
@@ -213,7 +201,6 @@
 }
 .tablerows:hover {
   background: rgba(0, 0, 0, 0.4);
-
 }
 .likecol {
   width: 7%;
@@ -304,33 +291,78 @@
 .snippetContainer {
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: stretch;
   align-items: center;
   padding: 10px 10px;
 }
 .snippetCard {
-  width: 150px;
-  height: 150px;
-  background: #92ff7d;
+  width: 200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
+  color: whites;
+  border-radius: 50%;
 }
-
-.searchText .link {
-  color: inherit;
+.snippetType {
+  display: block;
+  text-transform: uppercase;
+}
+.snippetText {
+  padding-left: 20px;
+  color: grey;
+  width: 80%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.snippetTitle {
+  font-size: 3rem;
+  color: white;
+  font-weight: bolder;
+}
+.snippetTools {
+  padding-top: 15px;
+}
+.snippetTools button {
+  padding: 7px 25px;
+  border-radius: 15px;
+  background: #00fff0;
+  border: none;
+  letter-spacing: 2px;
+  transition: 0.4s;
   cursor: pointer;
 }
 
-.searchText .link:hover {
+.deleteIcon {
+  font-size: 150%;
+  cursor: pointer;
+  transition: 0.4s;
+  vertical-align: -9px;
+  padding-left: 15px;
+}
+
+.likedText {
+  float: right;
+  padding-right: 15px;
+}
+
+.liked {
+  font-size: 150%;
+  cursor: pointer;
+  transition: 0.4s;
+  vertical-align: -9px;
+  padding-left: 15px;
+}
+
+.deleteIcon:hover,
+.liked:hover {
   color: white;
 }
 
-.snippetSettings {
-  height: 100%;
-  text-align: right;
-  width: 300px;
+.snippetText button:hover {
+  background: #01bbaf;
 }
 
 .bgTeal {
@@ -398,29 +430,50 @@
   color: #00fff0;
   cursor: pointer;
 }
-
-.other-snippet-container {
+.ot-snippet-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
-.other-snippet-card {
-  padding: 15px;
-  margin: 0px 10px;
-  background: rgb(108, 140, 209);
-  border-radius: 15px;
+.ot-snippet {
+  height: 100px;
+  width: 46%;
+  /* border: 2px solid black; */
+  margin-top: 10px;
   cursor: pointer;
-  text-align: center;
-  transition: 0.3s;
-}
-.other-snippet-card h4 {
-  color: white;
-  margin: 0;
-  padding: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 20px;
+  transition: 0.4s;
+  display: flex;
+  justify-content: stretch;
 }
 
-.other-snippet-card:hover {
-  background: rgb(105, 0, 190);
-  transform: scale(1.1);
+.ot-snippet:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.ot-snip-card {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 50%;
+}
+
+.ot-snip-text {
+  padding-left: 20px;
+  color: grey;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.player {
+  margin-top: 60px;
 }
