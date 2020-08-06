@@ -49,19 +49,21 @@ function Explore() {
         >
           <h1>COLLECTIONS</h1>
           {error && <h4>{error}</h4>}
+
+          {isLoading && (
+            <Loader
+              type="Grid"
+              color="#00BFFF"
+              height={50}
+              width={50}
+              timeout={3000} //3 secs
+            />
+          )}
+
           <Carousel title="Popular Collections">
             {collections.map((collection) => (
               <Collections key={collection.id} collection={collection} />
             ))}
-            {isLoading && (
-              <Loader
-                type="Grid"
-                color="#00BFFF"
-                height={50}
-                width={50}
-                timeout={3000} //3 secs
-              />
-            )}
           </Carousel>
         </div>
 

@@ -5,10 +5,13 @@ import {
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function Carousel({ children, title }) {
   const [currentIdx, setIdx] = useState(0);
   const length = children.length;
   const maxPerRow = 5;
+
+  console.log("LENGTH", length);
 
   const next = (e) => {
     e.preventDefault();

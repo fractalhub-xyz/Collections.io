@@ -12,7 +12,7 @@ import Carousel from "./carousel";
 //Modules
 import { useHistory } from "react-router-dom";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from 'react-loader-spinner'
+import Loader from "react-loader-spinner";
 
 function Home() {
   let history = useHistory();
@@ -50,37 +50,40 @@ function Home() {
         >
           <h1>COLLECTIONS</h1>
           {error && <h4>{error}</h4>}
+
+          {!collections.length && !isLoading && (
+            <h4
+              className="follow-message"
+              onClick={() => {
+                history.push("/explore");
+              }}
+            >
+              Follow collections to get started !<br />
+              <br />
+              ───▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄───
+              <br />
+              ───█▒▒░░░░░░░░░▒▒█───
+              <br />
+              ────█░░█░░░░░█░░█────
+              <br />
+              ─▄▄──█░░░▀█▀░░░█──▄▄─
+              <br />
+              █░░█─▀▄░░░░░░░▄▀─█░░█
+              <br />
+            </h4>
+          )}
+
+          {isLoading && (
+            <Loader
+              type="Grid"
+              color="#00BFFF"
+              height={50}
+              width={50}
+              timeout={3000} //3 secs
+            />
+          )}
+
           <Carousel title="Followed Collections">
-            {!collections.length && !isLoading && (
-              <h4
-                className="follow-message"
-                onClick={() => {
-                  history.push("/explore");
-                }}
-              >
-                Follow collections to get started !<br />
-                <br />
-                ───▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄───
-                <br />
-                ───█▒▒░░░░░░░░░▒▒█───
-                <br />
-                ────█░░█░░░░░█░░█────
-                <br />
-                ─▄▄──█░░░▀█▀░░░█──▄▄─
-                <br />
-                █░░█─▀▄░░░░░░░▄▀─█░░█
-                <br />
-              </h4>
-            )}
-            {isLoading && (
-              <Loader
-                type="Grid"
-                color="#00BFFF"
-                height={50}
-                width={50}
-                timeout={3000} //3 secs
-              />
-            )}
             {collections.map((collection) => (
               <Collections key={collection.id} collection={collection} />
             ))}
