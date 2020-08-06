@@ -7,6 +7,7 @@ import { postLogin, postRegister } from "../../helpers/api";
 //ICONS
 import { faChevronCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ToastsStore } from "react-toasts";
 
 function Login() {
   //setup
@@ -30,15 +31,20 @@ function Login() {
   const loginReq = async (e) => {
     e.preventDefault();
     const data = { username, password };
+    if (username === "" || password === "") {
+      ToastsStore.error("Please fill in the inputs");
+      return;
+    }
+
     try {
       const response = await postLogin(data);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", username);
+      ToastsStore.success("Logged in, yayyy!");
       setSuccess(!success);
       setTimeout(redirect, 1000);
     } catch {
-      console.log("bad request");
-      setError("Credentials are not valid");
+      ToastsStore.error("Credentials are not valid");
     }
   };
 

@@ -11,8 +11,6 @@ function Carousel({ children, title }) {
   const length = children.length;
   const maxPerRow = 5;
 
-  console.log("LENGTH", length);
-
   const next = (e) => {
     e.preventDefault();
     setIdx(currentIdx + maxPerRow);

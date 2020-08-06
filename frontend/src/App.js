@@ -9,6 +9,7 @@ import Tag from "./components/tagPage/tag";
 import Explore from "./components/homePage/explore";
 import SideNav from "./components/common/sidenav";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { ToastsContainer, ToastsStore } from "react-toasts";
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
           </Route>
         </Switch>
       </Router>
+
+      <ToastsContainer store={ToastsStore} />
     </div>
   );
 }

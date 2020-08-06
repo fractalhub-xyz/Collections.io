@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-toasts": "^3.0.6"
+  }
+}
