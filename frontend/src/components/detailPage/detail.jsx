@@ -50,6 +50,7 @@ function Detail() {
   const [bg, setBg] = useState(
     "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
   );
+  const [filter, setFilter] = useState("");
 
   //utitlity funcs
   const mystyle = {
@@ -99,7 +100,7 @@ function Detail() {
     }
     if (collection.tags) {
       if (collection.tags[0]) {
-        console.log("tag",collection.tags[0])
+        console.log("tag", collection.tags[0]);
         setBg(collection.tags[0].image_urls);
       }
     }
@@ -227,6 +228,17 @@ function Detail() {
                 setSearchText(e.target.value, searchText);
               }}
             />
+            <select
+              value={filter}
+              onChange={(e) => {
+                setFilter(e.target.value);
+              }}
+            >
+              <option value="">All</option>
+              <option value="podcast">Podcasts</option>
+              <option value="article">Articles</option>
+            </select>
+
             <FontAwesomeIcon
               data-tip="add snippet"
               data-type="info"
@@ -236,6 +248,7 @@ function Detail() {
               className="addSnippet"
               icon={faPlusCircle}
             />
+
             <div className="tableheaders">
               <div className="likecol">
                 <FontAwesomeIcon icon={faHeart} />
@@ -263,12 +276,15 @@ function Detail() {
                 </h4>
               )}
               {snippets.map((snippet) => (
-                <Snippet
-                  key={snippet.id}
-                  snippet={snippet}
-                  setRefresh={setRefresh}
-                  collectionName={collection.name}
-                />
+                <div key={snippet.id}>
+                  {snippet.type_of.includes(filter) && (
+                    <Snippet
+                      snippet={snippet}
+                      setRefresh={setRefresh}
+                      collectionName={collection.name}
+                    />
+                  )}
+                </div>
               ))}
             </div>
             <div
@@ -286,13 +302,14 @@ function Detail() {
               )}
               {snippets.map((snippet) => (
                 <div key={snippet.id}>
-                  {snippet.title.includes(searchText) && (
-                    <Snippet
-                      snippet={snippet}
-                      setRefresh={setRefresh}
-                      collectionName={collection.name}
-                    />
-                  )}
+                  {snippet.type_of.includes(filter) &&
+                    snippet.title.includes(searchText) && (
+                      <Snippet
+                        snippet={snippet}
+                        setRefresh={setRefresh}
+                        collectionName={collection.name}
+                      />
+                    )}
                 </div>
               ))}
             </div>
