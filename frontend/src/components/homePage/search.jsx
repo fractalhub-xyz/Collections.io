@@ -3,7 +3,8 @@ import { getSearchResults } from "../../helpers/api";
 import { randomColor } from "randomcolor";
 import SnippetSearch from "./snippetSearch";
 import CollectionSearch from "./searchCollection";
-import TagSearch from "./tagSearch";
+import UserSearch from "./searchUser";
+import TagSearch from "./searchTag";
 
 //Modules
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -14,6 +15,7 @@ function Search({ searchText }) {
   const [collectionMatches, setCollectionMatches] = useState([]);
   const [snippetMatches, setSnippetMatches] = useState([]);
   const [tagMatches, setTagMatches] = useState([]);
+  const [userMatches, setUserMatches] = useState([]);
   // const [numResults, setNumResults] = useState(0);
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,17 +43,19 @@ function Search({ searchText }) {
       const response = await getSearchResults(searchText);
       if (response.data.result.collections) {
         setCollectionMatches(response.data.result.collections);
-        console.log("collections", collectionMatches);
       }
 
       if (response.data.result.snippets) {
         setSnippetMatches(response.data.result.snippets);
-        console.log("snippet", snippetMatches);
       }
 
       if (response.data.result.tags) {
         setTagMatches(response.data.result.tags);
-        console.log("tags", tagMatches);
+      }
+
+      if (response.data.result.users) {
+        setUserMatches(response.data.result.users);
+        console.log(response.data.result.users);
       }
       // setNumResults(
       //   response.data.result.collections.length +
@@ -112,6 +116,16 @@ function Search({ searchText }) {
               <div className="dispSection">
                 {tagMatches.map((tag) => (
                   <TagSearch key={tag.name} tag={tag} />
+                ))}
+              </div>
+            </div>
+          )}
+          {!!userMatches.length && (
+            <div className="sectionLG">
+              <h2>Users</h2>
+              <div className="dispSection">
+                {userMatches.map((user) => (
+                  <UserSearch user={user} key={user.username} />
                 ))}
               </div>
             </div>
