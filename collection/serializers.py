@@ -15,8 +15,10 @@ class SnippetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Snippet
-        fields = ['id', 'owner', 'title', 'timestamp',
-                  'type_of', 'link', 'collection', 'hearts']
+        fields = [
+            'id', 'owner', 'title', 'timestamp', 'type_of', 'link',
+            'collection', 'hearts'
+        ]
 
 
 class CollectionSerializer(serializers.ModelSerializer):
@@ -27,8 +29,10 @@ class CollectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Collection
-        fields = ['id', 'owner', 'name', 'timestamp', 'followers',
-                  'snippets', 'desc', 'tags']
+        fields = [
+            'id', 'owner', 'name', 'timestamp', 'followers', 'snippets',
+            'desc', 'tags'
+        ]
 
 
 class ShortCollectionSerialiser(serializers.ModelSerializer):
@@ -54,3 +58,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'password', 'collections']
+
+
+class ShortUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email']

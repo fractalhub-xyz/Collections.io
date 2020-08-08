@@ -210,6 +210,11 @@ def search_view(request):
         result = {
             'snippets': SnippetSerializer(snips, many=True).data,
         }
+    elif query[0] == "@":
+        users = User.objects.filter(username__icontains=query[1:])[:MAX_LIMIT]
+        result = {
+            'users': ShortUserSerializer(users, many=True).data,
+        }
     else:
         colls = Collection.objects.filter(
             Q(Q(name__icontains=query) | Q(desc__icontains=query)))[:MAX_LIMIT]
