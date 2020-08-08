@@ -21,8 +21,9 @@ from rest_framework.authtoken.models import Token
 class SnippetViewSet(viewsets.ModelViewSet):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -30,8 +31,9 @@ class SnippetViewSet(viewsets.ModelViewSet):
 
 class CollectionViewSet(viewsets.ModelViewSet):
     serializer_class = CollectionSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
+    ]
 
     def get_queryset(self):
         return Collection.objects.all()
@@ -93,7 +95,8 @@ class HeartSnippetView(APIView):
         try:
             snip = Snippet.objects.get(id=snip_id)
         except:
-            return Response({'success': False}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'success': False},
+                            status=status.HTTP_404_NOT_FOUND)
 
         user = request.user
         liked = False
@@ -105,10 +108,11 @@ class HeartSnippetView(APIView):
             snip.hearts.remove(user)
         snip.save()
 
-        return Response(
-            {'success': True, 'liked': liked},
-            status=status.HTTP_200_OK
-        )
+        return Response({
+            'success': True,
+            'liked': liked
+        },
+                        status=status.HTTP_200_OK)
 
 
 class FollowCollectionView(APIView):
@@ -118,7 +122,8 @@ class FollowCollectionView(APIView):
         try:
             coll = Collection.objects.get(id=coll_id)
         except:
-            return Response({'success': False}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'success': False},
+                            status=status.HTTP_404_NOT_FOUND)
 
         user = request.user
         followed = False
@@ -130,10 +135,11 @@ class FollowCollectionView(APIView):
             coll.followers.remove(user)
         coll.save()
 
-        return Response(
-            {'success': True, 'followed': followed},
-            status=status.HTTP_200_OK
-        )
+        return Response({
+            'success': True,
+            'followed': followed
+        },
+                        status=status.HTTP_200_OK)
 
 
 class AllTagsView(generics.ListAPIView):
@@ -152,7 +158,8 @@ class TagsToCollection(APIView):
         try:
             collection = Collection.objects.get(id=coll_id)
         except:
-            return Response({'error': 'Collection Not Found'}, status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Collection Not Found'},
+                            status.HTTP_404_NOT_FOUND)
 
         collection.tags.all().delete()
 
@@ -174,27 +181,48 @@ def search_view(request):
     query = request.GET.get('query', '')
     query = query.strip()
     if query == '':
-        return Response({'success': False, 'error': 'Bad params: Empty query'}, status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'success': False,
+            'error': 'Bad params: Empty query'
+        }, status.HTTP_400_BAD_REQUEST)
 
     MAX_LIMIT = 4
 
     # Qs help construct OR sql statement.
     # More about it: https://docs.djangoproject.com/en/3.0/topics/db/queries/#complex-lookups-with-q-objects
-    colls = Collection.objects.filter(Q(
-        Q(name__icontains=query) | Q(desc__icontains=query)
-    ))[:MAX_LIMIT]
-    snips = Snippet.objects.filter(Q(
-        Q(title__icontains=query) | Q(link__icontains=query)
-    ))[:MAX_LIMIT]
-    tags = Tag.objects.filter(name__icontains=query)[:MAX_LIMIT]
 
-    result = {
-        'collections': ShortCollectionSerialiser(colls, many=True).data,
-        'snippets': SnippetSerializer(snips, many=True).data,
-        'tags': TagSerializer(tags, many=True).data,
-    }
+    if query[0] == "%":
+        tags = Tag.objects.filter(name__icontains=query[1:])[:MAX_LIMIT]
+        result = {
+            'tags': TagSerializer(tags, many=True).data,
+        }
+    elif query[0] == ":":
+        colls = Collection.objects.filter(
+            Q(Q(name__icontains=query)
+              | Q(desc__icontains=query[1:])))[:MAX_LIMIT]
+        result = {
+            'collections': ShortCollectionSerialiser(colls, many=True).data,
+        }
+    elif query[0] == ">":
+        snips = Snippet.objects.filter(
+            Q(Q(title__icontains=query)
+              | Q(link__icontains=query[1:])))[:MAX_LIMIT]
+        result = {
+            'snippets': SnippetSerializer(snips, many=True).data,
+        }
+    else:
+        colls = Collection.objects.filter(
+            Q(Q(name__icontains=query) | Q(desc__icontains=query)))[:MAX_LIMIT]
+        snips = Snippet.objects.filter(
+            Q(Q(title__icontains=query)
+              | Q(link__icontains=query)))[:MAX_LIMIT]
+        tags = Tag.objects.filter(name__icontains=query)[:MAX_LIMIT]
 
-    print(result)
+        result = {
+            'collections': ShortCollectionSerialiser(colls, many=True).data,
+            'snippets': SnippetSerializer(snips, many=True).data,
+            'tags': TagSerializer(tags, many=True).data,
+        }
 
     return Response({
         'success': True,
@@ -205,7 +233,10 @@ def search_view(request):
 @api_view(['GET'])
 def is_logged_in_view(request):
     if request.user.is_authenticated:
-        return Response({'success': True, 'user': request.user.username}, status.HTTP_200_OK)
+        return Response({
+            'success': True,
+            'user': request.user.username
+        }, status.HTTP_200_OK)
     else:
         return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
 
@@ -217,7 +248,10 @@ def login_view(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return Response({'success': True, 'token': f"Token {token}"}, status.HTTP_200_OK)
+        return Response({
+            'success': True,
+            'token': f"Token {token}"
+        }, status.HTTP_200_OK)
     else:
         return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
 

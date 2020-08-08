@@ -14,7 +14,7 @@ function Search({ searchText }) {
   const [collectionMatches, setCollectionMatches] = useState([]);
   const [snippetMatches, setSnippetMatches] = useState([]);
   const [tagMatches, setTagMatches] = useState([]);
-  const [numResults, setNumResults] = useState(0);
+  // const [numResults, setNumResults] = useState(0);
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -31,19 +31,33 @@ function Search({ searchText }) {
   //functions
   const Search = async (e) => {
     e.preventDefault();
+    setCollectionMatches([]);
+    setSnippetMatches([]);
+    setTagMatches([]);
 
     try {
       setCollectionMatches([]);
       setIsLoading(true);
       const response = await getSearchResults(searchText);
-      setCollectionMatches(response.data.result.collections);
-      setSnippetMatches(response.data.result.snippets);
-      setTagMatches(response.data.result.tags);
-      setNumResults(
-        response.data.result.collections.length +
-          response.data.result.snippets.length +
-          response.data.result.tags.length
-      );
+      if (response.data.result.collections) {
+        setCollectionMatches(response.data.result.collections);
+        console.log("collections", collectionMatches);
+      }
+
+      if (response.data.result.snippets) {
+        setSnippetMatches(response.data.result.snippets);
+        console.log("snippet", snippetMatches);
+      }
+
+      if (response.data.result.tags) {
+        setTagMatches(response.data.result.tags);
+        console.log("tags", tagMatches);
+      }
+      // setNumResults(
+      //   response.data.result.collections.length +
+      //     response.data.result.snippets.length +
+      //     response.data.result.tags.length
+      // );
       setIsLoading(false);
       setSuccess(true);
     } catch (error) {
@@ -54,7 +68,7 @@ function Search({ searchText }) {
   return (
     <div className={!!searchText.length ? "container" : "container dispnone"}>
       <div onClick={Search}>Search</div>
-      <h1>{success && <span>{numResults} Results</span>}</h1>
+      <h1>{success && <span>7 Results</span>}</h1>
       {error ? (
         <h3>{error}</h3>
       ) : isLoading ? (
