@@ -4,6 +4,7 @@ import Login from "./components/loginPage/login";
 import Home from "./components/homePage/home";
 import Detail from "./components/detailPage/detail";
 import User from "./components/userPage/user";
+import Notifications from "./components/notificationPage/notifications"
 import SnippetDetail from "./components/detailPage/snippetdetail";
 import Tag from "./components/tagPage/tag";
 import Explore from "./components/homePage/explore";
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/explore" exact>
             <Explore />
+          </Route>
+          <Route path="/notifications" exact>
+            <Notifications />
           </Route>
           <Route path="/detail/:id" exact>
             <Detail />

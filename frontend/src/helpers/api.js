@@ -85,3 +85,9 @@ export function postTagsToCollection(id, data) {
 export function getCollectionsFromTag(tag) {
   return api.get(`tag/${tag}`);
 }
+export function getNotifications() {
+  return api.get("notifications/all");
+}
+export function postReadNotification(id) {
+  return api.post(`notification/${id}/read`);
+}

@@ -29,7 +29,6 @@ function SideNav({ setRefresh }) {
     async function getData() {
       try {
         const response = await getFollowedCollections();
-        console.log(response);
         const followed = response.data;
         setFollowed(followed);
       } catch (error) {
@@ -64,6 +63,9 @@ function SideNav({ setRefresh }) {
     const username = localStorage.getItem("user");
     history.push(`/user/${username}`);
   };
+  const redirectNotification = () => {
+    history.push("/notifications");
+  };
   return (
     <div className="sidenav">
       <div className="sidenav-container">
@@ -80,7 +82,7 @@ function SideNav({ setRefresh }) {
           <FontAwesomeIcon icon={faHashtag} />
           &nbsp;Explore
         </div>
-        <div className="sidenav-link">
+        <div className="sidenav-link" onClick={redirectNotification}>
           {" "}
           <FontAwesomeIcon icon={faBell} />
           &nbsp;Notification
