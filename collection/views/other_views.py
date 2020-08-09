@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q, Count, Sum
 from collection.permissions import IsOwnerOrReadOnly
 
+
 from rest_framework import viewsets, generics, status, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -80,17 +81,6 @@ def search_view(request):
         'success': True,
         'result': result,
     }, status.HTTP_200_OK)
-
-
-@api_view(['GET'])
-def is_logged_in_view(request):
-    if request.user.is_authenticated:
-        return Response({
-            'success': True,
-            'user': request.user.username
-        }, status.HTTP_200_OK)
-    else:
-        return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(['POST'])

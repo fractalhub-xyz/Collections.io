@@ -14,15 +14,19 @@ router.register(r'collections', CollectionViewSet,
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
+    # Snippets
     path('snippets/<int:snip_id>/heart', HeartSnippetView.as_view()),
+    # Collections
     path('collections/<int:coll_id>/follow',
          FollowCollectionView.as_view()),
     path('collections/<int:coll_id>/tags',
          TagsToCollection.as_view()),
     path('collections/followed', FollowedCollectionViewset.as_view()),
     path('collections/popular', PopularCollectionViewset.as_view()),
+    # Tags
     path('tags', AllTagsView.as_view()),
     path('tag/<str:tag_name>', CollectionsForTagViewset.as_view()),
+    # Others
     path('search', search_view),
     path('login', auth.obtain_auth_token),
     path('logout', logout_view),

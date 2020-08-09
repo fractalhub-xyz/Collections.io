@@ -13,9 +13,20 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 
-TYPES = (
+SNIPPET_TYPES = (
     ('podcast', 'podcast'),
     ('article', 'article'),
+)
+
+COLLECTION_PERMISSIONS = (
+    ('all', 'all'),
+    ('none', 'none'),
+    ('selective', 'selective'),
+)
+
+COLLECTION_VISIBILITY = (
+    ('public', 'public'),
+    ('private', 'private')
 )
 
 
@@ -37,6 +48,14 @@ class Collection(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     desc = models.CharField(max_length=500, default=" ")
 
+    permission = models.CharField(
+        max_length=20, choices=COLLECTION_PERMISSIONS, default="none")
+    allowed_users = models.ManyToManyField(
+        User, related_name='allowed_collections')
+    visibility = models.CharField(
+        max_length=20, choices=COLLECTION_VISIBILITY, default="public")
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.name
 
@@ -48,7 +67,7 @@ class Snippet(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
     link = models.CharField(max_length=500)
-    type_of = models.CharField(choices=TYPES, max_length=20)
+    type_of = models.CharField(choices=SNIPPET_TYPES, max_length=20)
     owner = models.ForeignKey(
         'auth.User', related_name='snippets', on_delete=models.CASCADE)
 
