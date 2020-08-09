@@ -21,6 +21,7 @@ urlpatterns = [
          FollowCollectionView.as_view()),
     path('collections/<int:coll_id>/tags',
          TagsToCollection.as_view()),
+    path('collections/<int:coll_id>/settings', CollectionOwnerView.as_view()),
     path('collections/followed', FollowedCollectionViewset.as_view()),
     path('collections/popular', PopularCollectionViewset.as_view()),
     # Tags
