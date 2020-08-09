@@ -27,12 +27,13 @@ class CollectionSerializer(serializers.ModelSerializer):
     followers = serializers.StringRelatedField(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
     permission = serializers.ReadOnlyField()
+    allowed_users = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Collection
         fields = [
             'id', 'owner', 'name', 'timestamp', 'followers',
-            'desc', 'tags', 'visibility', 'permission', 'snippets'
+            'desc', 'tags', 'visibility', 'permission', 'snippets', 'allowed_users'
         ]
 
 

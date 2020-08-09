@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 TYPES = (
     ('USER_FOLLOWED', 'USER_FOLLOWED'),
     ('SNIPPET_CREATED', 'SNIPPET_CREATED'),
+    ('PERMISSION_GRANTED', 'PERMISSION_GRANTED'),
+    ('PERMISSION_REVOKED', 'PERMISSION_REVOKED'),
 )
 
 
@@ -13,6 +15,7 @@ class Notification(models.Model):
     is_read = models.BooleanField(default=False)
     type_of = models.CharField(choices=TYPES, max_length=20)
     title = models.CharField(max_length=128)
+    identifier = models.BigIntegerField(null=True, blank=True)
     subtitle = models.CharField(max_length=256, default='')
 
     def __str__(self):

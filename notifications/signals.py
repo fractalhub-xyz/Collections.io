@@ -14,6 +14,7 @@ def snippet_created(sender, instance, created, **kwargs):
             user=instance.collection.owner,
             type_of='SNIPPET_CREATED',
             title='New snippet added',
+            identifier=instance.collection.id,
             subtitle=f'{instance.owner.username} added a new snippet to {instance.collection.name}'
         )
 
@@ -26,5 +27,32 @@ def user_followed(sender, instance, action, pk_set, **kwargs):
             user=instance.owner,
             type_of='USER_FOLLOWED',
             title='New user follow',
+            identifier=instance.id,
             subtitle=f'{user.username} followed your collection {instance.name}'
+        )
+
+
+@receiver(m2m_changed, sender=Collection.allowed_users.through)
+def permission_granted(sender, instance, action, pk_set, **kwargs):
+    if action == 'post_add':
+        user = User.objects.filter(pk__in=pk_set)[0]
+        Notification.objects.create(
+            user=user,
+            type_of='PERMISSION_GRANTED',
+            title='You got permission',
+            identifier=instance.id,
+            subtitle=f'You got access to collection {instance.name}'
+        )
+
+
+@receiver(m2m_changed, sender=Collection.allowed_users.through)
+def permission_revoked(sender, instance, action, pk_set, **kwargs):
+    if action == 'post_remove':
+        user = User.objects.filter(pk__in=pk_set)[0]
+        Notification.objects.create(
+            user=user,
+            type_of='PERMISSION_REVOKED',
+            title='You got kicked off',
+            identifier=instance.id,
+            subtitle=f'Your access to collection {instance.name} was revoked'
         )

@@ -68,23 +68,9 @@ class CollectionsForTagViewset(generics.ListAPIView):
 class CollectionOwnerView(APIView):
     permissions_classes = [IsOwnerOrReadOnly]
 
-    def get(self, request, coll_id):
-        try:
-            coll = Collection.objects.get(id=coll_id)
-        except:
-            return Response(data={'success': 'False', 'error': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
-
-        all_users = coll.allowed_users.all()
-        usernames = [u.username for u in all_users]
-        csv = ','.join(usernames)
-
-        return Response(data={'success': True, 'users': csv})
-
     def post(self, request, coll_id):
         perm = request.POST.get('permission', 'none')
         allowed_usernames = request.POST.get('allowed_users', '').split(',')
-        # ["ajay", "admin"]
-
         try:
             coll = Collection.objects.get(id=coll_id)
         except:
