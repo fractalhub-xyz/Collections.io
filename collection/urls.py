@@ -1,27 +1,31 @@
 from django.urls import path, include
-from collection import views
+from collection.views.collection_views import *
+from collection.views.snippet_views import *
+from collection.views.tag_views import *
+from collection.views.other_views import *
+
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views as auth
 
 router = DefaultRouter()
-router.register(r'snippets', views.SnippetViewSet)
-router.register(r'collections', views.CollectionViewSet,
+router.register(r'snippets', SnippetViewSet)
+router.register(r'collections', CollectionViewSet,
                 basename="collections")
-router.register(r'users', views.UserViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
-    path('snippets/<int:snip_id>/heart', views.HeartSnippetView.as_view()),
+    path('snippets/<int:snip_id>/heart', HeartSnippetView.as_view()),
     path('collections/<int:coll_id>/follow',
-         views.FollowCollectionView.as_view()),
+         FollowCollectionView.as_view()),
     path('collections/<int:coll_id>/tags',
-         views.TagsToCollection.as_view()),
-    path('collections/followed', views.FollowedCollectionViewset.as_view()),
-    path('collections/popular', views.PopularCollectionViewset.as_view()),
-    path('tags', views.AllTagsView.as_view()),
-    path('tag/<str:tag_name>', views.CollectionsForTagViewset.as_view()),
-    path('search', views.search_view),
+         TagsToCollection.as_view()),
+    path('collections/followed', FollowedCollectionViewset.as_view()),
+    path('collections/popular', PopularCollectionViewset.as_view()),
+    path('tags', AllTagsView.as_view()),
+    path('tag/<str:tag_name>', CollectionsForTagViewset.as_view()),
+    path('search', search_view),
     path('login', auth.obtain_auth_token),
-    path('logout', views.logout_view),
-    path('register', views.UserCreateAPIView.as_view()),
+    path('logout', logout_view),
+    path('register', UserCreateAPIView.as_view()),
     path('', include(router.urls))
 ]
