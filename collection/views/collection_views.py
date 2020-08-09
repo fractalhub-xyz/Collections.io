@@ -5,7 +5,7 @@ from django.db.models import Q, Count, Sum
 from datetime import datetime, timedelta
 
 from rest_framework import viewsets, generics, status, permissions
-from collection.permissions import IsOwnerOrReadOnly
+from collection.permissions import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -13,7 +13,7 @@ from rest_framework.response import Response
 class CollectionViewSet(viewsets.ModelViewSet):
     serializer_class = CollectionSerializer
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
+        permissions.IsAuthenticatedOrReadOnly, CollectionPermissions
     ]
 
     def get_queryset(self):
@@ -25,12 +25,14 @@ class CollectionViewSet(viewsets.ModelViewSet):
 
 
 class PopularCollectionViewset(generics.ListAPIView):
-    permissions_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permissions_classes = [
+        permissions.IsAuthenticatedOrReadOnly, CollectionPermissions]
     serializer_class = ShortCollectionSerialiser
 
     def get_queryset(self):
         colls = Collection.objects.all() \
-            .filter(timestamp__gte=datetime.now() - timedelta(days=30)) \
+            .filter(timestamp__gte=datetime.now() - timedelta(days=300)) \
+            .filter(visibility="public") \
             .annotate(foll_count=Count('followers')) \
             .order_by('-foll_count', '-timestamp')
 
@@ -96,6 +98,9 @@ class CollectionOwnerView(APIView):
         users = User.objects.filter(username__in=allowed_usernames)
         for user in users:
             coll.allowed_users.add(user)
+        if len(users):
+            coll.permission = 'selective'
+
         coll.save()
 
         return Response({'success': True})

@@ -31,8 +31,8 @@ class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collection
         fields = [
-            'id', 'owner', 'name', 'timestamp', 'followers', 'snippets',
-            'desc', 'tags', 'visibility', 'permission'
+            'id', 'owner', 'name', 'timestamp', 'followers',
+            'desc', 'tags', 'visibility', 'permission', 'snippets'
         ]
 
 

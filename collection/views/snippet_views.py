@@ -1,6 +1,6 @@
 from collection.models import *
 from collection.serializers import *
-from collection.permissions import IsOwnerOrReadOnly
+from collection.permissions import *
 
 from rest_framework import viewsets, status, permissions
 from rest_framework.views import APIView
@@ -11,7 +11,7 @@ class SnippetViewSet(viewsets.ModelViewSet):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
+        permissions.IsAuthenticatedOrReadOnly, SnippetPermissions
     ]
 
     def perform_create(self, serializer):
