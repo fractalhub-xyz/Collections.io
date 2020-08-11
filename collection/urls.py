@@ -12,6 +12,7 @@ router.register(r'snippets', SnippetViewSet)
 router.register(r'collections', CollectionViewSet,
                 basename="collections")
 router.register(r'users', UserViewSet)
+router.register(r'comments', CommentViewSet)
 
 urlpatterns = [
     # Snippets

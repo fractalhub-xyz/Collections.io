@@ -8,16 +8,24 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ["name", "image_urls"]
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = [
+            'id' , 'comment', 'owner', 'snippet'
+        ]
+
 
 class SnippetSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     hearts = serializers.StringRelatedField(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Snippet
         fields = [
             'id', 'owner', 'title', 'timestamp', 'type_of', 'link',
-            'collection', 'hearts'
+            'collection', 'comments', 'hearts'
         ]
 
 

@@ -76,3 +76,13 @@ class Snippet(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=1000)
+    owner = models.ForeignKey(
+        User, related_name='comments', on_delete=models.CASCADE)
+    snippet = models.ForeignKey(Snippet, related_name='comments', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment
