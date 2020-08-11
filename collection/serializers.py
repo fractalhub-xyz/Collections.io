@@ -9,10 +9,12 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ["name", "image_urls"]
 
 class CommentSerializer(serializers.ModelSerializer):
+    upvotes = serializers.StringRelatedField(many=True, read_only=True)
+    
     class Meta:
         model = Comment
         fields = [
-            'id' , 'comment', 'owner', 'snippet'
+            'id' , 'comment', 'owner', 'snippet', 'upvotes'
         ]
 
 

@@ -17,6 +17,7 @@ router.register(r'comments', CommentViewSet)
 urlpatterns = [
     # Snippets
     path('snippets/<int:snip_id>/heart', HeartSnippetView.as_view()),
+    path('comments/<int:comment_id>/upvote', UpvoteCommentView.as_view()),
     # Collections
     path('collections/<int:coll_id>/follow',
          FollowCollectionView.as_view()),

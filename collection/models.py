@@ -83,6 +83,7 @@ class Comment(models.Model):
     owner = models.ForeignKey(
         User, related_name='comments', on_delete=models.CASCADE)
     snippet = models.ForeignKey(Snippet, related_name='comments', on_delete=models.CASCADE)
+    upvotes = models.ManyToManyField(User, related_name="upvoted_comments")
 
     def __str__(self):
         return self.comment

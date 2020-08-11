@@ -44,6 +44,37 @@ class HeartSnippetView(APIView):
         },
             status=status.HTTP_200_OK)
 
+class UpvoteCommentView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, comment_id):
+        try:
+            comment = Comment.objects.get(id=comment_id)
+        except: 
+            return Response({'success': False}, 
+                            status=status.HTTP_404_NOT_FOUND)
+
+        #TEMP
+        return Response('fix da errur')
+        
+        # user = request.user
+        # upvoted = False
+        
+        # if user not in comment.upvotes.all():
+        #     upvoted = True
+        #     comment.upvotes.add(user)
+        # else: 
+        #     upvoted = False
+        #     comment.upvotes.remove(user)
+        # comment.save()
+
+        # return Response({'check'})
+        # return Response({
+        #     'success': True,
+        #     'upvoted' : upvoted
+        # }, status=status.HTTP_200_OK)
+
+
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
