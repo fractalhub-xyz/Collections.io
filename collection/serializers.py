@@ -56,10 +56,15 @@ class ShortCollectionSerialiser(serializers.ModelSerializer):
         model = Collection
         fields = ['id', 'name', 'desc', 'owner', 'followers', 'tags']
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['my_followers']
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
     collections = CollectionSerializer(many=True, read_only=True)
+    profile = ProfileSerializer(read_only=True)
 
     def create(self, validated_data):
         user = super(UserSerializer, self).create(validated_data)
@@ -69,7 +74,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'collections']
+        fields = [
+            'id', 'username', 'email', 'password', 
+            'collections', 'profile'
+            ]
 
 
 class ShortUserSerializer(serializers.ModelSerializer):

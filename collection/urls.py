@@ -3,6 +3,7 @@ from collection.views.collection_views import *
 from collection.views.snippet_views import *
 from collection.views.tag_views import *
 from collection.views.other_views import *
+from collection.views.user_views import *
 
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views as auth
@@ -21,6 +22,7 @@ urlpatterns = [
     # Collections
     path('collections/<int:coll_id>/follow',
          FollowCollectionView.as_view()),
+    path('user/<int:user_id>/follow', FollowUserView.as_view()), 
     path('collections/<int:coll_id>/tags',
          TagsToCollection.as_view()),
     path('collections/<int:coll_id>/settings', CollectionOwnerView.as_view()),

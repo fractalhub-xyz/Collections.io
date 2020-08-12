@@ -6,7 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
-
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
@@ -28,6 +27,15 @@ COLLECTION_VISIBILITY = (
     ('public', 'public'),
     ('private', 'private')
 )
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, to_field='id', 
+                                on_delete=models.CASCADE, primary_key=True)
+    my_followers = models.CharField(max_length=1000, default = " ", null = True, blank = True)
+
+    def __str__(self):
+        return f"{self.user}'s profile"
 
 
 class Tag(models.Model):
