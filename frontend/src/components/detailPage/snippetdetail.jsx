@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import React, { useState, useEffect } from "react";
 import "./detail.css";
 import { useParams } from "react-router-dom";
@@ -7,6 +8,8 @@ import {
   getSnippetFromID,
   getCollectionFromID,
   postHeartSnippet,
+  getSnippetComments,
+  postNewComment,
 } from "../../helpers/api";
 // import { postFollowCollection } from "../../helpers/api";
 //components
@@ -38,6 +41,8 @@ function SnippetDetail() {
   const [totLikes, setTotLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [snippet, setSnippet] = useState({});
+  const [comments, setComments] = useState({});
+  const [newComment, setNewComment] = useState("");
   const [otherSnippets, setOtherSnippets] = useState([]);
   const [collection, setCollection] = useState({});
   const [id, setID] = useState(null);
@@ -65,7 +70,6 @@ function SnippetDetail() {
         console.log(`fetching snippet ${snipID} from collectino ${id}`);
         const response = await getSnippetFromID(snipID);
         setSnippet(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
         setError(`Failed to load collection with ID: ${params.id}`);
@@ -75,6 +79,18 @@ function SnippetDetail() {
     fetchSnippet();
     setRefresh(false);
   }, [refresh, id]);
+
+  useEffect(() => {
+    async function fetchComments() {
+      try {
+        const response = await getSnippetComments(snipID);
+        setComments(response.data);
+      } catch (error) {
+        console.error();
+      }
+    }
+    fetchComments();
+  }, [snippet]);
 
   //lifcycle funcs
   useEffect(() => {
@@ -116,6 +132,22 @@ function SnippetDetail() {
       }
     }
   }, [collection]);
+
+  const submitNewComment = async (e) => {
+    e.preventDefault();
+    const payload = {
+      comment: newComment,
+      owner: 1,
+      snippet: snipID,
+    };
+    try {
+      const response = await postNewComment(payload);
+      console.log("Successfully submited new comment");
+    } catch (error) {
+      console.log(error);
+    }
+    setNewComment(" ");
+  };
 
   //utitlity funcs
   const mystyle = {
@@ -253,6 +285,28 @@ function SnippetDetail() {
             {/* </div> */}
             <h2>Comment Section</h2>
             <div className="line" />
+            <div>
+              {!!comments.length &&
+                comments.map((comment) => (
+                  <div key={comment.id} className="comment">
+                    <h3>By {comment.owner}</h3>
+                    <h4>{comment.comment}</h4>
+                  </div>
+                ))}
+              <div className="comment">
+                <h3>Add COMMENT</h3>
+                <input
+                  value={newComment}
+                  onChange={(e) => {
+                    setNewComment(e.target.value);
+                  }}
+                />
+                <button onClick={submitNewComment}>ADD</button>
+              </div>
+              <br />
+              <br />
+              <br />
+            </div>
           </div>
         )}
       </div>

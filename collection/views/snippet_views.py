@@ -2,7 +2,7 @@ from collection.models import *
 from collection.serializers import *
 from collection.permissions import *
 
-from rest_framework import viewsets, status, permissions
+from rest_framework import viewsets, status, permissions, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -82,3 +82,21 @@ class CommentViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
+
+class CollectionsForTagViewset(generics.ListAPIView):
+    permissions_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = ShortCollectionSerialiser
+
+    def get_queryset(self):
+        tag_name = self.kwargs.get('tag_name')
+        return Collection.objects.filter(tags__name=tag_name)
+
+
+class SnippetCommentListView(generics.ListAPIView):
+    permissions_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        snip_id = self.kwargs.get('snip_id')
+        return Comment.objects.filter(snippet=snip_id)
+

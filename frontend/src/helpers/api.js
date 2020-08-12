@@ -91,3 +91,9 @@ export function getNotifications() {
 export function postReadNotification(id) {
   return api.post(`notification/${id}/read`);
 }
+export function getSnippetComments(id) {
+  return api.get(`snippets/${id}/comments`);
+}
+export function postNewComment(data) {
+  return api.post("comments/", data)
+}
