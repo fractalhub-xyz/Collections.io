@@ -97,3 +97,6 @@ export function getSnippetComments(id) {
 export function postNewComment(data) {
   return api.post("comments/", data)
 }
+export function DeleteComment(id) {
+  return api.delete(`comments/${id}`)
+}

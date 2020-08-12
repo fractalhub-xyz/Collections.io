@@ -9,6 +9,7 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ["name", "image_urls"]
 
 class CommentSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     upvotes = serializers.StringRelatedField(many=True, read_only=True)
     
     class Meta:

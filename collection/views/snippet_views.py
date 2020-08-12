@@ -44,26 +44,27 @@ class HeartSnippetView(APIView):
         },
             status=status.HTTP_200_OK)
 
+
 class UpvoteCommentView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, comment_id):
         try:
             comment = Comment.objects.get(id=comment_id)
-        except: 
-            return Response({'success': False}, 
+        except:
+            return Response({'success': False},
                             status=status.HTTP_404_NOT_FOUND)
 
-        #TEMP
+        # TEMP
         return Response('fix da errur')
-        
+
         # user = request.user
         # upvoted = False
-        
+
         # if user not in comment.upvotes.all():
         #     upvoted = True
         #     comment.upvotes.add(user)
-        # else: 
+        # else:
         #     upvoted = False
         #     comment.upvotes.remove(user)
         # comment.save()
@@ -80,8 +81,13 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
 
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
+        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
     ]
+
+    def perform_create(self, serializer):
+        s = serializer.save(owner=self.request.user)
+        print(s)
+
 
 class CollectionsForTagViewset(generics.ListAPIView):
     permissions_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -99,4 +105,3 @@ class SnippetCommentListView(generics.ListAPIView):
     def get_queryset(self):
         snip_id = self.kwargs.get('snip_id')
         return Comment.objects.filter(snippet=snip_id)
-

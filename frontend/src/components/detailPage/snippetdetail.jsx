@@ -10,6 +10,7 @@ import {
   postHeartSnippet,
   getSnippetComments,
   postNewComment,
+  DeleteComment,
 } from "../../helpers/api";
 // import { postFollowCollection } from "../../helpers/api";
 //components
@@ -42,6 +43,7 @@ function SnippetDetail() {
   const [isLiked, setIsLiked] = useState(false);
   const [snippet, setSnippet] = useState({});
   const [comments, setComments] = useState({});
+  const [updateComments, setUpdateComments] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [otherSnippets, setOtherSnippets] = useState([]);
   const [collection, setCollection] = useState({});
@@ -90,7 +92,8 @@ function SnippetDetail() {
       }
     }
     fetchComments();
-  }, [snippet]);
+    setUpdateComments(false);
+  }, [updateComments, snippet]);
 
   //lifcycle funcs
   useEffect(() => {
@@ -137,16 +140,26 @@ function SnippetDetail() {
     e.preventDefault();
     const payload = {
       comment: newComment,
-      owner: 1,
       snippet: snipID,
     };
     try {
-      const response = await postNewComment(payload);
+      await postNewComment(payload);
       console.log("Successfully submited new comment");
     } catch (error) {
       console.log(error);
     }
     setNewComment(" ");
+    setUpdateComments(true);
+  };
+
+  const Delete = async (id) => {
+    try {
+      await DeleteComment(id);
+      console.log("Succesfully deleted comment");
+    } catch (error) {
+      console.log(error);
+    }
+    setUpdateComments(true);
   };
 
   //utitlity funcs
@@ -250,7 +263,7 @@ function SnippetDetail() {
             <div className="line" />
             <div className="ot-snippet-container">
               {otherSnippets
-                .filter((snip) => snip.title != snippet.title)
+                .filter((snip) => snip.title !== snippet.title)
                 .map((snippet) => (
                   <div
                     className="ot-snippet"
@@ -289,8 +302,21 @@ function SnippetDetail() {
               {!!comments.length &&
                 comments.map((comment) => (
                   <div key={comment.id} className="comment">
-                    <h3>By {comment.owner}</h3>
-                    <h4>{comment.comment}</h4>
+                    <div>
+                      <h3>By {comment.owner}</h3>
+                      {localStorage.getItem("user") === comment.owner && (
+                        <button
+                          onClick={() => {
+                            Delete(comment.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                    <div>
+                      <p>{comment.comment}</p>
+                    </div>
                   </div>
                 ))}
               <div className="comment">
