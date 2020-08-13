@@ -5,19 +5,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //MODULES
 import { useHistory } from "react-router-dom";
 //API
-import { editCollection, deleteCollection } from "../../helpers/api";
+import {
+  editCollection,
+  deleteCollection,
+  postCollectionSettings,
+} from "../../helpers/api";
 
 function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
   let history = useHistory();
   const [name, setName] = useState(collection.name);
   const [desc, setDesc] = useState(collection.desc);
+  const [visibility, setVisibility] = useState(collection.visibility);
+  const [permission, setPermission] = useState(collection.permission);
+  const [allowed_users, setAllowed_users] = useState(collection.allowed_users);
   const [error, setError] = useState("");
 
   const editSelection = async (e) => {
     e.preventDefault();
-    const payload = { name, desc };
     try {
+      var payload = { name, desc, visibility };
       await editCollection(collection.id, payload);
+      var settingsPayload = {}
+      if (permission === "selective") {
+        settingsPayload = { permission, allowed_users };
+      } else {
+        settingsPayload = { permission };
+      }
+      await postCollectionSettings(collection.id, settingsPayload);
       setEditCollectionModal(false);
       setRefresh(true);
       console.log("Succesfull edited Collection");
@@ -72,6 +86,40 @@ function EditCollection({ setEditCollectionModal, setRefresh, collection }) {
                   setDesc(e.target.value);
                 }}
               />
+              <h5>Visibility</h5>
+              <select
+                value={visibility}
+                onChange={(e) => {
+                  setVisibility(e.target.value);
+                }}
+              >
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
+              <h5>Permissions</h5>
+              <select
+                value={permission}
+                onChange={(e) => {
+                  setPermission(e.target.value);
+                }}
+              >
+                <option value="all">All users allowed to editc</option>
+                <option value="none">No one allowed to edit</option>
+                <option value="selective">
+                  Selective users allowed to edit
+                </option>
+              </select>
+              {permission === "selective" && (
+                <div>
+                  <h5>Enter users as a csv</h5>
+                  <input
+                    value={allowed_users}
+                    onChange={(e) => {
+                      setAllowed_users(e.target.value);
+                    }}
+                  />
+                </div>
+              )}
             </div>
           </div>
           <div className="errorText">{error}</div>

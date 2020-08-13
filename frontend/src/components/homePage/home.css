@@ -203,6 +203,10 @@
   animation-duration: 0.3s;
 }
 
+.lg {
+  height: 500px;
+}
+
 .form h4 {
   margin: 0;
   padding: 0;

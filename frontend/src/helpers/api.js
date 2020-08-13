@@ -100,3 +100,6 @@ export function postNewComment(data) {
 export function DeleteComment(id) {
   return api.delete(`comments/${id}`)
 }
+export function postCollectionSettings(id, data) {
+  return api.post(`collections/${id}/settings`, data)
+}
