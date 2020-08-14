@@ -10,13 +10,13 @@ import {
   postHeartSnippet,
   getSnippetComments,
   postNewComment,
-  DeleteComment,
 } from "../../helpers/api";
 // import { postFollowCollection } from "../../helpers/api";
 //components
 import EditSnippet from "./editsnippet";
-import { useHistory } from "react-router-dom";
+import Comment from "./comment";
 //modules
+import { useHistory } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
@@ -149,16 +149,6 @@ function SnippetDetail() {
       console.log(error);
     }
     setNewComment(" ");
-    setUpdateComments(true);
-  };
-
-  const Delete = async (id) => {
-    try {
-      await DeleteComment(id);
-      console.log("Succesfully deleted comment");
-    } catch (error) {
-      console.log(error);
-    }
     setUpdateComments(true);
   };
 
@@ -302,21 +292,10 @@ function SnippetDetail() {
               {!!comments.length &&
                 comments.map((comment) => (
                   <div key={comment.id} className="comment">
-                    <div>
-                      <h3>By {comment.owner}</h3>
-                      {localStorage.getItem("user") === comment.owner && (
-                        <button
-                          onClick={() => {
-                            Delete(comment.id);
-                          }}
-                        >
-                          Delete
-                        </button>
-                      )}
-                    </div>
-                    <div>
-                      <p>{comment.comment}</p>
-                    </div>
+                    <Comment
+                      comment={comment}
+                      setUpdateComments={setUpdateComments}
+                    />
                   </div>
                 ))}
               <div className="comment">
