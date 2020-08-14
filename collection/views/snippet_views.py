@@ -55,25 +55,21 @@ class UpvoteCommentView(APIView):
             return Response({'success': False},
                             status=status.HTTP_404_NOT_FOUND)
 
-        # TEMP
-        return Response('fix da errur')
+        user = request.user
+        upvoted = False
 
-        # user = request.user
-        # upvoted = False
+        if user not in comment.upvotes.all():
+            upvoted = True
+            comment.upvotes.add(user)
+        else:
+            upvoted = False
+            comment.upvotes.remove(user)
+        comment.save()
 
-        # if user not in comment.upvotes.all():
-        #     upvoted = True
-        #     comment.upvotes.add(user)
-        # else:
-        #     upvoted = False
-        #     comment.upvotes.remove(user)
-        # comment.save()
-
-        # return Response({'check'})
-        # return Response({
-        #     'success': True,
-        #     'upvoted' : upvoted
-        # }, status=status.HTTP_200_OK)
+        return Response({
+            'success': True,
+            'upvoted' : upvoted
+        }, status=status.HTTP_200_OK)
 
 
 class CommentViewSet(viewsets.ModelViewSet):

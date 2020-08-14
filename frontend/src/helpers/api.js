@@ -106,3 +106,6 @@ export function postCollectionSettings(id, data) {
 export function postUpvoteComment(id) {
   return api.post(`comments/${id}/upvote`)
 }
+export function putEditComment(id, data) {
+  return api.put(`comments/${id}/`, data)
+}

@@ -3,7 +3,7 @@ from django.db.models import ObjectDoesNotExist
 from collection.serializers import *
 from collection.permissions import IsOwnerOrReadOnly
 from collection.api import get_images_for_tag
-
+from ..permissions import CollectionPermissions
 from rest_framework import generics, status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,7 +16,7 @@ class AllTagsView(generics.ListAPIView):
 
 
 class TagsToCollection(APIView):
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly, CollectionPermissions]
 
     def post(self, request, coll_id):
         tags = request.POST.get('tags', '').lower()

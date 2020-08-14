@@ -291,12 +291,13 @@ function SnippetDetail() {
             <div>
               {!!comments.length &&
                 comments.map((comment) => (
-                  <div key={comment.id} className="comment">
+                  
                     <Comment
+                      key={comment.id}
                       comment={comment}
                       setUpdateComments={setUpdateComments}
+                      snipID={snipID}
                     />
-                  </div>
                 ))}
               <div className="comment">
                 <h3>Add COMMENT</h3>
