@@ -8,14 +8,15 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ["name", "image_urls"]
 
+
 class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     upvotes = serializers.StringRelatedField(many=True, read_only=True)
-    
+
     class Meta:
         model = Comment
         fields = [
-            'id' , 'comment', 'owner', 'snippet', 'upvotes'
+            'id', 'comment', 'owner', 'snippet', 'upvotes'
         ]
 
 
@@ -57,10 +58,14 @@ class ShortCollectionSerialiser(serializers.ModelSerializer):
         model = Collection
         fields = ['id', 'name', 'desc', 'owner', 'followers', 'tags']
 
+
 class ProfileSerializer(serializers.ModelSerializer):
+    followers = serializers.StringRelatedField(many=True, read_only=True)
+
     class Meta:
         model = Profile
-        fields = ['my_followers']
+        fields = ['followers']
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -76,9 +81,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = [
-            'id', 'username', 'email', 'password', 
+            'id', 'username', 'email', 'password',
             'collections', 'profile'
-            ]
+        ]
 
 
 class ShortUserSerializer(serializers.ModelSerializer):

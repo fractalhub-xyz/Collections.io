@@ -23,7 +23,7 @@ urlpatterns = [
     # Collections
     path('collections/<int:coll_id>/follow',
          FollowCollectionView.as_view()),
-    path('user/<int:user_id>/follow', FollowUserView.as_view()), 
+    path('users/<str:username>/follow', FollowUserView.as_view()),
     path('collections/<int:coll_id>/tags',
          TagsToCollection.as_view()),
     path('collections/<int:coll_id>/settings', CollectionOwnerView.as_view()),

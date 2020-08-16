@@ -12,18 +12,6 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    lookup_field = 'username'
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class UserCreateAPIView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.AllowAny]
-
-
 @api_view(['GET'])
 def search_view(request):
     query = request.GET.get('query', '')
