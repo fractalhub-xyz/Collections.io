@@ -1,0 +1,25 @@
+$primary-size: 12px
+@import '../variables.sass'
+.login
+    header
+        font-size: 1rem
+        color: $primary-color
+
+    .collection
+        color: #fff
+
+        .submit-btn:hover + &
+            color: #000
+
+        @media screen and ( max-width: 500 )
+            font-size: $header-size
+
+        &-description
+            color: #aaa
+
+body
+    .login
+        .collection
+            .dark
+
+        .submit-btn
