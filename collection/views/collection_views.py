@@ -35,7 +35,7 @@ class PopularCollectionViewset(generics.ListAPIView):
             .filter(timestamp__gte=datetime.now() - timedelta(days=300)) \
             .filter(visibility="public") \
             .annotate(foll_count=Count('followers')) \
-            .order_by('-foll_count', '-timestamp')
+            .order_by('-foll_count', '-updated_at')
 
         limit = int(self.request.GET.get('limit', '0'))
         if limit and limit > 0:
@@ -49,7 +49,7 @@ class FollowedCollectionViewset(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        colls = user.followed_collections.all().order_by('-timestamp')
+        colls = user.followed_collections.all().order_by('-updated_at')
 
         limit = int(self.request.GET.get('limit', '0'))
         if limit and limit > 0:

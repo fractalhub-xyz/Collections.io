@@ -16,6 +16,7 @@ import { useHistory, Link } from "react-router-dom";
 //API
 import { postNewCollection, getFollowedCollections } from "../../helpers/api";
 import Modal from "./modal";
+import {} from "react-toasts";
 
 function SideNav({ setRefresh }) {
   let history = useHistory();
@@ -30,6 +31,7 @@ function SideNav({ setRefresh }) {
       try {
         const response = await getFollowedCollections();
         const followed = response.data;
+        console.log(followed);
         setFollowed(followed);
       } catch (error) {
         setError(error);
@@ -136,7 +138,7 @@ function SideNav({ setRefresh }) {
                   />
                 </div>
               </div>
-              <div className="errorText">{error}</div>
+              <div className="errorText">{error.toString()}</div>
               <div className="buttonHolder">
                 <button onClick={createCollection}>CREATE</button>
               </div>

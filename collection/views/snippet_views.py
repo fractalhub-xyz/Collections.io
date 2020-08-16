@@ -13,7 +13,7 @@ class SnippetViewSet(ModelNoListViewset):
     serializer_class = SnippetSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly, SnippetPermissions
-    ]s
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

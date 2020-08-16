@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 //MODULES
 import { useHistory } from "react-router-dom";
 //ICONS
@@ -9,10 +9,13 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { debounce } from "../../helpers/debounce";
 
 function Navbar({ searchText, setSearchText }) {
   let history = useHistory();
   const [showMore, setShowMore] = useState(false);
+
+  const debouncedHandler = useCallback(debounce(setSearchText), []);
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -29,7 +32,7 @@ function Navbar({ searchText, setSearchText }) {
         placeholder="Search"
         value={searchText}
         onChange={(e) => {
-          setSearchText(e.target.value);
+          debouncedHandler(e.target.value);
         }}
       />
       {!!searchText.length && (
