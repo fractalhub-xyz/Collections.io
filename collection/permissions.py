@@ -25,6 +25,7 @@ class CollectionPermissions(permissions.BasePermission):
         if obj.owner == request.user:
             return True
 
+        print(request.method)
         if request.method in permissions.SAFE_METHODS and (
             obj.visibility == 'public' or is_user_allowed(request.user, obj)
         ):
@@ -33,9 +34,19 @@ class CollectionPermissions(permissions.BasePermission):
         return False
 
 
-# snippets post -> collection id
-# id -> collection and loook at its allowed list
-# allow to post if owner
+class TagPermissions(permissions.BasePermission):
+    def has_permission(self, request, view):
+        coll = view.kwargs.get('coll_id', '-1')
+
+        try:
+            collection = Collection.objects.get(id=coll)
+            print(collection.owner, request.user)
+            if collection.owner == request.user:
+                print(f"im {request.user} and im the owner")
+                return True
+        except:
+            return False
+
 
 class SnippetPermissions(permissions.BasePermission):
 
@@ -62,6 +73,10 @@ class SnippetPermissions(permissions.BasePermission):
         if obj.collection.owner == request.user:
             print(f"im {request.user} and im the owner")
             return True
+
+        if request.METHOD in ['PUT', 'DELETE'] and obj.owner != request.user:
+            print(f"I'm not the owner of this object")
+            return False
 
         if is_user_allowed(request.user, obj.collection):
             # if (obj.owner == request.user):
