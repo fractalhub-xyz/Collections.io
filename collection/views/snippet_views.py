@@ -5,14 +5,15 @@ from collection.permissions import *
 from rest_framework import viewsets, status, permissions, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from .viewset import ModelNoListViewset
 
 
-class SnippetViewSet(viewsets.ModelViewSet):
+class SnippetViewSet(ModelNoListViewset):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly, SnippetPermissions
-    ]
+    ]s
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -68,11 +69,11 @@ class UpvoteCommentView(APIView):
 
         return Response({
             'success': True,
-            'upvoted' : upvoted
+            'upvoted': upvoted
         }, status=status.HTTP_200_OK)
 
 
-class CommentViewSet(viewsets.ModelViewSet):
+class CommentViewSet(ModelNoListViewset):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 

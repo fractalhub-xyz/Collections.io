@@ -5,12 +5,13 @@ from django.db.models import Q, Count, Sum
 from datetime import datetime, timedelta
 
 from rest_framework import viewsets, generics, status, permissions
+from .viewset import ModelNoListViewset
 from collection.permissions import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
-class CollectionViewSet(viewsets.ModelViewSet):
+class CollectionViewSet(ModelNoListViewset):
     serializer_class = CollectionSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly, CollectionPermissions

@@ -51,7 +51,6 @@ class TagPermissions(permissions.BasePermission):
 class SnippetPermissions(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        print('in has_permission')
         if request.method != 'POST':
             return True
 
