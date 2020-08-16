@@ -1,5 +1,5 @@
 import React from "react";
-// import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 // import Login from "./components/loginPage/login";
 // import Home from "./components/homePage/home";
 // import Detail from "./components/detailPage/detail";
@@ -11,7 +11,11 @@ import React from "react";
 // import SideNav from "./components/common/sidenav";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 // import { ToastsContainer, ToastsStore } from "react-toasts";
+
 import Login from "./components/login/Login";
+import Home from "./components/home/Home";
+import Explore from "./components/explore/Explore";
+import Collection from "./components/collection/Collection";
 /*
 function App() {
   return (
@@ -56,7 +60,21 @@ function App() {
 } */
 
 function App() {
-  return <Login />;
+  return (
+    <Router>
+      <Switch>
+        <Route path="/home" exact>
+          <Home />
+        </Route>
+        <Route path="/explore" exact>
+          <Explore />
+        </Route>
+        <Route path="/collection/:id" exact>
+          <Collection />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;
