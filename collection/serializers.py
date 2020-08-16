@@ -23,13 +23,12 @@ class CommentSerializer(serializers.ModelSerializer):
 class SnippetSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     hearts = serializers.StringRelatedField(many=True, read_only=True)
-    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Snippet
         fields = [
             'id', 'owner', 'title', 'timestamp', 'type_of', 'link',
-            'collection', 'comments', 'hearts'
+            'collection', 'hearts'
         ]
 
 

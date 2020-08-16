@@ -37,9 +37,6 @@ export function postNewCollection(data) {
 export function postNewSnippet(data) {
   return api.post("/snippets/", data);
 }
-export function getCollections() {
-  return api.get("/collections");
-}
 export function getPopularCollections(limit = 10) {
   return api.get("/collections/popular?limit=" + limit);
 }
@@ -54,9 +51,6 @@ export function getSnippetFromID(id) {
 }
 export function getUserFromID(username) {
   return api.get(`/users/${username}`);
-}
-export function getSnippets() {
-  return api.get("/snippets");
 }
 export function deleteSnippet(id) {
   return api.delete(`/snippets/${id}/`);

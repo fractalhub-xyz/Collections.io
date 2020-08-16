@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./collection.sass"
 
 //api
 import { getCollectionFromID } from "../../helpers/api";
@@ -42,7 +43,12 @@ function Collection() {
     setRefresh(false);
   }, [refresh, params]);
 
-  return <div>{console.log(`collection ${collection.name}`)}</div>;
+  return (
+    <main className="collection">
+      <header>{collection.name}</header>
+      <section>{collection.desc}</section>
+    </main>
+  );
 }
 
 export default Collection;

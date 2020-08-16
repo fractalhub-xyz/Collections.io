@@ -16,6 +16,8 @@ import Login from "./components/login/Login";
 import Home from "./components/home/Home";
 import Explore from "./components/explore/Explore";
 import Collection from "./components/collection/Collection";
+import Snippet from "./components/snippet/Snippet";
+import User from "./components/user/User";
 /*
 function App() {
   return (
@@ -71,6 +73,12 @@ function App() {
         </Route>
         <Route path="/collection/:id" exact>
           <Collection />
+        </Route>
+        <Route path="/snippet/:id" exact>
+          <Snippet />
+        </Route>
+        <Route path="/user/:username" exact>
+          <User />
         </Route>
       </Switch>
     </Router>
