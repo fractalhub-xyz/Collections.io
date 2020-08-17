@@ -1,21 +1,45 @@
 $primary-size: 12px
+
+$form-width: 80vw    
 @import '../common/variables.sass'
 .login
     header
         font-size: 1rem
         color: $primary-color
 
-    .collection
-        color: #fff
-
-        .submit-btn:hover + &
-            color: #000
-
-        @media screen and ( max-width: 500 )
-            font-size: $header-size
-
-        &-description
-            color: #aaa
+    section
+        form
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            padding: 25px
+            border: 1px solid white
+            h1
+                width: $form-width
+                text-align: center
+                border-bottom: 2px solid white
+                padding-bottom: 10px
+                color: rgba(119, 90, 197, 0.836)
+            label
+                text-align: left
+                width: $form-width
+                margin-top: 20px
+                padding: 1px 2px
+            input
+                width: $form-width
+                margin-top: 5px
+                display: block
+                padding-top: 10px
+                padding-bottom: 10px
+                border-radius: 10px
+            p
+                color: red
+            button
+                width: $form-width
+                padding: 10px 2px
+                background: rgb(0, 247, 255)
+                margin-top: 50px
 
 body
     .login

@@ -1,14 +1,5 @@
 import React from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-// import Login from "./components/loginPage/login";
-// import Home from "./components/homePage/home";
-// import Detail from "./components/detailPage/detail";
-// import User from "./components/userPage/user";
-// import Notifications from "./components/notificationPage/notifications"
-// import SnippetDetail from "./components/detailPage/snippetdetail";
-// import Tag from "./components/tagPage/tag";
-// import Explore from "./components/homePage/explore";
-// import SideNav from "./components/common/sidenav";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 // import { ToastsContainer, ToastsStore } from "react-toasts";
 
@@ -65,6 +56,9 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/login" exact>
+          <Login />
+        </Route>
         <Route path="/home" exact>
           <Home />
         </Route>
