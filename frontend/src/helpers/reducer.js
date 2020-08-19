@@ -1,5 +1,6 @@
 export const initialState = {
   user: "",
+  modal: false,
 };
 
 const reducer = (state, action) => {
@@ -9,6 +10,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.user,
+      };
+    case "TOGGLE_MODAL":
+      return {
+        ...state,
+        modal: action.modal,
       };
     default:
       return state;

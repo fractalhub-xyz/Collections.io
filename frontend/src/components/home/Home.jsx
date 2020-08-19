@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./home.sass";
 //api
 import { getFollowedCollections } from "../../helpers/api";
+//componentss
+import { useStateValue } from "../../helpers/stateProvider";
 
 function Home() {
   //states
   const [followedCollections, setFollowedCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
+  //globalstates
+  const [, dispatch] = useStateValue();
   //mount
   useEffect(() => {
     // temp
@@ -43,6 +47,13 @@ function Home() {
               ))}
           {getError && <div>{getError}</div>}
         </div>
+        <button
+          onClick={() => {
+            dispatch({ type: "TOGGLE_MODAL", modal: true });
+          }}
+        >
+          OPEN MODAL
+        </button>
       </section>
     </main>
   );

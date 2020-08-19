@@ -9,6 +9,7 @@ import Explore from "./components/explore/Explore";
 import Collection from "./components/collection/Collection";
 import Snippet from "./components/snippet/Snippet";
 import User from "./components/user/User";
+import Modal from "./components/common/Modal";
 /*
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
 function App() {
   return (
     <Router>
+      <Modal />
       <Switch>
         <Route path="/login" exact>
           <Login />

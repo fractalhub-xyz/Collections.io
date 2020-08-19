@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./collection.sass"
+import "./collection.sass";
 
 //api
 import { getCollectionFromID } from "../../helpers/api";
 //components
 //modules
 import { useParams } from "react-router-dom";
+import { useStateValue } from "../../helpers/stateProvider";
 
 function Collection() {
   //states
@@ -16,6 +17,9 @@ function Collection() {
   const [getError, setGetError] = useState(null);
 
   const [refresh, setRefresh] = useState(true);
+
+  //global states
+  const [, dispatch] = useStateValue();
 
   const params = useParams();
 
@@ -47,6 +51,13 @@ function Collection() {
     <main className="collection">
       <header>{collection.name}</header>
       <section>{collection.desc}</section>
+      <button
+        onClick={() => {
+          dispatch({ type: "TOGGLE_MODAL", modal: true });
+        }}
+      >
+        OPEN MODAL
+      </button>
     </main>
   );
 }

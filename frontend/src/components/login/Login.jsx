@@ -28,6 +28,13 @@ function Login() {
         >
           reset
         </button>
+        <button
+          onClick={() => {
+            dispatch({ type: "TOGGLE_MODAL", modal: true });
+          }}
+        >
+          OPEN MODAL
+        </button>
       </section>
     </main>
   );
