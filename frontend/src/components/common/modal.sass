@@ -10,7 +10,37 @@
     justify-content: center
     align-items: center
 
-    .close-modal 
+    .close-modal
         position: fixed
         top: 20px
         right: 20px
+
+    form
+        border: 2px solid white
+        min-height: 50vh
+        width: 50vw
+        border-radius: 20px
+        background: rgba(70, 4, 145, 0.801)
+        padding: 20px
+        h1
+            text-align: center
+
+        section
+            label
+                font-size: 1.7rem
+                display: block
+                margin-bottom: 20px
+            input, textarea
+                width: 98%
+                font-size: 1.5
+                padding: 10px
+
+            textarea
+                height: 10vh
+            button
+                width: 100%
+                font-size: 2rem
+            .error-message
+                color: red
+                &::before
+                    content: "<Error> "

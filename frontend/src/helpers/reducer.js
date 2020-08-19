@@ -1,6 +1,7 @@
 export const initialState = {
   user: "",
   modal: false,
+  form: null,
 };
 
 const reducer = (state, action) => {
@@ -15,6 +16,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         modal: action.modal,
+        form: action.form,
       };
     default:
       return state;

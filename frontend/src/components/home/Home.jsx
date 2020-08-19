@@ -49,10 +49,25 @@ function Home() {
         </div>
         <button
           onClick={() => {
-            dispatch({ type: "TOGGLE_MODAL", modal: true });
+            dispatch({
+              type: "TOGGLE_MODAL",
+              modal: true,
+              form: "create_collection",
+            });
           }}
         >
-          OPEN MODAL
+          CREATE COLLECTIOn
+        </button>
+        <button
+          onClick={() => {
+            dispatch({
+              type: "TOGGLE_MODAL",
+              modal: true,
+              form: "edit_collection",
+            });
+          }}
+        >
+          EDIT COLLECTIOn
         </button>
       </section>
     </main>

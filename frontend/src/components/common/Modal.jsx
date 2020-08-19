@@ -1,21 +1,37 @@
 import React from "react";
 import "./modal.sass";
+//components
 import { useStateValue } from "../../helpers/stateProvider";
+
+import EditCollection from "./editCollection";
+import CreateCollection from "./createCollection.";
+
 function Modal() {
-  const [{ modal }, dispatch] = useStateValue();
+  const [{ modal, form }, dispatch] = useStateValue();
+
+  function CreateColl() {
+    return <CreateCollection />;
+  }
+  function EditColl() {
+    return <EditCollection />;
+  }
+
+  const map = {
+    create_collection: CreateColl,
+    edit_collection: EditColl,
+  };
+
+  const SelectedForm = map[form];
 
   return (
     <main>
       {modal && (
         <div className="modal">
-          <form>
-            <h3>this is a form</h3>
-            <h4>Another ele of the form</h4>
-          </form>
+          <SelectedForm />
           <button
             className="close-modal"
             onClick={() => {
-              dispatch({ type: "TOGGLE_MODAL", modal: false });
+              dispatch({ type: "TOGGLE_MODAL", modal: false, form: null });
             }}
           >
             close modal
