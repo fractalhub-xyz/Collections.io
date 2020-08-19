@@ -12,10 +12,15 @@ const reducer = (state, action) => {
         ...state,
         user: action.user,
       };
-    case "TOGGLE_MODAL":
+    case "CLOSE_MODAL":
       return {
         ...state,
-        modal: action.modal,
+        modal: false,
+      };
+    case "OPEN_FORM":
+      return {
+        ...state,
+        modal: true,
         form: action.form,
       };
     default:

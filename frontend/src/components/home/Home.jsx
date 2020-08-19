@@ -50,8 +50,7 @@ function Home() {
         <button
           onClick={() => {
             dispatch({
-              type: "TOGGLE_MODAL",
-              modal: true,
+              type: "OPEN_FORM",
               form: "create_collection",
             });
           }}
@@ -61,8 +60,7 @@ function Home() {
         <button
           onClick={() => {
             dispatch({
-              type: "TOGGLE_MODAL",
-              modal: true,
+              type: "OPEN_FORM",
               form: "edit_collection",
             });
           }}

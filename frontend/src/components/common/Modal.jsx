@@ -31,7 +31,7 @@ function Modal() {
           <button
             className="close-modal"
             onClick={() => {
-              dispatch({ type: "TOGGLE_MODAL", modal: false, form: null });
+              dispatch({ type: "CLOSE_MODAL", modal: false, form: null });
             }}
           >
             close modal
