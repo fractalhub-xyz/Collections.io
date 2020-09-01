@@ -73,7 +73,7 @@ class SnippetPermissions(permissions.BasePermission):
             print(f"im {request.user} and im the owner")
             return True
 
-        if request.METHOD in ['PUT', 'DELETE'] and obj.owner != request.user:
+        if request.method in ['PUT', 'DELETE'] and obj.owner != request.user:
             print(f"I'm not the owner of this object")
             return False
 
