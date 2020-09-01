@@ -11,7 +11,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
   //globalstates
-  const [, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   //mount
   useEffect(() => {
     // temp
@@ -34,7 +34,10 @@ function Home() {
 
   return (
     <main className="home">
-      <header>This should be aqua yellow</header>
+      <header>
+        This should be aqua yellow
+        <h2>USER : {user}</h2>
+      </header>
       <section>
         <div className="followedCollections">
           {isLoading
