@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://127.0.0.1:8000";
+const baseURL = process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000";
 
 const api = axios.create({
   baseURL,
@@ -95,17 +95,17 @@ export function getSnippetComments(id) {
   return api.get(`snippets/${id}/comments`);
 }
 export function postNewComment(data) {
-  return api.post("comments/", data)
+  return api.post("comments/", data);
 }
 export function DeleteComment(id) {
-  return api.delete(`comments/${id}`)
+  return api.delete(`comments/${id}`);
 }
 export function postCollectionSettings(id, data) {
-  return api.post(`collections/${id}/settings`, data)
+  return api.post(`collections/${id}/settings`, data);
 }
 export function postUpvoteComment(id) {
-  return api.post(`comments/${id}/upvote`)
+  return api.post(`comments/${id}/upvote`);
 }
 export function putEditComment(id, data) {
-  return api.put(`comments/${id}/`, data)
+  return api.put(`comments/${id}/`, data);
 }
