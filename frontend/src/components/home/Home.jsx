@@ -11,7 +11,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
   //globalstates
-  const [{ user }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   //mount
   useEffect(() => {
     // temp
@@ -36,7 +36,6 @@ function Home() {
     <main className="home">
       <header>
         This should be aqua yellow
-        <h2>USER : {user}</h2>
       </header>
       <section>
         <div className="followedCollections">
@@ -71,16 +70,16 @@ function Home() {
           EDIT COLLECTIOn
         </button>
         <div className="tiles">
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
-          <div className="tile">SUP</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
+          <div className="tile">Collection</div>
         </div>
       </section>
     </main>
