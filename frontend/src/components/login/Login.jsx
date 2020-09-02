@@ -26,21 +26,6 @@ function Login() {
       </header>
       <section>
         <LoginForm dispatch = {dispatch}/>
-        {/* <p>{user}</p>
-        <button
-          onClick={() => {
-            dispatch({ type: "SET_USER", user: "admin" });
-          }}
-        >
-          set
-        </button>
-        <button
-          onClick={() => {
-            dispatch({ type: "SET_USER", user: "not admin" });
-          }}
-        >
-          reset
-        </button> */}
       </section>
     </main>
   );

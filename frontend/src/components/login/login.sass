@@ -1,6 +1,7 @@
 $primary-size: 12px
-$Logo-size: 140px
-$form-width: 25vw    
+$Logo-size: 100px
+$form-width: 25vw 
+$form-font: 1.6rem   
 @import '../common/variables.sass'
 .login
     height: 100vh
@@ -12,7 +13,15 @@ $form-width: 25vw
         .streak
             height: calc(#{$Logo-size}/3)
             margin-top: 5px
-        .blue 
+            animation: swipe
+            animation-duration: 1s
+
+        @keyframes swipe
+            0%
+                width: 0vw
+            100%
+                width: 100vw
+        .blue
             background: #2d4059
         .red
             background: #ea5455
@@ -24,7 +33,7 @@ $form-width: 25vw
             color: $primary-color
             position: relative
             top: calc(#{$Logo-size}*-1*1.25)
-        
+
     section
         display: flex
         justify-content: center
@@ -36,7 +45,7 @@ $form-width: 25vw
             justify-content: center
             align-items: center
             padding: 25px
-            
+
             // border: 1px solid black
             width: $form-width
             h1
@@ -44,22 +53,23 @@ $form-width: 25vw
                 padding: 5px
                 margin: 0
                 color: #2d4059
-                font-size: 3.2rem
+                font-size: calc(#{$form-font} * 2)
             h2
                 width: $form-width
                 margin: 0
                 color: #2d4059
-                font-size: 1.3rem
+                font-size: calc(#{$form-font} * 0.7)
+                margin-bottom: 60px
             label
                 color: #2d4059
-                font-size: 1.3rem
+                font-size: calc(#{$form-font} * 0.8)
                 width: $form-width
-                margin-top: 20px
+                margin-top: 0px
                 padding: 1px 2px
             input
                 background: none
                 border: 3px solid #314969
-                font-size: 2rem
+                font-size: calc(#{$form-font} * 1)
                 width: $form-width
                 margin-left: 20px
                 margin-top: 5px
@@ -72,21 +82,19 @@ $form-width: 25vw
             button
                 background: #314969
                 border: 3px solid #2d4059
-                font-size: 2rem
+                font-size: calc(#{$form-font} * 0.8)
                 width: calc(#{$form-width} + 20px)
                 margin-left: 20px
-                margin-top: 75px
+                margin-top: 25px
                 display: block
                 padding-top: 15px
                 padding-bottom: 15px
-                font-size: 2rem
                 cursor: pointer
                 transition: 0.5s
                 color: $primary-color
 
                 &:hover
                     background: #3e5f8c
-                    
 
 body
     .login

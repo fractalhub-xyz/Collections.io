@@ -70,6 +70,18 @@ function Home() {
         >
           EDIT COLLECTIOn
         </button>
+        <div className="tiles">
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+          <div className="tile">SUP</div>
+        </div>
       </section>
     </main>
   );

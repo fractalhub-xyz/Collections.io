@@ -1,11 +1,42 @@
 @import '../common/variables.sass'
+$tile-bg: $primary-color
 .home
     header
         font-size: 1rem
         color: $primary-color
 
     section
-        .followedCollections            
+        .followedCollections
             h4
                 color: #5b685e
                 font-size: 1.25rem
+        .tiles
+            display: flex
+            justify-content: space-around
+            margin-top: 25px
+            flex-wrap: wrap
+            .tile
+                height: 300px
+                width: 300px
+                margin: 25px
+                background: $primary-color
+                color: black
+                border-radius: 10px
+                animation: 2s ease infinite pulse
+
+                @keyframes pulse
+                    0%
+                        background: $tile-bg
+                        transform: scale(1)
+
+                    25%
+                        background: darken($tile-bg, 50%)
+                        transform: scale(1.1)
+
+                    50%
+                        background: $tile-bg
+                        transform: scale(1)
+
+                @for $i from 1 through 10
+                    &:nth-child(#{$i})
+                        animation-delay: $i * (1s / 18)
