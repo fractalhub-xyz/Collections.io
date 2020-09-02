@@ -4,6 +4,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 // import { ToastsContainer, ToastsStore } from "react-toasts";
 
 import Login from "./components/login/Login";
+import Navbar from "./components/navbar/Navbar";
 import Home from "./components/home/Home";
 import Explore from "./components/explore/Explore";
 import Collection from "./components/collection/Collection";
@@ -56,11 +57,17 @@ function App() {
 function App() {
   return (
     <Router>
-      <Modal />
       <Switch>
         <Route path="/login" exact>
           <Login />
         </Route>
+      </Switch>
+
+      {/* <SideNav /> */}
+      <Navbar />
+      <Modal />
+
+      <Switch>
         <Route path="/home" exact>
           <Home />
         </Route>
