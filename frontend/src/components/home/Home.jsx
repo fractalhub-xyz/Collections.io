@@ -14,9 +14,6 @@ function Home() {
   const [, dispatch] = useStateValue();
   //mount
   useEffect(() => {
-    // temp
-    localStorage.setItem("token", "7f32ddcb88eb6ab14e786fa3bc90b260324e0a9c");
-    // temp
     console.log("[RENDERING] >> Home ");
     async function fetchFollowedCollection() {
       console.log("[GET] >> FollowedCollections");
