@@ -10,9 +10,6 @@ function Explore() {
   const [getError, setGetError] = useState(null);
   //mount
   useEffect(() => {
-    // temp
-    localStorage.setItem("token", "7f32ddcb88eb6ab14e786fa3bc90b260324e0a9c");
-    // temp
     console.log("[RENDERING] >> Explore ");
     async function fetchFollowedCollection() {
       console.log("[GET] >> PopularCollections");

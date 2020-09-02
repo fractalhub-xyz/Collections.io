@@ -64,8 +64,9 @@ function App() {
       </Switch>
 
       {/* <SideNav /> */}
-      <Navbar />
+
       <Modal />
+      <Navbar />
 
       <Switch>
         <Route path="/home" exact>
