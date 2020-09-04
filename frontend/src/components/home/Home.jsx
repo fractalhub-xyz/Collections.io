@@ -3,7 +3,7 @@ import "./home.sass";
 //api
 import { getFollowedCollections } from "../../helpers/api";
 //componentss
-import { useStateValue } from "../../helpers/stateProvider";
+// import { useStateValue } from "../../helpers/stateProvider";
 
 function Home() {
   //states
@@ -11,10 +11,19 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
   //globalstates
-  const [, dispatch] = useStateValue();
+  const [bg, setBg] = useState(
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
+  );
+
+  const mystyle = {
+    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${bg}) center / cover`,
+    // background: `url(${bg}) center / cover`,
+  };
+
   //mount
   useEffect(() => {
     console.log("[RENDERING] >> Home ");
+    setIsLoading(true);
     async function fetchFollowedCollection() {
       console.log("[GET] >> FollowedCollections");
       try {
@@ -31,22 +40,42 @@ function Home() {
 
   return (
     <main className="home">
-      <header>
-        This should be aqua yellow
-      </header>
+      <header>This should be aqua yellow</header>
       <section>
         <div className="followedCollections">
-          {isLoading
-            ? null
-            : followedCollections.map((collection) => (
-                <div key={collection.id}>
-                  {/* Insert component here */}
-                  <h4>{collection.name}</h4>
+          {isLoading ? (
+            <div className="tiles">
+              <div className="tile" />
+              <div className="tile" />
+              <div className="tile" />
+              <div className="tile" />
+              <div className="tile" />
+              <div className="tile" />
+              <div className="tile" />
+            </div>
+          ) : (
+            <div className="cards">
+              {followedCollections.map((collection) => (
+                <div key={collection.id} className="card">
+                  <div className="more">SUP </div>
+                  <div className="cover" style={mystyle}>
+                    <h4>{collection.name}</h4>
+                  </div>
                 </div>
               ))}
+            </div>
+
+            //   followedCollections.map((collection) => (
+            //   <div key={collection.id} className="card">
+            //     {/* Insert component here */}
+            //     <h4>{collection.name}</h4>
+            //   </div>
+            //   ))
+            // </div>
+          )}
           {getError && <div>{getError}</div>}
         </div>
-        <button
+        {/* <button
           onClick={() => {
             dispatch({
               type: "OPEN_FORM",
@@ -65,8 +94,8 @@ function Home() {
           }}
         >
           EDIT COLLECTIOn
-        </button>
-        <div className="tiles">
+        </button> */}
+        {/* <div className="tiles">
           <div className="tile">Collection</div>
           <div className="tile">Collection</div>
           <div className="tile">Collection</div>
@@ -77,7 +106,7 @@ function Home() {
           <div className="tile">Collection</div>
           <div className="tile">Collection</div>
           <div className="tile">Collection</div>
-        </div>
+        </div> */}
       </section>
     </main>
   );

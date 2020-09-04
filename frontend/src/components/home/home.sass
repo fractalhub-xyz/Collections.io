@@ -1,42 +1,86 @@
 @import '../common/variables.sass'
-$tile-bg: $primary-color
+$tab-size: 250px
+$tile-size: 200px
 .home
+    margin-left: 150px
     header
         font-size: 1rem
         color: $primary-color
 
     section
         .followedCollections
+            height: $tab-size
+            background: $secondary-color
+            border-top-left-radius: 30px
+            border-bottom-left-radius: 30px
+            padding: 20px
             h4
                 color: #5b685e
                 font-size: 1.25rem
-        .tiles
-            display: flex
-            justify-content: space-around
-            margin-top: 25px
-            flex-wrap: wrap
-            .tile
-                height: 300px
-                width: 300px
-                margin: 25px
-                background: $primary-color
-                color: black
-                border-radius: 10px
-                animation: 2s ease infinite pulse
+            .tiles
+                display: flex
+                align-items: center
+                .tile
+                    height: $tile-size
+                    width: $tile-size
+                    margin: 25px
+                    background: $primary-color
+                    border-radius: 10px
+                    animation: 4s ease infinite pulse
 
-                @keyframes pulse
-                    0%
-                        background: $tile-bg
-                        transform: scale(1)
+                    @keyframes pulse
+                        0%
+                            background: $primary-color
+                            transform: scale(1)
 
-                    25%
-                        background: darken($tile-bg, 50%)
-                        transform: scale(1.1)
+                        25%
+                            background: darken($primary-color, 50%)
+                            transform: scale(1.1)
 
-                    50%
-                        background: $tile-bg
-                        transform: scale(1)
+                        50%
+                            background: $primary-color
+                            transform: scale(1)
 
-                @for $i from 1 through 10
-                    &:nth-child(#{$i})
-                        animation-delay: $i * (1s / 18)
+                    @for $i from 1 through 10
+                        &:nth-child(#{$i})
+                            animation-delay: $i * (1s / 10)
+            .cards
+                display: flex
+                align-items: center
+                .card
+
+                    height: $tile-size
+                    width: $tile-size
+                    margin: 25px
+                    background: $primary-color
+                    border-radius: 10px
+                    box-shadow: 2px 2px 15px 5px $shadow-color
+                    cursor: pointer
+                    overflow: hidden
+                    .more
+                        height: 100%
+                        width: 100%
+                        background: white
+                        transform: translateY(calc(#{$tile-size} * -1))
+                        transition: 0.3s
+
+                    .cover
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        height: 100%
+                        width: 100%
+                        position:
+                        top: 0px
+                        left: 0px
+                        transform: translateY(calc(#{$tile-size} * -1))
+                        transition: 0.3s
+
+                        h4
+                            color: white
+
+                    &:hover
+                        .more
+                            transform: translateY(calc(#{$tile-size} * 0))
+                        .cover
+                            transform: translateY(calc(#{$tile-size} * 0))

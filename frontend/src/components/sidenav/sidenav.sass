@@ -1,0 +1,49 @@
+@import '../common/variables.sass'
+$nav-button: 60px
+
+.side-nav
+    position: fixed
+    z-index: 999999
+    top: 100px
+    left: 0px
+    .container
+        height: calc( 100vh -  #{$nav-height} - 50px) 
+        width: 100px
+        background: $primary-color
+        filter: brightness($accent-per)
+        border-top-right-radius: 30px
+        border-bottom-right-radius: 30px
+        transition: 0.4s
+        cursor: pointer
+        box-shadow: 2px 2px 10px 1px $shadow-color
+
+        .gap
+            height: 10px
+            width: 70px
+
+        .nav-button
+            min-width: 70px
+            height: 55px
+            margin: 0 15px
+            background: grey
+            border-radius: 35px
+            overflow: hidden
+            display: flex
+            align-items: center
+            transition: 0.3s
+
+            .icon
+                margin-left: 19px
+                font-size: 2rem
+
+            .link
+                margin-left: 25px
+                font-size: 1.3rem
+
+            &:hover 
+                background: blue
+        .active 
+            background: black
+        &:hover
+            width: 250px
+            

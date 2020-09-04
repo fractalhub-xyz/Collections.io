@@ -10,13 +10,18 @@ function Sidenav() {
       <div className="container">
         <div className="gap" />
         <div className="nav-button">
-          <div className="icon"></div>
+          <div className="icon">IC</div>
           <div className="link">Home</div>
         </div>
         <div className="gap" />
+        <div className="nav-button active">
+          <div className="icon">IC</div>
+          <div className="link">Explore</div>
+        </div>
+        <div className="gap" />
         <div className="nav-button">
-          <div className="icon"></div>
-          <div className="link">Home</div>
+          <div className="icon">IC</div>
+          <div className="link">Placehodler</div>
         </div>
       </div>
     </main>
