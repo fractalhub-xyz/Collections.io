@@ -9,8 +9,18 @@ function Navbar() {
 
   return (
     <main className="navbar">
-      <div className="user"> {user}</div>
-      <div className="user-icon" />
+      <div className="nav-left">
+        <div className="logo">LOGO</div>
+        <div className="nav-search">
+          <div className="search-icon">o?</div>
+          <input type="text" placeholder="Search"></input>
+        </div>
+      </div>
+      <div className="nav-control">
+        <div className="icon"></div>
+        <div className="icon"></div>
+        <div className="user-icon" />
+      </div>
     </main>
   );
 }

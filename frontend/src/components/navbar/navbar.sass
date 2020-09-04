@@ -1,19 +1,59 @@
 @import '../common/variables.sass'
 $tile-bg: $primary-color
+$nav-height: 70px
+$margin: 15px
+$search-width: 300px
 .navbar
-    height: 80px
-    border: 2px solid red
+    margin: 15px 0px
     display: flex
+    justify-content: space-between
     align-items: center
-    justify-content: flex-end
-    .user-icon
-        height: 60px
-        width: 60px
-        background: $primary-color
-        border-radius: 50%
-        margin-right: 15px
-    .user
-        font-size: 1.6rem
-        margin-right: 20px
-        text-transform: capitalize
-        
+
+    .nav-left
+        .logo
+            margin-left: $margin
+            height: calc( #{$nav-height} - #{$margin} )
+            float: left
+            width: 300px
+            background: rgba(255, 255, 255, 0.288)
+
+        .nav-search
+            height: calc( #{$nav-height} - #{$margin} )
+            float: left
+            margin-left: 50px
+            width: $search-width
+            background: $primary-color
+            border-radius: 30px
+            .search-icon
+                float: left
+                color: black
+            input
+                background: $primary-color
+                padding: 0px
+                border: none
+                float: right
+                border-radius: 30px
+
+                height: 100%
+                width: calc( #{$search-width} - 30px)
+    .nav-control
+        display: flex
+        align-items: center
+        justify-content: space-between
+        width: 300px
+        height: calc( #{$nav-height} - 10px )
+        border: 2px solid white
+        border-radius: 30px
+        margin-right: $margin
+        float: right
+        .icon
+            height: calc( #{$nav-height} - 20px )
+            width: calc( #{$nav-height} - 20px )
+            background: $primary-color
+            border-radius: 50%
+            margin-left: 10px
+        .user-icon
+            height: $nav-height
+            width: $nav-height
+            background: $primary-color
+            border-radius: 50%

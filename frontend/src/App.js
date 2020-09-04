@@ -5,6 +5,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
 import Login from "./components/login/Login";
 import Navbar from "./components/navbar/Navbar";
+import SideNav from "./components/sidenav/Sidenav"
 import Home from "./components/home/Home";
 import Explore from "./components/explore/Explore";
 import Collection from "./components/collection/Collection";
@@ -67,6 +68,7 @@ function App() {
 
       <Modal />
       <Navbar />
+      <SideNav />
 
       <Switch>
         <Route path="/home" exact>
