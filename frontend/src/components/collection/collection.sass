@@ -1,8 +1,39 @@
 @import '../common/variables.sass'
+$card-dim: 250px
 .collection
+    margin-left: 150px
+    margin-top: 50px
     header
-        font-size: 1rem
-        color: $primary-color
+        .detail
+            height: $card-dim
+            width: calc( #{$card-dim} * 2.2 )
+            padding: 20px
+            color: black
+            border-radius: 30px
+            background: $primary-color
+            filter: brightness(110%)
+            //temp
+            margin-bottom: 50px
+
+            display: flex
+            .stats
+                width: 25px
+                border: 2px solid red
+                height: $card-dim
+            .card
+                height: $card-dim
+                min-width: $card-dim
+                border-radius: 25px
+                margin: 0px 10px
+            .info
+                margin-top: 20px
+                height: $card-dim
+                .name
+                    font-size: 2rem
+                .owner
+                    strong
+                        text-transform: capitalize
+                .desc
 
     section
-           color: #0000e9a4
+        color: #0000e9a4

@@ -18,6 +18,15 @@ function Collection() {
 
   const [refresh, setRefresh] = useState(true);
 
+  const [bg, setBg] = useState(
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
+  );
+
+  const coll_bg = {
+    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${bg}) center / cover`,
+    // background: `url(${bg}) center / cover`,
+  };
+
   //global states
   const [, dispatch] = useStateValue();
 
@@ -25,6 +34,10 @@ function Collection() {
 
   // lifecycle functions
   useEffect(() => {
+    dispatch({
+      type: "SET_PAGE",
+      page: "collection_detail",
+    });
     console.log("[RENDER] >> Collection");
     if (!refresh) {
       return;
@@ -49,8 +62,21 @@ function Collection() {
 
   return (
     <main className="collection">
-      <header>{collection.name}</header>
-      <section>{collection.desc}</section>
+      <header>
+        <div className="detail">
+          <div className="stats"></div>
+          <div className="card" style={coll_bg}></div>
+          <div className="info">
+            <div className="name">{collection.name}</div>
+            <div className="owner">
+              by<strong>&nbsp;{collection.owner}</strong>
+            </div>
+            <br />
+            <div className="desc">{collection.desc}</div>
+          </div>
+        </div>
+      </header>
+      <section>SECTION</section>
       <button
         onClick={() => {
           dispatch({ type: "TOGGLE_MODAL", modal: true });

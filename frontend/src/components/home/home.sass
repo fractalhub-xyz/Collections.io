@@ -63,6 +63,18 @@ $tile-size: 200px
                         background: white
                         transform: translateY(calc(#{$tile-size} * -1))
                         transition: 0.3s
+                        color: black
+                        .created_by
+                            margin-left: 15px
+                            padding-top: 15px
+                            font-size: 0.8rem
+                        .owner
+                            margin-left: 15px
+                            font-size: 2rem
+                            text-transform: capitalize
+                            color: $accent-color
+                            &::before
+                                content: "@"
 
                     .cover
                         display: flex

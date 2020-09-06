@@ -2,6 +2,7 @@ export const initialState = {
   user: "",
   modal: false,
   form: null,
+  page: null,
 };
 
 const reducer = (state, action) => {
@@ -22,6 +23,11 @@ const reducer = (state, action) => {
         ...state,
         modal: true,
         form: action.form,
+      };
+    case "SET_PAGE":
+      return {
+        ...state,
+        page: action.page,
       };
     default:
       return state;
