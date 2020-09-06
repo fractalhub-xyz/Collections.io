@@ -23,11 +23,13 @@ function Modal() {
 
   const SelectedForm = map[form];
 
+  console.log("HELLOOOOOOO", modal);
+
   return (
     <main>
       {modal && (
         <div className="modal">
-          <SelectedForm />
+          {SelectedForm ? <SelectedForm /> : "Error finding your form"}
           <button
             className="close-modal"
             onClick={() => {

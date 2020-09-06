@@ -19,7 +19,7 @@ function Collection() {
   const [refresh, setRefresh] = useState(true);
 
   const [bg, setBg] = useState(
-    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271",
   );
 
   const coll_bg = {
@@ -79,7 +79,7 @@ function Collection() {
       <section>SECTION</section>
       <button
         onClick={() => {
-          dispatch({ type: "TOGGLE_MODAL", modal: true });
+          dispatch({ type: "OPEN_FORM", form: "sdfsd" });
         }}
       >
         OPEN MODAL
