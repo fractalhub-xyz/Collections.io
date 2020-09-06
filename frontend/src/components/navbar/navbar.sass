@@ -21,27 +21,28 @@ $search-width: 300px
             height: calc( #{$nav-height} - #{$margin} )
             float: left
             margin-left: 50px
-            background: $primary-color
-            filter: brightness($accent-per)
             border-radius: 30px
-            box-shadow: 2px 2px 10px 1px $shadow-color
-            .search-icon
-                // border: 2px solid black
+            box-shadow: 2px 2px 10px 1px $light-shadow
+            background: $light-bg-step
+
+            .dark &
+                background: $dark-bg-step
+                box-shadow: 2px 2px 10px 1px $dark-shadow
+
             input
-                background: $primary-color
                 padding: 0px
                 border: none
+                background: inherit
                 float: left
                 border-radius: 30px
                 margin-left: 30px
-                transition: 0.4s
+                transition: width 0.4s ease-in
                 height: 100%
                 width: $search-width
-                
-                &:focus
-                   width: calc( #{$search-width} + 400px)
 
-                    
+                &:focus
+                    width: calc( #{$search-width} + 400px)
+
     .nav-control
         display: flex
         align-items: center
@@ -51,9 +52,13 @@ $search-width: 300px
         margin-right: $margin
         border-radius: 30px
         float: right
-        background: $primary-color
-        filter: brightness($accent-per)
-        box-shadow: 2px 2px 12px 2px $shadow-color
+        background: $light-bg-step
+        box-shadow: 2px 2px 12px 2px $light-shadow
+
+        .dark &
+            background: $dark-bg-step
+            box-shadow: 2px 2px 12px 2px $dark-shadow
+
         .icon
             height: calc( #{$nav-height} - 20px )
             width: calc( #{$nav-height} - 20px )

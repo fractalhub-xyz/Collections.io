@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./navbar.sass";
 //modueles
 import { useHistory } from "react-router-dom";
@@ -9,7 +9,22 @@ function Navbar() {
   //init
   const [{ user }] = useStateValue();
   let history = useHistory();
-  //globalstates
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const newTheme = theme == "light" ? "dark" : "light";
+
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
   return (
     <main className="navbar">
@@ -23,6 +38,7 @@ function Navbar() {
       <div className="nav-control">
         <div className="icon"></div>
         <div className="icon"></div>
+        <button onClick={toggleTheme}>{theme}</button>
         <div
           onClick={() => {
             history.push(`/user/${user}`);

@@ -2,6 +2,18 @@ $header-size: 24px
 $subtitle-size: 18px
 $text-size: 12px
 
+$light-bg: #e5e5e5
+$dark-bg: #1a1a1a
+
+$light-bg-step: scale-color($light-bg, $lightness: 40%)
+$dark-bg-step: scale-color($dark-bg, $lightness: 5%)
+
+$light-color: $dark-bg
+$dark-color: $light-bg
+
+$light-shadow: scale-color($dark-bg, $lightness: 50%)
+$dark-shadow: scale-color($light-bg, $lightness: -75%)
+
 $primary-color: #e5e5e5
 $accent-per: 130%
 $secondary-color: rgba(0,0,0, 0.2)

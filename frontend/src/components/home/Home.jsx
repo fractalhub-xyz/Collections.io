@@ -51,13 +51,11 @@ function Home() {
         <div className="followedCollections">
           {isLoading ? (
             <div className="tiles">
-              <div className="tile" />
-              <div className="tile" />
-              <div className="tile" />
-              <div className="tile" />
-              <div className="tile" />
-              <div className="tile" />
-              <div className="tile" />
+              {Array(6)
+                .fill("")
+                .map((_, i) => (
+                  <div key={i} className="tile" />
+                ))}
             </div>
           ) : (
             <div className="cards">

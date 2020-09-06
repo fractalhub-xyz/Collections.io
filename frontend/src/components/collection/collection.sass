@@ -8,14 +8,15 @@ $card-dim: 250px
             height: $card-dim
             width: calc( #{$card-dim} * 2.2 )
             padding: 20px
-            color: black
             border-radius: 30px
-            background: $primary-color
-            filter: brightness(110%)
+            display: flex
             //temp
             margin-bottom: 50px
+            background: $light-bg-step
 
-            display: flex
+            .dark &
+                background: $dark-bg-step
+
             .stats
                 width: 25px
                 border: 2px solid red

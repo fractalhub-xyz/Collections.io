@@ -1,6 +1,15 @@
 @import '../common/variables.sass'
 $tab-size: 250px
 $tile-size: 200px
+
+body
+    background-color: $light-bg
+    color: $light-color
+
+    &.dark
+        background-color: $dark-bg
+        color: $dark-color
+
 .home
     margin-left: 150px
     header
@@ -10,10 +19,14 @@ $tile-size: 200px
     section
         .followedCollections
             height: $tab-size
-            background: $secondary-color
             border-top-left-radius: 30px
             border-bottom-left-radius: 30px
             padding: 20px
+            background: $light-bg-step
+
+            .dark &
+                background: $dark-bg-step
+
             h4
                 color: #5b685e
                 font-size: 1.25rem
@@ -47,16 +60,32 @@ $tile-size: 200px
             .cards
                 display: flex
                 align-items: center
-                .card
 
+                .card
                     height: $tile-size
                     width: $tile-size
                     margin: 25px
-                    background: $primary-color
                     border-radius: 10px
-                    box-shadow: 2px 2px 15px 5px $shadow-color
                     cursor: pointer
                     overflow: hidden
+                    animation: 0.1s ease custom-fade
+                    animation-fill-mode: both
+                    box-shadow: 2px 2px 15px 5px $light-shadow
+
+                    .dark &
+                        box-shadow: 2px 2px 15px 5px $dark-shadow
+
+                    @keyframes custom-fade
+                        from
+                            opacity: 0
+
+                        to
+                            opacity: 1
+
+                    @for $i from 1 through 10
+                        &:nth-child(#{$i})
+                            animation-delay: $i * (1s / 20)
+
                     .more
                         height: 100%
                         width: 100%

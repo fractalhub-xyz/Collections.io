@@ -7,15 +7,19 @@ $nav-button: 60px
     top: 100px
     left: 0px
     .container
-        height: calc( 100vh -  #{$nav-height} - 50px) 
+        height: calc( 100vh -  #{$nav-height} - 50px)
         width: 100px
-        background: $primary-color
+        background: $light-bg
         filter: brightness($accent-per)
         border-top-right-radius: 30px
         border-bottom-right-radius: 30px
-        transition: 0.4s
+        transition: width 0.4s ease-in
         cursor: pointer
-        box-shadow: 2px 2px 10px 1px $shadow-color
+        box-shadow: 2px 2px 10px 1px $light-shadow
+
+        .dark &
+            background: $dark-bg
+            box-shadow: 2px 2px 10px 1px $dark-shadow
 
         .gap
             height: 10px
@@ -30,7 +34,7 @@ $nav-button: 60px
             overflow: hidden
             display: flex
             align-items: center
-            transition: 0.3s
+            transition: width 0.3s ease-in
 
             .icon
                 margin-left: 19px
@@ -40,10 +44,9 @@ $nav-button: 60px
                 margin-left: 25px
                 font-size: 1.3rem
 
-            &:hover 
+            &:hover
                 background: blue
-        .active 
+        .active
             background: black
         &:hover
             width: 250px
-            

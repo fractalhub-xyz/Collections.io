@@ -6,9 +6,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e5e5e5;
-  color: white;
 }
+
+* {
+  transition: background 0.09s ease-in;
+}
+
 *::-webkit-scrollbar {
   display: none;
 }
@@ -20,11 +23,11 @@ code {
 
 a {
   text-decoration: none;
-  color: white;
+  color: inherit;
 }
 
 a:visited {
-  color: white;
+  color: inherit;
 }
 
 .customSlider .slick-track {
