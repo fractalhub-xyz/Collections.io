@@ -8,7 +8,7 @@ $nav-button: 60px
     left: 0px
     .container
         height: calc( 100vh -  #{$nav-height} - 50px)
-        width: 100px
+        width: 90px
         background: $light-bg
         filter: brightness($accent-per)
         border-top-right-radius: 30px
@@ -26,7 +26,7 @@ $nav-button: 60px
             width: 70px
 
         .nav-button
-            min-width: 70px
+            min-width: 60px
             height: 55px
             margin: 0 15px
             background: grey
@@ -35,18 +35,25 @@ $nav-button: 60px
             display: flex
             align-items: center
             transition: width 0.3s ease-in
+            color: white
 
+            .dark &
+                color: black
             .icon
                 margin-left: 19px
                 font-size: 2rem
+                color: inherit
 
+            
             .link
                 margin-left: 25px
                 font-size: 1.3rem
 
             &:hover
-                background: blue
+                background: $accent-color
+                background: lighten($accent-color, 12%)
+
         .active
-            background: black
+            background: $accent-color
         &:hover
             width: 250px

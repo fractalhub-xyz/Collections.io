@@ -46,7 +46,7 @@ function Home() {
 
   return (
     <main className="home">
-      <header>This should be aqua yellow</header>
+      <header></header>
       <section>
         <div className="followedCollections">
           {isLoading ? (
@@ -80,7 +80,7 @@ function Home() {
           )}
           {getError && <div>{getError}</div>}
         </div>
-        <button
+        {/* <button
           onClick={() => {
             dispatch({
               type: "OPEN_FORM",
@@ -99,7 +99,7 @@ function Home() {
           }}
         >
           EDIT COLLECTIOn
-        </button>
+        </button> */}
       </section>
     </main>
   );

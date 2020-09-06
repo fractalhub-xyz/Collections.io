@@ -4,8 +4,8 @@ import "./sidenav.sass";
 import { useHistory } from "react-router-dom";
 
 const ITEMS = [
-  { title: "Home", url: "/home" },
-  { title: "Explore", url: "/explore" },
+  { title: "Home", url: "/home" , icon : "H"},
+  { title: "Explore", url: "/explore" , icon : "E"},
 ];
 
 function Sidenav() {
@@ -16,7 +16,7 @@ function Sidenav() {
   return (
     <main className="side-nav">
       <div className="container">
-        {ITEMS.map(({ title, url }) => (
+        {ITEMS.map(({ title, url, icon }) => (
           <>
             <div className="gap" />
             <div
@@ -26,7 +26,7 @@ function Sidenav() {
                 history.push(url);
               }}
             >
-              <div className="icon">IC</div>
+              <div className="icon">{icon}</div>
               <div className="link">{title}</div>
             </div>
           </>

@@ -11,6 +11,7 @@ body
         color: $dark-color
 
 .home
+    margin-top: 30px
     margin-left: 150px
     header
         font-size: 1rem
@@ -23,6 +24,8 @@ body
             border-bottom-left-radius: 30px
             padding: 20px
             background: $light-bg-step
+            border-right: 30px solid $accent-color
+            border-left: 4px solid $accent-color
 
             .dark &
                 background: $dark-bg-step
@@ -70,7 +73,7 @@ body
                     overflow: hidden
                     animation: 0.1s ease custom-fade
                     animation-fill-mode: both
-                    box-shadow: 2px 2px 15px 5px $light-shadow
+                    box-shadow: 5px 5px 5px $light-shadow
 
                     .dark &
                         box-shadow: 2px 2px 15px 5px $dark-shadow
@@ -104,7 +107,9 @@ body
                             color: $accent-color
                             &::before
                                 content: "@"
-
+                        .dark &
+                            background: rgb(29, 29, 29)
+                            color: white
                     .cover
                         display: flex
                         align-items: center
