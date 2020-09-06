@@ -21,7 +21,7 @@ function LoginForm({ dispatch }) {
     };
     try {
       const response = await postLogin(payload);
-      console.log(response.data.token)
+      console.log(response.data.token);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", data.username);
       dispatch({ type: "SET_USER", user: data.username });

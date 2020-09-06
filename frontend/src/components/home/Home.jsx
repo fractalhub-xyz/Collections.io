@@ -13,9 +13,8 @@ function Home() {
   const [getError, setGetError] = useState(null);
   //globalstates\
 
-  
   const [bg, setBg] = useState(
-    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271",
   );
 
   const mystyle = {
@@ -29,14 +28,10 @@ function Home() {
 
   //mount
   useEffect(() => {
-    dispatch({
-      type: "SET_PAGE",
-      page: "home",
-    });
     console.log("[RENDERING] >> Home ");
-    setIsLoading(true);
     async function fetchFollowedCollection() {
       console.log("[GET] >> FollowedCollections");
+      setIsLoading(true);
       try {
         const response = await getFollowedCollections();
         setFollowedCollections(response.data);
@@ -44,9 +39,9 @@ function Home() {
         console.log(`[ERROR] >> ${error.response}`);
         setGetError("Error communicating with server");
       }
+      setIsLoading(false);
     }
     fetchFollowedCollection();
-    setIsLoading(false);
   }, []);
 
   return (
@@ -87,7 +82,7 @@ function Home() {
           )}
           {getError && <div>{getError}</div>}
         </div>
-        {/* <button
+        <button
           onClick={() => {
             dispatch({
               type: "OPEN_FORM",
@@ -106,19 +101,7 @@ function Home() {
           }}
         >
           EDIT COLLECTIOn
-        </button> */}
-        {/* <div className="tiles">
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-          <div className="tile">Collection</div>
-        </div> */}
+        </button>
       </section>
     </main>
   );

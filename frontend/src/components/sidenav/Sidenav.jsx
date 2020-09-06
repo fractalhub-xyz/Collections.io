@@ -1,53 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "./sidenav.sass";
-//api
-//components
-import { useStateValue } from "../../helpers/stateProvider";
 //modules
 import { useHistory } from "react-router-dom";
+
+const ITEMS = [
+  { title: "Home", url: "/home" },
+  { title: "Explore", url: "/explore" },
+];
 
 function Sidenav() {
   //init
   let history = useHistory();
-
-  //GlobalStates
-  const [{ page }] = useStateValue();
+  const [activeUrl, setActiveUrl] = useState(window.location.pathname);
 
   return (
     <main className="side-nav">
       <div className="container">
-        <div className="gap" />
-        <div
-          className={page === "home" ? "nav-button active" : "nav-button"}
-          onClick={() => {
-            history.push(`/home`);
-          }}
-        >
-          <div className="icon">IC</div>
-          <div className="link">Home</div>
-        </div>
-        <div className="gap" />
-        <div
-          className={page === "explore" ? "nav-button active" : "nav-button"}
-          onClick={() => {
-            history.push(`/explore`);
-          }}
-        >
-          <div className="icon">IC</div>
-          <div className="link">Explore</div>
-        </div>
-        <div className="gap" />
-        <div
-          className={
-            page === "placeholder" ? "nav-button active" : "nav-button"
-          }
-          onClick={() => {
-            history.push(`dunno`)
-          }}
-        >
-          <div className="icon">IC</div>
-          <div className="link">Placehodler</div>
-        </div>
+        {ITEMS.map(({ title, url }) => (
+          <>
+            <div className="gap" />
+            <div
+              className={activeUrl === url ? "nav-button active" : "nav-button"}
+              onClick={() => {
+                setActiveUrl(url);
+                history.push(url);
+              }}
+            >
+              <div className="icon">IC</div>
+              <div className="link">{title}</div>
+            </div>
+          </>
+        ))}
       </div>
     </main>
   );

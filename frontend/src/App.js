@@ -5,7 +5,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
 import Login from "./components/login/Login";
 import Navbar from "./components/navbar/Navbar";
-import SideNav from "./components/sidenav/Sidenav"
+import SideNav from "./components/sidenav/Sidenav";
 import Home from "./components/home/Home";
 import Explore from "./components/explore/Explore";
 import Collection from "./components/collection/Collection";
@@ -55,21 +55,12 @@ function App() {
   );
 } */
 
-function App() {
+function AuthenticatedRoutes() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/login" exact>
-          <Login />
-        </Route>
-      </Switch>
-
-      {/* <SideNav /> */}
-
+    <>
       <Navbar />
-      <SideNav />
       <Modal />
-
+      <SideNav />
       <Switch>
         <Route path="/home" exact>
           <Home />
@@ -85,6 +76,21 @@ function App() {
         </Route>
         <Route path="/user/:username" exact>
           <User />
+        </Route>
+      </Switch>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/login" exact>
+          <Login />
+        </Route>
+        <Route path="/">
+          <AuthenticatedRoutes />
         </Route>
       </Switch>
     </Router>
