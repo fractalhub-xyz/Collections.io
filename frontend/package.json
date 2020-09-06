@@ -21,6 +21,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-toasts": "^3.0.6",
+    "react-toggle": "^4.1.1",
     "react-tooltip": "^4.2.7",
     "redux": "^4.0.5"
   },

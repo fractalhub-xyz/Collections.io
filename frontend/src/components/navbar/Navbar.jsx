@@ -4,6 +4,8 @@ import "./navbar.sass";
 import { useHistory } from "react-router-dom";
 //componentss
 import { useStateValue } from "../../helpers/stateProvider";
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
 
 function Navbar() {
   //init
@@ -38,7 +40,11 @@ function Navbar() {
       <div className="nav-control">
         <div className="icon"></div>
         <div className="icon"></div>
-        <button onClick={toggleTheme}>{theme}</button>
+        <Toggle
+          icons={false}
+          onChange={toggleTheme}
+          defaultChecked={theme === "dark"}
+        />
         <div
           onClick={() => {
             history.push(`/user/${user}`);
