@@ -1,6 +1,5 @@
-$primary-size: 12px
-$Logo-size: 100px
-$form-width: 25vw 
+$Logo-size: 5rem
+$form-width: 23rem
 $form-font: 1.6rem   
 @import '../common/variables.sass'
 .login
@@ -44,62 +43,59 @@ $form-font: 1.6rem
             display: flex
             flex-direction: column
             justify-content: center
-            align-items: center
+            align-items: flex-start
             padding: 25px
-
-            // border: 1px solid black
-            width: $form-width
+            background: $light-bg-step
+            box-shadow: 2px 2px 10px 1px $light-shadow
+            border-radius: 20px
+            min-height: 50vh
             h1
-                width: $form-width
-                padding: 5px
+                padding: 0
                 margin: 0
                 color: #2d4059
                 font-size: calc(#{$form-font} * 2)
             h2
-                width: $form-width
                 margin: 0
                 color: #2d4059
                 font-size: calc(#{$form-font} * 0.7)
-                margin-bottom: 60px
+                margin-bottom: 40px
             label
                 color: #2d4059
                 font-size: calc(#{$form-font} * 0.8)
-                width: $form-width
                 margin-top: 0px
                 padding: 1px 2px
+                font-weight: 100
             input
-                background: none
-                border: 3px solid #314969
-                font-size: calc(#{$form-font} * 1)
-                width: $form-width
-                margin-left: 20px
+                background: #efefef
+                border: none
+                box-shadow: inset 10px 10px 20px #e3e3e3, inset -10px -10px 20px #fbfbfb
+                font-size: calc(#{$form-font} * 0.6)
                 margin-top: 5px
-                display: block
-                padding-top: 10px
-                padding-bottom: 10px
-                padding-left: 10px
+                padding: 10px
+                border-radius: 10px
+                min-width: $form-width
             p
                 color: red
+            .toggle
+                font-weight: 100
+                cursor: pointer
+                font-size: calc(#{$form-font} * 0.5)
+                transition: 0.4s
+                &:hover
+                    transform: scale(1.05)
             button
                 background: #314969
                 border: 3px solid #2d4059
                 font-size: calc(#{$form-font} * 0.8)
-                width: calc(#{$form-width} + 20px)
-                margin-left: 20px
-                margin-top: 25px
                 display: block
-                padding-top: 15px
-                padding-bottom: 15px
                 cursor: pointer
                 transition: 0.5s
                 color: $primary-color
+                width: 100%
+                padding-top: 10px
+                padding-bottom: 10px
+                border-radius: 10px
+                margin-top: 20px
 
                 &:hover
                     background: #3e5f8c
-
-body
-    .login
-        .collection
-            .dark
-
-        .submit-btn

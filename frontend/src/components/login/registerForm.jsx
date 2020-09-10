@@ -1,40 +1,31 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 //modules
-import { useHistory } from "react-router-dom";
 //api
-import { postLogin } from "../../helpers/api";
+import { postRegister } from "../../helpers/api";
 
-function LoginForm({ dispatch, setIsLogin }) {
+function RegisterForm({ dispatch, setIsLogin }) {
   const { register, handleSubmit, errors } = useForm();
-  //setup
-  let history = useHistory();
 
-  const redirect = () => {
-    history.push("/home");
-  };
-
-  const loginReq = async (data) => {
+  const registerReq = async (data) => {
     const payload = {
       username: data.username,
+      email: data.email,
       password: data.password,
     };
     try {
-      const response = await postLogin(payload);
-      console.log(response.data.token);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", data.username);
-      dispatch({ type: "SET_USER", user: data.username });
-      setTimeout(redirect, 200);
+      const response = await postRegister(payload);
+      setIsLogin(true);
     } catch {
       alert("failed // temp");
     }
   };
+  //
 
   return (
-    <form onSubmit={handleSubmit(loginReq)}>
-      <h1>Login</h1>
-      <h2>To access collections! </h2>
+    <form onSubmit={handleSubmit(registerReq)}>
+      <h1>Hi!</h1>
+      <h2>Register to access collections! </h2>
       <label>Username</label>
       <input
         name="username"
@@ -46,6 +37,17 @@ function LoginForm({ dispatch, setIsLogin }) {
         })}
       />
       <p>{errors?.username?.message}</p>
+      <label>Email</label>
+      <input
+        name="email"
+        ref={register({
+          required: {
+            message: "Please enter a email",
+            value: true,
+          },
+        })}
+      />
+      <p>{errors?.email?.message}</p>
       <label>Password</label>
       <input
         name="password"
@@ -61,15 +63,15 @@ function LoginForm({ dispatch, setIsLogin }) {
       <div
         className="toggle"
         onClick={() => {
-          setIsLogin(false);
+          setIsLogin(true);
         }}
       >
         {" "}
-        New here? Click here to register!{" "}
+        Already have an account? Click here to login!{" "}
       </div>
-      <button type="submit">Log In</button>
+      <button type="submit">Register</button>
     </form>
   );
 }
 
-export default LoginForm;
+export default RegisterForm;

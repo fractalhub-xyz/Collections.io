@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./login.sass";
 //components
 import LoginForm from "./loginForm";
+import RegisterForm from "./registerForm";
 import { useStateValue } from "../../helpers/stateProvider";
 // import cx from "../../helpers/cx";
 
 function Login() {
   const [, dispatch] = useStateValue();
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
     localStorage.removeItem("token");
@@ -25,7 +27,11 @@ function Login() {
         </div>
       </header>
       <section>
-        <LoginForm dispatch = {dispatch}/>
+        {isLogin ? (
+          <LoginForm dispatch={dispatch} setIsLogin={setIsLogin} />
+        ) : (
+          <RegisterForm setIsLogin={setIsLogin} />
+        )}
       </section>
     </main>
   );
