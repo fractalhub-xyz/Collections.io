@@ -32,8 +32,9 @@ function Navbar() {
     <main className="navbar">
       <div className="nav-left">
         <div className="logo">LOGO</div>
+        <span className="back">LOGO</span>
         <div className="nav-search">
-          <div className="search-icon"></div>
+          <div className="search-icon">SE</div>
           <input type="text" placeholder="Search"></input>
         </div>
       </div>

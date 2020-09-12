@@ -2,48 +2,60 @@
 $tile-bg: $primary-color
 $margin: 15px
 $search-width: 300px
+$height: calc( #{$nav-height} - #{$margin} )
 .navbar
     margin: 15px 0px
     display: flex
     justify-content: space-between
     align-items: center
 
-    .nav-left
-        .logo
-            margin-left: $margin
-            height: calc( #{$nav-height} - #{$margin} )
-            float: left
-            width: 300px
-            background: $primary-color
-            filter: brightness($accent-per)
+    .logo
+        margin-left: $margin
+        height: $height
+        float: left
+        width: 300px
+        background: $primary-color
+        filter: brightness($accent-per)
+    .back
+        margin-left: 30px
+        height: $height
+        float: left
+        width: $height
+        background: $primary-color
+        filter: brightness($accent-per)
+        border-radius: 50%
 
-        .nav-search
-            height: calc( #{$nav-height} - #{$margin} )
+    .nav-search
+        height: $height
+        float: left
+        margin-left: 30px
+        border-radius: 30px
+        box-shadow: 2px 2px 10px 1px $light-shadow
+        background: $light-bg-step
+        display: flex
+        align-items: center
+        .search-icon
+            border: 2px solid black
+            margin-left: 20px
+        .dark &
+            background: $dark-bg-step
+            box-shadow: 2px 2px 10px 1px $dark-shadow
+
+        input
+            padding: 0px
+            border: none
+            background: inherit
             float: left
-            margin-left: 50px
             border-radius: 30px
-            box-shadow: 2px 2px 10px 1px $light-shadow
-            background: $light-bg-step
-
-            .dark &
-                background: $dark-bg-step
-                box-shadow: 2px 2px 10px 1px $dark-shadow
-
-            input
-                padding: 0px
-                border: none
-                background: inherit
-                float: left
-                border-radius: 30px
-                margin-left: 30px
-                transition: width 0.4s ease-in
-                height: 100%
-                width: $search-width
+            margin-left: 10px
+            transition: width 0.4s ease-in
+            height: 100%
+            width: $search-width
+            color: $accent-color
+            &::placeholder
                 color: $accent-color
-                &::placeholder
-                    color: $accent-color
-                &:focus
-                    width: calc( #{$search-width} + 400px)
+            &:focus
+                width: calc( #{$search-width} + 400px)
 
     .nav-control
         display: flex
