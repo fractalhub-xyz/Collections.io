@@ -25,7 +25,7 @@ function Snippet({ snippet, setRefresh, collectionName }) {
   useEffect(() => {
     setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
     setLikes(snippet.hearts.length);
-  }, []);
+  }, [ ]);
 
   //functions
   const heartSnippet = async (e) => {

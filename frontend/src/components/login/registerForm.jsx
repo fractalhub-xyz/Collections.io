@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 //api
 import { postRegister } from "../../helpers/api";
 
-function RegisterForm({ dispatch, setIsLogin }) {
+function RegisterForm({ setIsLogin }) {
   const { register, handleSubmit, errors } = useForm();
 
   const registerReq = async (data) => {

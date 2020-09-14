@@ -41,6 +41,7 @@ a:visited {
 }
 
 input:focus,
-button:focus {
+button:focus,
+select:focus {
   outline: none;
 }
