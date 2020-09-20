@@ -10,11 +10,12 @@ import Podcast from "../../assets/svgs/podcasts.svg";
 import Article from "../../assets/svgs/articles_green.svg";
 import URL from "../../assets/svgs/URLs.svg";
 import Video from "../../assets/svgs/videos.svg";
-import { Heart } from "react-feather";
+import { Favorite, FavoriteOutlined, Search } from '@material-ui/icons';
+
+// import { Heart } from "react-feather";
 //modules
 import { useParams } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
-import { Search } from "react-feather";
 
 function Collection() {
   //states
@@ -140,7 +141,7 @@ function Collection() {
           </div>
           <div className="interact">
             <div className="likes">
-              <Heart className={isFollowed ? "icon red" : "icon"} />
+              <Favorite className={isFollowed ? "icon red" : "icon"} />
               <div className="count">{totFollowers}</div>
             </div>
           </div>

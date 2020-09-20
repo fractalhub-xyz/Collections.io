@@ -3,7 +3,8 @@ import "./navbar.sass";
 //modueles
 import { useHistory } from "react-router-dom";
 //icons
-import { Bell, ChevronLeft, Search, Settings } from "react-feather";
+import {Notifications, NavigateBefore, Search, Settings} from "@material-ui/icons"
+// import { Bell, ChevronLeft, Search, Settings } from "react-feather";
 //componentss
 import { useStateValue } from "../../helpers/stateProvider";
 import Toggle from "react-toggle";
@@ -40,7 +41,7 @@ function Navbar() {
             history.goBack();
           }}
         >
-          <ChevronLeft />
+          <NavigateBefore />
         </span>
         <div className="nav-search center">
           <div className="search-icon">
@@ -54,7 +55,7 @@ function Navbar() {
           <Settings />
         </div>
         <div className="icon center">
-          <Bell />
+          <Notifications />
         </div>
         <Toggle
           icons={false}

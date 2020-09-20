@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./collection.sass";
 //icons
-import { Heart } from "react-feather";
+import { Favorite, FavoriteOutlined, Search } from "@material-ui/icons";
 import Podcast from "../../assets/svgs/podcasts.svg";
 import Article from "../../assets/svgs/articles_green.svg";
 //API
@@ -42,7 +42,7 @@ function SnippetRow({ snippet }) {
         className={isLiked ? "icon center red" : "icon center"}
         onClick={heartSnippet}
       >
-        <Heart />
+        <Favorite />
       </div>
       <div className="title">{snippet.title}</div>
       {snippet.type_of === "podcast" ? (

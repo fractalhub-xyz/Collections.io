@@ -12,9 +12,9 @@ $card-dim: 280px
             padding: 20px
             border-radius: 30px
             display: flex
-            //temp
             margin-bottom: 2rem
             background: $light-bg-step
+            box-shadow: 3px 3px 20px $light-shadow
 
             .dark &
                 background: $dark-bg-step
@@ -116,6 +116,7 @@ $card-dim: 280px
         border-radius: 30px
         margin-bottom: 2rem
         background: $light-bg-step
+        box-shadow: 3px 3px 20px $light-shadow
         .snippet
             background: white
             height: 3rem
@@ -129,9 +130,10 @@ $card-dim: 280px
             .icon
                 padding: 9px
                 border-radius: 10px
-                background: grey
+                background: black
                 color: white
                 cursor: pointer
+                transition: 0.4s
                 &:hover
                     background: black
             .red
