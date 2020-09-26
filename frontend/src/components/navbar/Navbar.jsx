@@ -3,8 +3,12 @@ import "./navbar.sass";
 //modueles
 import { useHistory } from "react-router-dom";
 //icons
-import {Notifications, NavigateBefore, Search, Settings} from "@material-ui/icons"
-// import { Bell, ChevronLeft, Search, Settings } from "react-feather";
+import {
+  Notifications,
+  NavigateBefore,
+  Search,
+  Settings,
+} from "@material-ui/icons";
 //componentss
 import { useStateValue } from "../../helpers/stateProvider";
 import Toggle from "react-toggle";
@@ -12,7 +16,7 @@ import "react-toggle/style.css";
 
 function Navbar() {
   //init
-  const [{ user }] = useStateValue();
+  const [{ user, isDesktop }] = useStateValue();
   let history = useHistory();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -25,51 +29,53 @@ function Navbar() {
   }, [theme]);
 
   const toggleTheme = () => {
-    const newTheme = theme == "light" ? "dark" : "light";
+    const newTheme = theme === "light" ? "dark" : "light";
 
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
   };
 
   return (
-    <main className="navbar">
-      <div className="nav-left center">
-        <div className="logo">LOGO</div>
-        <span
-          className="back center"
-          onClick={() => {
-            history.goBack();
-          }}
-        >
-          <NavigateBefore />
-        </span>
-        <div className="nav-search center">
-          <div className="search-icon">
-            <Search />
+    <div>
+      {isDesktop ? (
+        <main className="navbar-desk">
+          <div className="container-left">
+            <img src="../../assets/svgs/videos.svg" alt="logo" />
+            <div
+              className="back-button center"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              <NavigateBefore />
+            </div>
+            <div className="searchbox">
+              <Search />
+              <input placeholder="Search" />
+            </div>
           </div>
-          <input type="text" placeholder="Search"></input>
-        </div>
-      </div>
-      <div className="nav-control">
-        <div className="icon center">
-          <Settings />
-        </div>
-        <div className="icon center">
-          <Notifications />
-        </div>
-        <Toggle
-          icons={false}
-          onChange={toggleTheme}
-          defaultChecked={theme === "dark"}
-        />
-        <div
-          onClick={() => {
-            history.push(`/user/${user}`);
-          }}
-          className="user-icon"
-        />
-      </div>
-    </main>
+          <div className="container-right">
+            <div className="btn center">
+              <Notifications />
+            </div>
+            <div className="btn center">
+              <Settings />
+            </div>
+            <Toggle
+              icons={false}
+              onChange={toggleTheme}
+              defaultChecked={theme === "dark"}
+            />
+            <div
+              className="usericon"
+              onClick={() => {
+                history.push(`/user/${user}`);
+              }}
+            ></div>
+          </div>
+        </main>
+      ) : null}
+    </div>
   );
 }
 

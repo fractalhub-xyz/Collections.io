@@ -1,109 +1,70 @@
 @import '../common/variables.sass'
-$tile-bg: $primary-color
-$margin: 15px
-$search-width: 300px
-$height: calc( #{$nav-height} - #{$margin} )
-.navbar
-    margin: 15px 0px
+$border-radius: 50px
+
+.navbar-desk
+    height: $nav-height
+    background: $light-bg
+    padding: 0 1rem
     display: flex
     justify-content: space-between
     align-items: center
-    
-    .nav-left
-        .logo
-            margin-left: $margin
-            height: $height
-            float: left
-            width: 300px
-            background: $primary-color
-            filter: brightness($accent-per)
-        .back
-            float: left
-            margin-left: 2rem
-            height: calc( #{$height} - 0.7rem)
-            width: calc( #{$height} - 0.7rem)
-            background: $primary-color
-            filter: brightness($accent-per)
-            box-shadow: 3px 3px 20px $light-shadow
-            border-radius: 50%
-            color: $icon-color
-            transition: 0.2s
-            cursor: pointer
-            &:hover
-                transform: scale(1.1)
-            .dark &
-                background: $dark-bg-step
-                box-shadow: 3px 3px 20px $dark-shadow
-                color: white
-            
 
-        .nav-search
-            height: $height
-            float: left
+    .container-left
+        display: flex
+        .back-button
             margin-left: 1rem
-            border-radius: 30px
-            box-shadow: 3px 3px 20px $light-shadow
-            background: $light-bg-step
+            border-radius: 50%
+            height: calc( #{$nav-height} / 1.5)
+            width: calc( #{$nav-height} / 1.5)
+            cursor: pointer
+            box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+            &:hover
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+            .dark &
+                box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+                &:hover
+                    box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+        .searchbox
+            margin-left: 1rem
             display: flex
             align-items: center
-            .search-icon
-                margin-left: 15px
-                color: $icon-color
-            .dark &
-                background: $dark-bg-step
-                box-shadow: 3px 3px 20px $dark-shadow
-
+            border-radius: $border-radius
+            padding: 0 1rem
+            box-shadow: inset -6.2px -6.2px 6.2px $light-sh-b, inset 3.7px 3.7px 6.2px $light-sh-d
+            color: grey
+            width: 24rem
             input
-                padding: 0px
+                background: none
                 border: none
-                background: inherit
-                float: left
-                border-radius: 30px
-                margin-left: 10px
-                transition: width 0.4s ease-in
-                height: 100%
-                width: $search-width
-                color: $accent-color
-                &::placeholder
-                    color: $text-color
-                &:focus
-                    width: calc( #{$search-width} + 400px)
-
-    .nav-control
-        display: flex
-        align-items: center
-        justify-content: space-between
-        width: 300px
-        height: calc( #{$nav-height} - 10px )
-        margin-right: $margin
-        border-radius: 30px
-        float: right
-        background: $light-bg-step
-        box-shadow: 3px 3px 20px $light-shadow
-
-        .dark &
-            background: $dark-bg-step
-            box-shadow: 3px 3px 20px $dark-shadow
-
-        .icon
-            height: calc( #{$nav-height} - 20px )
-            width: calc( #{$nav-height} - 20px )
-            background: $accent-color
-            border-radius: 50%
-            margin-left: 10px
-            box-shadow: 3px 3px 20px $light-shadow
-            color: $light-bg
-            cursor: pointer
-            transition: 0.2s
-            &:hover
-                transform: scale(0.95)
+                font-size: 1.1rem
+                color: inherit
             .dark &
-                box-shadow: 3px 3px 20px $dark-shadow
-                color: $dark-bg
+                box-shadow: inset -6.2px -6.2px 6.2px $dark-sh-b, inset 3.7px 3.7px 6.2px $dark-sh-d
 
-        .user-icon
-            height: $nav-height
-            width: $nav-height
-            background: black
+    .container-right
+        display: flex
+        color: grey
+        align-items: center
+        .btn
+            margin-right: 1rem
             border-radius: 50%
+            height: calc( #{$nav-height} / 1.5)
+            width: calc( #{$nav-height} / 1.5)
             cursor: pointer
+            box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+            &:hover
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+            .dark &
+                box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+                &:hover
+                    box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+        .usericon
+            height: calc( #{$nav-height} / 1.5)
+            width: calc( #{$nav-height} / 1.5)
+            background: black
+            margin-left: 1rem
+            border-radius: $border-radius
+            cursor: pointer
+
+    .dark &
+        background: $dark-bg

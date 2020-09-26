@@ -3,57 +3,87 @@ $nav-button: 60px
 
 .side-nav
     position: fixed
-    z-index: 999999
-    top: 100px
-    left: 0px
     .container
-        height: calc( 100vh -  #{$nav-height} - 50px)
-        width: 90px
-        background: $light-bg
-        filter: brightness($accent-per)
-        border-top-right-radius: 30px
-        border-bottom-right-radius: 30px
-        transition: width 0.4s ease-in
-        cursor: pointer
-        box-shadow: 2px 2px 10px 1px $light-shadow
-
+        margin-top: 1.5rem
+        width: $side-nav-width
+        height: 80vh
+        border-radius: 0 $borderbox-radius $borderbox-radius 0
+        box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+        display: flex
+        flex-direction: column
+        align-items: center
         .dark &
-            background: $dark-bg
-            box-shadow: 2px 2px 10px 1px $dark-shadow
-
-        .gap
-            height: 10px
-            width: 70px
-
-        .nav-button
-            min-width: 60px
-            height: 55px
-            margin: 0 15px
-            background: grey
-            border-radius: 35px
-            overflow: hidden
-            display: flex
-            align-items: center
-            transition: width 0.3s ease-in
-            color: white
-
+            box-shadow: -6.2px -6.2px 18px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+        .navbtn
+            margin-top: 1.3rem
+            border-radius: 50%
+            height: calc( #{$nav-height} / 1.5)
+            width: calc( #{$nav-height} / 1.5)
+            cursor: pointer
+            color: grey
+            box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+            .current
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+                color: red
+            &:hover
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
             .dark &
-                color: black
-            .icon
-                margin-left: 19px
-                font-size: 2rem
-                color: inherit
+                box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+                &:hover
+                    box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+
+    // position: fixed
+    // z-index: 999999
+    // top: 100px
+    // left: 0px
+    // .container
+    //     height: calc( 100vh -  #{$nav-height} - 50px)
+    //     width: 90px
+    //     background: $light-bg
+    //     filter: brightness($accent-per)
+    //     border-top-right-radius: 30px
+    //     border-bottom-right-radius: 30px
+    //     transition: width 0.4s ease-in
+    //     cursor: pointer
+    //     box-shadow: 2px 2px 10px 1px $light-shadow
+
+    //     .dark &
+    //         background: $dark-bg
+    //         box-shadow: 2px 2px 10px 1px $dark-shadow
+
+    //     .gap
+    //         height: 10px
+    //         width: 70px
+
+    //     .nav-button
+    //         min-width: 60px
+    //         height: 55px
+    //         margin: 0 15px
+    //         background: grey
+    //         border-radius: 35px
+    //         overflow: hidden
+    //         display: flex
+    //         align-items: center
+    //         transition: width 0.3s ease-in
+    //         color: white
+
+    //         .dark &
+    //             color: black
+    //         .icon
+    //             margin-left: 19px
+    //             font-size: 2rem
+    //             color: inherit
 
             
-            .link
-                margin-left: 25px
-                font-size: 1.3rem
+    //         .link
+    //             margin-left: 25px
+    //             font-size: 1.3rem
 
-            &:hover
-                background: $accent-color
-                background: lighten($accent-color, 12%)
+    //         &:hover
+    //             background: $accent-color
+    //             background: lighten($accent-color, 12%)
 
-        .active
-            background: $accent-color
-        &:hover
-            width: 250px
+    //     .active
+    //         background: $accent-color
+    //     &:hover
+    //         width: 250px

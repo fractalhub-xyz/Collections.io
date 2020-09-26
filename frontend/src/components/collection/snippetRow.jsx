@@ -39,17 +39,25 @@ function SnippetRow({ snippet }) {
   return (
     <div className="snippet">
       <div
-        className={isLiked ? "icon center red" : "icon center"}
+        className={isLiked ? "likeicon center red" : "likeicon center"}
         onClick={heartSnippet}
       >
         <Favorite />
       </div>
-      <div className="title">{snippet.title}</div>
+      <div className="info">
+        <div className="name">{snippet.title}</div>
+        <div className="owner">by {snippet.owner}</div>
+      </div>
       {snippet.type_of === "podcast" ? (
         <img src={Podcast} alt="Podcast" />
       ) : (
         <img src={Article} alt="Article" />
       )}
+      <div className="date">{snippet.timestamp}</div>
+      <div className="likes">
+        <p>{likes}</p>
+        <Favorite />
+      </div>
     </div>
   );
 }
