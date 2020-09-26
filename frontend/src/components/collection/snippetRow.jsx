@@ -6,6 +6,7 @@ import Podcast from "../../assets/svgs/podcasts.svg";
 import Article from "../../assets/svgs/articles_green.svg";
 //API
 import { postHeartSnippet } from "../../helpers/api";
+import { getRelativeTime } from '../../helpers/time'
 
 function SnippetRow({ snippet }) {
   const [isLiked, setIsLiked] = useState(true);
@@ -53,7 +54,7 @@ function SnippetRow({ snippet }) {
       ) : (
         <img src={Article} alt="Article" />
       )}
-      <div className="date">{snippet.timestamp}</div>
+      <div className="date">{getRelativeTime(snippet.timestamp)}</div>
       <div className="likes">
         <p>{likes}</p>
         <Favorite />
