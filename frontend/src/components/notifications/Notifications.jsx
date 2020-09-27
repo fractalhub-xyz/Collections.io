@@ -1,11 +1,72 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import "./notifications.sass";
+//components
+import Notification from "./notification";
+//api
+import { getNotifications, postReadNotification } from "../../helpers/api";
 
 function Notifications() {
-    return (
-        <div>
-            
+  //states
+  const [notifications, setNotifications] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [refresh, setRefresh] = useState(true);
+
+  //lifcycle funcs
+  useEffect(() => {
+    if (!refresh) {
+      return;
+    }
+    console.log("rendering Notification View");
+    async function fetchNotifications() {
+      try {
+        console.log(`fetching notifications`);
+        const response = await getNotifications();
+        setNotifications(response.data);
+      } catch (error) {
+        console.error(error);
+        setError(`Failed to fetch Notifications`);
+      }
+      setIsLoading(false);
+    }
+    fetchNotifications();
+    setRefresh(false);
+  }, [refresh]);
+
+  return (
+    <main className="notifications">
+      <div className="container">
+        <h2>NOTIFICATIONS</h2>
+        <h1>{} new!</h1>
+        <div className="all">
+          <h3>Unread</h3>
+          {notifications.map((notification) => (
+            <div key={notification.id}>
+              {notification.is_read == false && (
+                <Notification
+                  notification={notification}
+                  setRefresh={setRefresh}
+                  read={true}
+                />
+              )}
+            </div>
+          ))}
+          <h3>Others</h3>
+          {notifications.map((notification) => (
+            <div key={notification.id}>
+              {notification.is_read == true && (
+                <Notification
+                  notification={notification}
+                  setRefresh={setRefresh}
+                  read={false}
+                />
+              )}
+            </div>
+          ))}
         </div>
-    )
+      </div>
+    </main>
+  );
 }
 
-export default Notifications
+export default Notifications;
