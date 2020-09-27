@@ -142,8 +142,7 @@ body
 
     section
         .followedCollections
-            .dark &
-
+            
             .cards
                 display: flex
                 flex-wrap: wrap
@@ -156,6 +155,8 @@ body
                     box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
                     border-radius: 20px
                     padding: 0.6rem 0.1rem
+                    .dark &
+                        box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
 
                     .cover
                         border-radius: 10px

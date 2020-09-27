@@ -145,7 +145,7 @@ function Snippet() {
       }
     }
   }, [collection]);
-  
+
   //functions
   const submitNewComment = async (e) => {
     e.preventDefault();
@@ -181,83 +181,74 @@ function Snippet() {
   };
 
   return (
-    <div>
-      {isDesktop ? (
-        <main className="snippet-view">
-          <header>
-            <div className="bigbox">
-              <div className="card" style={coll_bg}></div>
-              <div className="info">
-                <div className="type">{snippet.type_of}</div>
-                <div className="name">{snippet.title}</div>
-                <div className="date">Created {snippet.timestamp}</div>
-                <div className="likes">
-                  <div
-                    className={isLiked ? "btn center liked" : "btn center"}
-                    onClick={heartSnippet}
-                  >
-                    <Favorite />
-                  </div>
-                  {totLikes} Likes
-                </div>
+    <main className="snippet-view">
+      <header>
+        <div className="bigbox">
+          <div className="card" style={coll_bg}></div>
+          <div className="info">
+            <div className="type">{snippet.type_of}</div>
+            <div className="name">{snippet.title}</div>
+            <div className="date">Created {snippet.timestamp}</div>
+            <div className="likes">
+              <div
+                className={isLiked ? "btn center liked" : "btn center"}
+                onClick={heartSnippet}
+              >
+                <Favorite />
               </div>
-              <div className="col3">
-                <div className="owner">{snippet.owner}</div>
-                <MoreVert className="more" />
-              </div>
+              {totLikes} Likes
             </div>
-            {snippet.type_of === "podcast" && (
-              <div className="player">
-                <iframe
-                  src={podcast}
-                  width="100%"
-                  height="240"
-                  frameborder="0"
-                  allowtransparency="true"
-                  allow="encrypted-media"
-                />{" "}
-              </div>
-            )}
-          </header>
-          <section>
-            <div className="comments">
-              <h1>{comments.length} COMMENTS</h1>
-              <div className="new-comment">
-                <input
-                  placeholder="Say something interesting"
-                  value={newComment}
-                  onChange={(e) => {
-                    setNewComment(e.target.value);
-                  }}
-                />
-                <div className="btn center" onClick={submitNewComment}>
-                  <PlayArrow />
-                </div>
-              </div>
-              <div className="all">
-                {comments.map((comment) => (
-                  <Comment
-                    key={comment.id}
-                    comment={comment}
-                    setUpdateComments={setUpdateComments}
-                  />
-                ))}
-              </div>
+          </div>
+          <div className="col3">
+            <div className="owner">{snippet.owner}</div>
+            <MoreVert className="more" />
+          </div>
+        </div>
+        {snippet.type_of === "podcast" && (
+          <div className="player">
+            <iframe
+              src={podcast}
+              width="100%"
+              height="240"
+              frameborder="0"
+              allowtransparency="true"
+              allow="encrypted-media"
+            />{" "}
+          </div>
+        )}
+      </header>
+      <section>
+        <div className="comments">
+          <h1>{comments.length} COMMENTS</h1>
+          <div className="new-comment">
+            <input
+              placeholder="Say something interesting"
+              value={newComment}
+              onChange={(e) => {
+                setNewComment(e.target.value);
+              }}
+            />
+            <div className="btn center" onClick={submitNewComment}>
+              <PlayArrow />
             </div>
-            <div className="otsnippets">
-              {otherSnippets.map((snip) => (
-                <OtherSnippets key={snip.id} snip={snip} />
-              ))}
-            </div>
-          </section>
-        </main>
-      ) : (
-        <main className="snippet">
-          <header></header>
-          <section></section>
-        </main>
-      )}
-    </div>
+          </div>
+          <div className="all">
+            {comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                setUpdateComments={setUpdateComments}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="otsnippets">
+          {otherSnippets.map((snip) => (
+            <OtherSnippets key={snip.id} snip={snip} />
+          ))}
+        </div>
+      </section>
+    </main>
   );
 }
 

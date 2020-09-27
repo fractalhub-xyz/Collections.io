@@ -2,7 +2,7 @@ export const initialState = {
   user: "",
   modal: false,
   form: null,
-  isDesktop: true
+  isDesktop: false
 };
 
 const reducer = (state, action) => {
