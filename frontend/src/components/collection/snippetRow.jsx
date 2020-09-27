@@ -18,7 +18,6 @@ function SnippetRow({ snippet }) {
   useEffect(() => {
     setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
     setLikes(snippet.hearts.length);
-    console.log(snippet);
   }, []);
 
   //functions

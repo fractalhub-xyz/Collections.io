@@ -5,23 +5,31 @@ import {
   getSnippetFromID,
   getSnippetComments,
   getCollectionFromID,
+  postNewComment,
+  postHeartSnippet,
 } from "../../helpers/api";
 import { getRelativeTime } from "../../helpers/time";
 //components
+import Comment from "./comment";
 //modules
 import { useParams } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
-import { Favorite, MoreVert } from "@material-ui/icons";
+import { Favorite, MoreVert, PlayArrow } from "@material-ui/icons";
+import OtherSnippets from "./otherSnippets";
 
 function Snippet() {
   const [snippet, setSnippet] = useState({});
+  const [snipID, setSnipID] = useState(null);
   const [comments, setComments] = useState([]);
   const [podcast, setPodcast] = useState("");
+  const [totLikes, setTotLikes] = useState(0);
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(true);
   const [isLoadingComments, setIsLoadingComments] = useState(true);
   const [getError, setGetError] = useState(null);
   const [collection, setCollection] = useState({});
   const [otherSnippets, setOtherSnippets] = useState([]);
+  const [updateComments, setUpdateComments] = useState(false);
+  const [newComment, setNewComment] = useState("");
 
   //flags
   const [isLiked, setIsLiked] = useState(false);
@@ -33,6 +41,12 @@ function Snippet() {
   const [{ user, isDesktop }, dispatch] = useStateValue();
 
   // lifecycle functions
+
+  useEffect(() => {
+    setSnipID(params.id);
+    setRefresh(true);
+  }, [params]);
+
   useEffect(() => {
     console.log("[RENDER] >> Snippet");
     if (!refresh) {
@@ -47,7 +61,6 @@ function Snippet() {
         console.error(error);
         setGetError(`Failed to load snippet with ID: ${params.id}`);
       }
-      setIsLoadingSnippet(false);
     }
     async function fetchComments() {
       try {
@@ -65,7 +78,26 @@ function Snippet() {
     fetchSnippet();
     fetchComments();
     setRefresh(false);
-  }, [refresh, params]);
+  }, [refresh, snipID]);
+
+  useEffect(() => {
+    console.log("[RENDER] >> Updating Comments");
+    async function fetchComments() {
+      try {
+        console.log(`[GET] >> Comments for Snippet ${params.id}`);
+        const response = await getSnippetComments(params.id);
+        setComments(response.data);
+      } catch (error) {
+        console.error(error);
+        setGetError(
+          `Failed to load comments for snippet with ID: ${params.id}`
+        );
+        setIsLoadingComments(false);
+      }
+    }
+    setUpdateComments(false);
+    fetchComments();
+  }, [updateComments, snippet]);
 
   useEffect(() => {
     if (snippet.collection) {
@@ -87,8 +119,6 @@ function Snippet() {
       setPodcast(
         `https://open.spotify.com/embed-podcast/${code[3]}/${code[4]}`
       );
-      console.log("type->", code[3]);
-      console.log("code->", code[4]);
     }
   }, [snippet]);
 
@@ -99,6 +129,55 @@ function Snippet() {
   const coll_bg = {
     background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${bg}) center / cover`,
     // background: `url(${bg}) center / cover`,
+  };
+
+  useEffect(() => {
+    if (snippet.hearts) {
+      setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
+      setTotLikes(snippet.hearts.length);
+    }
+  }, [snippet]);
+
+  useEffect(() => {
+    if (collection.tags) {
+      if (collection.tags[0]) {
+        setBg(collection.tags[0].image_urls);
+      }
+    }
+  }, [collection]);
+  
+  //functions
+  const submitNewComment = async (e) => {
+    e.preventDefault();
+    const payload = {
+      comment: newComment,
+      snippet: snipID,
+    };
+    try {
+      await postNewComment(payload);
+      console.log("Successfully submited new comment");
+    } catch (error) {
+      console.log(error);
+    }
+    setNewComment(" ");
+    setUpdateComments(true);
+  };
+
+  const heartSnippet = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await postHeartSnippet(snippet.id);
+      if (response.data.success === true) {
+        if (response.data.liked === false) {
+          setTotLikes(totLikes - 1);
+        } else {
+          setTotLikes(totLikes + 1);
+        }
+      }
+      setIsLiked(response.data.liked);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -112,8 +191,14 @@ function Snippet() {
                 <div className="type">{snippet.type_of}</div>
                 <div className="name">{snippet.title}</div>
                 <div className="date">Created {snippet.timestamp}</div>
-                <div className={isLiked ? "btn center liked" : "btn center"}>
-                  <Favorite />
+                <div className="likes">
+                  <div
+                    className={isLiked ? "btn center liked" : "btn center"}
+                    onClick={heartSnippet}
+                  >
+                    <Favorite />
+                  </div>
+                  {totLikes} Likes
                 </div>
               </div>
               <div className="col3">
@@ -137,8 +222,33 @@ function Snippet() {
           <section>
             <div className="comments">
               <h1>{comments.length} COMMENTS</h1>
+              <div className="new-comment">
+                <input
+                  placeholder="Say something interesting"
+                  value={newComment}
+                  onChange={(e) => {
+                    setNewComment(e.target.value);
+                  }}
+                />
+                <div className="btn center" onClick={submitNewComment}>
+                  <PlayArrow />
+                </div>
+              </div>
+              <div className="all">
+                {comments.map((comment) => (
+                  <Comment
+                    key={comment.id}
+                    comment={comment}
+                    setUpdateComments={setUpdateComments}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="otsnippets"></div>
+            <div className="otsnippets">
+              {otherSnippets.map((snip) => (
+                <OtherSnippets key={snip.id} snip={snip} />
+              ))}
+            </div>
           </section>
         </main>
       ) : (
