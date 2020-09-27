@@ -16,30 +16,28 @@ function Sidenav() {
 
   return (
     <main className="side-nav">
-      {isDesktop ? (
-        <div className="container">
-          <div
-            className={
-              activeUrl === "/home" ? "navbtn center current" : "navbtn center"
-            }
-            onClick={() => {
-              history.push("/home");
-            }}
-          >
-            <Home />
-          </div>
-          <div
-            className={
-              activeUrl === "/explore" ? "navbtn center current" : "navbtn center"
-            }
-            onClick={() => {
-              history.push("/explore");
-            }}
-          >
-            <Explore />
-          </div>
+      <div className="container">
+        <div
+          className={
+            activeUrl === "/home" ? "navbtn center current" : "navbtn center"
+          }
+          onClick={() => {
+            history.push("/home");
+          }}
+        >
+          <Home />
         </div>
-      ) : null}
+        <div
+          className={
+            activeUrl === "/explore" ? "navbtn center current" : "navbtn center"
+          }
+          onClick={() => {
+            history.push("/explore");
+          }}
+        >
+          <Explore />
+        </div>
+      </div>
     </main>
   );
 }

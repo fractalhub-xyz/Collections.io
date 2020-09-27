@@ -14,7 +14,7 @@ function Home() {
   //globalstates\
 
   const [bg, setBg] = useState(
-    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271",
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
   );
 
   const mystyle = {
@@ -24,7 +24,7 @@ function Home() {
   //init
   let history = useHistory();
   //GlobalStates
-  const [, dispatch] = useStateValue();
+  const [{ isDesktop }, dispatch] = useStateValue();
 
   //mount
   useEffect(() => {
@@ -45,42 +45,44 @@ function Home() {
   }, []);
 
   return (
-    <main className="home">
-      <header></header>
-      <section>
-        <div className="followedCollections">
-          {isLoading ? (
-            <div className="tiles">
-              {Array(6)
-                .fill("")
-                .map((_, i) => (
-                  <div key={i} className="tile" />
-                ))}
-            </div>
-          ) : (
-            <div className="cards">
-              {followedCollections.map((collection) => (
-                <div
-                  key={collection.id}
-                  className="card"
-                  onClick={() => {
-                    history.push(`/collection/${collection.id}`);
-                  }}
-                >
-                  <div className="more">
-                    <div className="created_by">Created by</div>
-                    <div className="owner">{collection.owner}</div>
-                  </div>
-                  <div className="cover" style={mystyle}>
-                    <h4>{collection.name}</h4>
-                  </div>
+    <div>
+      {isDesktop ? (
+        <main className="home">
+          <header></header>
+          <section>
+            <div className="followedCollections">
+              {isLoading ? (
+                <div className="tiles">
+                  {Array(6)
+                    .fill("")
+                    .map((_, i) => (
+                      <div key={i} className="tile" />
+                    ))}
                 </div>
-              ))}
+              ) : (
+                <div className="cards">
+                  {followedCollections.map((collection) => (
+                    <div
+                      key={collection.id}
+                      className="card"
+                      onClick={() => {
+                        history.push(`/collection/${collection.id}`);
+                      }}
+                    >
+                      <div className="more">
+                        <div className="created_by">Created by</div>
+                        <div className="owner">{collection.owner}</div>
+                      </div>
+                      <div className="cover" style={mystyle}>
+                        <h4>{collection.name}</h4>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {getError && <div>{getError}</div>}
             </div>
-          )}
-          {getError && <div>{getError}</div>}
-        </div>
-        {/* <button
+            {/* <button
           onClick={() => {
             dispatch({
               type: "OPEN_FORM",
@@ -100,8 +102,67 @@ function Home() {
         >
           EDIT COLLECTIOn
         </button> */}
-      </section>
-    </main>
+          </section>
+        </main>
+      ) : (
+        <main className="home-mobile">
+          <header></header>
+          <section>
+            <div className="followedCollections">
+              {isLoading ? (
+                <div className="tiles">
+                  {Array(6)
+                    .fill("")
+                    .map((_, i) => (
+                      <div key={i} className="tile" />
+                    ))}
+                </div>
+              ) : (
+                <div className="cards">
+                  {followedCollections.map((collection) => (
+                    <div
+                      key={collection.id}
+                      className="card"
+                      onClick={() => {
+                        history.push(`/collection/${collection.id}`);
+                      }}
+                    >
+                      <div className="cover" style={mystyle} />
+                      <div className="info">
+                        <div className="name">{collection.name}</div>
+                        <div className="by">by</div>
+                        <div className="owner">{collection.owner}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {getError && <div>{getError}</div>}
+            </div>
+            {/* <button
+          onClick={() => {
+            dispatch({
+              type: "OPEN_FORM",
+              form: "create_collection",
+            });
+          }}
+        >
+          CREATE COLLECTIOn
+        </button>
+        <button
+          onClick={() => {
+            dispatch({
+              type: "OPEN_FORM",
+              form: "edit_collection",
+            });
+          }}
+        >
+          EDIT COLLECTIOn
+        </button> */}
+          </section>
+        </main>
+      )}
+    </div>
   );
 }
 

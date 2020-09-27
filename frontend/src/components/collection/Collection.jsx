@@ -2,15 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./collection.sass";
 
 //api
-import { getCollectionFromID } from "../../helpers/api";
+import { getCollectionFromID, postFollowCollection } from "../../helpers/api";
 //components
 import SnippetRow from "./snippetRow";
 //icons
-import Podcast from "../../assets/svgs/podcasts.svg";
-import Article from "../../assets/svgs/articles_green.svg";
-import URL from "../../assets/svgs/URLs.svg";
-import Video from "../../assets/svgs/videos.svg";
-import { Favorite, MoreVert, PlaylistAdd, Search } from "@material-ui/icons";
+import {
+  Favorite,
+  Link,
+  Mic,
+  MoreVert,
+  Movie,
+  PlaylistAdd,
+  Search,
+  Description,
+} from "@material-ui/icons";
 
 // import { Heart } from "react-feather";
 //modules
@@ -96,6 +101,25 @@ function Collection() {
     }
   }, [collection, user]);
 
+  //functions
+  const followCollection = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await postFollowCollection(collection.id);
+      setIsFollowed(response.data.followed);
+      console.log(response.data.followed);
+      if (response.data.success === true) {
+        if (response.data.followed === true) {
+          setTotFollowers(totFollowers + 1);
+        } else {
+          setTotFollowers(totFollowers - 1);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const podcasts = snippets.filter((snip) => snip.type_of === "podcast").length;
   const articles = snippets.filter((snip) => snip.type_of === "article").length;
 
@@ -114,11 +138,9 @@ function Collection() {
                   {tag.name}
                 </div>
               ))}
-              <div
-                className={isFollowed ? "btn center followed" : "btn center "}
-              >
+              <div className="btn center" onClick={followCollection}>
                 {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}
-                <Favorite />
+                <Favorite className={isFollowed ? "followed" : ""} />
               </div>
             </div>
             <div className="col3">
@@ -139,7 +161,12 @@ function Collection() {
                   }}
                 />
               </div>
-              <div className="line" />
+              <div className="lines">
+                <div className="line c1"></div>
+                <div className="line c2"></div>
+                <div className="line c3"></div>
+                <div className="line c4"></div>
+              </div>
             </div>
             <div className="selects">
               <div
@@ -148,7 +175,7 @@ function Collection() {
                   setFilter("podcast");
                 }}
               >
-                <img src={Podcast} alt="Url" className="icon" />
+                <Mic fontSize="medium" className="mat-icon"/>
                 <p>{podcasts}</p>
               </div>
               <div
@@ -157,7 +184,7 @@ function Collection() {
                   setFilter("article");
                 }}
               >
-                <img src={Article} alt="Url" className="icon" />
+                <Description fontSize="medium" className="mat-icon"/>
                 <p>{articles}</p>
               </div>
               <div
@@ -166,7 +193,7 @@ function Collection() {
                   setFilter("");
                 }}
               >
-                <img src={URL} alt="Url" className="icon" />
+                <Link fontSize="medium" className="mat-icon"/>
                 <p>12/</p>
               </div>
               <div
@@ -175,7 +202,7 @@ function Collection() {
                   setFilter("");
                 }}
               >
-                <img src={Video} alt="Url" className="icon" />
+                <Movie fontSize="medium" className="mat-icon"/>
                 <p>12/</p>
               </div>
             </div>
@@ -189,15 +216,14 @@ function Collection() {
                 <div key={snippet.id}>
                   {snippet.type_of.includes(filter) &&
                     snippet.title.includes(searchText) && (
-                      <SnippetRow
-                        snippet={snippet}
-                        key={snippet.id}
-                      />
+                      <SnippetRow snippet={snippet} key={snippet.id} />
                     )}
                 </div>
               ))}
             </div>
-            <div className="highlight"></div>
+            <div className="highlight">
+              <div className="container"></div>
+            </div>
           </section>
         </main>
       ) : (
@@ -211,7 +237,7 @@ function Collection() {
                   setFilter("podcast");
                 }}
               >
-                <img src={Podcast} alt="Url" className="icon" />
+                <Mic fontSize="medium" className="mat-icon"/>
                 <p>{podcasts}</p>
               </div>
               <div
@@ -220,7 +246,7 @@ function Collection() {
                   setFilter("article");
                 }}
               >
-                <img src={Article} alt="Url" className="icon" />
+                <Description fontSize="medium" className="mat-icon"/>
                 <p>{articles}</p>
               </div>
               <div
@@ -229,7 +255,7 @@ function Collection() {
                   setFilter("");
                 }}
               >
-                <img src={URL} alt="Url" className="icon" />
+                <Link fontSize="medium" className="mat-icon"/>
                 <p>12/</p>
               </div>
               <div
@@ -238,7 +264,7 @@ function Collection() {
                   setFilter("");
                 }}
               >
-                <img src={Video} alt="Url" className="icon" />
+                <Movie fontSize="medium" className="mat-icon"/>
                 <p>12/</p>
               </div>
             </div>

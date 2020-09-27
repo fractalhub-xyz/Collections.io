@@ -97,10 +97,24 @@ $card-dim: 280px
                     background: none
                     border: none
                     font-size: 1.5rem
-            .line
-                height: 20px
-                width: 100%
-                backgroud: $accent-color
+            .lines
+                height: 15px
+                width: 98%
+                margin: 0 1%
+                margin-top: 1rem
+                display: flex
+                .line
+                    width: 25%
+                    height: 100%
+
+                .c1
+                    background: #2d4059
+                .c2
+                    background: #ea5455 
+                .c3
+                    background: #decdc3
+                .c4
+                    background: #59405c
         .selects
             width: 20%
             display: flex
@@ -118,8 +132,8 @@ $card-dim: 280px
                 cursor: pointer
                 &:hover
                     box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
-                .icon
-                    margin-left: 0.3rem
+                .mat-icon
+                    margin-left: 0.6rem
                 p
                     margin-right: 10px
             .current
@@ -198,6 +212,12 @@ $card-dim: 280px
                         .owner
                             font-weight: 200
                             font-size: 0.8rem
+                    .mat-icon
+                        height: 50px
+                        width: 50px
+                        color: white
+                        background: black
+                        border-radius: 50%
                     .date
                         margin: auto 0
                         margin-left: 1.3rem
@@ -209,10 +229,16 @@ $card-dim: 280px
                             font-size: 1rem
                             margin-right: 0.4rem
         .highlight
-            width: 25%
-            height: 43vh
+            width: 23%
             box-shadow: inset -6.2px -6.2px 6.2px $light-sh-b, inset 3.7px 3.7px 6.2px $light-sh-d
             border-radius: $borderbox-radius
+            padding: 1.2rem
+            .container
+                height: 100%
+                width: 100%
+                background: $accent-color
+                border-radius: 22px
+
         .dark &
             color: $light-bg
             .snippets
@@ -271,6 +297,8 @@ $card-dim: 280px
                     margin-left: 0.3rem
                 p
                     margin-right: 10px
+                .mat-icon
+                    margin-left: 0.6rem
             .current
                 box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
         .info
@@ -301,12 +329,12 @@ $card-dim: 280px
                 box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
                 border-radius: 15px
                 cursor: pointer
-                .followed
-                    color: $accent-color
                 &:hover
                     box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 18px $light-sh-d
                 p
                     margin-right: 0.5rem
+            .followed
+                color: $accent-color
 
             .more
                 color: grey
@@ -381,6 +409,7 @@ $card-dim: 280px
         display: flex
         color: $dark-bg
         margin-top: 1rem
+        margin-bottom: 5rem
         display: flex
         justify-content: space-between
         .snippets
@@ -396,7 +425,6 @@ $card-dim: 280px
                     width: 47px
                     border-radius: 10px
                     box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
-                    margin-right: 1rem
                     border: 6px solid $light-bg
                     cursor: pointer
                     &:hover
@@ -406,8 +434,9 @@ $card-dim: 280px
                     box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
                     padding: 10px
                     border-radius: 10px
-                    margin: 1rem
+                    margin: 0.3rem
                     display: flex
+                    margin-right: 0.6rem
 
                     &:hover
                         box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
@@ -423,6 +452,13 @@ $card-dim: 280px
                         .owner
                             font-weight: 200
                             font-size: 0.8rem
+                    .mat-icon
+                        height: 40px
+                        width: 40px
+                        color: white
+                        background: black
+                        border-radius: 50%
+
                     .date
                         display: none
                     .likes

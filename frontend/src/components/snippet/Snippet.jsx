@@ -183,7 +183,7 @@ function Snippet() {
   return (
     <div>
       {isDesktop ? (
-        <main className="snippet">
+        <main className="snippet-view">
           <header>
             <div className="bigbox">
               <div className="card" style={coll_bg}></div>

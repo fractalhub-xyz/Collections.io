@@ -22,16 +22,33 @@ $nav-button: 60px
             cursor: pointer
             color: grey
             box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
-            .current
-                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
-                color: red
+
             &:hover
                 box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
             .dark &
                 box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
                 &:hover
                     box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+        .current
+            box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+            color: $accent-color
 
 @media screen and (max-width: 800px)
     .side-nav
-        display: none
+        top: none
+        bottom: -1%
+        width: 100%
+        z-index: 999999
+        .container
+            width: 100%
+            flex-direction: row
+            justify-content: space-evenly
+            align-items: center
+            background: white
+            height: 8vh
+            border-radius: $borderbox-radius $borderbox-radius 0 0 
+            box-shadow: none
+            .navbtn
+                margin-top: 0
+                box-shadow: none
+                

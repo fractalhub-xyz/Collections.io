@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./collection.sass";
 //icons
-import { Favorite, FavoriteOutlined, Search } from "@material-ui/icons";
-import Podcast from "../../assets/svgs/podcasts.svg";
-import Article from "../../assets/svgs/articles_green.svg";
+import {
+  Favorite,
+  Article,
+  Mic,
+  Search,
+  Description,
+} from "@material-ui/icons";
+// import Podcast from "../../assets/svgs/podcasts.svg";
+// import Article from "../../assets/svgs/articles_green.svg";
 //API
 import { postHeartSnippet } from "../../helpers/api";
 import { getRelativeTime } from "../../helpers/time";
@@ -46,15 +52,21 @@ function SnippetRow({ snippet }) {
           history.push(`/snippet/${snippet.id}`);
         }}
       >
+        {snippet.type_of === "podcast" ? (
+          <div className="mat-icon center">
+            <Mic fontSize="medium" color="primary" />
+          </div>
+        ) : (
+          <div className="mat-icon center">
+            <Description fontSize="medium" color="primary" />
+          </div>
+        )}
+
         <div className="info">
           <div className="name">{snippet.title}</div>
           <div className="owner">by {snippet.owner}</div>
         </div>
-        {snippet.type_of === "podcast" ? (
-          <img src={Podcast} alt="Podcast" />
-        ) : (
-          <img src={Article} alt="Article" />
-        )}
+
         <div className="date">{getRelativeTime(snippet.timestamp)}</div>
         <div className="likes">
           <p>{likes}</p>

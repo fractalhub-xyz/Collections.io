@@ -19,20 +19,23 @@ body
 
     section
         .followedCollections
-            height: $tab-size
             border-top-left-radius: 30px
             border-bottom-left-radius: 30px
             padding: 20px
-            background: $light-bg-step
+            background: $light-bg
             border-right: 30px solid $accent-color
             border-left: 4px solid $accent-color
+            box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
 
             .dark &
-                background: $dark-bg-step
+                background: $dark-bg
+                box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
 
             h4
                 color: #5b685e
                 font-size: 1.25rem
+                text-align: center
+
             .tiles
                 display: flex
                 align-items: center
@@ -63,6 +66,7 @@ body
             .cards
                 display: flex
                 align-items: center
+                flex-wrap: wrap
 
                 .card
                     height: $tile-size
@@ -130,3 +134,46 @@ body
                             transform: translateY(calc(#{$tile-size} * 0))
                         .cover
                             transform: translateY(calc(#{$tile-size} * 0))
+
+.home-mobile
+    margin-top: 0.5rem
+    margin-left: 0
+    header
+
+    section
+        .followedCollections
+            .dark &
+
+            .cards
+                display: flex
+                flex-wrap: wrap
+                justify-content: center
+                .card
+                    width: 40%
+                    margin: 1rem
+                    display: flex
+                    flex-direction: column
+                    box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+                    border-radius: 20px
+                    padding: 0.6rem 0.1rem
+
+                    .cover
+                        border-radius: 10px
+                        margin: 0 auto
+                        margin-bottom: 0.6rem
+                        height: 130px
+                        width: 130px
+                        box-shadow: inset -6.2px -6.2px 6px $dark-sh-b, inset 6.2px 6.2px 6px $dark-sh-d
+                    .info
+                        margin: 0 0.6rem
+                        .name
+                            text-transform: uppercase
+                            font-weight: 600
+                        .by
+                            font-weight: 200
+                            display: inline
+                        .owner
+                            margin-left: 0.3rem
+                            color: $accent-color
+                            display: inline
+                            

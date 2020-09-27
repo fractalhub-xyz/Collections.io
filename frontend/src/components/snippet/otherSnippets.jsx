@@ -1,9 +1,15 @@
 import React from "react";
 //icons
-import Podcast from "../../assets/svgs/podcasts.svg";
-import Article from "../../assets/svgs/articles_green.svg";
-import URL from "../../assets/svgs/URLs.svg";
-import Video from "../../assets/svgs/videos.svg";
+import {
+  Favorite,
+  Link,
+  Mic,
+  MoreVert,
+  Movie,
+  PlaylistAdd,
+  Search,
+  Description,
+} from "@material-ui/icons";
 //modules
 import { useHistory } from "react-router-dom";
 
@@ -18,9 +24,9 @@ function OtherSnippets({ snip }) {
     >
       <div className="card center">
         {snip.type_of === "podcast" ? (
-          <img src={Podcast} alt="Podcast" />
+          <Mic fontSize="large" />
         ) : (
-          <img src={Article} alt="Article" />
+          <Description fontSize="large" />
         )}
       </div>
       <div className="info">
