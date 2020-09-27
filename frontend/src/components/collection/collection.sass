@@ -87,10 +87,12 @@ $card-dim: 280px
                 display: flex
                 align-items: center
                 padding: 0.5rem 0.5rem
-                color: grey
+                padding-left: 1rem
                 box-shadow: inset -6.2px -6.2px 6.2px $light-sh-b, inset 3.7px 3.7px 6.2px $light-sh-d
                 border-radius: 25px
+                color: grey
                 input
+                    color: inherit
                     width: 100%
                     background: none
                     border: none
@@ -160,40 +162,55 @@ $card-dim: 280px
             border-radius: $borderbox-radius
             box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
             .snippet
-                box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
-                padding: 10px
-                border-radius: 10px
-                margin: 1rem
                 display: flex
+                align-items: center
                 .likeicon
                     background: black
-                    height: 50px
-                    width: 50px
+                    height: 57px
+                    width: 57px
                     border-radius: 10px
-                .info
+                    box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+                    margin-right: 1rem
+                    border: 6px solid $light-bg
+                    cursor: pointer
+                    &:hover
+                        box-shadow: inset -6.2px -6.2px 10px $light-sh-b, inset 6.2px 6.2px 18px $light-sh-d
+                .deet
+                    box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+                    padding: 10px
+                    border-radius: 10px
+                    margin: 1rem
                     display: flex
-                    flex-direction: column
-                    margin-left: 1rem
-                    justify-content: center
-                    width: 60%
-                    .name
-                        font-weight: 400
-                        font-size: 1.3rem
-                    .owner
-                        font-weight: 200
-                        font-size: 0.8rem
-                .date
-                    margin: auto 0
-                    margin-left: 1.3rem
-                .likes
-                    margin-left: 1.3rem
-                    display: flex
-                    align-items: center
-                    p
-                        font-size: 1rem
-                        margin-right: 0.4rem
+                    cursor: pointer
+                    width: 90%
+                    &:hover
+                        box-shadow: inset -6.2px -6.2px 10px $light-sh-b, inset 6.2px 6.2px 18px $light-sh-d
+
+                    .info
+                        display: flex
+                        flex-direction: column
+                        margin-left: 1rem
+                        justify-content: center
+                        width: 75%
+                        .name
+                            font-weight: 400
+                            font-size: 1.3rem
+                        .owner
+                            font-weight: 200
+                            font-size: 0.8rem
+                    .date
+                        margin: auto 0
+                        margin-left: 1.3rem
+                    .likes
+                        margin-left: 1.3rem
+                        display: flex
+                        align-items: center
+                        p
+                            font-size: 1rem
+                            margin-right: 0.4rem
         .highlight
             width: 25%
+            height: 43vh
             box-shadow: inset -6.2px -6.2px 6.2px $light-sh-b, inset 3.7px 3.7px 6.2px $light-sh-d
             border-radius: $borderbox-radius
         .dark &
@@ -201,149 +218,226 @@ $card-dim: 280px
             .snippets
                 box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
                 .snippet
-                    box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
                     .likeicon
-                        color: red
+                        box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+                        border: 6px solid $dark-bg
+                        &:hover
+                            box-shadow: inset -6.2px -6.2px 10px $dark-sh-b, inset 6.2px 6.2px 18px $dark-sh-d
+                    .deet
+                        box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+                        &:hover
+                            box-shadow: inset -6.2px -6.2px 10px $dark-sh-b, inset 6.2px 6.2px 18px $dark-sh-d
+
             .highlight
                 box-shadow: inset -6.2px -6.2px 6.2px $dark-sh-b, inset 3.7px 3.7px 6.2px $dark-sh-d
+                .icon
+                    background: $light-bg
 
-    // position: absolute
-    // top: calc( #{$nav-height} + 40px )
-    // left: 5rem
-    // margin: 0px 4rem
-    // header
-    //     .detail
-    //         height: $card-dim
-    //         width: 97%
-    //         padding: 20px
-    //         border-radius: 30px
-    //         display: flex
-    //         margin-bottom: 2rem
-    //         background: $light-bg-step
-    //         box-shadow: 3px 3px 20px $light-shadow
+.collection-mobile
+    margin-left: 0
+    padding: 0rem 0.8rem
+    header
+        box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+        border-radius: $borderbox-radius
+        padding: 1rem
+        display: flex
+        flex-wrap: wrap
+        color: $dark-bg
+        .card
+            height: 200px
+            min-width: 200px
+            border-radius: $borderbox-radius
+            display: inline-block
+            box-shadow: inset -6.2px -6.2px 6px $dark-sh-b, inset 6.2px 6.2px 6px $dark-sh-d
+        .selects
+            width: 20%
+            display: flex
+            flex-wrap: wrap
+            flex-direction: column
+            .select
+                margin: 0.4rem 1rem
+                display: flex
+                justify-content: space-between
+                align-items: center
+                padding: 3px
+                height: 2rem
+                width: 100px
+                box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+                border-radius: 15px
+                cursor: pointer
+                &:hover
+                    box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+                .icon
+                    margin-left: 0.3rem
+                p
+                    margin-right: 10px
+            .current
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+        .info
+            margin-top: 1rem
+            display: flex
+            flex-direction: column
+            justify-content: flex-end
+            .type
+                font-weight: 100
+                font-size: 1rem
+                letter-spacing: 0.1rem
+            .name
+                font-weight: 600
+                font-size: 2rem
+                margin-bottom: 0.1rem
+            .owner
+                text-transform: capitalize
+                margin-bottom: 0.4rem
+                font-size: 0.7rem
+                color: grey
+            .desc
+                font-weight: 300
+                font-size: 1rem
+                margin-bottom: 1rem
+            .btn
+                float: left
+                width: 10rem
+                box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+                border-radius: 15px
+                cursor: pointer
+                .followed
+                    color: $accent-color
+                &:hover
+                    box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 18px $light-sh-d
+                p
+                    margin-right: 0.5rem
 
-    //         .dark &
-    //             background: $dark-bg-step
+            .more
+                color: grey
+                cursor: pointer
+                float: right
+                margin: auto 0
+                &:hover
+                    color: black
 
-    //         .interact
-    //             width: 4rem
-    //             height: $card-dim
-    //             display: flex
-    //             flex-direction: colomn
-    //             justify-content: center
-    //             cursor: pointer
-    //             .likes
-    //                 display: flex
-    //                 flex-direction: column
-    //                 width: 3.4rem
-    //                 justify-content: flex-start
-    //                 margin-top: 1rem
-    //                 border-radius: 17px
-    //                 background: $light-bg-step
-    //                 box-shadow: 3px 3px 20px $light-shadow
-    //                 align-items: center
-    //                 height: 5rem
-    //                 .icon
-    //                     margin-top: 0.6rem
-    //                 .red
-    //                     color: red
-    //                 .count
-    //                     margin-top: 5px
-    //         .card
-    //             height: $card-dim
-    //             min-width: $card-dim
-    //             border-radius: 25px
-    //             margin: 0px 10px
-    //         .info
-    //             margin-top: 20px
-    //             height: $card-dim
-    //             .name
-    //                 font-size: 2rem
-    //             .owner
-    //                 strong
-    //                     text-transform: capitalize
-    //             .desc
-    //             .stats
-    //                 margin-top: 4rem
-    //                 display: flex
-    //                 .stat
-    //                     margin: 0px 0.6rem
-    //                     display: flex
-    //                     justify-content: space-between
-    //                     align-items: center
-    //                     padding: 5px
-    //                     background: $light-bg-step
-    //                     box-shadow: 3px 3px 20px $light-shadow
-    //                     border-radius: 20px
-    //                     height: 1.9rem
-    //                     .icon
-    //                         margin-left: 0.5rem
-    //                     .title
-    //                         margin-left: 0.5rem
-    //                         margin-right: 0.5rem
-    //                     .count
-    //                         box-shadow: 3px 3px 20px $light-shadow
-    //                         background: $light-bg-step
-    //                         height: 2.9rem
-    //                         width: 2.9rem
-    //                         border-radius: 50%
-    //     .control
-    //         width: 99%
-    //         display: flex
-    //         justify-content: space-between
-    //         margin-bottom: 2rem
-    //         .snip-search
-    //             border-radius: 20px
-    //             height: 3rem
-    //             display: flex
-    //             width: 90%
-    //             background: $light-bg-step
-    //             box-shadow: 3px 3px 20px $light-shadow
+        .dark &
+            color: $light-bg
+            box-shadow: -6.2px -6.2px 18px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+            .card
+                box-shadow: inset -6.2px -6.2px 6px $dark-sh-b, inset 6.2px 6.2px 6px $dark-sh-d
+            .selects
+                .select
+                    box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+                    &:hover
+                        box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+            .info
+                .btn
+                    box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 18px $dark-sh-d
+                    &:hover
+                        box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 18px $dark-sh-d
+            .col3
+                .more
+                    &:hover
+                        color: white
+    .mid
+        display: flex
+        justify-content: space-between
+        margin-top: 1rem
+        .searchsection
+            width: 80%
+            margin: 0.5rem 0rem
+            .searchbox
+                display: flex
+                align-items: center
+                padding: 0.5rem 0.5rem
+                color: grey
+                box-shadow: inset -6.2px -6.2px 6.2px $light-sh-b, inset 3.7px 3.7px 6.2px $light-sh-d
+                border-radius: 25px
+                padding-left: 1rem
+                input
+                    width: 100%
+                    background: none
+                    border: none
+                    font-size: 1rem
 
-    //             .search-icon
-    //                 margin-left: 1rem
-    //             input
-    //                 border: none
-    //                 margin-left: 1rem
-    //                 background: $light-bg-step
-    //                 width: 95%
+        .addbtn
+            width: 50px
+            border-radius: 25px
+            margin: 0.5rem 0rem
+            box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+            cursor: pointer
+            &:hover
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+        .dark &
+            color: $light-bg
+            .searchsection
+                .searchbox
+                    box-shadow: inset -6.2px -6.2px 6.2px $dark-sh-b, inset 3.7px 3.7px 6.2px $dark-sh-d
+                    box-shadow: inset -6.2px -6.2px 6px $dark-sh-b, inset 6.2px 6.2px 6px $dark-sh-d
 
-    //         select
-    //             width: 7%
-    //             padding-left: 1%
-    //             border-radius: 20px
-    //             border: none
-    //             background: $light-bg-step
-    //             box-shadow: 3px 3px 20px $light-shadow
-    // section
-    //     min-height: 4rem
-    //     width: 97%
-    //     padding: 0.05rem 1rem
-    //     border-radius: 30px
-    //     margin-bottom: 2rem
-    //     background: $light-bg-step
-    //     box-shadow: 3px 3px 20px $light-shadow
-    //     .snippet
-    //         background: white
-    //         height: 3rem
-    //         width: 99%
-    //         border-radius: 10px
-    //         padding: 5px
-    //         display: flex
-    //         align-items: center
-    //         margin: 1rem 0rem
-    //         box-shadow: 3px 3px 20px $light-shadow
-    //         .icon
-    //             padding: 9px
-    //             border-radius: 10px
-    //             background: black
-    //             color: white
-    //             cursor: pointer
-    //             transition: 0.4s
-    //             &:hover
-    //                 background: black
-    //         .red
-    //             color: red
-    //         .title
-    //             margin-left: 1rem
-    //             width: 35%
+            .addbtn
+                box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+                &:hover
+                    box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+
+    section
+        border-radius: $borderbox-radius
+        display: flex
+        color: $dark-bg
+        margin-top: 1rem
+        display: flex
+        justify-content: space-between
+        .snippets
+            width: 100%
+            border-radius: $borderbox-radius
+            box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+            .snippet
+                display: flex
+                align-items: center
+                .likeicon
+                    background: black
+                    height: 47px
+                    width: 47px
+                    border-radius: 10px
+                    box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+                    margin-right: 1rem
+                    border: 6px solid $light-bg
+                    cursor: pointer
+                    &:hover
+                        box-shadow: inset -6.2px -6.2px 10px $light-sh-b, inset 6.2px 6.2px 18px $light-sh-d
+                .deet
+                    width: 75%
+                    box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+                    padding: 10px
+                    border-radius: 10px
+                    margin: 1rem
+                    display: flex
+
+                    &:hover
+                        box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+                    .info
+                        display: flex
+                        flex-direction: column
+                        margin-left: 1rem
+                        justify-content: center
+                        width: 84%
+                        .name
+                            font-weight: 400
+                            font-size: 1.3rem
+                        .owner
+                            font-weight: 200
+                            font-size: 0.8rem
+                    .date
+                        display: none
+                    .likes
+                        display: none
+        .dark &
+            color: $light-bg
+            .snippets
+                box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+                .snippet
+                    .likeicon
+                        box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+                        border: 6px solid $dark-bg
+                        &:hover
+                            box-shadow: inset -6.2px -6.2px 10px $dark-sh-b, inset 6.2px 6.2px 18px $dark-sh-d
+                    .deet
+                        box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+                        &:hover
+                            box-shadow: inset -6.2px -6.2px 10px $dark-sh-b, inset 6.2px 6.2px 18px $dark-sh-d

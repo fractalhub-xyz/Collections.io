@@ -6,12 +6,14 @@ import Podcast from "../../assets/svgs/podcasts.svg";
 import Article from "../../assets/svgs/articles_green.svg";
 //API
 import { postHeartSnippet } from "../../helpers/api";
-import { getRelativeTime } from '../../helpers/time'
+import { getRelativeTime } from "../../helpers/time";
+//modules
+import { useHistory } from "react-router-dom";
 
 function SnippetRow({ snippet }) {
   const [isLiked, setIsLiked] = useState(true);
   const [likes, setLikes] = useState(0);
-
+  let history = useHistory();
   //lifecycle funs
   useEffect(() => {
     setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
@@ -40,24 +42,28 @@ function SnippetRow({ snippet }) {
   return (
     <div className="snippet">
       <div
-        className={isLiked ? "likeicon center red" : "likeicon center"}
-        onClick={heartSnippet}
+        className="deet"
+        onClick={() => {
+          history.push(`/snippet/${snippet.id}`);
+        }}
       >
-        <Favorite />
+        <div className="info">
+          <div className="name">{snippet.title}</div>
+          <div className="owner">by {snippet.owner}</div>
+        </div>
+        {snippet.type_of === "podcast" ? (
+          <img src={Podcast} alt="Podcast" />
+        ) : (
+          <img src={Article} alt="Article" />
+        )}
+        <div className="date">{getRelativeTime(snippet.timestamp)}</div>
+        <div className="likes">
+          <p>{likes}</p>
+          <Favorite />
+        </div>
       </div>
-      <div className="info">
-        <div className="name">{snippet.title}</div>
-        <div className="owner">by {snippet.owner}</div>
-      </div>
-      {snippet.type_of === "podcast" ? (
-        <img src={Podcast} alt="Podcast" />
-      ) : (
-        <img src={Article} alt="Article" />
-      )}
-      <div className="date">{getRelativeTime(snippet.timestamp)}</div>
-      <div className="likes">
-        <p>{likes}</p>
-        <Favorite />
+      <div className="likeicon center" onClick={heartSnippet}>
+        {isLiked ? <Favorite color="secondary" /> : <Favorite />}
       </div>
     </div>
   );

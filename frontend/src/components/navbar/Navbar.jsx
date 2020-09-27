@@ -74,7 +74,44 @@ function Navbar() {
             ></div>
           </div>
         </main>
-      ) : null}
+      ) : (
+        <main className="navbar-desk">
+          <div className="container-left">
+            <img src="../../assets/svgs/videos.svg" alt="logo" />
+            <div
+              className="back-button center"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              <NavigateBefore />
+            </div>
+            <div className="searchbox">
+              <Search />
+              <input placeholder="Search" />
+            </div>
+          </div>
+          <div className="container-right">
+            <div className="btn center">
+              <Notifications />
+            </div>
+            <div className="btn center">
+              <Settings />
+            </div>
+            <Toggle
+              icons={false}
+              onChange={toggleTheme}
+              defaultChecked={theme === "dark"}
+            />
+            <div
+              className="usericon"
+              onClick={() => {
+                history.push(`/user/${user}`);
+              }}
+            ></div>
+          </div>
+        </main>
+      )}
     </div>
   );
 }

@@ -1,8 +1,115 @@
 @import '../common/variables.sass'
+$card-dim: 210px
 .snippet
+    margin-top: 1.5rem
+    margin-left: calc( #{$side-nav-width})
+    padding: 0rem 2rem
     header
-        font-size: 1rem
-        color: $primary-color
+        margin-bottom: 2rem
+        display: flex
+        .bigbox
+            box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+            border-radius: $borderbox-radius
+            padding: 1rem
+            display: flex
+            color: $dark-bg
+            width: 50%
+            .card
+                height: $card-dim
+                min-width: $card-dim
+                display: inline-block
+                box-shadow: inset -6.2px -6.2px 6px $dark-sh-b, inset 6.2px 6.2px 6px $dark-sh-d
+                border-radius: 50%
+            .info
+                margin-left: 1rem
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 80%
+                margin-top: 3rem
+                .type
+                    font-weight: 100
+                    font-size: 1.4rem
+                    letter-spacing: 0.1rem
+                    text-transform: uppercase
+                .name
+                    font-weight: 600
+                    font-size: 2.5rem
+                    margin-bottom: 0.3rem
+                .btn
+                    width: 50px
+                    height: 50px
+                    box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+                    cursor: pointer
+                    border-radius: 35px
+                    margin-top: 1rem
+                    .liked
+                        color: $accent-color
+                    &:hover
+                        box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 18px $light-sh-d
 
+            .col3
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                align-items: flex-end
+                .owner
+                    text-transform: capitalize
+                    padding: 0.5rem 1rem
+                    border-radius: 15px
+                    box-shadow: inset -6.2px -6.2px 6.2px $light-sh-b, inset 3.7px 3.7px 6.2px $light-sh-d
+                .more
+                    color: grey
+                    cursor: pointer
+                    &:hover
+                        color: black
+            .dark &
+                color: $light-bg
+                box-shadow: -6.2px -6.2px 18px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+                .card
+                    box-shadow: inset -6.2px -6.2px 6px $dark-sh-b, inset 6.2px 6.2px 6px $dark-sh-d
+                .info
+                    .btn
+                        box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 18px $dark-sh-d
+                        &:hover
+                            box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 18px $dark-sh-d
+                .col3
+                    .owner
+                        box-shadow: inset -6.2px -6.2px 6.2px $dark-sh-b, inset 3.7px 3.7px 6.2px $dark-sh-d
+                    .more
+                        &:hover
+                            color: white
+        .player
+            margin-left: 1rem
+            width: 50%
+            overflow: hidden
+            border-radius: 25px
+            box-shadow: -6.2px -6.2px 18px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+            border: 5px solid $light-bg
+
+            .dark &
+                box-shadow: -6.2px -6.2px 18px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+                border: 5px solid $dark-bg
     section
-        color: rgba(93, 0, 255, 0.6)
+        display: flex
+        justify-content: space-between
+        .comments
+            box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+            width: 66%
+            min-height: 60vh
+            border-radius: $borderbox-radius $borderbox-radius 0 0 
+            padding: 0 1rem
+        .otsnippets
+            border: 6px solid $light-bg
+            box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+            width: 30%
+            background: $accent-color
+            min-height: 70vh
+            border-radius: $borderbox-radius $borderbox-radius 0 0 
+
+        .dark &
+            .comments
+                box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+            .otsnippets
+                border: 6px solid $dark-bg
+                box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
