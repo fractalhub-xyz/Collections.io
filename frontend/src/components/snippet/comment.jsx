@@ -4,16 +4,14 @@ import "./snippet.sass";
 import { Delete, ThumbUp } from "@material-ui/icons";
 //api
 import { DeleteComment, postUpvoteComment } from "../../helpers/api";
-import { useStateValue } from "../../helpers/stateProvider";
 
 function Comment({ comment, setUpdateComments }) {
-  const [{ user, isDesktop }] = useStateValue();
 
   const [upvotes, setUpvotes] = useState(0);
   const [isupvoted, setIsupvoted] = useState(false);
   useEffect(() => {
     setUpvotes(comment.upvotes.length);
-    setIsupvoted(comment.upvotes.includes(user));
+    setIsupvoted(comment.upvotes.includes(localStorage.getItem('user')));
   }, []);
 
   const DeleteComm = async (e) => {
@@ -58,7 +56,7 @@ function Comment({ comment, setUpdateComments }) {
           >
             <ThumbUp />
           </div>
-          {user === comment.owner && (
+          {localStorage.getItem('user') === comment.owner && (
             <div className="btn center" onClick={DeleteComm}>
               <Delete />
             </div>

@@ -3,10 +3,10 @@ import "./collection.sass";
 //icons
 import {
   Favorite,
-  Article,
   Mic,
-  Search,
   Description,
+  Link,
+  Movie,
 } from "@material-ui/icons";
 // import Podcast from "../../assets/svgs/podcasts.svg";
 // import Article from "../../assets/svgs/articles_green.svg";

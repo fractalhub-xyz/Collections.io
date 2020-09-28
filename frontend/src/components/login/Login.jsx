@@ -13,8 +13,7 @@ function Login() {
   useEffect(() => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    dispatch({ type: "SET_USER", user: null });
-  }, [dispatch]);
+  }, []);
 
   return (
     <main className="login">
@@ -28,7 +27,7 @@ function Login() {
       </header>
       <section>
         {isLogin ? (
-          <LoginForm dispatch={dispatch} setIsLogin={setIsLogin} />
+          <LoginForm setIsLogin={setIsLogin} />
         ) : (
           <RegisterForm setIsLogin={setIsLogin} />
         )}

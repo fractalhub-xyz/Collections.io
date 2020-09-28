@@ -14,7 +14,7 @@ function RegisterForm({ setIsLogin }) {
       password: data.password,
     };
     try {
-      const response = await postRegister(payload);
+      await postRegister(payload);
       setIsLogin(true);
     } catch {
       alert("failed // temp");

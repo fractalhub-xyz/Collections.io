@@ -1,5 +1,4 @@
 export const initialState = {
-  user: "",
   modal: false,
   form: null,
   isDesktop: true,
@@ -10,11 +9,6 @@ export const initialState = {
 const reducer = (state, action) => {
   console.log(action);
   switch (action.type) {
-    case "SET_USER":
-      return {
-        ...state,
-        user: action.user,
-      };
     case "CLOSE_MODAL":
       return {
         ...state,

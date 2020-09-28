@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./collection.sass";
-
 //api
 import { getCollectionFromID, postFollowCollection } from "../../helpers/api";
 //components
@@ -15,11 +14,11 @@ import {
   PlaylistAdd,
   Search,
   Description,
+  Loyalty,
 } from "@material-ui/icons";
 
-// import { Heart } from "react-feather";
 //modules
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
 
 function Collection() {
@@ -33,11 +32,11 @@ function Collection() {
   const [filter, setFilter] = useState("");
   const [searchText, setSearchText] = useState("");
 
+  let history = useHistory();
   //misc
   const [totFollowers, setTotFollowers] = useState(0);
 
   //flags
-  const [isLiked, setIsLiked] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
 
@@ -72,7 +71,7 @@ function Collection() {
         setSnippets(response.data.snippets);
         setTags(response.data.tags);
       } catch (error) {
-        console.error(error);
+        console.error(error.response.data);
         setGetError(`Failed to load collection with ID: ${params.id}`);
       }
       setIsLoading(false);
@@ -137,11 +136,22 @@ function Collection() {
               <div className="type">COLLECTION</div>
               <div className="name">{collection.name}</div>
               <div className="desc">{collection.desc}</div>
-              {tags.map((tag) => (
-                <div className="tag btn" key={tags.id}>
-                  {tag.name}
+              <div className="tags">
+                <div className="hash">
+                  <Loyalty />
                 </div>
-              ))}
+                {tags.map((tag) => (
+                  <div
+                    className="tag"
+                    key={tags.id}
+                    onClick={() => {
+                      history.push(`/tag/${tag.name}`);
+                    }}
+                  >
+                    {tag.name}
+                  </div>
+                ))}
+              </div>
               <div className="btn center" onClick={followCollection}>
                 {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}
                 <Favorite className={isFollowed ? "followed" : ""} />
@@ -286,11 +296,22 @@ function Collection() {
               <div className="name">{collection.name}</div>
               <div className="owner">by {collection.owner}</div>
               <div className="desc">{collection.desc}</div>
-              {tags.map((tag) => (
-                <div className="tag btn" key={tags.id}>
-                  {tag.name}
+              <div className="tags">
+                <div className="hash">
+                  <Loyalty fontSize="small" />
                 </div>
-              ))}
+                {tags.map((tag) => (
+                  <div
+                    className="tag"
+                    key={tags.id}
+                    onClick={() => {
+                      history.push(`/tag/${tag.name}`);
+                    }}
+                  >
+                    {tag.name}
+                  </div>
+                ))}
+              </div>
               <div>
                 <div className="btn center" onClick={followCollection}>
                   {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}

@@ -7,7 +7,7 @@ import {
   Notifications,
   NavigateBefore,
   Search,
-  Settings,
+  VoiceOverOff,
 } from "@material-ui/icons";
 //componentss
 import { useStateValue } from "../../helpers/stateProvider";
@@ -16,7 +16,7 @@ import "react-toggle/style.css";
 
 function Navbar() {
   //init
-  const [{ user, isDesktop }] = useStateValue();
+  const [{ user }] = useStateValue();
   let history = useHistory();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -52,17 +52,14 @@ function Navbar() {
           <input placeholder="Search" />
         </div>
       </div>
-      <div className="container-right">
+    <div className="container-right">
         <div
-          className="btn center"
+          className="btn center hide"
           onClick={() => {
-            history.push(`/notifications/`);
+            history.push("/login/");
           }}
         >
-          <Notifications />
-        </div>
-        <div className="btn center hide">
-          <Settings />
+          <VoiceOverOff />
         </div>
         <Toggle
           icons={false}

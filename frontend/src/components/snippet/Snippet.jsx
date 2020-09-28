@@ -13,7 +13,6 @@ import { getRelativeTime } from "../../helpers/time";
 import Comment from "./comment";
 //modules
 import { useParams } from "react-router-dom";
-import { useStateValue } from "../../helpers/stateProvider";
 import { Favorite, MoreVert, PlayArrow } from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
 
@@ -36,9 +35,6 @@ function Snippet() {
   const [refresh, setRefresh] = useState(true);
 
   const params = useParams();
-
-  //global states
-  const [{ user, isDesktop }, dispatch] = useStateValue();
 
   // lifecycle functions
 

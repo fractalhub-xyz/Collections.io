@@ -34,6 +34,22 @@ $card-dim: 280px
                 font-weight: 300
                 font-size: 1rem
                 margin-bottom: 1rem
+
+            .tags
+                display: flex
+                margin-bottom: 1rem
+                align-items: center
+                .hash
+                    margin-right: 1rem
+                .tag
+                    box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+                    width: auto
+                    padding: 0.6rem 1rem
+                    margin-right: 1rem
+                    cursor: pointer
+                    &:hover
+                        box-shadow: inset -2px -2px 4px $light-sh-b,inset 2px 2px 4px $light-sh-d
+
             .btn
                 width: 10rem
                 box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
@@ -71,6 +87,12 @@ $card-dim: 280px
                     box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 18px $dark-sh-d
                     &:hover
                         box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 18px $dark-sh-d
+                .tags
+                    .tag
+                        box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                        &:hover
+                            box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
+
             .col3
                 .owner
                     box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
@@ -317,6 +339,19 @@ $card-dim: 280px
                 font-weight: 300
                 font-size: 1rem
                 margin-bottom: 1rem
+            .tags
+                display: flex
+                flex-wrap: wrap
+                .hash
+                    margin-right: 1rem
+                .tag
+                    margin-bottom: 1rem
+                    font-size: 0.7rem
+                    box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+                    width: auto
+                    padding: 0.6rem 1rem
+                    margin-right: 1rem
+                    cursor: pointer
             .btn
                 float: left
                 width: 10rem
@@ -349,6 +384,11 @@ $card-dim: 280px
             .info
                 .btn
                     box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 18px $dark-sh-d
+                .tags
+                    .tag
+                        box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                        
+
             .col3
                 .more
                     &:hover

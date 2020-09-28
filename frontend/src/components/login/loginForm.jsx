@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 //api
 import { postLogin } from "../../helpers/api";
 
-function LoginForm({ dispatch, setIsLogin }) {
+function LoginForm({ setIsLogin }) {
   const { register, handleSubmit, errors } = useForm();
   //setup
   let history = useHistory();
@@ -24,7 +24,6 @@ function LoginForm({ dispatch, setIsLogin }) {
       console.log(response.data.token);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", data.username);
-      dispatch({ type: "SET_USER", user: data.username });
       setTimeout(redirect, 200);
     } catch {
       alert("failed // temp");

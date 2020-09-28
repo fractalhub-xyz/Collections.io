@@ -3,7 +3,7 @@ import "./notifications.sass";
 //components
 import Notification from "./notification";
 //api
-import { getNotifications, postReadNotification } from "../../helpers/api";
+import { getNotifications } from "../../helpers/api";
 
 function Notifications() {
   //states
@@ -40,7 +40,7 @@ function Notifications() {
         <h1>
           {
             notifications.filter(function (notifications) {
-              return notifications.is_read == false;
+              return notifications.is_read === false;
             }).length
           }{" "}
           new!
@@ -49,7 +49,7 @@ function Notifications() {
           <h3>Unread</h3>
           {notifications.map((notification) => (
             <div key={notification.id}>
-              {notification.is_read == false && (
+              {notification.is_read === false && (
                 <Notification
                   notification={notification}
                   setRefresh={setRefresh}
@@ -61,7 +61,7 @@ function Notifications() {
           <h3>Others</h3>
           {notifications.map((notification) => (
             <div key={notification.id}>
-              {notification.is_read == true && (
+              {notification.is_read === true && (
                 <Notification
                   notification={notification}
                   setRefresh={setRefresh}

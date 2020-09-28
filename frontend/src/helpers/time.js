@@ -13,7 +13,7 @@ export function getRelativeTime(timestamp) {
 
     const diff = new Date().getTime() - new Date(timestamp).getTime()
     for (var u in units) {
-        if (Math.abs(diff) > units[u] || u == 'second') {
+        if (Math.abs(diff) > units[u] || u === 'second') {
             return rtf.format(-1 * Math.round(diff/units[u]), u)
         }
     }

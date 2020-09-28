@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./sidenav.sass";
 //icons
-import { Home, Explore, Add } from "@material-ui/icons";
+import { Home, Explore, Add, Notifications } from "@material-ui/icons";
 //modules
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
@@ -36,6 +36,14 @@ function Sidenav() {
           }}
         >
           <Explore />
+        </div>
+        <div
+          className="navbtn center"
+          onClick={() => {
+            history.push(`/notifications/`);
+          }}
+        >
+          <Notifications />
         </div>
         <div
           className={"navbtn center add"}

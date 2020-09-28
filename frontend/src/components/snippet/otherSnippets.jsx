@@ -1,13 +1,9 @@
 import React from "react";
 //icons
 import {
-  Favorite,
   Link,
   Mic,
-  MoreVert,
   Movie,
-  PlaylistAdd,
-  Search,
   Description,
 } from "@material-ui/icons";
 //modules
