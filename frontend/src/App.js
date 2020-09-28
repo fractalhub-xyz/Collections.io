@@ -13,6 +13,7 @@ import Snippet from "./components/snippet/Snippet";
 import User from "./components/user/User";
 import Modal from "./components/common/Modal";
 import Notifications from "./components/notifications/Notifications";
+import Tag from "./components/tag/Tag";
 /*
 function App() {
   return (
@@ -80,6 +81,9 @@ function AuthenticatedRoutes() {
         </Route>
         <Route path="/notifications" exact>
           <Notifications />
+        </Route>
+        <Route path="/tag/:id">
+          <Tag />
         </Route>
       </Switch>
     </>

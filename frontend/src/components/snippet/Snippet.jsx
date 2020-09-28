@@ -15,12 +15,13 @@ import Comment from "./comment";
 import { useParams } from "react-router-dom";
 import { Favorite, MoreVert, PlayArrow } from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
+import { useStateValue } from "../../helpers/stateProvider";
 
 function Snippet() {
   const [snippet, setSnippet] = useState({});
   const [snipID, setSnipID] = useState(null);
   const [comments, setComments] = useState([]);
-  const [podcast, setPodcast] = useState("");
+  const [link, setLink] = useState("");
   const [totLikes, setTotLikes] = useState(0);
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(true);
   const [isLoadingComments, setIsLoadingComments] = useState(true);
@@ -29,6 +30,8 @@ function Snippet() {
   const [otherSnippets, setOtherSnippets] = useState([]);
   const [updateComments, setUpdateComments] = useState(false);
   const [newComment, setNewComment] = useState("");
+
+  const [, dispatch] = useStateValue();
 
   //flags
   const [isLiked, setIsLiked] = useState(false);
@@ -111,10 +114,13 @@ function Snippet() {
     }
     var code = snippet.link;
     if (code) {
-      code = code.split("/");
-      setPodcast(
-        `https://open.spotify.com/embed-podcast/${code[3]}/${code[4]}`
-      );
+      if (snippet.type_of === "podcast") {
+        code = code.split("/");
+        setLink(`https://open.spotify.com/embed-podcast/${code[3]}/${code[4]}`);
+      } else if (snippet.type_of === "video") {
+        code = code.split("=");
+        setLink(`https://www.youtube.com/embed/${code[1]}`);
+      }
     }
   }, [snippet]);
 
@@ -129,7 +135,7 @@ function Snippet() {
 
   useEffect(() => {
     if (snippet.hearts) {
-      setIsLiked(snippet.hearts.includes(localStorage.getItem('user')));
+      setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
       setTotLikes(snippet.hearts.length);
     }
   }, [snippet]);
@@ -203,13 +209,30 @@ function Snippet() {
         {snippet.type_of === "podcast" && (
           <div className="player">
             <iframe
-              src={podcast}
+              src={link}
               width="100%"
               height="240"
               frameborder="0"
               allowtransparency="true"
               allow="encrypted-media"
             />{" "}
+          </div>
+        )}
+        {snippet.type_of === "video" && (
+          <div className="player video">
+            <div className="icon center">Youtube</div>
+            <div
+              className="open center"
+              onClick={() => {
+                dispatch({
+                  type: "OPEN_FORM",
+                  form: "open_video",
+                  id: link,
+                });
+              }}
+            >
+              <PlayArrow fontSize="large" />
+            </div>
           </div>
         )}
       </header>

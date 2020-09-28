@@ -7,6 +7,7 @@ import EditCollection from "./editCollection";
 import CreateCollection from "./createCollection.";
 import CreateSnippet from "./createSnippet";
 import { Close } from "@material-ui/icons";
+import OpenVideo from "./openVideo";
 
 function Modal() {
   const [{ modal, form }, dispatch] = useStateValue();
@@ -22,6 +23,7 @@ function Modal() {
     create_collection: CreateColl,
     edit_collection: EditColl,
     create_snippet: CreateSnippet,
+    open_video: OpenVideo,
   };
 
   const SelectedForm = map[form];

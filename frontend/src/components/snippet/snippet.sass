@@ -95,6 +95,26 @@ $card-dim: 210px
             .dark &
                 box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
                 border: 5px solid $dark-bg
+        
+        .video
+            display: flex
+            padding: 1rem
+            justify-content: space-around
+            align-items: center
+            .icon 
+                color: white
+                font-size: 3rem
+                color: $dark-bg
+            .open
+                height: 70px
+                width: 70px
+                border-radius: 50%
+                background: teal
+                color: white
+            .dark &
+                .icon
+                    color: $light-bg
+
     section
         display: flex
         justify-content: space-between

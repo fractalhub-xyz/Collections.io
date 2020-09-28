@@ -16,6 +16,8 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 SNIPPET_TYPES = (
     ('podcast', 'podcast'),
     ('article', 'article'),
+    ('video', 'video'),
+    ('link', 'link'),
 )
 
 COLLECTION_PERMISSIONS = (

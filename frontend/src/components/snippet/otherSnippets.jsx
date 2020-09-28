@@ -1,11 +1,6 @@
 import React from "react";
 //icons
-import {
-  Link,
-  Mic,
-  Movie,
-  Description,
-} from "@material-ui/icons";
+import { Link, Mic, Movie, Description } from "@material-ui/icons";
 //modules
 import { useHistory } from "react-router-dom";
 
@@ -19,10 +14,25 @@ function OtherSnippets({ snip }) {
       }}
     >
       <div className="card center">
-        {snip.type_of === "podcast" ? (
-          <Mic fontSize="large" />
-        ) : (
-          <Description fontSize="large" />
+        {snip.type_of === "podcast" && (
+          <div>
+            <Mic fontSize="large" />
+          </div>
+        )}
+        {snip.type_of === "article" && (
+          <div>
+            <Description fontSize="large" />
+          </div>
+        )}
+        {snip.type_of === "video" && (
+          <div>
+            <Movie fontSize="large" />
+          </div>
+        )}
+        {snip.type_of === "link" && (
+          <div>
+            <Link fontSize="large" />
+          </div>
         )}
       </div>
       <div className="info">
