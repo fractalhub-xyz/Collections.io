@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./sidenav.sass";
 //icons
-import { Home, Explore } from "@material-ui/icons";
+import { Home, Explore, Add } from "@material-ui/icons";
 //modules
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
 
 function Sidenav() {
   //init
-  const [{ isDesktop }] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   let history = useHistory();
   const [activeUrl, setActiveUrl] = useState(window.location.pathname);
@@ -36,6 +36,17 @@ function Sidenav() {
           }}
         >
           <Explore />
+        </div>
+        <div
+          className={"navbtn center add"}
+          onClick={() => {
+            dispatch({
+              type: "OPEN_FORM",
+              form: "create_collection",
+            });
+          }}
+        >
+          <Add />
         </div>
       </div>
     </main>

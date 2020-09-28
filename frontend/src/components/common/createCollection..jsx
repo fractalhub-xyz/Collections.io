@@ -1,24 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+//api
+import { postNewCollection } from "../../helpers/api";
 //modules
 import { useForm } from "react-hook-form";
+import { useStateValue } from "../../helpers/stateProvider";
+import { useHistory } from "react-router-dom";
 
 function CreateCollection() {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const [, dispatch] = useStateValue();
+  let history = useHistory();
+  const [error, setError] = useState("");
+  const createCollection = async (data, e) => {
+    e.preventDefault();
+    const payload = {
+      name: data.name,
+      desc: data.desc,
+    };
+    try {
+      await postNewCollection(payload);
+      const response = console.log("Successfully created new collection");
+      dispatch({ type: "CLOSE_MODAL" });
+      history.push(`/collection/${response.data.id}`);
+    } catch (error) {
+      console.log("Failed to create a new collection");
+      // setError(error.response.data.detail);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="edit-collection">
-      <h1>Create New Collection</h1>
+    <form onSubmit={handleSubmit(createCollection)} className="create-collection">
+      <header />
       <section>
-        <label>Name of Collection</label>
+        <h1>Add new snippet</h1>
+        <label>Name</label>
         <input
           name="name"
           ref={register({
             required: {
               value: true,
-              message: "The new collection needs a name",
+              message: "Snippets require a name",
             },
           })}
         />
@@ -30,18 +51,32 @@ function CreateCollection() {
           name="desc"
           ref={register({
             required: {
-              message:
-                "You need to provide a short description for your collection",
               value: true,
+              message: "Snippets require a sescription",
             },
-            maxLength: { value: 100, message: "isa too big" },
+            // maxLength: { value: 100, message: "isa too big" },
           })}
         />
         {errors?.desc?.message && (
           <p className="error-message">{errors.desc.message}</p>
         )}
+
+        {!!error.length && (
+          <div className="api-error">
+            {error}
+            <span
+              className="back"
+              onClick={() => {
+                dispatch({ type: "CLOSE_MODAL" });
+              }}
+            >
+              &nbsp;[ go back ]
+            </span>
+          </div>
+        )}
         <button type="submit">Submit</button>
       </section>
+      <footer />
     </form>
   );
 }

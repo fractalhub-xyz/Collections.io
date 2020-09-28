@@ -53,12 +53,12 @@ function SnippetRow({ snippet }) {
         }}
       >
         {snippet.type_of === "podcast" ? (
-          <div className="mat-icon center">
-            <Mic fontSize="medium" color="primary" />
+          <div className="mat-icon center c3">
+            <Mic fontSize="medium"  />
           </div>
         ) : (
-          <div className="mat-icon center">
-            <Description fontSize="medium" color="primary" />
+          <div className="mat-icon center c2">
+            <Description fontSize="medium"/>
           </div>
         )}
 
