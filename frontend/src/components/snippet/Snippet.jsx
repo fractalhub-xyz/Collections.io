@@ -133,7 +133,7 @@ function Snippet() {
 
   useEffect(() => {
     if (snippet.hearts) {
-      setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
+      setIsLiked(snippet.hearts.includes(localStorage.getItem('user')));
       setTotLikes(snippet.hearts.length);
     }
   }, [snippet]);

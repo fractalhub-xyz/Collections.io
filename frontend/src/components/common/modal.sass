@@ -1,4 +1,12 @@
 @import '../common/variables.sass'
+.modal-blur
+    position: fixed
+    top: 0
+    left: 0
+    height: 100vh
+    width: 100vw
+    z-index: 999999
+    filter: blur(3px)
 .modal
     position: fixed
     top: 0
@@ -15,33 +23,107 @@
         position: fixed
         top: 20px
         right: 20px
+        cursor: pointer
+        color: $accent-color
+        &:hover
+            color: white
+
 
     form
-        border: 2px solid white
-        min-height: 50vh
-        width: 50vw
-        border-radius: 20px
-        background: rgba(70, 4, 145, 1)
-        padding: 20px
-        h1
-            text-align: center
-
+        width: 35rem
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        background: $light-bg-step
+        header
+            height: 25%
+            background: $light-bg
         section
+            padding: 0 1rem
+            display: flex
+            flex-direction: column
+            height: 100%
+            h1
+                text-align: center
+                margin-bottom: 0rem
             label
-                font-size: 1.7rem
-                display: block
-                margin-bottom: 20px
+                margin-top: 1.5rem
+                font-weight: 100
+                text-transform: uppercase
+                letter-spacing: 0.05rem
             input, textarea
-                width: 98%
-                font-size: 1.5
-                padding: 10px
-
+                margin-top: 0.5rem
+                font-size: 1.3rem
+                border: none
             textarea
-                height: 10vh
+                height: 25%
             button
-                width: 100%
-                font-size: 2rem
+                font-size: 1.3rem
+                margin-top: 1.5rem
+                margin-bottom: 1.5rem
+                padding: 0.4rem 0
+                background: rgba(161, 161, 161, 0.979)
+                border: none
+                color: white
+                cursor: pointer
+                &:hover
+                    background: $light-bg
+                    color: black
+
             .error-message
-                color: red
-                &::before
-                    content: "<Error> "
+                font-size: 0.8rem
+                color: teal
+        .api-error
+            text-align: center
+            margin-top: 1rem
+            color: teal
+        .back
+            font-weight: 100
+            cursor: pointer
+            &:hover
+                color: white
+        footer
+            background: $light-bg
+            height: 8%
+
+    .create-snippet
+        height: 60vh
+        .selects
+            margin-top: 0.5rem
+            display: flex
+            justify-content: space-between
+            .select
+                width: 20%
+                padding: 0.4rem 0
+                border: 2px solid $accent-color
+                border-radius: 15px
+                cursor: pointer
+                &:hover
+                    background: $accent-color
+                    color: white
+            .current
+                background: $accent-color
+                color: white
+
+    .dark &
+        .close-modal
+        form
+            background: $dark-bg-step
+            header
+                background: $dark-bg
+            section
+                background: rgba(39, 39, 39, 0.979)
+            footer
+                background: $dark-bg
+
+@media screen and (max-width: 800px)
+    .modal
+        align-items: flex-end
+        .close-modal
+            
+        form
+            header
+            section
+            footer
+        .create-snippet
+            height: 80vh

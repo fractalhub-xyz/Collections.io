@@ -2,7 +2,9 @@ export const initialState = {
   user: "",
   modal: false,
   form: null,
-  isDesktop: false,
+  isDesktop: true,
+  id: null,
+  refreshSnippets: true
 };
 
 const reducer = (state, action) => {
@@ -18,11 +20,17 @@ const reducer = (state, action) => {
         ...state,
         modal: false,
       };
+    case "REFRESH_SNIPPETS":
+      return {
+        ...state,
+        refreshSnippets: action.refresh,
+      };
     case "OPEN_FORM":
       return {
         ...state,
         modal: true,
         form: action.form,
+        id: action.id
       };
     default:
       return state;

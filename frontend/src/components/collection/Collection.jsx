@@ -25,12 +25,12 @@ import { useStateValue } from "../../helpers/stateProvider";
 function Collection() {
   //states
   const [collection, setCollection] = useState({});
+  const [colid, setColid] = useState(null);
   const [snippets, setSnippets] = useState([]);
   const [tags, setTags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
   const [filter, setFilter] = useState("");
-  const [refresh, setRefresh] = useState(true);
   const [searchText, setSearchText] = useState("");
 
   //misc
@@ -51,20 +51,19 @@ function Collection() {
   };
 
   //global states
-  const [{ user, isDesktop }, dispatch] = useStateValue();
+  const [{ user, refreshSnippets, isDesktop }, dispatch] = useStateValue();
   const params = useParams();
+
+  useEffect(() => {
+    setColid(params.id);
+  }, [params]);
 
   // lifecycle functions
   useEffect(() => {
-    dispatch({
-      type: "SET_PAGE",
-      page: "collection_detail",
-    });
     console.log("[RENDER] >> Collection");
-    if (!refresh) {
+    if (!refreshSnippets) {
       return;
     }
-
     async function fetchCollection() {
       try {
         console.log(`[GET] >> Collection ${params.id} details`);
@@ -79,8 +78,11 @@ function Collection() {
       setIsLoading(false);
     }
     fetchCollection();
-    setRefresh(false);
-  }, [refresh, params]);
+    dispatch({
+      type: "REFRESH_SNIPPETS",
+      refresh: false,
+    });
+  }, [refreshSnippets, colid]);
 
   useEffect(() => {
     if (user === collection.owner) {
@@ -90,7 +92,9 @@ function Collection() {
     }
     const followers = collection.followers;
     if (followers) {
-      setIsFollowed(followers.includes(user));
+      //check
+      setIsFollowed(followers.includes(localStorage.getItem("user")));
+      //
       setTotFollowers(collection.followers.length);
     }
     if (collection.tags) {
@@ -175,7 +179,7 @@ function Collection() {
                   setFilter("podcast");
                 }}
               >
-                <Mic fontSize="medium" className="mat-icon"/>
+                <Mic fontSize="medium" className="mat-icon a1" />
                 <p>{podcasts}</p>
               </div>
               <div
@@ -184,7 +188,7 @@ function Collection() {
                   setFilter("article");
                 }}
               >
-                <Description fontSize="medium" className="mat-icon"/>
+                <Description fontSize="medium" className="mat-icon a2" />
                 <p>{articles}</p>
               </div>
               <div
@@ -193,7 +197,7 @@ function Collection() {
                   setFilter("");
                 }}
               >
-                <Link fontSize="medium" className="mat-icon"/>
+                <Link fontSize="medium" className="mat-icon a3" />
                 <p>12/</p>
               </div>
               <div
@@ -202,11 +206,20 @@ function Collection() {
                   setFilter("");
                 }}
               >
-                <Movie fontSize="medium" className="mat-icon"/>
+                <Movie fontSize="medium" className="mat-icon a4" />
                 <p>12/</p>
               </div>
             </div>
-            <div className="addbtn center">
+            <div
+              className="addbtn center"
+              onClick={() => {
+                dispatch({
+                  type: "OPEN_FORM",
+                  form: "create_snippet",
+                  id: collection.id,
+                });
+              }}
+            >
               <PlaylistAdd />
             </div>
           </div>
@@ -237,7 +250,7 @@ function Collection() {
                   setFilter("podcast");
                 }}
               >
-                <Mic fontSize="medium" className="mat-icon"/>
+                <Mic fontSize="medium" className="mat-icon" />
                 <p>{podcasts}</p>
               </div>
               <div
@@ -246,7 +259,7 @@ function Collection() {
                   setFilter("article");
                 }}
               >
-                <Description fontSize="medium" className="mat-icon"/>
+                <Description fontSize="medium" className="mat-icon" />
                 <p>{articles}</p>
               </div>
               <div
@@ -255,7 +268,7 @@ function Collection() {
                   setFilter("");
                 }}
               >
-                <Link fontSize="medium" className="mat-icon"/>
+                <Link fontSize="medium" className="mat-icon" />
                 <p>12/</p>
               </div>
               <div
@@ -264,7 +277,7 @@ function Collection() {
                   setFilter("");
                 }}
               >
-                <Movie fontSize="medium" className="mat-icon"/>
+                <Movie fontSize="medium" className="mat-icon" />
                 <p>12/</p>
               </div>
             </div>
@@ -279,11 +292,9 @@ function Collection() {
                 </div>
               ))}
               <div>
-                <div
-                  className={isFollowed ? "btn center followed" : "btn center "}
-                >
+                <div className="btn center" onClick={followCollection}>
                   {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}
-                  <Favorite />
+                  <Favorite className={isFollowed ? "followed" : ""} />
                 </div>
                 <MoreVert className="more" />
               </div>
@@ -304,7 +315,16 @@ function Collection() {
               </div>
             </div>
 
-            <div className="addbtn center">
+            <div
+              className="addbtn center"
+              onClick={() => {
+                dispatch({
+                  type: "OPEN_FORM",
+                  form: "create_snippet",
+                  id: collection.id,
+                });
+              }}
+            >
               <PlaylistAdd />
             </div>
           </div>

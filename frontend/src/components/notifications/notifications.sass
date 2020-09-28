@@ -6,8 +6,8 @@
     padding: 0rem 2rem
     .container
         width: 50%
-        height: 87vh
-        box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
+        min-height: 87vh
+        box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
         border-radius: $borderbox-radius $borderbox-radius 0 0
         padding: 1rem
         h2
@@ -16,10 +16,11 @@
         h1
             margin-top: 1rem
         .dark &
-            box-shadow: -6.2px -6.2px 10px $dark-sh-b, 6.2px 6.2px 18px $dark-sh-d
+            box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
         
         .all
             .notification
+                margin-top: 0.6rem
                 display: flex
                 align-items: center
                 justify-content: space-between

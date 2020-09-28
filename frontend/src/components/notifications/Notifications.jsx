@@ -37,7 +37,14 @@ function Notifications() {
     <main className="notifications">
       <div className="container">
         <h2>NOTIFICATIONS</h2>
-        <h1>{} new!</h1>
+        <h1>
+          {
+            notifications.filter(function (notifications) {
+              return notifications.is_read == false;
+            }).length
+          }{" "}
+          new!
+        </h1>
         <div className="all">
           <h3>Unread</h3>
           {notifications.map((notification) => (
