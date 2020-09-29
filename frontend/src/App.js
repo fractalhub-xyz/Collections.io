@@ -85,6 +85,9 @@ function AuthenticatedRoutes() {
         <Route path="/tag/:id">
           <Tag />
         </Route>
+        <Route path="/user/:username">
+          <User />
+        </Route>
       </Switch>
     </>
   );

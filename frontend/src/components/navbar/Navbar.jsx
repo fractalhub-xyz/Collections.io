@@ -52,7 +52,7 @@ function Navbar() {
           <input placeholder="Search" />
         </div>
       </div>
-    <div className="container-right">
+      <div className="container-right">
         <div
           className="btn center hide"
           onClick={() => {
@@ -69,7 +69,7 @@ function Navbar() {
         <div
           className="usericon"
           onClick={() => {
-            history.push(`/user/${user}`);
+            history.push(`/user/${localStorage.getItem("user")}`);
           }}
         ></div>
       </div>

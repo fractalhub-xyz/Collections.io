@@ -30,6 +30,8 @@
 
     form
         width: 35rem
+        border-radius: 20px
+        overflow: hidden
         display: flex
         flex-direction: column
         justify-content: space-between
@@ -54,6 +56,7 @@
                 margin-top: 0.5rem
                 font-size: 1.3rem
                 border: none
+
             textarea
                 height: 25%
             button
@@ -61,13 +64,13 @@
                 margin-top: 1.5rem
                 margin-bottom: 1.5rem
                 padding: 0.4rem 0
-                background: rgba(161, 161, 161, 0.979)
+                background: $accent-color
                 border: none
                 color: white
                 cursor: pointer
+                transition: 0.2s
                 &:hover
-                    background: $light-bg
-                    color: black
+                    filter: brightness(90%)
 
             .error-message
                 font-size: 0.8rem
@@ -103,7 +106,7 @@
             .current
                 background: $accent-color
                 color: white
-    
+
     .create-collection
         height: 50vh
 
@@ -115,6 +118,8 @@
                 background: $dark-bg
             section
                 background: rgba(39, 39, 39, 0.979)
+                input, textarea
+                    background: $dark-bg
             footer
                 background: $dark-bg
 

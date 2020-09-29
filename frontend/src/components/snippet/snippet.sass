@@ -62,6 +62,9 @@ $card-dim: 210px
                     padding: 0.5rem 1rem
                     border-radius: 15px
                     box-shadow: inset -2px -2px 4px $light-sh-b, inset 2px 2px 4px $light-sh-d
+                    cursor: pointer
+                    &:hover
+                        color: $accent-color
 
                 .more
                     color: grey
@@ -95,13 +98,15 @@ $card-dim: 210px
             .dark &
                 box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
                 border: 5px solid $dark-bg
-        
+
         .video
             display: flex
             padding: 1rem
             justify-content: space-around
             align-items: center
-            .icon 
+            background: url(https://ssdm.co/wp-content/uploads/2017/07/youtube_pattern.png) center / cover
+            back
+            .icon
                 color: white
                 font-size: 3rem
                 color: $dark-bg
@@ -111,6 +116,10 @@ $card-dim: 210px
                 border-radius: 50%
                 background: teal
                 color: white
+                cursor: pointer
+                transition: 0.3s
+                &:hover
+                    transform: scale(1.1)
             .dark &
                 .icon
                     color: $light-bg

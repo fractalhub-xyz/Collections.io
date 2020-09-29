@@ -125,6 +125,8 @@ function Collection() {
 
   const podcasts = snippets.filter((snip) => snip.type_of === "podcast").length;
   const articles = snippets.filter((snip) => snip.type_of === "article").length;
+  const links = snippets.filter((snip) => snip.type_of === "link").length;
+  const videos = snippets.filter((snip) => snip.type_of === "video").length;
 
   return (
     <div>
@@ -158,7 +160,14 @@ function Collection() {
               </div>
             </div>
             <div className="col3">
-              <div className="owner">{collection.owner}</div>
+              <div
+                className="owner"
+                onClick={() => {
+                  history.push(`/user/${collection.owner}`);
+                }}
+              >
+                {collection.owner}
+              </div>
               <MoreVert className="more" />
             </div>
           </header>
@@ -202,22 +211,22 @@ function Collection() {
                 <p>{articles}</p>
               </div>
               <div
-                className={filter === "" ? "select current" : "select"}
+                className={filter === "link" ? "select current" : "select"}
                 onClick={(e) => {
-                  setFilter("");
+                  setFilter("link");
                 }}
               >
                 <Link fontSize="medium" className="mat-icon a3" />
-                <p>12/</p>
+                <p>{links}</p>
               </div>
               <div
-                className={filter === "" ? "select current" : "select"}
+                className={filter === "video" ? "select current" : "select"}
                 onClick={(e) => {
-                  setFilter("");
+                  setFilter("video");
                 }}
               >
                 <Movie fontSize="medium" className="mat-icon a4" />
-                <p>12/</p>
+                <p>{videos}</p>
               </div>
             </div>
             <div

@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
-import "./user.sass"
+import "./user.sass";
 //api
 import { getUserFromID } from "../../helpers/api";
 //components
 //modules
 import { useParams } from "react-router-dom";
+import YourCollection from "./yourCollection";
 
 function User() {
   const [user, setUser] = useState({});
+  const [collections, setCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
+  const [numSnippets, setNumSnippets] = useState(0)
+  const [numCollection, setNumCollection] = useState(0)
 
   const [refresh, setRefresh] = useState(true);
 
@@ -35,13 +39,65 @@ function User() {
     fetchUser();
     setRefresh(false);
   }, [refresh, params]);
+
+  const refreshCount = () => {
+    var colLen = collections.length;
+    var len = 0;
+    for (var i = 0; i < colLen; i++) {
+      var snipLen = collections[i].snippets.length;
+      if (snipLen !== 0) {
+        len = len + snipLen;
+      }
+      setNumSnippets(len);
+    }
+  };
+
+  useEffect(() => {
+    if (user.collections) {
+      setCollections(user.collections);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    refreshCount();
+    setNumCollection(collections.length)
+  }, [collections]);
+
   return (
     <main className="user">
-      <header></header>
-      <section>
-        {user.username}
-        {user.id}
-      </section>
+      <div className="info">
+        <div className="card">
+          <div className="propic"></div>
+          <div className="username">{user.username}</div>
+          <div className="email">{user.email}</div>
+          <div className="stats">
+            <div className="stat"> 1 Follower</div>
+            <div className="stat"> 1 Following</div>
+            <div className="stat"> 1 ★</div>
+          </div>
+          {user.username === localStorage.getItem("user") ? (
+            <button>Edit Profile</button>
+          ) : (
+            <button>Follow</button>
+          )}
+        </div>
+        <div className="counts">
+          <div className="count c2 center">
+            <div className="outline center">{numCollection} Collections</div>
+          </div>
+          <div className="count c4 center">
+            <div className="outline center">{numSnippets} Snippets</div>
+          </div>
+        </div>
+      </div>
+      <div className="user-collections">
+        <div className="header">{user.username}'s collections</div>
+        <div className="user-container">
+          {collections.map((collection) => (
+            <YourCollection collection={collection} key={collection.id} />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }

@@ -12,7 +12,7 @@ import { getRelativeTime } from "../../helpers/time";
 //components
 import Comment from "./comment";
 //modules
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Favorite, MoreVert, PlayArrow } from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
 import { useStateValue } from "../../helpers/stateProvider";
@@ -133,6 +133,8 @@ function Snippet() {
     // background: `url(${bg}) center / cover`,
   };
 
+  let history = useHistory();
+
   useEffect(() => {
     if (snippet.hearts) {
       setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
@@ -202,7 +204,14 @@ function Snippet() {
             </div>
           </div>
           <div className="col3">
-            <div className="owner">{snippet.owner}</div>
+            <div
+              className="owner"
+              onClick={() => {
+                history.push(`/user/${collection.owner}`);
+              }}
+            >
+              {snippet.owner}
+            </div>
             <MoreVert className="more" />
           </div>
         </div>
