@@ -135,12 +135,13 @@ body
     footer
         margin-top: 2rem
         padding-right: calc(8rem - #{$side-nav-width})
-        .container
+        .container-bg
             height: 50vh
             width: 100%
             box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
             border: 12px solid $light-bg
             border-radius: $borderbox-radius
+            background: url(https://images.unsplash.com/photo-1590816911133-40f771f0ea7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80) center / cover
             .letter
                 padding: 0 1rem
                 color: white
@@ -151,7 +152,8 @@ body
                 height: 100%
 
         .dark &
-            .container
+            .container-bg
+                background: url(https://images.unsplash.com/photo-1572890117969-c2462841187a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80) center / cover
                 box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
                 border: 12px solid $dark-bg
 

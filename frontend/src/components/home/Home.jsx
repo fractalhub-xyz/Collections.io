@@ -44,16 +44,16 @@ function Home() {
     fetchFollowedCollection();
   }, []);
 
-  const [cover, setCover] = useState(
-    "https://raw.githubusercontent.com/Ajay051198/Collections.io/master/frontend/src/assets/images/cover.jpeg"
-    // "https://images.pexels.com/photos/48770/business-time-clock-clocks-48770.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    // "https://images.pexels.com/photos/383568/pexels-photo-383568.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    // "https://images.pexels.com/photos/3815759/pexels-photo-3815759.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-  );
-  const coverst = {
-    background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url(${cover}) center / cover`,
-    // background: `url(${cover})`,
-  };
+  // const [cover, setCover] = useState(
+  //   "https://raw.githubusercontent.com/Ajay051198/Collections.io/master/frontend/src/assets/images/cover.jpeg"
+  //   // "https://images.pexels.com/photos/48770/business-time-clock-clocks-48770.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  //   // "https://images.pexels.com/photos/383568/pexels-photo-383568.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  //   // "https://images.pexels.com/photos/3815759/pexels-photo-3815759.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  // );
+  // const coverst = {
+  //   background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url(${cover}) center / cover`,
+  //   // background: `url(${cover})`,
+  // };
 
   return (
     <div>
@@ -95,7 +95,7 @@ function Home() {
             </div>
           </section>
           <footer>
-            <div className="container center" style={coverst}>
+            <div className="container-bg center">
               <div className="letter center">COLLECTIONS</div>
             </div>
           </footer>
