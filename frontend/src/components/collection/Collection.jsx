@@ -4,12 +4,12 @@ import "./collection.sass";
 import { getCollectionFromID, postFollowCollection } from "../../helpers/api";
 //components
 import SnippetRow from "./snippetRow";
+import { isMobile } from "react-device-detect";
 //icons
 import {
   Favorite,
   Link,
   Mic,
-  MoreVert,
   Movie,
   PlaylistAdd,
   Search,
@@ -17,7 +17,6 @@ import {
   Loyalty,
   Create,
   Security,
-  SettingsBackupRestore,
   NotInterested,
 } from "@material-ui/icons";
 
@@ -55,7 +54,7 @@ function Collection() {
   };
 
   //global states
-  const [{ refresh, isDesktop }, dispatch] = useStateValue();
+  const [{ refresh }, dispatch] = useStateValue();
   const params = useParams();
   const user = localStorage.getItem("user");
 
@@ -147,7 +146,7 @@ function Collection() {
 
   return (
     <div>
-      {isDesktop ? (
+      {!isMobile ? (
         <main className="collection">
           <header>
             <div className="card" style={coll_bg}></div>

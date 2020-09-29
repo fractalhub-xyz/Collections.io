@@ -1,11 +1,12 @@
 import React from "react";
+import { isMobile } from "react-device-detect";
 import { useStateValue } from "../../helpers/stateProvider";
 
 function OpenVideo() {
-  const [{ id, isDesktop }] = useStateValue();
+  const [{ id }] = useStateValue();
   return (
     <div>
-      {isDesktop ? (
+      {!isMobile ? (
         <iframe
           width="1120"
           height="730"

@@ -3,8 +3,8 @@ import "./home.sass";
 //api
 import { getFollowedCollections } from "../../helpers/api";
 //componentss
-import { useStateValue } from "../../helpers/stateProvider";
 import { useHistory } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 function Home() {
   //states
@@ -23,8 +23,7 @@ function Home() {
   };
   //init
   let history = useHistory();
-  //GlobalStates
-  const [{ isDesktop }, dispatch] = useStateValue();
+
 
   //mount
   useEffect(() => {
@@ -57,7 +56,7 @@ function Home() {
 
   return (
     <div>
-      {isDesktop ? (
+      {!isMobile ? (
         <main className="home">
           <header></header>
           <section>

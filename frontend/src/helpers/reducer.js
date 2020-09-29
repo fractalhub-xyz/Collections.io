@@ -1,7 +1,6 @@
 export const initialState = {
   modal: false,
   form: null,
-  isDesktop: true,
   id: null,
   prefill_data: {},
   refresh: true,
