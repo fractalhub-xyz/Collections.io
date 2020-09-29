@@ -3,7 +3,8 @@ export const initialState = {
   form: null,
   isDesktop: true,
   id: null,
-  refreshSnippets: true
+  prefill_data: {},
+  refresh: true,
 };
 
 const reducer = (state, action) => {
@@ -14,17 +15,18 @@ const reducer = (state, action) => {
         ...state,
         modal: false,
       };
-    case "REFRESH_SNIPPETS":
+    case "REFRESH":
       return {
         ...state,
-        refreshSnippets: action.refresh,
+        refresh: action.refresh,
       };
     case "OPEN_FORM":
       return {
         ...state,
         modal: true,
         form: action.form,
-        id: action.id
+        id: action.id,
+        prefill_data: action.prefill_data,
       };
     default:
       return state;

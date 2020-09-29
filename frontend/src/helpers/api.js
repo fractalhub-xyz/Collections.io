@@ -40,7 +40,7 @@ export function postNewSnippet(data) {
 export function getPopularCollections(limit = 10) {
   return api.get("/collections/popular?limit=" + limit);
 }
-export function getFollowedCollections(limit = 10) {
+export function getFollowedCollections(limit = 6) {
   return api.get("/collections/followed?limit=" + limit);
 }
 export function getCollectionFromID(id) {

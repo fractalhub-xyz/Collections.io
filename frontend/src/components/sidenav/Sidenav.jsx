@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./sidenav.sass";
 //icons
 import { Home, Explore, Add, Notifications } from "@material-ui/icons";
 //modules
-import { useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
 
-function Sidenav() {
+function Sidenav({ history }) {
   //init
   const [, dispatch] = useStateValue();
 
-  let history = useHistory();
   const [activeUrl, setActiveUrl] = useState(window.location.pathname);
-  console.log(activeUrl);
+
+  useEffect(
+    () =>
+      history.listen((location) => {
+        setActiveUrl(location.pathname);
+      }),
+    []
+  );
 
   return (
     <main className="side-nav">
@@ -38,9 +44,11 @@ function Sidenav() {
           <Explore />
         </div>
         <div
-          className="navbtn center"
+          className={
+            activeUrl === "/notifications" ? "navbtn center current" : "navbtn center"
+          }
           onClick={() => {
-            history.push(`/notifications/`);
+            history.push(`/notifications`);
           }}
         >
           <Notifications />
@@ -61,4 +69,4 @@ function Sidenav() {
   );
 }
 
-export default Sidenav;
+export default withRouter(Sidenav);

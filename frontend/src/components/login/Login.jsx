@@ -4,6 +4,7 @@ import "./login.sass";
 import LoginForm from "./loginForm";
 import RegisterForm from "./registerForm";
 import { useStateValue } from "../../helpers/stateProvider";
+import Toggle from "react-toggle";
 // import cx from "../../helpers/cx";
 
 function Login() {
@@ -17,15 +18,11 @@ function Login() {
 
   return (
     <main className="login">
-      <header>
-        <div className="Logo-container">
-          <div className="blue streak" />
-          <div className="red streak" />
-          <div className="beige streak" />
-          <div className="LOGO">COLLECTIONS</div>
-        </div>
+      <header className="center">
+        COLLECTIONS
       </header>
-      <section>
+      <section className="center">
+
         {isLogin ? (
           <LoginForm setIsLogin={setIsLogin} />
         ) : (

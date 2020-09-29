@@ -15,6 +15,10 @@ import {
   Search,
   Description,
   Loyalty,
+  Create,
+  Security,
+  SettingsBackupRestore,
+  NotInterested,
 } from "@material-ui/icons";
 
 //modules
@@ -38,6 +42,7 @@ function Collection() {
 
   //flags
   const [isOwner, setIsOwner] = useState(false);
+  const [isWhitelist, setIsWhitelist] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
 
   const [bg, setBg] = useState(
@@ -50,17 +55,22 @@ function Collection() {
   };
 
   //global states
-  const [{ user, refreshSnippets, isDesktop }, dispatch] = useStateValue();
+  const [{ refresh, isDesktop }, dispatch] = useStateValue();
   const params = useParams();
+  const user = localStorage.getItem("user");
 
   useEffect(() => {
     setColid(params.id);
+    dispatch({
+      type: "REFRESH",
+      refresh: true,
+    });
   }, [params]);
 
   // lifecycle functions
   useEffect(() => {
     console.log("[RENDER] >> Collection");
-    if (!refreshSnippets) {
+    if (!refresh) {
       return;
     }
     async function fetchCollection() {
@@ -78,21 +88,28 @@ function Collection() {
     }
     fetchCollection();
     dispatch({
-      type: "REFRESH_SNIPPETS",
+      type: "REFRESH",
       refresh: false,
     });
-  }, [refreshSnippets, colid]);
+  }, [refresh, colid]);
 
   useEffect(() => {
     if (user === collection.owner) {
       setIsOwner(true);
-    } else {
-      setIsOwner(false);
+      setIsWhitelist(true);
+    }
+    if (collection.permission == "all") {
+      setIsWhitelist(true);
+    }
+    if (collection.allowed_users) {
+      if (collection.allowed_users.includes(user)) {
+        setIsWhitelist(true);
+      }
     }
     const followers = collection.followers;
     if (followers) {
       //check
-      setIsFollowed(followers.includes(localStorage.getItem("user")));
+      setIsFollowed(followers.includes(user));
       //
       setTotFollowers(collection.followers.length);
     }
@@ -168,7 +185,47 @@ function Collection() {
               >
                 {collection.owner}
               </div>
-              <MoreVert className="more" />
+              <div className="btns">
+                {collection.owner === user && (
+                  <div
+                    className="ctrl-btn center"
+                    onClick={() => {
+                      dispatch({
+                        type: "OPEN_FORM",
+                        form: "edit_permissions",
+                        id: collection.id,
+                        prefill_data: {
+                          allowed_users: collection.allowed_users,
+                          permission: collection.permission,
+                        },
+                      });
+                    }}
+                  >
+                    <Security />
+                  </div>
+                )}
+                {collection.owner === user && (
+                  <div
+                    className="ctrl-btn center"
+                    onClick={() => {
+                      dispatch({
+                        type: "OPEN_FORM",
+                        form: "edit_collection",
+                        id: collection.id,
+                        prefill_data: {
+                          form_data: {
+                            name: collection.name,
+                            desc: collection.desc,
+                          },
+                          visibility: collection.visibility,
+                        },
+                      });
+                    }}
+                  >
+                    <Create />
+                  </div>
+                )}
+              </div>
             </div>
           </header>
           <div className="mid">
@@ -229,18 +286,24 @@ function Collection() {
                 <p>{videos}</p>
               </div>
             </div>
-            <div
-              className="addbtn center"
-              onClick={() => {
-                dispatch({
-                  type: "OPEN_FORM",
-                  form: "create_snippet",
-                  id: collection.id,
-                });
-              }}
-            >
-              <PlaylistAdd />
-            </div>
+            {isWhitelist ? (
+              <div
+                className="addbtn center"
+                onClick={() => {
+                  dispatch({
+                    type: "OPEN_FORM",
+                    form: "create_snippet",
+                    id: collection.id,
+                  });
+                }}
+              >
+                <PlaylistAdd />
+              </div>
+            ) : (
+              <div className="addbtn center">
+                <NotInterested />
+              </div>
+            )}
           </div>
           <section>
             <div className="snippets">
@@ -326,7 +389,47 @@ function Collection() {
                   {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}
                   <Favorite className={isFollowed ? "followed" : ""} />
                 </div>
-                <MoreVert className="more" />
+                <div className="btns">
+                  {collection.owner === user && (
+                    <div
+                      className="ctrl-btn "
+                      onClick={() => {
+                        dispatch({
+                          type: "OPEN_FORM",
+                          form: "edit_permissions",
+                          id: collection.id,
+                          prefill_data: {
+                            allowed_users: collection.allowed_users,
+                            permission: collection.permission,
+                          },
+                        });
+                      }}
+                    >
+                      <Security />
+                    </div>
+                  )}
+                  {collection.owner === user && (
+                    <div
+                      className="ctrl-btn"
+                      onClick={() => {
+                        dispatch({
+                          type: "OPEN_FORM",
+                          form: "edit_collection",
+                          id: collection.id,
+                          prefill_data: {
+                            form_data: {
+                              name: collection.name,
+                              desc: collection.desc,
+                            },
+                            visibility: collection.visibility,
+                          },
+                        });
+                      }}
+                    >
+                      <Create />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </header>
@@ -344,19 +447,24 @@ function Collection() {
                 />
               </div>
             </div>
-
-            <div
-              className="addbtn center"
-              onClick={() => {
-                dispatch({
-                  type: "OPEN_FORM",
-                  form: "create_snippet",
-                  id: collection.id,
-                });
-              }}
-            >
-              <PlaylistAdd />
-            </div>
+            {isWhitelist ? (
+              <div
+                className="addbtn center"
+                onClick={() => {
+                  dispatch({
+                    type: "OPEN_FORM",
+                    form: "create_snippet",
+                    id: collection.id,
+                  });
+                }}
+              >
+                <PlaylistAdd />
+              </div>
+            ) : (
+              <div className="addbtn center">
+                <NotInterested />
+              </div>
+            )}
           </div>
           <section>
             <div className="snippets">

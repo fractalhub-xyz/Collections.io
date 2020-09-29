@@ -18,21 +18,24 @@ function CreateCollection() {
       desc: data.desc,
     };
     try {
-      await postNewCollection(payload);
-      const response = console.log("Successfully created new collection");
+      const response = await postNewCollection(payload);
+      console.log("Successfully created new collection");
       dispatch({ type: "CLOSE_MODAL" });
       history.push(`/collection/${response.data.id}`);
     } catch (error) {
       console.log("Failed to create a new collection");
-      // setError(error.response.data.detail);
+      setError(error.response.data.detail);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(createCollection)} className="create-collection">
+    <form
+      onSubmit={handleSubmit(createCollection)}
+      className="create-collection"
+    >
       <header />
       <section>
-        <h1>Add new snippet</h1>
+        <h1>Create new collection</h1>
         <label>Name</label>
         <input
           name="name"

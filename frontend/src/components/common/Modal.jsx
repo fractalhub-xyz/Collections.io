@@ -8,21 +8,18 @@ import CreateCollection from "./createCollection.";
 import CreateSnippet from "./createSnippet";
 import { Close } from "@material-ui/icons";
 import OpenVideo from "./openVideo";
+import EditSnippet from "./editSnippet";
+import EditPermissions from "./editPermissions";
 
 function Modal() {
   const [{ modal, form }, dispatch] = useStateValue();
 
-  function CreateColl() {
-    return <CreateCollection />;
-  }
-  function EditColl() {
-    return <EditCollection />;
-  }
-
   const map = {
-    create_collection: CreateColl,
-    edit_collection: EditColl,
+    create_collection: CreateCollection,
+    edit_collection: EditCollection,
+    edit_permissions: EditPermissions,
     create_snippet: CreateSnippet,
+    edit_snippet: EditSnippet,
     open_video: OpenVideo,
   };
 

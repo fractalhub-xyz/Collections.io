@@ -74,11 +74,12 @@ $card-dim: 280px
                 cursor: pointer
                 &:hover
                     color: $accent-color
-            .more
-                color: grey
-                cursor: pointer
-                &:hover
-                    color: black
+            .btns
+                .ctrl-btn
+                    cursor: pointer
+                    margin-top: 1rem
+                    &:hover
+                        color: $accent-color
 
         .dark &
             color: $light-bg
@@ -366,13 +367,15 @@ $card-dim: 280px
             .followed
                 color: $accent-color
 
-            .more
-                color: grey
-                cursor: pointer
-                float: right
-                margin: auto 0
-                &:hover
-                    color: black
+           
+            .btns
+                .ctrl-btn
+                    width: 45%
+                    cursor: pointer
+                    display: flex
+                    justify-content: flex-end
+                    &:hover
+                        color: $accent-color
 
         .dark &
             color: $light-bg
@@ -388,14 +391,10 @@ $card-dim: 280px
                 .btn
                     box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 18px $dark-sh-d
                 .tags
+                    margin-bottom: 1rem
                     .tag
                         box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
                         
-
-            .col3
-                .more
-                    &:hover
-                        color: white
     .mid
         display: flex
         justify-content: space-between

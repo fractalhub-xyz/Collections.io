@@ -3,13 +3,16 @@ import { useStateValue } from "../../helpers/stateProvider";
 //modules
 import { useForm } from "react-hook-form";
 //api
-import { postNewSnippet } from "../../helpers/api";
+import { editSnippet } from "../../helpers/api";
 import { Description, Link, Mic, Movie } from "@material-ui/icons";
 
-function CreateSnippet() {
-  const { register, handleSubmit, errors } = useForm();
-  const [{ id }, dispatch] = useStateValue();
-  const [type, setType] = useState("podcast");
+function EditSnippet() {
+  const [{ id, prefill_data }, dispatch] = useStateValue();
+  const form_data = prefill_data.form_data;
+  const { register, handleSubmit, errors } = useForm({
+    defaultValues: form_data,
+  });
+  const [type, setType] = useState(prefill_data.type);
   const [error, setError] = useState("");
 
   const createSnippet = async (data, e) => {
@@ -18,11 +21,11 @@ function CreateSnippet() {
       title: data.title,
       type_of: type,
       link: data.link,
-      collection: id,
+      collection: id.coll_id,
     };
     try {
-      await postNewSnippet(payload);
-      console.log("Successfully pushed snippet to collection");
+      await editSnippet(id.snip_id, payload);
+      console.log("Successfully editted snippet");
       dispatch({ type: "CLOSE_MODAL" });
       dispatch({
         type: "REFRESH",
@@ -35,10 +38,10 @@ function CreateSnippet() {
   };
 
   return (
-    <form onSubmit={handleSubmit(createSnippet)} className="create-snippet">
+    <form onSubmit={handleSubmit(createSnippet)} className="edit-snippet">
       <header />
       <section>
-        <h1>Add new snippet</h1>
+        <h1>Edit snippet</h1>
         <label>Title</label>
         <input
           name="title"
@@ -129,4 +132,4 @@ function CreateSnippet() {
   );
 }
 
-export default CreateSnippet;
+export default EditSnippet;

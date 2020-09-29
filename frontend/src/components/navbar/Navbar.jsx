@@ -39,17 +39,10 @@ function Navbar() {
     <main className="navbar-desk">
       <div className="container-left">
         <img src="../../assets/svgs/videos.svg" alt="logo" />
-        <div
-          className="back-button center"
-          onClick={() => {
-            history.goBack();
-          }}
-        >
-          <NavigateBefore />
-        </div>
+        
         <div className="searchbox">
           <Search />
-          <input placeholder="Search" />
+          <input placeholder="Search" onChange={(e)=>{history.push(`/search/${e.target.value}`)}}/>
         </div>
       </div>
       <div className="container-right">

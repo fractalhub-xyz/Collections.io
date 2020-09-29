@@ -13,7 +13,14 @@ import { getRelativeTime } from "../../helpers/time";
 import Comment from "./comment";
 //modules
 import { useHistory, useParams } from "react-router-dom";
-import { Favorite, MoreVert, PlayArrow } from "@material-ui/icons";
+import {
+  Create,
+  Favorite,
+  PlayArrow,
+  Security,
+  Settings,
+  SettingsBackupRestore,
+} from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
 import { useStateValue } from "../../helpers/stateProvider";
 
@@ -31,11 +38,11 @@ function Snippet() {
   const [updateComments, setUpdateComments] = useState(false);
   const [newComment, setNewComment] = useState("");
 
-  const [, dispatch] = useStateValue();
+  const [{ refresh }, dispatch] = useStateValue();
+  const user = localStorage.getItem("user");
 
   //flags
   const [isLiked, setIsLiked] = useState(false);
-  const [refresh, setRefresh] = useState(true);
 
   const params = useParams();
 
@@ -43,7 +50,10 @@ function Snippet() {
 
   useEffect(() => {
     setSnipID(params.id);
-    setRefresh(true);
+    dispatch({
+      type: "REFRESH",
+      refresh: true,
+    });
   }, [params]);
 
   useEffect(() => {
@@ -76,7 +86,10 @@ function Snippet() {
     }
     fetchSnippet();
     fetchComments();
-    setRefresh(false);
+    dispatch({
+      type: "REFRESH",
+      refresh: false,
+    });
   }, [refresh, snipID]);
 
   useEffect(() => {
@@ -137,7 +150,7 @@ function Snippet() {
 
   useEffect(() => {
     if (snippet.hearts) {
-      setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
+      setIsLiked(snippet.hearts.includes(user));
       setTotLikes(snippet.hearts.length);
     }
   }, [snippet]);
@@ -212,7 +225,37 @@ function Snippet() {
             >
               {snippet.owner}
             </div>
-            <MoreVert className="more" />
+            <div className="btns">
+              {snippet.owner === user && (
+                <div
+                  className="ctrl-btn center"
+                  onClick={() => {
+                    dispatch({
+                      type: "OPEN_FORM",
+                      form: "edit_snippet",
+                      id: { coll_id: collection.id, snip_id: snippet.id },
+                      prefill_data: {
+                        form_data: {
+                          title: snippet.title,
+                          link: snippet.link,
+                        },
+                        type: snippet.type_of,
+                      },
+                    });
+                  }}
+                >
+                  <Create />
+                </div>
+              )}
+              <div
+                className="ctrl-btn center"
+                onClick={() => {
+                  history.push(`/collection/${collection.id}`);
+                }}
+              >
+                <SettingsBackupRestore />
+              </div>
+            </div>
           </div>
         </div>
         {snippet.type_of === "podcast" && (
@@ -228,7 +271,7 @@ function Snippet() {
           </div>
         )}
         {snippet.type_of === "video" && (
-          <div className="player video">
+          <div className="player dim video">
             <div className="icon center">Youtube</div>
             <div
               className="open center"
@@ -241,6 +284,38 @@ function Snippet() {
               }}
             >
               <PlayArrow fontSize="large" />
+            </div>
+          </div>
+        )}
+        {snippet.type_of === "link" && (
+          <div className="player dim link">
+            <div className="icon center">Link</div>
+            <div className="open center">
+              <a
+                data-text-color="#00fff0"
+                data-tip={snippet.link}
+                href={snippet.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <PlayArrow fontSize="large" />
+              </a>
+            </div>
+          </div>
+        )}
+        {snippet.type_of === "article" && (
+          <div className="player dim article">
+            <div className="icon center">Article</div>
+            <div className="open center">
+              <a
+                data-text-color="#00fff0"
+                data-tip={snippet.link}
+                href={snippet.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <PlayArrow fontSize="large" />
+              </a>
             </div>
           </div>
         )}

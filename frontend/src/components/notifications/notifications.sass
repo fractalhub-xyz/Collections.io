@@ -4,6 +4,7 @@
     margin-top: 1.5rem
     margin-left: calc( #{$side-nav-width})
     padding: 0rem 2rem
+    display: flex
     .container
         width: 50%
         min-height: 87vh
@@ -50,6 +51,12 @@
                         cursor: pointer
                         &:hover
                             color: $accent-color
+    .logo
+        text-align: center
+        width: 47%
+        font-size: 3rem
+        font-weight: 100
+        padding: 40vh 0
 @media screen and (max-width: 800px)
     .notifications
         margin-top: 0.5rem
@@ -68,3 +75,5 @@
                     .right
                         display: flex
                         flex-direction: column
+        .logo
+            display: none

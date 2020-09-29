@@ -5,7 +5,7 @@ import { Link, Mic, Movie, Description } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 
 function OtherSnippets({ snip }) {
-  let history = { useHistory };
+  let history = useHistory();
   return (
     <div
       className="otsnippet"

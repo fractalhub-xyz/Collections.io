@@ -5,97 +5,87 @@ $form-font: 1.6rem
 .login
     height: 100vh
     width: 100vw
-    background: $primary-color
-
-    .Logo-container
-        padding-top: 100px
-        .streak
-            height: calc(#{$Logo-size}/3)
-            margin-top: 5px
-            animation: swipe
-            animation-duration: 1s
-
-        @keyframes swipe
-            0%
-                width: 0vw
-            100%
-                width: 100vw
-        .blue
-            background: #2d4059
-        .red
-            background: #ea5455
-        .beige
-            background: #decdc3
-        .LOGO
-            text-align: center
-            user-select: none
-            font-size: calc(#{$Logo-size}*1.2)
-            color: $primary-color
-            position: relative
-            top: calc(#{$Logo-size}*-1*1.25)
-
+    background: $light-bg
+    display: flex
+    header
+        width: 60%
+        font-size: 3rem
+        font-weight: 100
     section
-        display: flex
-        justify-content: center
-        position: relative
-        top: calc(#{$Logo-size}*-1)
+        width: 40%
         form
             display: flex
             flex-direction: column
-            justify-content: center
-            align-items: flex-start
-            padding: 25px
-            background: $light-bg-step
-            box-shadow: 2px 2px 10px 1px $light-shadow
+            padding: 2.5rem 1rem
+            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
             border-radius: 20px
-            min-height: 50vh
+            width: 50%
             h1
+                font-size: 2rem
+                margin: 0
                 padding: 0
-                margin: 0
-                color: #2d4059
-                font-size: calc(#{$form-font} * 2)
+                margin-top: 1rem
             h2
+                font-size: 1.4rem
+                font-weight: 200
                 margin: 0
-                color: #2d4059
-                font-size: calc(#{$form-font} * 0.7)
-                margin-bottom: 40px
+                margin-bottom: 2rem
             label
-                color: #2d4059
-                font-size: calc(#{$form-font} * 0.8)
-                margin-top: 0px
-                padding: 1px 2px
+                text-transform: uppercase
                 font-weight: 100
             input
-                background: #efefef
+                margin-top: 0.6rem
                 border: none
-                box-shadow: 0px 0px 5px 0px #0000001f
-                font-size: calc(#{$form-font} * 0.6)
-                margin-top: 5px
-                padding: 10px
-                border-radius: 10px
-                min-width: $form-width
+                background: none
+                border-radius: 20px
+                width: 95%
+                font-size: 1.5  rem
+                padding: 0.7rem
+                box-shadow: inset -2px -2px 4px $light-sh-b, inset 2px 2px 4px $light-sh-d
+                color: $dark-bg
             p
                 color: red
+                font-size: 0.8rem
             .toggle
-                font-weight: 100
+                font-weight: 300
+                margin-bottom: 2rem
                 cursor: pointer
-                font-size: calc(#{$form-font} * 0.5)
-                transition: 0.4s
+                transition: 0.2s
+                text-align: center
+                color: grey
                 &:hover
                     transform: scale(1.05)
             button
-                background: #314969
-                border: 3px solid #2d4059
-                font-size: calc(#{$form-font} * 0.8)
-                display: block
+                font-size: 1.2rem
                 cursor: pointer
-                transition: 0.5s
-                color: $primary-color
-                width: 100%
-                padding-top: 10px
-                padding-bottom: 10px
-                border-radius: 10px
-                margin-top: 20px
-
+                padding: 0.5rem
+                border: none
+                background: none
+                background: $accent-color
+                border-radius: 20px
                 &:hover
-                    background: #3e5f8c
+                    filter: brightness(80%)
+
+    .dark &
+        background: $dark-bg
+        section
+            form
+
+                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                input
+                    color: $light-bg
+                    box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
+
+@media screen and (max-width: 800px)
+    .login
+        flex-direction: column
+        width: 100%
+        header
+            width: 100%
+            margin-top: 1rem
+        section
+            margin-top: 1rem
+            width: 100%
+            form
+                width: 87%
+                height: 90vh

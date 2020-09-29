@@ -66,11 +66,12 @@ $card-dim: 210px
                     &:hover
                         color: $accent-color
 
-                .more
-                    color: grey
-                    cursor: pointer
-                    &:hover
-                        color: black
+                .btns
+                    .ctrl-btn
+                        cursor: pointer
+                        margin-top: 1rem
+                        &:hover
+                            color: $accent-color
             .dark &
                 color: $light-bg
                 box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
@@ -99,17 +100,14 @@ $card-dim: 210px
                 box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
                 border: 5px solid $dark-bg
 
-        .video
+        .dim
             display: flex
             padding: 1rem
             justify-content: space-around
             align-items: center
-            background: url(https://ssdm.co/wp-content/uploads/2017/07/youtube_pattern.png) center / cover
-            back
             .icon
                 color: white
                 font-size: 3rem
-                color: $dark-bg
             .open
                 height: 70px
                 width: 70px
@@ -121,8 +119,17 @@ $card-dim: 210px
                 &:hover
                     transform: scale(1.1)
             .dark &
-                .icon
-                    color: $light-bg
+
+        .video
+            background: url(https://ssdm.co/wp-content/uploads/2017/07/youtube_pattern.png) center / cover
+        .link
+            background: url(https://wallpapercave.com/wp/wp4285370.png) center / cover
+            .icon
+                color: black
+        .article
+            background: url(https://i.pinimg.com/originals/51/a9/82/51a982c98cd468f3e4dcb8153bde632f.jpg) center / cover
+            .icon
+                color: black
 
     section
         display: flex

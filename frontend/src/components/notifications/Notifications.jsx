@@ -72,6 +72,7 @@ function Notifications() {
           ))}
         </div>
       </div>
+      <div className="logo">COLLECTIONS</div>
     </main>
   );
 }
