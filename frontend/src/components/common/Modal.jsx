@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 
 import "./modal.sass";
@@ -15,6 +15,7 @@ import EditPermissions from "./editPermissions";
 
 function Modal() {
   const [{ modal, form }, dispatch] = useStateValue();
+  const formEl = useRef(null);
 
   const map = {
     create_collection: CreateCollection,
@@ -25,17 +26,44 @@ function Modal() {
     open_video: OpenVideo,
   };
 
+  const closeModal = (e) => {
+    dispatch({ type: "CLOSE_MODAL" });
+  };
+
+  const onClickOutside = (e) => {
+    e.preventDefault();
+    const userclicked = e.target;
+
+    if (formEl.current && !formEl.current.contains(userclicked)) {
+      closeModal();
+    }
+  };
+
+  const onEscapeclick = (e) => {
+    console.log(e.key, modal);
+    if (formEl.current && e.key === "Escape") {
+      closeModal();
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("click", onClickOutside);
+    document.body.addEventListener("keydown", onEscapeclick);
+
+    return () => {
+      document.body.removeEventListener("keydown", onEscapeclick);
+      document.body.removeEventListener("click", onClickOutside);
+    };
+  }, []);
+
   const SelectedForm = map[form];
 
   const modalEl = (
     <div className="modal">
-      {SelectedForm ? <SelectedForm /> : "Error finding your form"}
-      <div
-        className="close-modal"
-        onClick={() => {
-          dispatch({ type: "CLOSE_MODAL" });
-        }}
-      >
+      <div ref={formEl}>
+        {SelectedForm ? <SelectedForm /> : "Error finding your form"}
+      </div>
+      <div className="close-modal" onClick={closeModal}>
         <Close fontSize="medium" />
       </div>
     </div>
