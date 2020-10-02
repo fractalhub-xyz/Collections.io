@@ -1,12 +1,5 @@
 @import '../common/variables.sass'
-.modal-blur
-    position: fixed
-    top: 0
-    left: 0
-    height: 100vh
-    width: 100vw
-    z-index: 999999
-    filter: blur(3px)
+
 .modal
     position: fixed
     top: 0
@@ -151,13 +144,15 @@
         .close-modal
 
         form
-            border-radius: 20px 20px 0 0 
+            border-radius: 20px 20px 0 0
+            width: 100vw
+
             header
             section
             footer
             .selects
                 margin-bottom: 1rem
-                .select      
+                .select
                     font-size: 0.7rem
         .create-snippet
             height: 80vh

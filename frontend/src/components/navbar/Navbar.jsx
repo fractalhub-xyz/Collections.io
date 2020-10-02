@@ -56,7 +56,7 @@ function Navbar() {
         <div
           className="btn center hide"
           onClick={() => {
-            history.push("/login/");
+            history.push("/");
           }}
         >
           <VoiceOverOff />

@@ -46,7 +46,7 @@ function Collection() {
   const [isFollowed, setIsFollowed] = useState(false);
 
   const [bg, setBg] = useState(
-    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271",
   );
 
   const coll_bg = {
@@ -442,7 +442,7 @@ function Collection() {
                   placeholder="Search"
                   value={searchText}
                   onChange={(e) => {
-                    setSearchText(e.target.value);
+                    setSearchText(e.target.value.toLowerCase());
                   }}
                 />
               </div>
@@ -471,7 +471,7 @@ function Collection() {
               {snippets.map((snippet) => (
                 <div key={snippet.id}>
                   {snippet.type_of.includes(filter) &&
-                    snippet.title.includes(searchText) && (
+                    snippet.title.toLowerCase().includes(searchText) && (
                       <SnippetRow snippet={snippet} key={snippet.id} />
                     )}
                 </div>
