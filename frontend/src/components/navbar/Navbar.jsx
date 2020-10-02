@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./navbar.sass";
 //modueles
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { debounce } from "../../helpers/debounce";
 //icons
-import {
-  Search,
-  VoiceOverOff,
-} from "@material-ui/icons";
+import { Search, VoiceOverOff } from "@material-ui/icons";
 //componentss
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
@@ -16,6 +14,19 @@ function Navbar() {
   //init
   let history = useHistory();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const params = useParams();
+
+  const debouncedHandler = useCallback(
+    debounce((value) => {
+      history.push(`/search/${value}`);
+    }, 500),
+    [],
+  );
+
+  const inputOnChange = (e) => {
+    const value = e.target.value;
+    debouncedHandler(value);
+  };
 
   useEffect(() => {
     if (theme === "dark") {
@@ -35,15 +46,10 @@ function Navbar() {
   return (
     <main className="navbar-desk">
       <div className="container-left">
-        <img src={logo} alt="logo" className="colelctions-logo"/>
+        <img src={logo} alt="logo" className="colelctions-logo" />
         <div className="searchbox">
           <Search />
-          <input
-            placeholder="Search"
-            onChange={(e) => {
-              history.push(`/search/${e.target.value}`);
-            }}
-          />
+          <input placeholder="Search" onChange={inputOnChange} />
         </div>
       </div>
       <div className="container-right">
