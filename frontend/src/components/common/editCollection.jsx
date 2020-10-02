@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 //api
-import { editCollection } from "../../helpers/api";
+import { deleteCollection, editCollection } from "../../helpers/api";
 //modules
 import { useForm } from "react-hook-form";
 import { useStateValue } from "../../helpers/stateProvider";
-import { Public, Lock } from "@material-ui/icons";
+import { Public, Lock, Delete } from "@material-ui/icons";
+import { useHistory } from "react-router-dom";
 
 function EditCollection() {
   const [{ prefill_data, id }, dispatch] = useStateValue();
@@ -14,7 +15,7 @@ function EditCollection() {
   });
   const [visibility, setVisiblity] = useState(prefill_data.visibility);
   const [error, setError] = useState("");
-
+  let history = useHistory();
 
   const editCollectionHandle = async (data, e) => {
     e.preventDefault();
@@ -37,8 +38,24 @@ function EditCollection() {
     }
   };
 
+  const deleteSelection = async (e) => {
+    e.preventDefault();
+    try {
+      await deleteCollection(id);
+      history.push("/home");
+      dispatch({ type: "CLOSE_MODAL" });
+      console.log("Succesfull deleted Collection");
+    } catch (error) {
+      console.log(error.response.data);
+      setError(error.response.data);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit(editCollectionHandle)} className="edit-collection">
+    <form
+      onSubmit={handleSubmit(editCollectionHandle)}
+      className="edit-collection"
+    >
       <header />
       <section>
         <h1>Create new collection</h1>
@@ -112,7 +129,18 @@ function EditCollection() {
             &nbsp; PRIVATE
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <div className="buttons">
+          <button className="edit-button" type="submit">
+            Save
+          </button>
+          <button
+            onClick={deleteSelection}
+            className="delete-button"
+            type="submit"
+          >
+            <Delete fontSize="small" />
+          </button>
+        </div>
       </section>
       <footer />
     </form>

@@ -29,6 +29,7 @@ function Collection() {
   const [collection, setCollection] = useState({});
   const [colid, setColid] = useState(null);
   const [snippets, setSnippets] = useState([]);
+  const [isOwner, setIsOwner] = useState(false);
   const [tags, setTags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
@@ -40,7 +41,6 @@ function Collection() {
   const [totFollowers, setTotFollowers] = useState(0);
 
   //flags
-  const [isOwner, setIsOwner] = useState(false);
   const [isWhitelist, setIsWhitelist] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
 
@@ -64,7 +64,7 @@ function Collection() {
       type: "REFRESH",
       refresh: true,
     });
-  }, [params]);
+  }, [params, dispatch]);
 
   // lifecycle functions
   useEffect(() => {
@@ -90,14 +90,14 @@ function Collection() {
       type: "REFRESH",
       refresh: false,
     });
-  }, [refresh, colid]);
+  }, [refresh, colid, params, dispatch]);
 
   useEffect(() => {
     if (user === collection.owner) {
       setIsOwner(true);
       setIsWhitelist(true);
     }
-    if (collection.permission == "all") {
+    if (collection.permission === "all") {
       setIsWhitelist(true);
     }
     if (collection.allowed_users) {

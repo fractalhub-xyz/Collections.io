@@ -3,8 +3,9 @@ import { useStateValue } from "../../helpers/stateProvider";
 //modules
 import { useForm } from "react-hook-form";
 //api
-import { editSnippet } from "../../helpers/api";
-import { Description, Link, Mic, Movie } from "@material-ui/icons";
+import { deleteSnippet, editSnippet } from "../../helpers/api";
+import { Delete, Description, Link, Mic, Movie } from "@material-ui/icons";
+import { useHistory } from "react-router-dom";
 
 function EditSnippet() {
   const [{ id, prefill_data }, dispatch] = useStateValue();
@@ -14,6 +15,8 @@ function EditSnippet() {
   });
   const [type, setType] = useState(prefill_data.type);
   const [error, setError] = useState("");
+
+  let history = useHistory();
 
   const createSnippet = async (data, e) => {
     e.preventDefault();
@@ -34,6 +37,19 @@ function EditSnippet() {
     } catch (error) {
       console.log("Failed to create a new collection");
       setError(error.response.data.detail);
+    }
+  };
+
+  const deleteSelected = async (e) => {
+    e.preventDefault();
+    try {
+      await deleteSnippet(id.snip_id);
+      dispatch({ type: "CLOSE_MODAL" });
+      console.log("Successfully removed snippet from collection");
+      history.push(`/collection/${id.coll_id}`);
+    } catch (error) {
+      console.log(error.response.data);
+      setError(error.response.data);
     }
   };
 
@@ -125,7 +141,18 @@ function EditSnippet() {
             </span>
           </div>
         )}
-        <button type="submit">Submit</button>
+        <div className="buttons">
+          <button className="edit-button" type="submit">
+            Save
+          </button>
+          <button
+            onClick={deleteSelected}
+            className="delete-button"
+            type="submit"
+          >
+            <Delete fontSize="small" />
+          </button>
+        </div>
       </section>
       <footer />
     </form>

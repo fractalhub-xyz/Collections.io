@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./snippet.sass";
 //icons
-import { Delete, ThumbUp } from "@material-ui/icons";
+import { Check, Create, Delete, ThumbUp } from "@material-ui/icons";
 //api
-import { DeleteComment, postUpvoteComment } from "../../helpers/api";
+import {
+  DeleteComment,
+  postUpvoteComment,
+  putEditComment,
+} from "../../helpers/api";
 
 function Comment({ comment, setUpdateComments }) {
-
   const [upvotes, setUpvotes] = useState(0);
   const [isupvoted, setIsupvoted] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [newComment, setNewComment] = useState(comment.comment);
   useEffect(() => {
     setUpvotes(comment.upvotes.length);
-    setIsupvoted(comment.upvotes.includes(localStorage.getItem('user')));
+    setIsupvoted(comment.upvotes.includes(localStorage.getItem("user")));
   }, []);
 
   const DeleteComm = async (e) => {
@@ -41,6 +46,23 @@ function Comment({ comment, setUpdateComments }) {
       console.log(error);
     }
   };
+
+  const submitNewComment = async (e) => {
+    e.preventDefault();
+    const payload = {
+      comment: newComment,
+      snippet: comment.snippet,
+    };
+    try {
+      await putEditComment(comment.id, payload);
+      console.log("Successfully edited comment");
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    setUpdateComments(true);
+    setIsEdit(false);
+  };
+
   return (
     <div className="comment">
       <div className="top">
@@ -56,14 +78,40 @@ function Comment({ comment, setUpdateComments }) {
           >
             <ThumbUp />
           </div>
-          {localStorage.getItem('user') === comment.owner && (
-            <div className="btn center" onClick={DeleteComm}>
-              <Delete />
+          {localStorage.getItem("user") === comment.owner && isEdit ? (
+            <div>
+              <div className="btn center" onClick={DeleteComm}>
+                <Delete />
+              </div>
+              <div className="btn center" onClick={submitNewComment}>
+                <Check />
+              </div>
+            </div>
+          ) : (
+            <div
+              className="btn center"
+              onClick={() => {
+                setIsEdit(true);
+              }}
+              //also set focus to input field
+            >
+              <Create />
             </div>
           )}
         </div>
       </div>
-      <div className="content">{comment.comment}</div>
+      {!isEdit ? (
+        <div className="content">{comment.comment}</div>
+      ) : (
+        <div className="edit-content">
+          <input
+            value={newComment}
+            onChange={(e) => {
+              setNewComment(e.target.value);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

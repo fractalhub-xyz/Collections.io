@@ -17,8 +17,6 @@ import {
   Create,
   Favorite,
   PlayArrow,
-  Security,
-  Settings,
   SettingsBackupRestore,
 } from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
@@ -54,7 +52,7 @@ function Snippet() {
       type: "REFRESH",
       refresh: true,
     });
-  }, [params]);
+  }, [params, dispatch]);
 
   useEffect(() => {
     console.log("[RENDER] >> Snippet");
@@ -90,7 +88,7 @@ function Snippet() {
       type: "REFRESH",
       refresh: false,
     });
-  }, [refresh, snipID]);
+  }, [refresh, snipID, params.id, dispatch]);
 
   useEffect(() => {
     console.log("[RENDER] >> Updating Comments");
@@ -109,7 +107,7 @@ function Snippet() {
     }
     setUpdateComments(false);
     fetchComments();
-  }, [updateComments, snippet]);
+  }, [updateComments, snippet, params.id]);
 
   useEffect(() => {
     if (snippet.collection) {
@@ -153,7 +151,7 @@ function Snippet() {
       setIsLiked(snippet.hearts.includes(user));
       setTotLikes(snippet.hearts.length);
     }
-  }, [snippet]);
+  }, [snippet, user]);
 
   useEffect(() => {
     if (collection.tags) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 //modules
 //api
@@ -7,6 +7,10 @@ import { postRegister } from "../../helpers/api";
 function RegisterForm({ setIsLogin }) {
   const { register, handleSubmit, errors } = useForm();
 
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const registerReq = async (data) => {
     const payload = {
       username: data.username,
@@ -14,10 +18,21 @@ function RegisterForm({ setIsLogin }) {
       password: data.password,
     };
     try {
+      setUsernameError("");
+      setEmailError("");
+      setPasswordError("");
       await postRegister(payload);
       setIsLogin(true);
-    } catch {
-      alert("failed // temp");
+    } catch (error) {
+      if (error.response.data.username) {
+        setUsernameError(error.response.data.username);
+      }
+      if (error.response.data.email) {
+        setEmailError(error.response.data.email);
+      }
+      if (error.response.data.password) {
+        setPasswordError(error.response.data.password);
+      }
     }
   };
   //
@@ -37,6 +52,7 @@ function RegisterForm({ setIsLogin }) {
         })}
       />
       <p>{errors?.username?.message}</p>
+      {!!usernameError.length && <p>{usernameError}</p>}
       <label>Email</label>
       <input
         name="email"
@@ -48,6 +64,7 @@ function RegisterForm({ setIsLogin }) {
         })}
       />
       <p>{errors?.email?.message}</p>
+      {!!emailError.length && <p>{emailError}</p>}
       <label>Password</label>
       <input
         name="password"
@@ -60,6 +77,7 @@ function RegisterForm({ setIsLogin }) {
         })}
       />
       <p>{errors?.password?.message}</p>
+      {!!passwordError.length && <p>{passwordError}</p>}
       <div
         className="toggle"
         onClick={() => {

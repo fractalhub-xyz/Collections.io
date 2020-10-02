@@ -12,8 +12,9 @@ function User() {
   const [collections, setCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
-  const [numSnippets, setNumSnippets] = useState(0)
-  const [numCollection, setNumCollection] = useState(0)
+  const [numSnippets, setNumSnippets] = useState(0);
+  const [numCollection, setNumCollection] = useState(0);
+  const [numCollectionFollows, setNumCollectionFollows] = useState(0);
 
   const [refresh, setRefresh] = useState(true);
 
@@ -42,13 +43,19 @@ function User() {
 
   const refreshCount = () => {
     var colLen = collections.length;
-    var len = 0;
+    var Slen = 0;
+    var Flen = 0;
     for (var i = 0; i < colLen; i++) {
       var snipLen = collections[i].snippets.length;
+      var folLen = collections[i].followers.length;
       if (snipLen !== 0) {
-        len = len + snipLen;
+        Slen = Slen + snipLen;
       }
-      setNumSnippets(len);
+      if (folLen !== 0) {
+        Flen = Flen + snipLen;
+      }
+      setNumSnippets(Slen);
+      setNumCollectionFollows(Flen);
     }
   };
 
@@ -60,7 +67,7 @@ function User() {
 
   useEffect(() => {
     refreshCount();
-    setNumCollection(collections.length)
+    setNumCollection(collections.length);
   }, [collections]);
 
   return (
@@ -73,7 +80,7 @@ function User() {
           <div className="stats">
             <div className="stat"> 1 Follower</div>
             <div className="stat"> 1 Following</div>
-            <div className="stat"> 1 ★</div>
+            <div className="stat"> {numCollectionFollows} ★</div>
           </div>
           {user.username === localStorage.getItem("user") ? (
             <button>Edit Profile</button>

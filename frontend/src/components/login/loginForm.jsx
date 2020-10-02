@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 //modules
 import { useHistory } from "react-router-dom";
@@ -7,6 +7,7 @@ import { postLogin } from "../../helpers/api";
 
 function LoginForm({ setIsLogin }) {
   const { register, handleSubmit, errors } = useForm();
+  const [error, setError] = useState("");
   //setup
   let history = useHistory();
 
@@ -26,7 +27,7 @@ function LoginForm({ setIsLogin }) {
       localStorage.setItem("user", data.username);
       setTimeout(redirect, 200);
     } catch {
-      alert("failed // temp");
+      setError("Invalid Credentials");
     }
   };
 
@@ -57,6 +58,7 @@ function LoginForm({ setIsLogin }) {
         })}
       />
       <p>{errors?.password?.message}</p>
+      {!!error.length && <div className="err">{error}</div>}
       <div
         className="toggle"
         onClick={() => {
