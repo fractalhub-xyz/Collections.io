@@ -7,12 +7,32 @@ from ..permissions import TagPermissions
 from rest_framework import generics, status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from random import randint
 
 
 class AllTagsView(generics.ListAPIView):
     queryset = Tag.objects.all()
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = TagSerializer
+
+
+def get_random_list(limit, max):
+    arr = []
+    for _ in range(0, limit):
+        arr.append(randint(0, max))
+    return arr
+
+
+class RandomTagView(generics.ListAPIView):
+    permissions_classes = [permissions.IsAuthenticated]
+    serializer_class = TagSerializer
+
+    def get_queryset(self):
+        limit = int(self.request.GET.get('limit', '3'))
+        random_list = get_random_list(limit, Tag.objects.count())
+        all_tags = Tag.objects.all()
+        tags = [all_tags[i] for i in random_list]
+        return tags
 
 
 class TagsToCollection(APIView):

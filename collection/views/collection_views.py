@@ -1,7 +1,7 @@
 from collection.serializers import *
 from collection.permissions import IsOwnerOrReadOnly
 from collection.models import *
-from django.db.models import Q, Count, Sum
+from django.db.models import Count
 from datetime import datetime, timedelta
 
 from rest_framework import viewsets, generics, status, permissions
