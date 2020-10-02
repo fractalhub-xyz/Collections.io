@@ -10,6 +10,7 @@ const reducer = (state, action) => {
   console.log(action);
   switch (action.type) {
     case "CLOSE_MODAL":
+      document.querySelector("#root").classList.remove("blur");
       return {
         ...state,
         modal: false,
@@ -20,6 +21,7 @@ const reducer = (state, action) => {
         refresh: action.refresh,
       };
     case "OPEN_FORM":
+      document.querySelector("#root").classList.add("blur");
       return {
         ...state,
         modal: true,

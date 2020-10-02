@@ -1,4 +1,6 @@
 import React from "react";
+import ReactDOM from "react-dom";
+
 import "./modal.sass";
 //components
 import { useStateValue } from "../../helpers/stateProvider";
@@ -25,26 +27,23 @@ function Modal() {
 
   const SelectedForm = map[form];
 
-  return (
-    <main>
-      {modal && (
-        <div>
-          <div className="modal-blur" />
-          <div className="modal">
-            {SelectedForm ? <SelectedForm /> : "Error finding your form"}
-            <div
-              className="close-modal"
-              onClick={() => {
-                dispatch({ type: "CLOSE_MODAL" });
-              }}
-            >
-              <Close fontSize="medium" />
-            </div>
-          </div>
-        </div>
-      )}
-    </main>
+  const modalEl = (
+    <div className="modal">
+      {SelectedForm ? <SelectedForm /> : "Error finding your form"}
+      <div
+        className="close-modal"
+        onClick={() => {
+          dispatch({ type: "CLOSE_MODAL" });
+        }}
+      >
+        <Close fontSize="medium" />
+      </div>
+    </div>
   );
+
+  const container = document.getElementById("modal_container");
+
+  return <main>{modal && ReactDOM.createPortal(modalEl, container)}</main>;
 }
 
 export default Modal;

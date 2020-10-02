@@ -15,48 +15,6 @@ import Modal from "./components/common/Modal";
 import Notifications from "./components/notifications/Notifications";
 import Tag from "./components/tag/Tag";
 import Search from "./components/search/Search";
-/*
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <Login />
-          </Route>
-        </Switch>
-
-        <SideNav />
-
-        <Switch>
-          <Route path="/home" exact>
-            <Home />
-          </Route>
-          <Route path="/explore" exact>
-            <Explore />
-          </Route>
-          <Route path="/notifications" exact>
-            <Notifications />
-          </Route>
-          <Route path="/detail/:id" exact>
-            <Detail />
-          </Route>
-          <Route path="/user/:username">
-            <User />
-          </Route>
-          <Route path="/tag/:tag">
-            <Tag />
-          </Route>
-          <Route path="/detail/:id/:snip" exact>
-            <SnippetDetail />
-          </Route>
-        </Switch>
-      </Router>
-
-      <ToastsContainer store={ToastsStore} />
-    </div>
-  );
-} */
 
 function AuthenticatedRoutes() {
   return (
