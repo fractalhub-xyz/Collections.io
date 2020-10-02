@@ -37,7 +37,7 @@ export function postNewCollection(data) {
 export function postNewSnippet(data) {
   return api.post("/snippets/", data);
 }
-export function getPopularCollections(limit = 10) {
+export function getPopularCollections(limit = 12) {
   return api.get("/collections/popular?limit=" + limit);
 }
 export function getFollowedCollections(limit = 6) {

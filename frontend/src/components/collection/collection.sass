@@ -200,16 +200,15 @@ $card-dim: 280px
                 display: flex
                 align-items: center
                 .likeicon
-                    background: black
                     height: 57px
                     width: 57px
                     border-radius: 10px
                     box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
                     margin-right: 1rem
-                    border: 6px solid $light-bg
+                    padding: 6px
                     cursor: pointer
                     &:hover
-                        box-shadow: none
+                        box-shadow: inset -2px -2px 4px $light-sh-b, inset 2px 2px 4px $light-sh-d
                 .deet
                     box-shadow: -6.2px -6.2px 10px $light-sh-b, 6.2px 6.2px 18px $light-sh-d
                     padding: 10px
@@ -266,9 +265,8 @@ $card-dim: 280px
                 .snippet
                     .likeicon
                         box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
-                        border: 6px solid $dark-bg
                         &:hover
-                            box-shadow: none
+                            box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
                     .deet
                         box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
                         &:hover
@@ -367,7 +365,6 @@ $card-dim: 280px
             .followed
                 color: $accent-color
 
-           
             .btns
                 .ctrl-btn
                     width: 45%
@@ -394,7 +391,7 @@ $card-dim: 280px
                     margin-bottom: 1rem
                     .tag
                         box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
-                        
+
     .mid
         display: flex
         justify-content: space-between
@@ -450,7 +447,6 @@ $card-dim: 280px
                 display: flex
                 align-items: center
                 .likeicon
-                    background: black
                     height: 47px
                     width: 47px
                     border-radius: 10px

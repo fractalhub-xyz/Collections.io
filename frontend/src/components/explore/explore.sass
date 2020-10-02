@@ -1,11 +1,90 @@
 @import '../common/variables.sass'
 .explore
-    margin-left: 150px
-    header
-        font-size: 1rem
+    margin-top: 1.5rem
+    margin-left: calc( #{$side-nav-width})
+    padding: 0rem 2rem
+    .explore-container
+        display: flex
+        justify-content: space-around
+        padding: 1rem
+        border-radius: $borderbox-radius
+        box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+        .left-container
+            border-radius: $borderbox-radius
+            padding: 1rem
+            width: 47%
+            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+            border-radius:
+            overflow-y: scroll
+            h1
+                margin: 0
+                margin-bottom: 1.2rem
+            .pop-collections
+                display: flex
+                flex-wrap: wrap
+                justify-content: space-between
+                .bg
+                    margin: 0.6rem 0.6rem
+                    height: 180px
+                    width: 180px
+                    border-radius: 15px
+                    overflow: hidden
+                    .pop-collection
+                        height: 100%
+                        width: 1005
+                        cursor: pointer
+                        display: flex
+                        flex-direction: column
+                        justify-content: flex-end
+                        p
+                            margin-bottom: 1rem
+                            text-align: left
+                            margin: 1rem 0.2rem
+                            margin-left: 1rem
+                            color: white
+                            opacity: 0
+                            transition: 0.05s
+                        &:hover
+                            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7))
+                            p
+                                opacity: 1
+        .right-container
+            width: 50%
+            display: flex
+            flex-wrap: wrap
+            justify-content: center
+            .top
+                width: 100%
+                height: 50%
+                display: flex
+                justify-content: space-evenly
+                .top-left
+                    width: 65%
+                    box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+                    border-radius: $borderbox-radius
+                .top-right
+                    width: 30%
+                    box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+                    border-radius: $borderbox-radius
+            .bottom
+                border-radius: $borderbox-radius
+                margin-top: 0.4rem
+                width: 96%
+                height: 46%
+                box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+                font-size: 2rem
+                font-weight: 100
+                letter-spacing: 0.2rem
 
-    section
-        .popularCollections
-            h4
-                color: #6d279b
-                font-size: 1.25rem
+        .dark &
+            box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+            .left-container
+                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+            .right-container
+                .top
+                    .top-left
+                        box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                    .top-right
+                        box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                .bottom
+                    box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d

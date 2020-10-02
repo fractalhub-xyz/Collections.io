@@ -4,6 +4,7 @@ import "./explore.sass";
 import { getPopularCollections } from "../../helpers/api";
 //components
 import { useStateValue } from "../../helpers/stateProvider";
+import PopCollection from "./popCollection";
 
 function Explore() {
   //GlobalStates
@@ -35,7 +36,33 @@ function Explore() {
 
   return (
     <main className="explore">
-      <header>This should be aqua yellow</header>
+      <div className="explore-container">
+        <div className="left-container">
+          <h1>Popular Collections</h1>
+          <div className="pop-collections">
+            {popularCollections.map((collection) => (
+              <PopCollection key={collection.id} collection={collection} />
+            ))}
+          </div>
+        </div>
+        <div className="right-container">
+          <div className="top">
+            <div className="top-left"></div>
+            <div className="top-right"></div>
+          </div>
+          <div className="bottom center">
+            COLLECTIONS
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default Explore;
+
+{
+  /* <header>This should be aqua yellow</header>
       <section>
         <div className="popularCollections">
           {isLoading
@@ -48,9 +75,5 @@ function Explore() {
                 </div>
               ))}
         </div>
-      </section>
-    </main>
-  );
+      </section> */
 }
-
-export default Explore;

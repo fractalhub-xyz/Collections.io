@@ -4,19 +4,16 @@ import "./navbar.sass";
 import { useHistory } from "react-router-dom";
 //icons
 import {
-  Notifications,
-  NavigateBefore,
   Search,
   VoiceOverOff,
 } from "@material-ui/icons";
 //componentss
-import { useStateValue } from "../../helpers/stateProvider";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
+import logo from "../../assets/svgs/Logo.png";
 
 function Navbar() {
   //init
-  const [{ user }] = useStateValue();
   let history = useHistory();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -38,11 +35,15 @@ function Navbar() {
   return (
     <main className="navbar-desk">
       <div className="container-left">
-        <img src="../../assets/svgs/videos.svg" alt="logo" />
-        
+        <img src={logo} alt="logo" className="colelctions-logo"/>
         <div className="searchbox">
           <Search />
-          <input placeholder="Search" onChange={(e)=>{history.push(`/search/${e.target.value}`)}}/>
+          <input
+            placeholder="Search"
+            onChange={(e) => {
+              history.push(`/search/${e.target.value}`);
+            }}
+          />
         </div>
       </div>
       <div className="container-right">

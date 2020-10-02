@@ -18,6 +18,7 @@ import {
   Create,
   Security,
   NotInterested,
+  Star,
 } from "@material-ui/icons";
 
 //modules
@@ -172,7 +173,7 @@ function Collection() {
               </div>
               <div className="btn center" onClick={followCollection}>
                 {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}
-                <Favorite className={isFollowed ? "followed" : ""} />
+                <Star className={isFollowed ? "followed" : ""} />
               </div>
             </div>
             <div className="col3">
@@ -386,7 +387,7 @@ function Collection() {
               <div>
                 <div className="btn center" onClick={followCollection}>
                   {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}
-                  <Favorite className={isFollowed ? "followed" : ""} />
+                  <Star className={isFollowed ? "followed" : ""} />
                 </div>
                 <div className="btns">
                   {collection.owner === user && (

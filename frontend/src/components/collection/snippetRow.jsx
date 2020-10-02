@@ -76,7 +76,11 @@ function SnippetRow({ snippet }) {
         </div>
       </div>
       <div className="likeicon center" onClick={heartSnippet}>
-        {isLiked ? <Favorite color="secondary" /> : <Favorite />}
+        {isLiked ? (
+          <Favorite fontSize="large" color="secondary" />
+        ) : (
+          <Favorite fontSize="large" />
+        )}
       </div>
     </div>
   );

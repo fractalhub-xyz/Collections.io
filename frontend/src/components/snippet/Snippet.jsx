@@ -224,7 +224,7 @@ function Snippet() {
               {snippet.owner}
             </div>
             <div className="btns">
-              {snippet.owner === user && (
+              {(snippet.owner === user || collection.owner === user) && (
                 <div
                   className="ctrl-btn center"
                   onClick={() => {
