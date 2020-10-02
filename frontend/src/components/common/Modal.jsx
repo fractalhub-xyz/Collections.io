@@ -31,7 +31,6 @@ function Modal() {
   };
 
   const onClickOutside = (e) => {
-    e.preventDefault();
     const userclicked = e.target;
 
     if (formEl.current && !formEl.current.contains(userclicked)) {
