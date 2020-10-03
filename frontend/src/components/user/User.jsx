@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./user.sass";
 //api
-import { getUserFromID } from "../../helpers/api";
+import { getUserFromID, postUserFollow } from "../../helpers/api";
 //components
 //modules
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import YourCollection from "./yourCollection";
 
 function User() {
+  const params = useParams();
+  const [userID, setUserID] = useState(params.username);
   const [user, setUser] = useState({});
   const [collections, setCollections] = useState([]);
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [no_followers, setNo_followers] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
   const [numSnippets, setNumSnippets] = useState(0);
@@ -18,7 +22,12 @@ function User() {
 
   const [refresh, setRefresh] = useState(true);
 
-  const params = useParams();
+  let history = useHistory();
+
+  useEffect(() => {
+    setUserID(params.username);
+    setRefresh(true);
+  }, [params]);
 
   // lifecycle functions
   useEffect(() => {
@@ -27,10 +36,13 @@ function User() {
       return;
     }
     async function fetchUser() {
+      const user = localStorage.getItem("user");
       try {
         console.log(`[GET] >> User ${params.username} details`);
-        const response = await getUserFromID(params.username);
+        const response = await getUserFromID(userID);
         setUser(response.data);
+        setIsFollowed(response.data.profile.followers.includes(user));
+        setNo_followers(response.data.profile.followers.length);
       } catch (error) {
         console.error(error);
         setGetError(`Failed to load data from user : ${params.username}`);
@@ -40,6 +52,22 @@ function User() {
     fetchUser();
     setRefresh(false);
   }, [refresh, params]);
+
+  const followUser = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await postUserFollow(user.username);
+      console.log("follow/unfollow req sent");
+      setIsFollowed(response.data.followed);
+      if (isFollowed === false) {
+        setNo_followers(no_followers - 1);
+      } else {
+        setNo_followers(no_followers + 1);
+      }
+    } catch {
+      alert("Unable to process your request right now");
+    }
+  };
 
   const refreshCount = () => {
     var colLen = collections.length;
@@ -78,14 +106,25 @@ function User() {
           <div className="username">{user.username}</div>
           <div className="email">{user.email}</div>
           <div className="stats">
-            <div className="stat"> 1 Follower</div>
-            <div className="stat"> 1 Following</div>
+            <div className="stat"> {no_followers} Follower</div>
+            {/* <div className="stat"> 1 Following</div> */}
             <div className="stat"> {numCollectionFollows} ★</div>
           </div>
           {user.username === localStorage.getItem("user") ? (
-            <button>Edit Profile</button>
+            <div>
+              <button>Edit Profile</button>
+              <button
+                onClick={() => {
+                  history.push("/");
+                }}
+              >
+                Logout
+              </button>
+            </div>
           ) : (
-            <button>Follow</button>
+            <button onClick={followUser}>
+              {!isFollowed ? <p>Follow</p> : <p>Unfollow</p>}
+            </button>
           )}
         </div>
         <div className="counts">

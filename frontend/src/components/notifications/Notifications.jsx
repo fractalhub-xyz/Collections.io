@@ -47,7 +47,7 @@ function Notifications() {
         </h1>
         <div className="all">
           <h3>Unread</h3>
-          {notifications.map((notification) => (
+          {notifications.reverse().map((notification) => (
             <div key={notification.id}>
               {notification.is_read === false && (
                 <Notification
@@ -59,7 +59,7 @@ function Notifications() {
             </div>
           ))}
           <h3>Others</h3>
-          {notifications.map((notification) => (
+          {notifications.reverse().map((notification) => (
             <div key={notification.id}>
               {notification.is_read === true && (
                 <Notification

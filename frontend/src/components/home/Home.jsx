@@ -5,6 +5,8 @@ import { getFollowedCollections } from "../../helpers/api";
 //componentss
 import { useHistory } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import { Add } from "@material-ui/icons";
+import { useStateValue } from "../../helpers/stateProvider";
 
 function Home() {
   //states
@@ -12,6 +14,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
   //globalstates\
+  const [, dispatch] = useStateValue();
 
   const [bg, setBg] = useState(
     "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
@@ -23,7 +26,6 @@ function Home() {
   };
   //init
   let history = useHistory();
-
 
   //mount
   useEffect(() => {
@@ -132,6 +134,17 @@ function Home() {
                   ))}
                 </div>
               )}
+              <div
+                className="addbtn center"
+                onClick={() => {
+                  dispatch({
+                    type: "OPEN_FORM",
+                    form: "create_collection",
+                  });
+                }}
+              >
+                <Add />
+              </div>
               {getError && <div>{getError}</div>}
             </div>
           </section>

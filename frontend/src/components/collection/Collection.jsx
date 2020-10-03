@@ -332,7 +332,7 @@ function Collection() {
                   setFilter("podcast");
                 }}
               >
-                <Mic fontSize="medium" className="mat-icon" />
+                <Mic fontSize="medium" className="mat-icon a1" />
                 <p>{podcasts}</p>
               </div>
               <div
@@ -341,26 +341,26 @@ function Collection() {
                   setFilter("article");
                 }}
               >
-                <Description fontSize="medium" className="mat-icon" />
+                <Description fontSize="medium" className="mat-icon a2" />
                 <p>{articles}</p>
               </div>
               <div
-                className={filter === "" ? "select current" : "select"}
+                className={filter === "link" ? "select current" : "select"}
                 onClick={(e) => {
-                  setFilter("");
+                  setFilter("link");
                 }}
               >
-                <Link fontSize="medium" className="mat-icon" />
-                <p>12/</p>
+                <Link fontSize="medium" className="mat-icon a3" />
+                <p>{links}</p>
               </div>
               <div
-                className={filter === "" ? "select current" : "select"}
+                className={filter === "video" ? "select current" : "select"}
                 onClick={(e) => {
-                  setFilter("");
+                  setFilter("video");
                 }}
               >
-                <Movie fontSize="medium" className="mat-icon" />
-                <p>12/</p>
+                <Movie fontSize="medium" className="mat-icon a4" />
+                <p>{videos}</p>
               </div>
             </div>
             <div className="info">

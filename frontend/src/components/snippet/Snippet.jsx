@@ -17,7 +17,7 @@ import {
   Create,
   Favorite,
   PlayArrow,
-  SettingsBackupRestore,
+  NavigateBefore,
 } from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
 import { useStateValue } from "../../helpers/stateProvider";
@@ -251,7 +251,7 @@ function Snippet() {
                   history.push(`/collection/${collection.id}`);
                 }}
               >
-                <SettingsBackupRestore />
+                <NavigateBefore fontSize="large"/>
               </div>
             </div>
           </div>

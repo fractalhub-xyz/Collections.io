@@ -103,3 +103,6 @@ export function postUpvoteComment(id) {
 export function putEditComment(id, data) {
   return api.put(`comments/${id}/`, data);
 }
+export function postUserFollow(user) {
+  return api.post(`users/${user}/follow`);
+}

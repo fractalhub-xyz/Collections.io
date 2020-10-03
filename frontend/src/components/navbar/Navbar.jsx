@@ -4,7 +4,7 @@ import "./navbar.sass";
 import { useHistory, useParams } from "react-router-dom";
 import { debounce } from "../../helpers/debounce";
 //icons
-import { Search, VoiceOverOff } from "@material-ui/icons";
+import { Search } from "@material-ui/icons";
 //componentss
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
@@ -53,14 +53,14 @@ function Navbar() {
         </div>
       </div>
       <div className="container-right">
-        <div
+        {/* <div
           className="btn center hide"
           onClick={() => {
             history.push("/");
           }}
         >
           <VoiceOverOff />
-        </div>
+        </div> */}
         <Toggle
           icons={false}
           onChange={toggleTheme}
