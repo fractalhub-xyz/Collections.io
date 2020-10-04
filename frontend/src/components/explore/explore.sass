@@ -15,15 +15,16 @@
             font-size: 1.5rem
             margin-bottom: 0.6rem
             color: $accent-color
-            font-weight: 200
+            font-weight: 400
         .left-container
             border-radius: $borderbox-radius
             padding: 1rem
-            width: 47%
+            width: 50%
             box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
             border-radius:
-            overflow-y: scroll
             .pop-collections
+                overflow-y: scroll
+                height: calc( 100% - 2.5rem )
                 display: flex
                 flex-wrap: wrap
                 justify-content: space-between
@@ -53,15 +54,16 @@
                             p
                                 opacity: 1
         .right-container
-            width: 50%
+            width: 45%
             display: flex
             flex-wrap: wrap
             justify-content: center
+            height: 100%
             .top
                 width: 100%
-                height: 50%
+                height: calc( 50% - 1rem)
                 display: flex
-                justify-content: space-evenly
+                justify-content: space-between
                 .top-left
                     width: 60%
                     box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
@@ -80,7 +82,7 @@
                             padding: 0.3rem
                             cursor: pointer
                             &:hover
-                                box-shadow: inset -2px -2px 4px $light-sh-b, inset 2px 2px 4px $light-sh-d
+                                box-shadow: inset -2px -2px 1px $light-sh-b, inset 2px 2px 4px $light-sh-d
 
                             .mat-icon
                                 height: 40px
@@ -91,31 +93,39 @@
                                 color: $light-bg
                                 margin-left: 1rem
                 .top-right
-                    width: 25%
+                    width: 30%
                     box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
                     border-radius: $borderbox-radius
                     padding: 1rem
-                    .random-tag
-                        box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
-                        border-radius: 15px
-                        margin-bottom: 1rem
-                        padding: 0.7rem
-                        cursor: pointer
+                    .tags
                         display: flex
+                        flex-wrap: wrap
+                        justify-content: space-around
                         align-items: center
-                        .name
-                            margin-left: 0.6rem
-                        &:hover
-                            box-shadow: inset -2px -2px 4px $light-sh-b, inset 2px 2px 4px $light-sh-d
+                        height: calc(100% - 2.9rem)
+                        .random-tag
+                            height: 70px
+                            width: 70px
+                            border-radius: 15px
+                            margin-bottom: 1rem
+                            padding: 0.7rem
+                            cursor: pointer
+                            display: flex
+                            align-items: center
+                            box-shadow: inset -2px -2px 2px $dark-sh-b, inset 2px 2px 2px $dark-sh-d
+
             .bottom
                 border-radius: $borderbox-radius
-                margin-top: 0.4rem
-                width: 96%
-                height: 46%
+                margin-top: 1rem
+                width: calc( 100% - 2rem )
+                height: calc( 50% - 1rem)
                 box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
-                font-size: 2rem
+                font-size: 3rem
                 font-weight: 100
                 letter-spacing: 0.2rem
+                background: $accent-color
+                color: $light-bg
+                border: 0.5rem solid $light-bg
 
         .dark &
             box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
@@ -129,15 +139,15 @@
                             .pop-snippet
                                 box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
                                 &:hover
-                                    box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
+                                    box-shadow: inset -2px -2px 2px $dark-sh-d, inset 2px 2px 4px $dark-sh-d
 
                     .top-right
                         box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
-                        .random-tag
-                            box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
-                            &:hover
-                                box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
+                        .tags
+
                 .bottom
+                    border: 0.5rem solid $dark-bg
+                    color: $dark-bg
                     box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
 
 @media screen and (max-width: 800px)
@@ -157,7 +167,7 @@
                 .pop-collections
                     display: flex
                     flex-wrap: wrap
-                    justify-content: center
+                    justify-content: space-around
                     .bg
                         margin: 0.2rem 0.2rem
                         height: 150px

@@ -11,6 +11,7 @@ import { useStateValue } from "../../helpers/stateProvider";
 import PopCollection from "./popCollection";
 import PopSnippet from "./PopSnippet";
 import { LocalOffer } from "@material-ui/icons";
+import RandomTag from "./randomTag";
 
 function Explore() {
   //GlobalStates
@@ -51,7 +52,7 @@ function Explore() {
     async function fetchRandomTags() {
       console.log("[GET] >> Random Tags");
       try {
-        const response = await getRandomTags();
+        const response = await getRandomTags(4);
         setRandomTags(response.data);
       } catch (error) {
         console.log(`[ERROR] >> ${error.response}`);
@@ -87,12 +88,11 @@ function Explore() {
             </div>
             <div className="top-right">
               <h1>Tags</h1>
-              {randomTags.map((tag) => (
-                <div className="random-tag">
-                  <LocalOffer />
-                  <div className="name">{tag.name}</div>
-                </div>
-              ))}
+              <div className="tags">
+                {randomTags.map((tag) => (
+                  <RandomTag id={tag.id} tag={tag} />
+                ))}
+              </div>
             </div>
           </div>
           <div className="bottom center">COLLECTIONS</div>

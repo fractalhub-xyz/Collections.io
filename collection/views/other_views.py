@@ -27,7 +27,7 @@ def search_view(request):
     # Qs help construct OR sql statement.
     # More about it: https://docs.djangoproject.com/en/3.0/topics/db/queries/#complex-lookups-with-q-objects
 
-    if query[0] == "%":
+    if query[0] == "!":
         tags = Tag.objects.filter(name__icontains=query[1:])[:MAX_LIMIT]
         result = {
             'tags': TagSerializer(tags, many=True).data,
@@ -58,11 +58,12 @@ def search_view(request):
             Q(Q(title__icontains=query)
               | Q(link__icontains=query)))[:MAX_LIMIT]
         tags = Tag.objects.filter(name__icontains=query)[:MAX_LIMIT]
-
+        users = User.objects.filter(username__icontains=query[1:])[:MAX_LIMIT]
         result = {
             'collections': ShortCollectionSerialiser(colls, many=True).data,
             'snippets': SnippetSerializer(snips, many=True).data,
             'tags': TagSerializer(tags, many=True).data,
+            'users': ShortUserSerializer(users, many=True).data,
         }
 
     return Response({

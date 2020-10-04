@@ -50,6 +50,9 @@ function AuthenticatedRoutes() {
         <Route path="/search/:search">
           <Search />
         </Route>
+        <Route path="/search/">
+          <Search />
+        </Route>
       </Switch>
     </>
   );

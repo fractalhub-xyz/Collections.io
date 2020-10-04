@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./sidenav.sass";
 //icons
-import { Home, Explore, Add, Notifications } from "@material-ui/icons";
+import { Home, Explore, Add, Notifications, Search } from "@material-ui/icons";
 //modules
 import { withRouter } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
@@ -45,13 +45,25 @@ function Sidenav({ history }) {
         </div>
         <div
           className={
-            activeUrl === "/notifications" ? "navbtn center current" : "navbtn center"
+            activeUrl === "/notifications"
+              ? "navbtn center current"
+              : "navbtn center"
           }
           onClick={() => {
             history.push(`/notifications`);
           }}
         >
           <Notifications />
+        </div>
+        <div
+          className={
+            activeUrl === "/search" ? "navbtn center current" : "navbtn center"
+          }
+          onClick={() => {
+            history.push(`/search`);
+          }}
+        >
+          <Search />
         </div>
         <div
           className={"navbtn center add"}

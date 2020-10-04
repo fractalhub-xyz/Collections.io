@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { getSearchResults } from "../../helpers/api";
 import "./search.sass";
+import CollectionSearch from "./collectionSearch";
+import SnippetSearch from "./snippetSearch";
+import TagSearch from "./tagSearch";
+import UserSearch from "./userSearch";
+import { debounce } from "@material-ui/core";
 
 function Search() {
   const params = useParams();
+  let history = useHistory();
+
   const [query, setQuery] = useState(params.search);
   const [refresh, setRefresh] = useState(true);
   const [error, setError] = useState(null);
@@ -74,9 +81,97 @@ function Search() {
     setRefresh(false);
   }, [refresh, query]);
 
+  const debouncedHandler = useCallback(
+    debounce((value) => {
+      history.push(`/search/${value}`);
+    }, 500),
+    []
+  );
+
+  const inputOnChange = (e) => {
+    const value = e.target.value;
+    debouncedHandler(value);
+  };
+
   return (
     <main className="search">
-      <h1>Seaching for {query}</h1>
+      <div className="left">
+        <input
+          placeholder="Search"
+          className="searchInput"
+          onChange={inputOnChange}
+        />
+        <img
+          className="search-logo"
+          src="https://www.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png"
+          alt="sh-lg"
+        />
+        <h1>Search</h1>
+        <p>Use !Tagname to search for tags</p>
+        <p>Use :Collectionname to search for Collections</p>
+        <p>Use Snippetname to search for Snippet</p>
+        <p>Use @Username to search for Users</p>
+      </div>
+      <div className="right">
+        <h1>Results</h1>
+        <div>
+          {!!collectionMatches.length && (
+            <div>
+              <div className="header-row">
+                <h2>Collections</h2>
+                <p>see all</p>
+              </div>
+              <div>
+                {collectionMatches.map((collection) => (
+                  <CollectionSearch
+                    collection={collection}
+                    key={collection.id}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+          {!!snippetMatches.length && (
+            <div>
+              <div className="header-row">
+                <h2>Snippets</h2>
+                <p>see all</p>
+              </div>
+              <div>
+                {snippetMatches.map((snippet) => (
+                  <SnippetSearch key={snippet.id} snippet={snippet} />
+                ))}
+              </div>
+            </div>
+          )}
+          {!!tagMatches.length && (
+            <div>
+              <div className="header-row">
+                <h2>Tags</h2>
+                <p>see all</p>
+              </div>
+              <div>
+                {tagMatches.map((tag) => (
+                  <TagSearch key={tag.name} tag={tag} />
+                ))}
+              </div>
+            </div>
+          )}
+          {!!userMatches.length && (
+            <div>
+              <div className="header-row">
+                <h2>Tags</h2>
+                <p>see all</p>
+              </div>
+              <div>
+                {userMatches.map((user) => (
+                  <UserSearch user={user} key={user.username} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </main>
   );
 }

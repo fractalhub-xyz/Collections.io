@@ -12,25 +12,35 @@ function PopSnippet({ snippet }) {
       onClick={() => {
         history.push(`/snippet/${snippet.id}`);
       }}
-      className="pop-snippet"
+      className={
+        snippet.type_of === "podcast"
+          ? "pop-snippet c4"
+          : snippet.type_of === "article"
+          ? "pop-snippet c2"
+          : snippet.type_of === "video"
+          ? "pop-snippet c3"
+          : snippet.type_of === "link"
+          ? "pop-snippet c1"
+          : null
+      }
     >
       {snippet.type_of === "podcast" && (
-        <div className="mat-icon center c4">
+        <div className="mat-icon center">
           <Mic fontSize="medium" />
         </div>
       )}
       {snippet.type_of === "article" && (
-        <div className="mat-icon center c2">
+        <div className="mat-icon center">
           <Description fontSize="medium" />
         </div>
       )}
       {snippet.type_of === "video" && (
-        <div className="mat-icon center c3">
+        <div className="mat-icon center">
           <Movie fontSize="medium" />
         </div>
       )}
       {snippet.type_of === "link" && (
-        <div className="mat-icon center c1">
+        <div className="mat-icon center">
           <Link fontSize="medium" />
         </div>
       )}
