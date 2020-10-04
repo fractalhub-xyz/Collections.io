@@ -1,0 +1,79 @@
+@import '../common/variables.sass'
+$border-radius: 50px
+
+.navbar-desk
+    height: $nav-height
+    background: $light-bg
+    padding: 0 1rem
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    .container-left
+        display: flex
+        align-items: center
+        .colelctions-logo
+            height: 250px
+        .searchbox
+            height: calc( #{$nav-height} / 1.5)
+            width: calc( #{$nav-height} / 1.5)
+            margin-left: 1rem
+            display: flex
+            align-items: center
+            border-radius: $border-radius
+            padding: 0 1rem
+            box-shadow: inset -6.2px -6.2px 6.2px $light-sh-b, inset 3.7px 3.7px 6.2px $light-sh-d
+            color: grey
+            width: 24rem
+            input
+                background: none
+                border: none
+                font-size: 1.1rem
+                color: inherit
+            .dark &
+                box-shadow: inset -6.2px -6.2px 6.2px $dark-sh-b, inset 3.7px 3.7px 6.2px $dark-sh-d
+
+    .container-right
+        display: flex
+        color: grey
+        align-items: center
+        .btn
+            margin-right: 1rem
+            border-radius: 50%
+            height: calc( #{$nav-height} / 1.5)
+            width: calc( #{$nav-height} / 1.5)
+            cursor: pointer
+            box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+            &:hover
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+            .dark &
+                box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+                &:hover
+                    box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+        .usericon
+            height: calc( #{$nav-height} / 1.5)
+            width: calc( #{$nav-height} / 1.5)
+            background: black
+            margin-left: 1rem
+            border-radius: $border-radius
+            cursor: pointer
+
+    .dark &
+        background: $dark-bg
+
+@media screen and (max-width: 800px)
+    .navbar-desk
+        .container-left
+            .colelctions-logo
+                height: 150px
+            .searchbox
+                display: none
+        .container-right
+            .btn
+                &:hover
+                    box-shadow: none
+            .hide
+                display: none
+                box-shadow: none
+                .dark &
+                    box-shadow: none

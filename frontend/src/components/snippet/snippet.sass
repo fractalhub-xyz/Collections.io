@@ -1,0 +1,283 @@
+@import '../common/variables.sass'
+$card-dim: 210px
+.snippet-view
+    margin-top: 1.5rem
+    margin-left: calc( #{$side-nav-width})
+    padding: 0rem 2rem
+    header
+        margin-bottom: 1.3rem
+        display: flex
+        .bigbox
+            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+            border-radius: $borderbox-radius
+            padding: 1rem
+            display: flex
+            color: $dark-bg
+            width: 50%
+            .card
+                height: $card-dim
+                min-width: $card-dim
+                display: inline-block
+                box-shadow: inset -6.2px -6.2px 6px $dark-sh-b, inset 6.2px 6.2px 6px $dark-sh-d
+                border-radius: 50%
+            .info
+                margin-left: 1rem
+                display: flex
+                flex-direction: column
+                justify-content: center
+                width: 80%
+                margin-top: 3rem
+                .type
+                    font-weight: 100
+                    font-size: 1.4rem
+                    letter-spacing: 0.1rem
+                    text-transform: uppercase
+                .name
+                    font-weight: 600
+                    font-size: 2.5rem
+                    margin-bottom: 0.3rem
+                .likes
+                    display: flex
+                    align-items: center
+                    margin-top: 1rem
+                    .btn
+                        width: 50px
+                        height: 50px
+                        box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+                        cursor: pointer
+                        border-radius: 35px
+                        margin-right: 1rem
+                        &:hover
+                            box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 18px $light-sh-d
+                .liked
+                    color: $accent-color
+
+            .col3
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                align-items: flex-end
+                .owner
+                    text-transform: capitalize
+                    padding: 0.5rem 1rem
+                    border-radius: 15px
+                    box-shadow: inset -2px -2px 4px $light-sh-b, inset 2px 2px 4px $light-sh-d
+                    cursor: pointer
+                    &:hover
+                        color: $accent-color
+
+                .btns
+                    .ctrl-btn
+                        cursor: pointer
+                        margin-top: 1rem
+                        &:hover
+                            color: $accent-color
+            .dark &
+                color: $light-bg
+                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                .card
+                    box-shadow: inset -6.2px -6.2px 6px $dark-sh-b, inset 6.2px 6.2px 6px $dark-sh-d
+                .info
+                    .btn
+                        box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 18px $dark-sh-d
+                        &:hover
+                            box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 18px $dark-sh-d
+                .col3
+                    .owner
+                        box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
+                    .more
+                        &:hover
+                            color: white
+        .player
+            margin-left: 1rem
+            width: 50%
+            overflow: hidden
+            border-radius: 25px
+            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+            border: 5px solid $light-bg
+
+            .dark &
+                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                border: 5px solid $dark-bg
+
+        .dim
+            display: flex
+            padding: 1rem
+            justify-content: space-around
+            align-items: center
+            .icon
+                color: white
+                font-size: 3rem
+            .open
+                height: 70px
+                width: 70px
+                border-radius: 50%
+                background: teal
+                color: white
+                cursor: pointer
+                transition: 0.3s
+                &:hover
+                    transform: scale(1.1)
+            .dark &
+
+        .video
+            background: url(https://ssdm.co/wp-content/uploads/2017/07/youtube_pattern.png) center / cover
+        .link
+            background: url(https://wallpapercave.com/wp/wp4285370.png) center / cover
+            .icon
+                color: black
+        .article
+            background: url(https://i.pinimg.com/originals/51/a9/82/51a982c98cd468f3e4dcb8153bde632f.jpg) center / cover
+            .icon
+                color: black
+
+    section
+        display: flex
+        justify-content: space-between
+        .comments
+            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+            width: 65%
+            min-height: 18vh
+            border-radius: $borderbox-radius $borderbox-radius 0 0
+            padding: 0 1rem
+            .new-comment
+                display: flex
+                input
+                    width: 93%
+                    background: none
+                    border: none
+                    border-bottom: 2px solid $accent-color
+                    color: inherit
+                .btn
+                    height: 40px
+                    width: 40px
+                    margin-left: 1rem
+                    border-radius: 50%
+                    background: $accent-color
+                    cursor: pointer
+            .all
+                .comment
+                    margin-top: 1.5rem
+                    border-bottom: 2px solid rgba(202, 202, 202, 0.171)
+                    padding-bottom: 0.3rem
+                    .top
+                        display: flex
+                        justify-content: space-between
+                        margin-bottom: 0.3rem
+                        .left
+                            display: flex
+                            align-items: center
+                            .icon
+                                height: 40px
+                                width: 40px
+                                background: $accent-color
+                                margin-right: 0.6rem
+                                border-radius: 50%
+                            .by
+                                font-size: 1.3rem
+                                text-transform: capitalize
+                        .right
+                            display: flex
+                            align-items: center
+                            .btn
+                                cursor: pointer
+                                &:hover
+                                    color: $accent-color
+                            .active
+                                color: $accent-color
+                            .count
+                                margin-right: 0.5rem
+                    .content
+                    .edit-content
+                        input
+                            width: 100%
+                            font-size: 1rem
+                            background: none
+                            border: none
+                            color: inherit
+                            color: grey
+        .otsnippets
+            border: 6px solid $light-bg
+            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+            width: 30%
+            background: $accent-color
+            min-height: 60vh
+            border-radius: $borderbox-radius $borderbox-radius 0 0
+            padding: 0.7rem
+            cursor: pointer
+            .otsnippet
+                margin: 0.5rem 0
+                height: 100px
+                border-radius: 15px
+                display: flex
+                align-items: center
+                color: $light-bg
+                .card
+                    height: 80px
+                    width: 80px
+                    border-radius: 50%
+                    background: black
+                    margin-left: 1rem
+                .info
+                    margin-left: 1rem
+                    user-select: none
+                    .type
+                        text-transform: uppercase
+                        font-weight: 100
+                        font-size: 0.8rem
+                    .title
+                        font-size: 1.5rem
+                @for $i from 1 through 10
+                    &:nth-child(#{$i})
+                        background: rgba(0, 0, 0, $i*0.2)
+
+        .dark &
+            .comments
+                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+
+            .otsnippets
+                border: 6px solid $dark-bg
+                color: $dark-bg
+                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+
+@media screen and (max-width: 800px)
+    .snippet-view
+        margin-top: 0.5rem
+        margin-left: 0
+        padding: 0rem 0.7rem
+        header
+            flex-wrap: wrap
+            .bigbox
+                width: 100%
+                flex-wrap: wrap
+                .card
+                    height: 150px
+                    min-width: 150px
+                .info
+                    width: calc(90% - 150px)
+                    margin-top: 1rem
+                    .type
+                        font-size: 0.8rem
+                    .name
+                        font-size: 1.5rem
+                    .date
+                        display: none
+                .col3
+                    width: 2%
+                    justify-content: flex-end
+                    .owner
+                        display: none
+            .player
+                width: 100%
+                margin-left: 0
+                margin-top: 1rem
+        section
+            margin-top: 1rem
+            flex-wrap: wrap
+            .comments
+                width: 100%
+                margin-bottom: 0.2rem
+                border-radius: $borderbox-radius
+            .otsnippets
+                margin-top: 1rem
+                width: 100%

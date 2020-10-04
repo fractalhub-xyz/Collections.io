@@ -37,13 +37,16 @@ export function postNewCollection(data) {
 export function postNewSnippet(data) {
   return api.post("/snippets/", data);
 }
-export function getCollections() {
-  return api.get("/collections");
-}
-export function getPopularCollections(limit = 10) {
+export function getPopularCollections(limit = 12) {
   return api.get("/collections/popular?limit=" + limit);
 }
-export function getFollowedCollections(limit = 10) {
+export function getPopularSnippets(limit = 12) {
+  return api.get("/snippets/popular?limit=" + limit);
+}
+export function getRandomTags(limit = 3) {
+  return api.get("/tags/random?limit=" + limit);
+}
+export function getFollowedCollections(limit = 6) {
   return api.get("/collections/followed?limit=" + limit);
 }
 export function getCollectionFromID(id) {
@@ -54,9 +57,6 @@ export function getSnippetFromID(id) {
 }
 export function getUserFromID(username) {
   return api.get(`/users/${username}`);
-}
-export function getSnippets() {
-  return api.get("/snippets");
 }
 export function deleteSnippet(id) {
   return api.delete(`/snippets/${id}/`);
@@ -108,4 +108,7 @@ export function postUpvoteComment(id) {
 }
 export function putEditComment(id, data) {
   return api.put(`comments/${id}/`, data);
+}
+export function postUserFollow(user) {
+  return api.post(`users/${user}/follow`);
 }

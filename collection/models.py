@@ -16,6 +16,8 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 SNIPPET_TYPES = (
     ('podcast', 'podcast'),
     ('article', 'article'),
+    ('video', 'video'),
+    ('link', 'link'),
 )
 
 COLLECTION_PERMISSIONS = (
@@ -33,10 +35,18 @@ COLLECTION_VISIBILITY = (
 class Profile(models.Model):
     user = models.OneToOneField(User, to_field='id',
                                 on_delete=models.CASCADE, primary_key=True)
-    followers = models.ManyToManyField(User, related_name="following_users")
+    followers = models.ManyToManyField(
+        User, related_name="following_users", blank=True)
 
     def __str__(self):
         return f"{self.user}'s profile"
+
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
 
 
 class Tag(models.Model):

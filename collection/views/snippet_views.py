@@ -1,6 +1,8 @@
 from collection.models import *
 from collection.serializers import *
 from collection.permissions import *
+from datetime import datetime, timedelta
+from django.db.models import Count
 
 from rest_framework import viewsets, status, permissions, generics
 from rest_framework.views import APIView
@@ -17,6 +19,24 @@ class SnippetViewSet(ModelNoListViewset):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class PopularSnippetViewset(generics.ListAPIView):
+    permissions_classes = [
+        permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = ShortSnippetSerializer
+
+    def get_queryset(self):
+        colls = Snippet.objects.all() \
+            .filter(timestamp__gte=datetime.now() - timedelta(days=300)) \
+            .filter(collection__visibility="public") \
+            .annotate(heart_count=Count('hearts')) \
+            .order_by('-heart_count', '-timestamp')
+
+        limit = int(self.request.GET.get('limit', '0'))
+        if limit and limit > 0:
+            colls = colls[:limit]
+        return colls
 
 
 class HeartSnippetView(APIView):

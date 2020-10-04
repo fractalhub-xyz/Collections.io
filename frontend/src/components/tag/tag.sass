@@ -1,0 +1,45 @@
+@import '../common/variables.sass'
+.tag-page
+    margin-top: 1.5rem
+    margin-left: calc( #{$side-nav-width})
+    padding: 0rem 2rem
+    h1
+    .tag2collections
+        display: flex
+        flex-wrap: wrap
+        .bg
+            height: 200px
+            width: 200px
+            border-radius: 15px
+            overflow: hidden
+            margin: 0.6rem 0.6rem
+            box-shadow: inset -2px -2px 2px $dark-sh-b, inset 2px 2px 2px $dark-sh-d
+            .tag2collection
+                height: 100%
+                cursor: pointer
+                display: flex
+                flex-direction: column
+                justify-content: flex-end
+                background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7))
+                p
+                    margin-bottom: 1rem
+                    text-align: left
+                    margin: 1rem 0.2rem
+                    margin-left: 1rem
+                    color: white
+                    opacity: 1
+                    transition: 0.05s
+@media screen and (max-width: 800px)
+    .tag-page
+        margin-top: 0.5rem
+        margin-left: 0
+        padding: 0rem 0.7rem
+        h1
+        .tag2collections
+            display: flex
+            flex-wrap: wrap
+            justify-content: space-around
+            .bg
+                margin: 0.2rem 0.2rem
+                height: 150px
+                width: 150px

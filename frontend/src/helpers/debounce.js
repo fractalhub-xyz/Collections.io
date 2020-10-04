@@ -3,7 +3,7 @@ export function debounce(fn, delay) {
 
   return function (...args) {
     clearTimeout(timerID);
-    setTimeout(() => {
+    timerID = setTimeout(() => {
       fn(...args);
     }, delay);
   };

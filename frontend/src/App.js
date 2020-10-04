@@ -1,56 +1,75 @@
 import React from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import Login from "./components/loginPage/login";
-import Home from "./components/homePage/home";
-import Detail from "./components/detailPage/detail";
-import User from "./components/userPage/user";
-import Notifications from "./components/notificationPage/notifications"
-import SnippetDetail from "./components/detailPage/snippetdetail";
-import Tag from "./components/tagPage/tag";
-import Explore from "./components/homePage/explore";
-import SideNav from "./components/common/sidenav";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { ToastsContainer, ToastsStore } from "react-toasts";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+// import { ToastsContainer, ToastsStore } from "react-toasts";
+
+import Login from "./components/login/Login";
+import Navbar from "./components/navbar/Navbar";
+import SideNav from "./components/sidenav/Sidenav";
+import Home from "./components/home/Home";
+import Explore from "./components/explore/Explore";
+import Collection from "./components/collection/Collection";
+import Snippet from "./components/snippet/Snippet";
+import User from "./components/user/User";
+import Modal from "./components/common/Modal";
+import Notifications from "./components/notifications/Notifications";
+import Tag from "./components/tag/Tag";
+import Search from "./components/search/Search";
+
+function AuthenticatedRoutes() {
+  return (
+    <>
+      <Navbar />
+      <Modal />
+      <SideNav />
+      <Switch>
+        <Route path="/home" exact>
+          <Home />
+        </Route>
+        <Route path="/explore" exact>
+          <Explore />
+        </Route>
+        <Route path="/collection/:id" exact>
+          <Collection />
+        </Route>
+        <Route path="/snippet/:id" exact>
+          <Snippet />
+        </Route>
+        <Route path="/user/:username" exact>
+          <User />
+        </Route>
+        <Route path="/notifications" exact>
+          <Notifications />
+        </Route>
+        <Route path="/tag/:tagname">
+          <Tag />
+        </Route>
+        <Route path="/user/:username">
+          <User />
+        </Route>
+        <Route path="/search/:search">
+          <Search />
+        </Route>
+        <Route path="/search/">
+          <Search />
+        </Route>
+      </Switch>
+    </>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <Login />
-          </Route>
-        </Switch>
-
-        <SideNav />
-
-        <Switch>
-          <Route path="/home" exact>
-            <Home />
-          </Route>
-          <Route path="/explore" exact>
-            <Explore />
-          </Route>
-          <Route path="/notifications" exact>
-            <Notifications />
-          </Route>
-          <Route path="/detail/:id" exact>
-            <Detail />
-          </Route>
-          <Route path="/user/:username">
-            <User />
-          </Route>
-          <Route path="/tag/:tag">
-            <Tag />
-          </Route>
-          <Route path="/detail/:id/:snip" exact>
-            <SnippetDetail />
-          </Route>
-        </Switch>
-      </Router>
-
-      <ToastsContainer store={ToastsStore} />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <Login />
+        </Route>
+        <Route path="/">
+          <AuthenticatedRoutes />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

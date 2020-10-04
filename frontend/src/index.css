@@ -6,8 +6,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282828;
-  color: white;
+}
+
+.blur {
+  filter: blur(10px);
+}
+
+* {
+  transition: background 0.09s ease-in;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 code {
@@ -17,11 +27,11 @@ code {
 
 a {
   text-decoration: none;
-  color: white;
+  color: inherit;
 }
 
 a:visited {
-  color: white;
+  color: inherit;
 }
 
 .customSlider .slick-track {
@@ -35,6 +45,7 @@ a:visited {
 }
 
 input:focus,
-button:focus {
+button:focus,
+select:focus {
   outline: none;
 }

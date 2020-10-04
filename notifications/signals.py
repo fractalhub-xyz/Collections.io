@@ -21,8 +21,8 @@ def snippet_created(sender, instance, created, **kwargs):
 
 @receiver(m2m_changed, sender=Collection.followers.through)
 def user_followed(sender, instance, action, pk_set, **kwargs):
-    if action == 'post_add':
-        user = User.objects.filter(pk__in=pk_set)[0]
+    user = User.objects.filter(pk__in=pk_set)[0]
+    if action == 'post_add' and instance.owner != user:
         Notification.objects.create(
             user=instance.owner,
             type_of='USER_FOLLOWED',
@@ -56,3 +56,44 @@ def permission_revoked(sender, instance, action, pk_set, **kwargs):
             identifier=instance.id,
             subtitle=f'Your access to collection {instance.name} was revoked'
         )
+
+
+@receiver(post_save, sender=Comment)
+def comment_created(sender, instance, created, **kwargs):
+    if created and instance.owner != instance.snippet.owner:
+        print('creating comment created notification...')
+        Notification.objects.create(
+            user=instance.snippet.owner,
+            type_of='COMMENT_CREATED',
+            title='New comment added',
+            identifier=instance.snippet.id,
+            subtitle=f'{instance.owner.username} commented on your snippet {instance.snippet.title}'
+        )
+
+
+@receiver(m2m_changed, sender=Profile.followers.through)
+def new_follower(sender, instance, action, pk_set, **kwargs):
+    if action == 'post_add':
+        user = User.objects.filter(pk__in=pk_set)[0]
+        Notification.objects.create(
+            user=instance.user,
+            type_of='NEW_FOLLOWER',
+            title='An user followed you',
+            identifier=user.id,
+            subtitle=f'{user.username} followed you'
+        )
+
+
+@receiver(post_save, sender=Collection)
+def follower_interact(sender, instance, created, **kwargs):
+    if created:
+        owner = instance.owner
+        followers = owner.profile.followers.all()
+        for user in followers:
+            Notification.objects.create(
+                user=user,
+                type_of='FOLLOWER_INTERACT',
+                title='New collection from someone you follow',
+                identifier=instance.id,
+                subtitle=f'{owner.username} created a new collection {instance.name}'
+            )

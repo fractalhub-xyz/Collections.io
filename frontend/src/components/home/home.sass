@@ -1,0 +1,213 @@
+@import '../common/variables.sass'
+$tab-size: 250px
+$tile-size: 200px
+
+body
+    background-color: $light-bg
+    color: $light-color
+
+    &.dark
+        background-color: $dark-bg
+        color: $dark-color
+
+.home
+    margin-top: 1.5rem
+    margin-left: 8rem
+    header
+
+    section
+        .followedCollections
+            border-top-left-radius: 30px
+            border-bottom-left-radius: 30px
+            padding: 20px
+            background: $light-bg
+            border-right: 30px solid $accent-color
+            border-left: 4px solid $accent-color
+            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+
+            .dark &
+                background: $dark-bg
+                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+
+            h4
+                color: #5b685e
+                font-size: 1.25rem
+                text-align: center
+
+            .tiles
+                display: flex
+                align-items: center
+                .tile
+                    height: $tile-size
+                    width: $tile-size
+                    margin: 25px
+                    background: $tile-loading-color
+                    border-radius: 10px
+                    animation: 4s ease infinite pulse
+
+                    @keyframes pulse
+                        0%
+                            background: $tile-loading-color
+                            transform: scale(1)
+
+                        25%
+                            background: darken($tile-loading-color, 50%)
+                            transform: scale(1.1)
+
+                        50%
+                            background: $tile-loading-color
+                            transform: scale(1)
+
+                    @for $i from 1 through 10
+                        &:nth-child(#{$i})
+                            animation-delay: $i * (1s / 10)
+            .cards
+                display: flex
+                align-items: center
+                flex-wrap: wrap
+
+                .card
+                    height: $tile-size
+                    width: $tile-size
+                    margin: 25px
+                    border-radius: 10px
+                    cursor: pointer
+                    overflow: hidden
+                    animation: 0.5s ease custom-fade
+                    animation-fill-mode: both
+
+                    @keyframes custom-fade
+                        from
+                            opacity: 0
+
+                        to
+                            opacity: 1
+
+                    @for $i from 1 through 10
+                        &:nth-child(#{$i})
+                            animation-delay: $i * (1s / 20)
+
+                    .more
+                        height: 100%
+                        width: 100%
+                        background: white
+                        transform: translateY(calc(#{$tile-size} * -1))
+                        transition: 0.3s
+                        color: black
+                        .created_by
+                            margin-left: 15px
+                            padding-top: 15px
+                            font-size: 0.8rem
+                        .owner
+                            margin-left: 15px
+                            font-size: 2rem
+                            text-transform: capitalize
+                            color: $accent-color
+                            &::before
+                                content: "@"
+                        .dark &
+                            background: rgb(29, 29, 29)
+                            color: white
+                    .cover
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        height: 100%
+                        width: 100%
+                        position:
+                        top: 0px
+                        left: 0px
+                        transform: translateY(calc(#{$tile-size} * -1))
+                        transition: 0.3s
+
+                        h4
+                            color: white
+
+                    &:hover
+                        .more
+                            transform: translateY(calc(#{$tile-size} * 0))
+                        .cover
+                            transform: translateY(calc(#{$tile-size} * 0))
+    footer
+        margin-top: 2rem
+        padding-right: calc(8rem - #{$side-nav-width})
+        .container-bg
+            height: 50vh
+            width: 100%
+            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+            border: 12px solid $light-bg
+            border-radius: $borderbox-radius
+            background: url(https://images.unsplash.com/photo-1590816911133-40f771f0ea7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80) center / cover
+            .letter
+                padding: 0 1rem
+                color: white
+                font-size: 4rem
+                letter-spacing: 0.7rem
+                font-weight: 100
+                background: rgba(0, 0, 0, 0.3)
+                height: 100%
+
+        .dark &
+            .container-bg
+                background: url(https://images.unsplash.com/photo-1572890117969-c2462841187a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80) center / cover
+                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                border: 12px solid $dark-bg
+
+.home-mobile
+    margin-top: 0.5rem
+    margin-left: 0
+    header
+
+    section
+        .followedCollections
+
+            .cards
+                display: flex
+                flex-wrap: wrap
+                justify-content: center
+
+                .card
+                    width: 40%
+                    margin: 1rem
+                    display: flex
+                    flex-direction: column
+                    box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+                    border-radius: 20px
+                    padding: 0.6rem 0.1rem
+                    .dark &
+                        box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+
+                    .cover
+                        border-radius: 10px
+                        margin: 0 auto
+                        margin-bottom: 0.6rem
+                        height: 130px
+                        width: 130px
+                        box-shadow: inset -2px -2px 7px $dark-sh-b, inset 2px 2px 7px $dark-sh-d
+                    .info
+                        margin: 0 0.6rem
+                        .name
+                            text-transform: uppercase
+                            font-weight: 600
+                            text-overflow: ellipsis
+                            overflow: hidden
+                        .by
+                            font-weight: 200
+                            display: inline
+                        .owner
+                            margin-left: 0.3rem
+                            color: $accent-color
+                            display: inline
+            .addbtn
+                margin: 0 auto
+                margin-top: 1.3rem
+                border-radius: 50%
+                margin-bottom: 20vh
+                height: 65px
+                width: 65px
+                cursor: pointer
+                color: $accent-color
+                box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+                .dark &
+                    box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+

@@ -1,0 +1,74 @@
+@import '../common/variables.sass'
+$nav-button: 60px
+
+.side-nav
+    position: fixed
+    .container
+        margin-top: 1.5rem
+        width: $side-nav-width
+        height: 92vh
+        border-radius: 0 $borderbox-radius 0 0
+        box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+        display: flex
+        flex-direction: column
+        align-items: center
+        .dark &
+           box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+        .navbtn
+            margin-top: 1.3rem
+            border-radius: 50%
+            height: calc( #{$nav-height} / 1.5)
+            width: calc( #{$nav-height} / 1.5)
+            cursor: pointer
+            color: grey
+            box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+
+            &:hover
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+            .dark &
+                box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+                &:hover
+                    box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+        .current
+            box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+            color: $accent-color
+        .add
+            background: $accent-color
+            color: $dark-bg
+            margin-top: 3rem
+            &:hover
+                box-shadow: none
+            .dark &
+                color: $light-bg
+                &:hover
+                    box-shadow: none
+             
+
+@media screen and (max-width: 800px)
+    .side-nav
+        top: none
+        bottom: -1%
+        width: 100%
+        z-index: 999999
+        .container
+            width: 100%
+            flex-direction: row
+            justify-content: space-evenly
+            align-items: center
+            background: white
+            height: 8vh
+            border-radius: $borderbox-radius $borderbox-radius 0 0 
+            box-shadow: none
+            .navbtn
+                margin-top: 0
+                box-shadow: none
+            .add
+                display: none
+        .dark &
+            .container
+                background: rgb(20, 20, 20)
+                box-shadow: none   
+                .navbtn
+                    box-shadow: none
+
+                
