@@ -40,6 +40,12 @@ export function postNewSnippet(data) {
 export function getPopularCollections(limit = 12) {
   return api.get("/collections/popular?limit=" + limit);
 }
+export function getPopularSnippets(limit = 12) {
+  return api.get("/snippets/popular?limit=" + limit);
+}
+export function getRandomTags(limit = 3) {
+  return api.get("/tags/random?limit=" + limit);
+}
 export function getFollowedCollections(limit = 6) {
   return api.get("/collections/followed?limit=" + limit);
 }

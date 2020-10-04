@@ -9,6 +9,13 @@
         padding: 1rem
         border-radius: $borderbox-radius
         box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+        height: 70vh
+        h1
+            margin: 0
+            font-size: 1.5rem
+            margin-bottom: 0.6rem
+            color: $accent-color
+            font-weight: 200
         .left-container
             border-radius: $borderbox-radius
             padding: 1rem
@@ -16,9 +23,6 @@
             box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
             border-radius:
             overflow-y: scroll
-            h1
-                margin: 0
-                margin-bottom: 1.2rem
             .pop-collections
                 display: flex
                 flex-wrap: wrap
@@ -32,7 +36,6 @@
                     box-shadow: inset -2px -2px 2px $dark-sh-b, inset 2px 2px 2px $dark-sh-d
                     .pop-collection
                         height: 100%
-                        width: 1005
                         cursor: pointer
                         display: flex
                         flex-direction: column
@@ -60,13 +63,50 @@
                 display: flex
                 justify-content: space-evenly
                 .top-left
-                    width: 65%
+                    width: 60%
                     box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
                     border-radius: $borderbox-radius
+                    padding: 0.7rem
+                    .pop-snippets
+                        height: calc( 100% -  2.9rem)
+                        overflow-y: scroll
+                        padding: 0.3rem
+                        .pop-snippet
+                            align-items: center
+                            display: flex
+                            box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+                            border-radius: 15px
+                            margin-bottom: 1rem
+                            padding: 0.3rem
+                            cursor: pointer
+                            &:hover
+                                box-shadow: inset -2px -2px 4px $light-sh-b, inset 2px 2px 4px $light-sh-d
+
+                            .mat-icon
+                                height: 40px
+                                width: 40px
+                                color: white
+                                border-radius: 50%
+                            .title
+                                color: $light-bg
+                                margin-left: 1rem
                 .top-right
-                    width: 30%
+                    width: 25%
                     box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
                     border-radius: $borderbox-radius
+                    padding: 1rem
+                    .random-tag
+                        box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
+                        border-radius: 15px
+                        margin-bottom: 1rem
+                        padding: 0.7rem
+                        cursor: pointer
+                        display: flex
+                        align-items: center
+                        .name
+                            margin-left: 0.6rem
+                        &:hover
+                            box-shadow: inset -2px -2px 4px $light-sh-b, inset 2px 2px 4px $light-sh-d
             .bottom
                 border-radius: $borderbox-radius
                 margin-top: 0.4rem
@@ -85,7 +125,93 @@
                 .top
                     .top-left
                         box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                        .pop-snippets
+                            .pop-snippet
+                                box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                                &:hover
+                                    box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
+
                     .top-right
                         box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                        .random-tag
+                            box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+                            &:hover
+                                box-shadow: inset -2px -2px 4px $dark-sh-b, inset 2px 2px 4px $dark-sh-d
                 .bottom
                     box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
+
+@media screen and (max-width: 800px)
+    .explore
+        margin-top: 0.5rem
+        margin-left: 0
+        padding: 0rem 0.7rem
+        .explore-container
+            flex-direction: column
+            height: auto
+            h1
+            .left-container
+                border-radius: $borderbox-radius
+                padding: 0.2rem
+                box-shadow: none
+                width: calc( 100% -  0.4rem)
+                .pop-collections
+                    display: flex
+                    flex-wrap: wrap
+                    justify-content: center
+                    .bg
+                        margin: 0.2rem 0.2rem
+                        height: 150px
+                        width: 150px
+                        border-radius: 15px
+                        overflow: hidden
+                        box-shadow: inset -2px -2px 2px $dark-sh-b, inset 2px 2px 2px $dark-sh-d
+                        .pop-collection
+                            height: 100%
+                            cursor: pointer
+                            display: flex
+                            flex-direction: column
+                            justify-content: flex-end
+                            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7))
+                            p
+                                margin-bottom: 1rem
+                                text-align: left
+                                margin: 1rem 0.2rem
+                                margin-left: 1rem
+                                color: white
+                                opacity: 1
+                                transition: 0.05s
+                                font-size: 0.8rem
+                                width: calc(100% - 0.4rem)
+                                text-overflow: ellipsis
+                                overflow: hidden
+                            &:hover
+                                background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7))
+                                p
+
+            .right-container
+                width: 100%
+                .top
+                    flex-wrap: wrap
+                    .top-left
+                        width: 100%
+                        margin-top: 1rem
+                        padding: 0.2rem
+                        box-shadow: none
+                    .top-right
+                        width: 100%
+                        margin-top: 1rem
+                        margin-bottom: 3rem
+                        padding: 0.2rem
+                        box-shadow: none
+                .bottom
+                    display: none
+
+            .dark &
+                .left-container
+                    box-shadow: none
+                .right-container
+                    .top
+                        .top-left
+                            box-shadow: none
+                        .top-right
+                            box-shadow: none

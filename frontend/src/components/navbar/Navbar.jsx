@@ -20,7 +20,7 @@ function Navbar() {
     debounce((value) => {
       history.push(`/search/${value}`);
     }, 500),
-    [],
+    []
   );
 
   const inputOnChange = (e) => {
