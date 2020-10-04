@@ -41,7 +41,7 @@ function AuthenticatedRoutes() {
         <Route path="/notifications" exact>
           <Notifications />
         </Route>
-        <Route path="/tag/:id">
+        <Route path="/tag/:tagname">
           <Tag />
         </Route>
         <Route path="/user/:username">

@@ -19,6 +19,7 @@ import {
   Security,
   NotInterested,
   Star,
+  Add,
 } from "@material-ui/icons";
 
 //modules
@@ -46,7 +47,7 @@ function Collection() {
   const [isFollowed, setIsFollowed] = useState(false);
 
   const [bg, setBg] = useState(
-    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271",
+    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
   );
 
   const coll_bg = {
@@ -170,6 +171,21 @@ function Collection() {
                     {tag.name}
                   </div>
                 ))}
+                <div
+                  className="addtag"
+                  onClick={() => {
+                    dispatch({
+                      type: "OPEN_FORM",
+                      form: "edit_tags",
+                      id: collection.id,
+                      prefill_data: {
+                        tags: collection.tags,
+                      },
+                    });
+                  }}
+                >
+                  <Add />
+                </div>
               </div>
               <div className="btn center" onClick={followCollection}>
                 {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}
@@ -383,6 +399,21 @@ function Collection() {
                     {tag.name}
                   </div>
                 ))}
+                <div
+                  className="addtag"
+                  onClick={() => {
+                    dispatch({
+                      type: "OPEN_FORM",
+                      form: "edit_tags",
+                      id: collection.id,
+                      prefill_data: {
+                        tags: collection.tags,
+                      },
+                    });
+                  }}
+                >
+                  <Add />
+                </div>
               </div>
               <div>
                 <div className="btn center" onClick={followCollection}>
