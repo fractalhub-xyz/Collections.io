@@ -72,6 +72,57 @@ def search_view(request):
     }, status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def search_all_view(request):
+    query = request.GET.get('query', '')
+    query = query.strip()
+    if query == '':
+        return Response({
+            'success': False,
+            'error': 'Bad params: Empty query'
+        }, status.HTTP_400_BAD_REQUEST)
+
+    MAX_LIMIT = 20
+
+    # Qs help construct OR sql statement.
+    # More about it: https://docs.djangoproject.com/en/3.0/topics/db/queries/#complex-lookups-with-q-objects
+
+    if query[0] == "!":
+        tags = Tag.objects.filter(name__icontains=query[1:])[:MAX_LIMIT]
+        result = {
+            'tags': TagSerializer(tags, many=True).data,
+        }
+    elif query[0] == ":":
+        colls = Collection.objects.filter(
+            Q(Q(name__icontains=query)
+              | Q(desc__icontains=query[1:])))[:MAX_LIMIT]
+        result = {
+            'collections': ShortCollectionSerialiser(colls, many=True).data,
+        }
+    elif query[0] == ">":
+        snips = Snippet.objects.filter(
+            Q(Q(title__icontains=query)
+              | Q(link__icontains=query[1:])))[:MAX_LIMIT]
+        result = {
+            'snippets': SnippetSerializer(snips, many=True).data,
+        }
+    elif query[0] == "@":
+        users = User.objects.filter(username__icontains=query[1:])[:MAX_LIMIT]
+        result = {
+            'users': ShortUserSerializer(users, many=True).data,
+        }
+    else:
+        return Response({
+            'success': False,
+            'error': 'No Specific choice provided'
+        }, status.HTTP_400_BAD_REQUEST)
+
+    return Response({
+        'success': True,
+        'result': result,
+    }, status.HTTP_200_OK)
+
+
 @api_view(['POST'])
 def login_view(request):
     username = request.POST.get('username', '')

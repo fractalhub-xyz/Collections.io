@@ -36,6 +36,7 @@ urlpatterns = [
     path('tag/<str:tag_name>', CollectionsForTagViewset.as_view()),
     # Others
     path('search', search_view),
+    path('search_all', search_all_view),
     path('login', auth.obtain_auth_token),
     path('logout', logout_view),
     path('register', UserCreateAPIView.as_view()),

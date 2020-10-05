@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { getSearchResults } from "../../helpers/api";
+import { getSearchResults, getSearchAllResults } from "../../helpers/api";
 import "./search.sass";
 import CollectionSearch from "./collectionSearch";
 import SnippetSearch from "./snippetSearch";
@@ -33,7 +33,6 @@ function Search() {
       try {
         setIsLoading(true);
         const response = await getSearchResults(params.search);
-        console.log("response", response);
 
         if (response.data.result.collections) {
           setCollectionMatches(response.data.result.collections);
@@ -51,17 +50,47 @@ function Search() {
           setUserMatches(response.data.result.users);
           console.log(response.data.result.users);
         }
-
+        setQuery(params.search);
         setIsLoading(false);
         setSuccess(true);
       } catch (error) {
         setError(error);
       }
     };
-
-    setQuery(params.search);
     search();
   }, [params]);
+
+  const get_all = async (q) => {
+    setCollectionMatches([]);
+    setSnippetMatches([]);
+    setTagMatches([]);
+    setUserMatches([]);
+    try {
+      setIsLoading(true);
+      const response = await getSearchAllResults(q);
+
+      if (response.data.result.collections) {
+        setCollectionMatches(response.data.result.collections);
+      }
+
+      if (response.data.result.snippets) {
+        setSnippetMatches(response.data.result.snippets);
+      }
+
+      if (response.data.result.tags) {
+        setTagMatches(response.data.result.tags);
+      }
+
+      if (response.data.result.users) {
+        setUserMatches(response.data.result.users);
+        console.log(response.data.result.users);
+      }
+      setIsLoading(false);
+      setSuccess(true);
+    } catch (eror) {
+      setError(error);
+    }
+  };
 
   // lifecycle functions
   useEffect(() => {
@@ -119,7 +148,13 @@ function Search() {
             <div>
               <div className="header-row">
                 <h2>Collections</h2>
-                <p>see all</p>
+                <p
+                  onClick={() => {
+                    get_all(`:${query}`);
+                  }}
+                >
+                  see all
+                </p>
               </div>
               <div>
                 {collectionMatches.map((collection) => (
@@ -135,7 +170,13 @@ function Search() {
             <div>
               <div className="header-row">
                 <h2>Snippets</h2>
-                <p>see all</p>
+                <p
+                  onClick={() => {
+                    get_all(`>${query}`);
+                  }}
+                >
+                  see all
+                </p>
               </div>
               <div>
                 {snippetMatches.map((snippet) => (
@@ -148,7 +189,13 @@ function Search() {
             <div>
               <div className="header-row">
                 <h2>Tags</h2>
-                <p>see all</p>
+                <p
+                  onClick={() => {
+                    get_all(`!${query}`);
+                  }}
+                >
+                  see all
+                </p>
               </div>
               <div>
                 {tagMatches.map((tag) => (
@@ -161,7 +208,13 @@ function Search() {
             <div>
               <div className="header-row">
                 <h2>Tags</h2>
-                <p>see all</p>
+                <p
+                  onClick={() => {
+                    get_all(`@${query}`);
+                  }}
+                >
+                  see all
+                </p>
               </div>
               <div>
                 {userMatches.map((user) => (
