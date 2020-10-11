@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { postLogin } from "../../helpers/api";
 
 function LoginForm({ setIsLogin }) {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, formState } = useForm();
   const [error, setError] = useState("");
   //setup
   let history = useHistory();
@@ -68,7 +68,11 @@ function LoginForm({ setIsLogin }) {
         {" "}
         New here? Click here to register!{" "}
       </div>
-      <button type="submit">Log In</button>
+      <button
+        disabled={formState.isSubmitting}
+        type="submit">
+            {formState.isSubmitting ? "Loading..." : "Log In" }
+        </button>
     </form>
   );
 }

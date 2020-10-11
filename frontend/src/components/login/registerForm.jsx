@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { postRegister } from "../../helpers/api";
 
 function RegisterForm({ setIsLogin }) {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, formState } = useForm();
 
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -87,7 +87,11 @@ function RegisterForm({ setIsLogin }) {
         {" "}
         Already have an account? Click here to login!{" "}
       </div>
-      <button type="submit">Register</button>
+      <button
+        disabled={formState.isSubmitting}
+        type="submit">
+            {formState.isSubmitting ? "Loading..." : "Register" }
+        </button>
     </form>
   );
 }

@@ -1,5 +1,15 @@
 @import '../common/variables.sass'
 $card-dim: 210px
+.error-page
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 2rem
+    margin-top: 40vh
+    flex-direction: column
+    text-align: center
+    margin-left: 8rem
+
 .snippet-view
     margin-top: 1.5rem
     margin-left: calc( #{$side-nav-width})
@@ -118,8 +128,6 @@ $card-dim: 210px
                 transition: 0.3s
                 &:hover
                     transform: scale(1.1)
-            .dark &
-
         .video
             background: url(https://ssdm.co/wp-content/uploads/2017/07/youtube_pattern.png) center / cover
         .link
@@ -187,7 +195,6 @@ $card-dim: 210px
                                 color: $accent-color
                             .count
                                 margin-right: 0.5rem
-                    .content
                     .edit-content
                         input
                             width: 100%
@@ -241,6 +248,9 @@ $card-dim: 210px
                 box-shadow: -2px -2px 4px $dark-sh-b, 2px 2px 4px $dark-sh-d
 
 @media screen and (max-width: 800px)
+    .error-page
+        margin-left: 0rem
+        margin-top: 20vh
     .snippet-view
         margin-top: 0.5rem
         margin-left: 0

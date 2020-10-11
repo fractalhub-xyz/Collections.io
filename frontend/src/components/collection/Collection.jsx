@@ -20,6 +20,7 @@ import {
   NotInterested,
   Star,
   Add,
+  Report,
 } from "@material-ui/icons";
 
 //modules
@@ -35,7 +36,7 @@ function Collection() {
   const [isOwner, setIsOwner] = useState(false);
   const [tags, setTags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [getError, setGetError] = useState(null);
+  const [isPrivate, setIsPrivate] = useState(false);
   const [filter, setFilter] = useState("");
   const [searchText, setSearchText] = useState("");
 
@@ -74,8 +75,10 @@ function Collection() {
         setSnippets(response.data.snippets);
         setTags(response.data.tags);
       } catch (error) {
+        if (error.response.status === 403) {
+          setIsPrivate(true)
+        }
         console.error(error.response.data);
-        setGetError(`Failed to load collection with ID: ${params.id}`);
       }
       setIsLoading(false);
     }
@@ -131,6 +134,13 @@ function Collection() {
   const articles = snippets.filter((snip) => snip.type_of === "article").length;
   const links = snippets.filter((snip) => snip.type_of === "link").length;
   const videos = snippets.filter((snip) => snip.type_of === "video").length;
+
+  if (isPrivate) {
+    return <main className="error-page">
+      <Report fontSize="large" />
+      <div>You can't access this collection</div>
+    </main>
+  }
 
   return (
     <div>

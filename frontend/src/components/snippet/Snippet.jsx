@@ -18,6 +18,7 @@ import {
   Favorite,
   PlayArrow,
   NavigateBefore,
+  Report
 } from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
 import { useStateValue } from "../../helpers/stateProvider";
@@ -31,7 +32,7 @@ function Snippet() {
   const [totLikes, setTotLikes] = useState(0);
   const [isLoadingSnippet, setIsLoadingSnippet] = useState(true);
   const [isLoadingComments, setIsLoadingComments] = useState(true);
-  const [getError, setGetError] = useState(null);
+  const [isPrivate, setIsPrivate] = useState(false);
   const [collection, setCollection] = useState({});
   const [otherSnippets, setOtherSnippets] = useState([]);
   const [updateComments, setUpdateComments] = useState(false);
@@ -67,7 +68,9 @@ function Snippet() {
         setSnippet(response.data);
       } catch (error) {
         console.error(error);
-        setGetError(`Failed to load snippet with ID: ${params.id}`);
+        if (error.response.status === 403) {
+          setIsPrivate(true)
+        }
       }
     }
     async function fetchComments() {
@@ -77,9 +80,6 @@ function Snippet() {
         setComments(response.data);
       } catch (error) {
         console.error(error);
-        setGetError(
-          `Failed to load comments for snippet with ID: ${params.id}`
-        );
         setIsLoadingComments(false);
       }
     }
@@ -100,9 +100,6 @@ function Snippet() {
         setComments(response.data);
       } catch (error) {
         console.error(error);
-        setGetError(
-          `Failed to load comments for snippet with ID: ${params.id}`
-        );
         setIsLoadingComments(false);
       }
     }
@@ -178,6 +175,13 @@ function Snippet() {
       console.log(error);
     }
   };
+
+  if (isPrivate) {
+    return <main className="error-page">
+      <Report fontSize="large" />
+      <div>You can't access this collection</div>
+    </main>
+  }
 
   return (
     <main className="snippet-view">

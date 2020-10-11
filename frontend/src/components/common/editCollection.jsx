@@ -64,7 +64,7 @@ function EditCollection() {
     >
       <header />
       <section>
-        <h1>Create new collection</h1>
+        <h1>Edit collection</h1>
         <label>Name</label>
         <input
           name="name"
