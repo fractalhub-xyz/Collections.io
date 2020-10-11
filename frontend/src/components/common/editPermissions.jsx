@@ -5,10 +5,12 @@ import { postCollectionSettings } from "../../helpers/api";
 import { useForm } from "react-hook-form";
 import { useStateValue } from "../../helpers/stateProvider";
 import { Public, Lock } from "@material-ui/icons";
+import SubmitButton from "./submitBtn";
 
 function EditPermissions() {
   const [{ prefill_data, id }, dispatch] = useStateValue();
   const [permission, setPermission] = useState(prefill_data.permission);
+  const [isLoading, setIsLoading] = useState(false)
   const [allowed_users, setAllowed_users] = useState(
     prefill_data.allowed_users
   );
@@ -24,6 +26,7 @@ function EditPermissions() {
       settingsPayload = { permission };
     }
     try {
+      setIsLoading(true)
       await postCollectionSettings(id, settingsPayload);
       console.log("Successfully updated collection");
       dispatch({ type: "CLOSE_MODAL" });
@@ -35,6 +38,7 @@ function EditPermissions() {
       console.log("Failed to updated a collection");
       setError(error.response.data.detail);
     }
+    setIsLoading(true)
   };
 
   return (
@@ -105,7 +109,11 @@ function EditPermissions() {
           </div>
         )}
 
-        <button onClick={editPermissionsHandle}>Submit</button>
+        <SubmitButton
+          isSubmitting={isLoading}
+          onclick={editPermissionsHandle}>
+            Submit
+        </SubmitButton>
       </section>
       <footer />
     </form>

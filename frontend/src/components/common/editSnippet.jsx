@@ -6,11 +6,13 @@ import { useForm } from "react-hook-form";
 import { deleteSnippet, editSnippet } from "../../helpers/api";
 import { Delete, Description, Link, Mic, Movie } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
+import SubmitButton from './submitBtn'
 
 function EditSnippet() {
   const [{ id, prefill_data }, dispatch] = useStateValue();
+  const [isDeleting, setIsDeleting] = useState(false)
   const form_data = prefill_data.form_data;
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, formState } = useForm({
     defaultValues: form_data,
   });
   const [type, setType] = useState(prefill_data.type);
@@ -43,11 +45,13 @@ function EditSnippet() {
   const deleteSelected = async (e) => {
     e.preventDefault();
     try {
+      setIsDeleting(true)
       await deleteSnippet(id.snip_id);
       dispatch({ type: "CLOSE_MODAL" });
       console.log("Successfully removed snippet from collection");
       history.push(`/collection/${id.coll_id}`);
     } catch (error) {
+      setIsDeleting(false)
       console.log(error.response.data);
       setError(error.response.data);
     }
@@ -68,8 +72,8 @@ function EditSnippet() {
             },
           })}
         />
-        {errors?.title?.message && (
-          <p className="error-message">{errors.title.message}</p>
+        { formState?.title?.message && (
+          <p className="error-message">{ formState.title.message}</p>
         )}
         <label>Link</label>
         <textarea
@@ -142,15 +146,16 @@ function EditSnippet() {
           </div>
         )}
         <div className="buttons">
-          <button className="edit-button" type="submit">
+          <SubmitButton isSubmitting={formState.isSubmitting || isDeleting} classes="edit-button">
             Save
-          </button>
+          </SubmitButton>
           <button
             onClick={deleteSelected}
             className="delete-button"
             type="submit"
+            disabled={isDeleting}
           >
-            <Delete fontSize="small" />
+            <Delete fontSize="small"/>
           </button>
         </div>
       </section>

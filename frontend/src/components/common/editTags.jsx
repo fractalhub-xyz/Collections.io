@@ -4,13 +4,14 @@ import { postTagsToCollection } from "../../helpers/api";
 //modules
 import { useForm } from "react-hook-form";
 import { useStateValue } from "../../helpers/stateProvider";
+import SubmitButton from "./submitBtn"
 
 function EditTags() {
   const [{ prefill_data, id }, dispatch] = useStateValue();
   const [error, setError] = useState("");
   const prevTags = prefill_data.tags;
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, formState,er } = useForm({
     defaultValues: {
       tags: prevTags,
     },
@@ -47,11 +48,10 @@ function EditTags() {
         <h1>Edit Tags</h1>
         <label>Tags</label>
         <input name="tags" ref={register()} />
-        <div className="buttons">
-          <button className="edit-button" type="submit">
-            Save
-          </button>
-        </div>
+
+        <SubmitButton isSubmitting={formState.isSubmitting} >
+          Save
+        </SubmitButton>
       </section>
       <footer />
     </form>

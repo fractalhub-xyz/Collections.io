@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 //api
 import { postNewSnippet } from "../../helpers/api";
 import { Description, Link, Mic, Movie } from "@material-ui/icons";
+import SubmitButton from './submitBtn'
 
 function CreateSnippet() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, formState } = useForm();
   const [{ id }, dispatch] = useStateValue();
   const [type, setType] = useState("podcast");
   const [error, setError] = useState("");
@@ -122,7 +123,9 @@ function CreateSnippet() {
             </span>
           </div>
         )}
-        <button type="submit">Submit</button>
+        <SubmitButton isSubmitting={formState.isSubmitting}>
+          Create
+        </SubmitButton>
       </section>
       <footer />
     </form>

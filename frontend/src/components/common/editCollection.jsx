@@ -6,16 +6,20 @@ import { useForm } from "react-hook-form";
 import { useStateValue } from "../../helpers/stateProvider";
 import { Public, Lock, Delete } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
+import SubmitButton from './submitBtn'
 
 function EditCollection() {
   const [{ prefill_data, id }, dispatch] = useStateValue();
   const form_data = prefill_data.form_data;
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, formState } = useForm({
     defaultValues: form_data,
   });
   const [visibility, setVisiblity] = useState(prefill_data.visibility);
+  const [isDeleting, setIsDeleting] = useState(false)
   const [error, setError] = useState("");
   let history = useHistory();
+
+  console.log('FORM State', formState)
 
   const editCollectionHandle = async (data, e) => {
     e.preventDefault();
@@ -41,11 +45,13 @@ function EditCollection() {
   const deleteSelection = async (e) => {
     e.preventDefault();
     try {
+      setIsDeleting(true)
       await deleteCollection(id);
       history.push("/home");
       dispatch({ type: "CLOSE_MODAL" });
       console.log("Succesfull deleted Collection");
     } catch (error) {
+      setIsDeleting(false)
       console.log(error.response.data);
       setError(error.response.data);
     }
@@ -130,12 +136,13 @@ function EditCollection() {
           </div>
         </div>
         <div className="buttons">
-          <button className="edit-button" type="submit">
-            Save
-          </button>
+        <SubmitButton classes="edit-button" isSubmitting={formState.isSubmitting || isDeleting}>
+          Save
+        </SubmitButton>
           <button
             onClick={deleteSelection}
             className="delete-button"
+            disabled={isDeleting}
             type="submit"
           >
             <Delete fontSize="small" />

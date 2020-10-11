@@ -5,9 +5,10 @@ import { postNewCollection } from "../../helpers/api";
 import { useForm } from "react-hook-form";
 import { useStateValue } from "../../helpers/stateProvider";
 import { useHistory } from "react-router-dom";
+import SubmitButton from './submitBtn'
 
 function CreateCollection() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, formState } = useForm();
   const [, dispatch] = useStateValue();
   let history = useHistory();
   const [error, setError] = useState("");
@@ -27,6 +28,8 @@ function CreateCollection() {
       setError(error.response.data.detail);
     }
   };
+
+  console.log('Form state', formState)
 
   return (
     <form
@@ -77,7 +80,9 @@ function CreateCollection() {
             </span>
           </div>
         )}
-        <button type="submit">Submit</button>
+        <SubmitButton isSubmitting={formState.isSubmitting}>
+          Create
+        </SubmitButton>
       </section>
       <footer />
     </form>
