@@ -1,3 +1,5 @@
+import { DEFAULT_COVER_IMAGE } from './constants'
+
 /**
  * Helper to ease including conditional classes
  * 1. cx() => ""
@@ -26,3 +28,20 @@ export function cx(...args) {
 export function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
+
+export function getCoverForCollection(collection) {
+  const tags = collection.tags;
+  let coverImg = DEFAULT_COVER_IMAGE;
+
+  if (tags && tags.length) {
+    const randomTag = tags[getRandomInt(tags.length)];
+    const images = randomTag.image_urls.split(",");
+    if (images.length) {
+      coverImg = images[getRandomInt(images.length)];
+    }
+  }
+
+  return {
+    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${coverImg}) center / cover`,
+  };
+};

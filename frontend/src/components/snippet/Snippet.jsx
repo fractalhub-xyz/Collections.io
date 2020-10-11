@@ -21,6 +21,7 @@ import {
 } from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
 import { useStateValue } from "../../helpers/stateProvider";
+import { getCoverForCollection } from "../../helpers/utils";
 
 function Snippet() {
   const [snippet, setSnippet] = useState({});
@@ -135,15 +136,6 @@ function Snippet() {
     }
   }, [snippet]);
 
-  const [bg, setBg] = useState(
-    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
-  );
-
-  const coll_bg = {
-    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${bg}) center / cover`,
-    // background: `url(${bg}) center / cover`,
-  };
-
   let history = useHistory();
 
   useEffect(() => {
@@ -152,14 +144,6 @@ function Snippet() {
       setTotLikes(snippet.hearts.length);
     }
   }, [snippet, user]);
-
-  useEffect(() => {
-    if (collection.tags) {
-      if (collection.tags[0]) {
-        setBg(collection.tags[0].image_urls);
-      }
-    }
-  }, [collection]);
 
   //functions
   const submitNewComment = async (e) => {
@@ -199,7 +183,7 @@ function Snippet() {
     <main className="snippet-view">
       <header>
         <div className="bigbox">
-          <div className="card" style={coll_bg}></div>
+          <div className="card" style={getCoverForCollection(collection)}></div>
           <div className="info">
             <div className="type">{snippet.type_of}</div>
             <div className="name">{snippet.title}</div>

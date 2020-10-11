@@ -7,25 +7,7 @@ import { useHistory } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { Add } from "@material-ui/icons";
 import { useStateValue } from "../../helpers/stateProvider";
-import { DEFAULT_COVER_IMAGE } from "../../helpers/constants";
-import { getRandomInt } from "../../helpers/utils";
-
-const getCoverForCollection = (collection) => {
-  const tags = collection.tags;
-  let coverImg = DEFAULT_COVER_IMAGE;
-
-  if (tags.length) {
-    const randomTag = tags[getRandomInt(tags.length)];
-    const images = randomTag.image_urls.split(",");
-    if (images.length) {
-      coverImg = images[getRandomInt(images.length)];
-    }
-  }
-
-  return {
-    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${coverImg}) center / cover`,
-  };
-};
+import { getCoverForCollection } from "../../helpers/utils";
 
 function Home() {
   //states

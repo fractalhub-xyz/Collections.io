@@ -25,6 +25,7 @@ import {
 //modules
 import { useHistory, useParams } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
+import { getCoverForCollection } from "../../helpers/utils";
 
 function Collection() {
   //states
@@ -45,15 +46,6 @@ function Collection() {
   //flags
   const [isWhitelist, setIsWhitelist] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
-
-  const [bg, setBg] = useState(
-    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271",
-  );
-
-  const coll_bg = {
-    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${bg}) center / cover`,
-    // background: `url(${bg}) center / cover`,
-  };
 
   //global states
   const [{ refresh }, dispatch] = useStateValue();
@@ -114,12 +106,6 @@ function Collection() {
       //
       setTotFollowers(collection.followers.length);
     }
-    if (collection.tags) {
-      if (collection.tags[0]) {
-        console.log("tag", collection.tags[0]);
-        setBg(collection.tags[0].image_urls);
-      }
-    }
   }, [collection, user]);
 
   //functions
@@ -151,7 +137,7 @@ function Collection() {
       {!isMobile ? (
         <main className="collection">
           <header>
-            <div className="card" style={coll_bg}></div>
+            <div className="card" style={getCoverForCollection(collection)}></div>
             <div className="info">
               <div className="type">COLLECTION</div>
               <div className="name">{collection.name}</div>
@@ -342,7 +328,7 @@ function Collection() {
       ) : (
         <main className="collection-mobile">
           <header>
-            <div className="card" style={coll_bg}></div>
+            <div className="card" style={getCoverForCollection(collection)}></div>
             <div className="selects">
               <div
                 className={filter === "podcast" ? "select current" : "select"}
