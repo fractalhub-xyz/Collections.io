@@ -8,13 +8,24 @@ import { useStateValue } from "../../helpers/stateProvider";
 function EditTags() {
   const [{ prefill_data, id }, dispatch] = useStateValue();
   const [error, setError] = useState("");
-  const form_data = prefill_data.form_data;
+  const prevTags = prefill_data.tags;
+
   const { register, handleSubmit, errors } = useForm({
-    defaultValues: form_data,
+    defaultValues: {
+      tags: prevTags,
+    },
   });
+
   const addTagHandler = async (data, e) => {
     e.preventDefault();
-    const payload = { tags: data.tags };
+    const tags = data.tags
+      .split(",")
+      .map((t) => t.trim())
+      .join(",");
+    const payload = {
+      tags,
+    };
+
     try {
       await postTagsToCollection(id, payload);
       dispatch({ type: "CLOSE_MODAL" });

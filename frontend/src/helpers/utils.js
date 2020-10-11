@@ -5,7 +5,7 @@
  * 3. cx({ "pha": true, "bet": false, "cal": true }) => "pha cal"
  * 4. cx("ga", { "pha": true, "bet": false, "cal": true }) => "ga pha cal"
  */
-export default function cx(...args) {
+export function cx(...args) {
   if (!args.length) {
     return "";
   }
@@ -21,4 +21,8 @@ export default function cx(...args) {
   });
 
   return classes.join(" ");
+}
+
+export function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }

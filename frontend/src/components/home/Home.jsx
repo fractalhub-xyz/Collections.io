@@ -7,6 +7,25 @@ import { useHistory } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { Add } from "@material-ui/icons";
 import { useStateValue } from "../../helpers/stateProvider";
+import { DEFAULT_COVER_IMAGE } from "../../helpers/constants";
+import { getRandomInt } from "../../helpers/utils";
+
+const getCoverForCollection = (collection) => {
+  const tags = collection.tags;
+  let coverImg = DEFAULT_COVER_IMAGE;
+
+  if (tags.length) {
+    const randomTag = tags[getRandomInt(tags.length)];
+    const images = randomTag.image_urls.split(",");
+    if (images.length) {
+      coverImg = images[getRandomInt(images.length)];
+    }
+  }
+
+  return {
+    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${coverImg}) center / cover`,
+  };
+};
 
 function Home() {
   //states
@@ -16,14 +35,6 @@ function Home() {
   //globalstates\
   const [, dispatch] = useStateValue();
 
-  const [bg, setBg] = useState(
-    "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/392/thumb/930adc5ed398-hackmtyMLH_300x300.png?1467906271"
-  );
-
-  const mystyle = {
-    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${bg}) center / cover`,
-    // background: `url(${bg}) center / cover`,
-  };
   //init
   let history = useHistory();
 
@@ -44,6 +55,8 @@ function Home() {
     }
     fetchFollowedCollection();
   }, []);
+
+  console.log(followedCollections);
 
   return (
     <div>
@@ -74,7 +87,10 @@ function Home() {
                         <div className="created_by">Created by</div>
                         <div className="owner">{collection.owner}</div>
                       </div>
-                      <div className="cover" style={mystyle}>
+                      <div
+                        className="cover"
+                        style={getCoverForCollection(collection)}
+                      >
                         <h4>{collection.name}</h4>
                       </div>
                     </div>
@@ -113,7 +129,10 @@ function Home() {
                         history.push(`/collection/${collection.id}`);
                       }}
                     >
-                      <div className="cover" style={mystyle} />
+                      <div
+                        className="cover"
+                        style={getCoverForCollection(collection)}
+                      />
                       <div className="info">
                         <div className="name">{collection.name}</div>
                         <div className="by">by</div>
