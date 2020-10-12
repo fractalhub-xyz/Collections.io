@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./home.sass";
 //api
-import { getFollowedCollections } from "../../helpers/api";
+import {
+  getFollowedCollections,
+  getAllFollowedCollections,
+} from "../../helpers/api";
 //componentss
 import { useHistory } from "react-router-dom";
 import { isMobile } from "react-device-detect";
-import { Add } from "@material-ui/icons";
+import { Add, AmpStories } from "@material-ui/icons";
 import { useStateValue } from "../../helpers/stateProvider";
 import { getCoverForCollection } from "../../helpers/utils";
 
@@ -14,29 +17,46 @@ function Home() {
   const [followedCollections, setFollowedCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [getError, setGetError] = useState(null);
+  const [showall, setShowall] = useState(false);
   //globalstates\
   const [, dispatch] = useStateValue();
 
   //init
   let history = useHistory();
 
-  //mount
   useEffect(() => {
-    console.log("[RENDERING] >> Home ");
-    async function fetchFollowedCollection() {
-      console.log("[GET] >> FollowedCollections");
-      setIsLoading(true);
-      try {
-        const response = await getFollowedCollections();
-        setFollowedCollections(response.data);
-      } catch (error) {
-        console.log(`[ERROR] >> ${error.response}`);
-        setGetError("Error communicating with server");
+    if (showall) {
+      async function fetchAllFollowedCollection() {
+        console.log("[GET] >> FollowedCollections");
+        setIsLoading(true);
+        try {
+          const response = await getAllFollowedCollections();
+          setFollowedCollections(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.log(`[ERROR] >> ${error.response}`);
+          setGetError("Error communicating with server");
+        }
+        setIsLoading(false);
       }
-      setIsLoading(false);
+      fetchAllFollowedCollection();
+    } else {
+      console.log("[RENDERING] >> Home ");
+      async function fetchFollowedCollection() {
+        console.log("[GET] >> FollowedCollections");
+        setIsLoading(true);
+        try {
+          const response = await getFollowedCollections();
+          setFollowedCollections(response.data);
+        } catch (error) {
+          console.log(`[ERROR] >> ${error.response}`);
+          setGetError("Error communicating with server");
+        }
+        setIsLoading(false);
+      }
+      fetchFollowedCollection();
     }
-    fetchFollowedCollection();
-  }, []);
+  }, [showall]);
 
   console.log(followedCollections);
 
@@ -44,7 +64,17 @@ function Home() {
     <div>
       {!isMobile ? (
         <main className="home">
-          <header></header>
+          <header>
+            <div className="see-all">
+              <button
+                onClick={() => {
+                  setShowall(!showall);
+                }}
+              >
+                {showall ? "show less" : "show more"}
+              </button>
+            </div>
+          </header>
           <section>
             <div className="followedCollections">
               {isLoading ? (
@@ -124,16 +154,27 @@ function Home() {
                   ))}
                 </div>
               )}
-              <div
-                className="addbtn center"
-                onClick={() => {
-                  dispatch({
-                    type: "OPEN_FORM",
-                    form: "create_collection",
-                  });
-                }}
-              >
-                <Add />
+              <div className="buttons">
+                <div
+                  className="addbtn center"
+                  onClick={() => {
+                    dispatch({
+                      type: "OPEN_FORM",
+                      form: "create_collection",
+                    });
+                  }}
+                >
+                  <Add />
+                </div>
+                <div
+                  className="addbtn center"
+                  onClick={() => {
+                    setShowall(!showall);
+                  }}
+                >
+                  <p>{showall ? "show less" : "show more"}</p>
+                  {/* <AmpStories /> */}
+                </div>
               </div>
               {getError && <div>{getError}</div>}
             </div>

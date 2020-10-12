@@ -12,6 +12,28 @@ body
 .home
     margin-top: 1.5rem
     margin-left: 8rem
+    header
+        display: flex
+        margin-bottom: 1rem
+        flex-direction: row-reverse
+        button
+            margin-right: 1rem
+            color: $accent-color
+            border: none
+            background: none
+            padding: 0.4rem 1.2rem
+            box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 10px $light-sh-d
+            cursor: pointer
+            border-radius: 35px
+            &:hover
+                box-shadow: inset -3px -3px 10px $light-sh-b, inset 3px 3px 18px $light-sh-d
+
+        .dark &
+            button
+                box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 10px $dark-sh-d
+                &:hover
+                    box-shadow: inset -3px -3px 10px $dark-sh-b, inset 3px 3px 18px $dark-sh-d
+
     section
         .followedCollections
             border-top-left-radius: 30px
@@ -195,15 +217,22 @@ body
                             margin-left: 0.3rem
                             color: $accent-color
                             display: inline
-            .addbtn
-                margin: 0 auto
+
+            .buttons
                 margin-top: 1.3rem
-                border-radius: 50%
                 margin-bottom: 20vh
-                height: 65px
-                width: 65px
-                cursor: pointer
-                color: $accent-color
-                box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
-                .dark &
-                    box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d
+                display: flex
+                justify-content: space-around
+                .addbtn
+                    margin: 0 auto
+                    border-radius: 50%
+                    height: 65px
+                    width: 65px
+                    cursor: pointer
+                    color: $accent-color
+                    box-shadow: -3px -3px 10px $light-sh-b, 3px 3px 10px $light-sh-d
+                    text-align: center
+                    font-size: 0.9rem
+                    padding: 0.2rem
+                    .dark &
+                        box-shadow: -3px -3px 10px $dark-sh-b, 3px 3px 10px $dark-sh-d

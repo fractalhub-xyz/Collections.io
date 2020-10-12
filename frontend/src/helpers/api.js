@@ -49,6 +49,9 @@ export function getRandomTags(limit = 3) {
 export function getFollowedCollections(limit = 6) {
   return api.get("/collections/followed?limit=" + limit);
 }
+export function getAllFollowedCollections(limit = 9999) {
+  return api.get("/collections/followed?limit=" + limit);
+}
 export function getCollectionFromID(id) {
   return api.get(`/collections/${id}`);
 }
