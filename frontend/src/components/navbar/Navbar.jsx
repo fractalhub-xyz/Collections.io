@@ -46,21 +46,13 @@ function Navbar() {
   return (
     <main className="navbar-desk">
       <div className="container-left">
-        <p>COLLECTIONS</p>
+        <img src={logo} alt="logo" className="colelctions-logo" />
         <div className="searchbox">
           <Search />
           <input placeholder="Search" onChange={inputOnChange} />
         </div>
       </div>
       <div className="container-right">
-        {/* <div
-          className="btn center hide"
-          onClick={() => {
-            history.push("/");
-          }}
-        >
-          <VoiceOverOff />
-        </div> */}
         <Toggle
           icons={false}
           onChange={toggleTheme}

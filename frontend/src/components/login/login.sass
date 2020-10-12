@@ -9,10 +9,18 @@ $form-font: 1.6rem
     display: flex
     header
         width: 60%
-        font-size: 3rem
-        font-weight: 100
+        
+        overflow: hidden
+        background: url("../../assets/svgs/Logo.png") center
     section
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
         width: 40%
+        p
+            font-size: 3rem
+            font-weight: 100
         form
             display: flex
             flex-direction: column
@@ -49,7 +57,7 @@ $form-font: 1.6rem
                 color: red
                 font-size: 0.8rem
                 margin: 0
-            
+
             .err
                 color: red
                 text-align: center
@@ -91,8 +99,8 @@ $form-font: 1.6rem
         flex-direction: column
         width: 100%
         header
-            width: 100%
             margin-top: 1rem
+            .collections-logo
         section
             margin-top: 1rem
             width: 100%

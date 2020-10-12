@@ -4,9 +4,7 @@ import "./login.sass";
 import LoginForm from "./loginForm";
 import RegisterForm from "./registerForm";
 import { useStateValue } from "../../helpers/stateProvider";
-import Toggle from "react-toggle";
-// import cx from "../../helpers/cx";
-
+import logo from "../../assets/svgs/Logo.png";
 function Login() {
   const [, dispatch] = useStateValue();
   const [isLogin, setIsLogin] = useState(true);
@@ -19,10 +17,9 @@ function Login() {
   return (
     <main className="login">
       <header className="center">
-        COLLECTIONS
       </header>
       <section className="center">
-
+        <p>COLLECTIONS</p>
         {isLogin ? (
           <LoginForm setIsLogin={setIsLogin} />
         ) : (
