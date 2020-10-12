@@ -8,7 +8,7 @@ import {
 //componentss
 import { useHistory } from "react-router-dom";
 import { isMobile } from "react-device-detect";
-import { Add, AmpStories } from "@material-ui/icons";
+import { Add, ExpandMore, ExpandLess } from "@material-ui/icons";
 import { useStateValue } from "../../helpers/stateProvider";
 import { getCoverForCollection } from "../../helpers/utils";
 
@@ -172,8 +172,7 @@ function Home() {
                     setShowall(!showall);
                   }}
                 >
-                  <p>{showall ? "show less" : "show more"}</p>
-                  {/* <AmpStories /> */}
+                  {showall ? <ExpandMore /> : <ExpandLess />}
                 </div>
               </div>
               {getError && <div>{getError}</div>}
