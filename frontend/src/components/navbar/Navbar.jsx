@@ -66,6 +66,13 @@ function Navbar() {
           onChange={toggleTheme}
           defaultChecked={theme === "dark"}
         />
+        <p
+          onClick={() => {
+            history.push(`/user/${localStorage.getItem("user")}`);
+          }}
+        >
+          {localStorage.getItem("user")}
+        </p>
         <div
           className="usericon"
           onClick={() => {
