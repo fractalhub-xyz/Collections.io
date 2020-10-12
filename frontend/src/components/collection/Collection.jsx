@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./collection.sass";
+import axios from "axios";
 //api
 import { getCollectionFromID, postFollowCollection } from "../../helpers/api";
 //components
@@ -39,6 +40,8 @@ function Collection() {
   const [isPrivate, setIsPrivate] = useState(false);
   const [filter, setFilter] = useState("");
   const [searchText, setSearchText] = useState("");
+  const [quote, setQoute] = useState("");
+  const [author, setAuthor] = useState("");
 
   let history = useHistory();
   //misc
@@ -76,11 +79,18 @@ function Collection() {
         setTags(response.data.tags);
       } catch (error) {
         if (error.response.status === 403) {
-          setIsPrivate(true)
+          setIsPrivate(true);
         }
         console.error(error.response.data);
       }
       setIsLoading(false);
+      try {
+        const response = await axios.get("https://quotes.rest/qod?language=en");
+        setAuthor(response.data.contents.quotes[0].author);
+        setQoute(response.data.contents.quotes[0].quote);
+      } catch (error) {
+        console.error(error);
+      }
     }
     fetchCollection();
     dispatch({
@@ -134,13 +144,15 @@ function Collection() {
   const articles = snippets.filter((snip) => snip.type_of === "article").length;
   const links = snippets.filter((snip) => snip.type_of === "link").length;
   const videos = snippets.filter((snip) => snip.type_of === "video").length;
-  const total = podcasts + articles + links + videos
+  const total = podcasts + articles + links + videos;
 
   if (isPrivate) {
-    return <main className="error-page">
-      <Report fontSize="large" />
-      <div>You can't access this collection</div>
-    </main>
+    return (
+      <main className="error-page">
+        <Report fontSize="large" />
+        <div>You can't access this collection</div>
+      </main>
+    );
   }
 
   return (
@@ -148,7 +160,10 @@ function Collection() {
       {!isMobile ? (
         <main className="collection">
           <header>
-            <div className="card" style={getCoverForCollection(collection)}></div>
+            <div
+              className="card"
+              style={getCoverForCollection(collection)}
+            ></div>
             <div className="info">
               <div className="type">COLLECTION</div>
               <div className="name">{collection.name}</div>
@@ -332,14 +347,20 @@ function Collection() {
               ))}
             </div>
             <div className="highlight">
-              <div className="container"></div>
+              <div className="container">
+                <div className="quote">"{quote}"</div>
+                <div className="author">by {author}</div>
+              </div>
             </div>
           </section>
         </main>
       ) : (
         <main className="collection-mobile">
           <header>
-            <div className="card" style={getCoverForCollection(collection)}></div>
+            <div
+              className="card"
+              style={getCoverForCollection(collection)}
+            ></div>
             <div className="selects">
               <div
                 className={filter === "podcast" ? "select current" : "select"}
