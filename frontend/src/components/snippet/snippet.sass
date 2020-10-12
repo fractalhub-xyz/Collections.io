@@ -207,7 +207,7 @@ $card-dim: 210px
             border: 6px solid $light-bg
             box-shadow: -2px -2px 4px $light-sh-b, 2px 2px 4px $light-sh-d
             width: 30%
-            background: $accent-color
+            background: #5568d6
             min-height: 60vh
             border-radius: $borderbox-radius $borderbox-radius 0 0
             padding: 0.7rem
@@ -237,6 +237,14 @@ $card-dim: 210px
                 @for $i from 1 through 10
                     &:nth-child(#{$i})
                         background: rgba(0, 0, 0, $i*0.2)
+            .pod:hover
+                background: #5c2a9d
+            .art:hover
+                background: #ea6227
+            .vid:hover
+                background: #ff414d
+            .lin:hover
+                sbackground: #55D6BE
 
         .dark &
             .comments

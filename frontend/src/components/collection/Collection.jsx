@@ -26,7 +26,7 @@ import {
 //modules
 import { useHistory, useParams } from "react-router-dom";
 import { useStateValue } from "../../helpers/stateProvider";
-import { getCoverForCollection } from "../../helpers/utils";
+import { getCoverForCollection, setLen } from "../../helpers/utils";
 
 function Collection() {
   //states
@@ -134,6 +134,7 @@ function Collection() {
   const articles = snippets.filter((snip) => snip.type_of === "article").length;
   const links = snippets.filter((snip) => snip.type_of === "link").length;
   const videos = snippets.filter((snip) => snip.type_of === "video").length;
+  const total = podcasts + articles + links + videos
 
   if (isPrivate) {
     return <main className="error-page">
@@ -256,10 +257,10 @@ function Collection() {
                 />
               </div>
               <div className="lines">
-                <div className="line c1"></div>
-                <div className="line c2"></div>
-                <div className="line c3"></div>
-                <div className="line c4"></div>
+                <div style={setLen(podcasts, total)} className="line c1"></div>
+                <div style={setLen(articles, total)} className="line c2"></div>
+                <div style={setLen(videos, total)} className="line c3"></div>
+                <div style={setLen(links, total)} className="line c4"></div>
               </div>
             </div>
             <div className="selects">
@@ -287,7 +288,7 @@ function Collection() {
                   setFilter("link");
                 }}
               >
-                <Link fontSize="medium" className="mat-icon a3" />
+                <Link fontSize="medium" className="mat-icon a4" />
                 <p>{links}</p>
               </div>
               <div
@@ -296,7 +297,7 @@ function Collection() {
                   setFilter("video");
                 }}
               >
-                <Movie fontSize="medium" className="mat-icon a4" />
+                <Movie fontSize="medium" className="mat-icon a3" />
                 <p>{videos}</p>
               </div>
             </div>
@@ -364,7 +365,7 @@ function Collection() {
                   setFilter("link");
                 }}
               >
-                <Link fontSize="medium" className="mat-icon a3" />
+                <Link fontSize="medium" className="mat-icon a4" />
                 <p>{links}</p>
               </div>
               <div
@@ -373,7 +374,7 @@ function Collection() {
                   setFilter("video");
                 }}
               >
-                <Movie fontSize="medium" className="mat-icon a4" />
+                <Movie fontSize="medium" className="mat-icon a3" />
                 <p>{videos}</p>
               </div>
             </div>

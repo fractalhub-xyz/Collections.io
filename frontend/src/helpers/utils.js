@@ -45,3 +45,9 @@ export function getCoverForCollection(collection) {
     background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${coverImg}) center / cover`,
   };
 };
+
+export function setLen(len, total) {
+  return {
+    width: `calc(${len/total*84}% + 4%)` 
+  }
+}

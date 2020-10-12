@@ -8,7 +8,17 @@ function OtherSnippets({ snip }) {
   let history = useHistory();
   return (
     <div
-      className="otsnippet"
+      className={
+        snip.type_of === "podcast"
+          ? "otsnippet pod"
+          : snip.type_of === "article"
+          ? "otsnippet art"
+          : snip.type_of === "video"
+          ? "otsnippet vid"
+          : snip.type_of === "link"
+          ? "otsnippet lin"
+          : null
+      }
       onClick={() => {
         history.push(`/snippet/${snip.id}`);
       }}

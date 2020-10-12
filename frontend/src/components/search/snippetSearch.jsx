@@ -8,13 +8,13 @@ function SnippetSearch({ snippet }) {
     <div
       className={
         snippet.type_of === "podcast"
-          ? "row c3"
+          ? "row c1"
           : snippet.type_of === "article"
-          ? "row c3"
+          ? "row c2"
           : snippet.type_of === "video"
           ? "row c3"
           : snippet.type_of === "link"
-          ? "row c3"
+          ? "row c4"
           : null
       }
       onClick={() => {
