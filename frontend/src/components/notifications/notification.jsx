@@ -49,7 +49,7 @@ function Notification({ notification, setRefresh, read }) {
             <Star />
           </div>
         ) : type === "PERMISSION_GRANTED" ? (
-          <div className="icon center c2">
+          <div className="icon center c6">
             {" "}
             <VerifiedUser />
           </div>
@@ -69,7 +69,7 @@ function Notification({ notification, setRefresh, read }) {
             <Comment />
           </div>
         ) : type === "NEW_FOLLOWER" ? (
-          <div className="icon center c6">
+          <div className="icon center c2">
             {" "}
             <AccountCircle />
           </div>

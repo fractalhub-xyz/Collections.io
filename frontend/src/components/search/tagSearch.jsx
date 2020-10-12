@@ -6,7 +6,7 @@ function TagSearch({ tag }) {
   let history = useHistory();
   return (
     <div
-      className="row c6"
+      className="row c8"
       onClick={() => {
         history.push(`/tag/${tag.name}`);
       }}

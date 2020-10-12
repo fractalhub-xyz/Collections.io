@@ -136,10 +136,10 @@ function Search() {
           alt="sh-lg"
         />
         <h1>Search</h1>
-        <p>Use !Tagname to search for tags</p>
-        <p>Use :Collectionname to search for Collections</p>
-        <p>Use Snippetname to search for Snippet</p>
-        <p>Use @Username to search for Users</p>
+        <p className="aa">Use :Collectionname to search for Collections</p>
+        <p className="a3">Use Snippetname to search for Snippet</p>
+        <p className="a8">Use !Tagname to search for tags</p>
+        <p className="a7">Use @Username to search for Users</p>
       </div>
       <div className="right">
         <h1>Results</h1>
@@ -150,7 +150,11 @@ function Search() {
                 <h2>Collections</h2>
                 <p
                   onClick={() => {
-                    get_all(`:${query}`);
+                    if (query[0] === "@") {
+                      get_all(`${query}`);
+                    } else {
+                      get_all(`:${query}`);
+                    }
                   }}
                 >
                   see all
@@ -172,7 +176,11 @@ function Search() {
                 <h2>Snippets</h2>
                 <p
                   onClick={() => {
-                    get_all(`>${query}`);
+                    if (query[0] === "@") {
+                      get_all(`${query}`);
+                    } else {
+                      get_all(`>${query}`);
+                    }
                   }}
                 >
                   see all
@@ -191,7 +199,11 @@ function Search() {
                 <h2>Tags</h2>
                 <p
                   onClick={() => {
-                    get_all(`!${query}`);
+                    if (query[0] === "@") {
+                      get_all(`${query}`);
+                    } else {
+                      get_all(`!${query}`);
+                    }
                   }}
                 >
                   see all
@@ -207,10 +219,14 @@ function Search() {
           {!!userMatches.length && (
             <div>
               <div className="header-row">
-                <h2>Tags</h2>
+                <h2>Users</h2>
                 <p
                   onClick={() => {
-                    get_all(`@${query}`);
+                    if (query[0] === "@") {
+                      get_all(`${query}`);
+                    } else {
+                      get_all(`@${query}`);
+                    }
                   }}
                 >
                   see all
