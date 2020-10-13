@@ -1,4 +1,4 @@
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import logout, authenticate
 from collection.models import *
 from collection.serializers import *
 from django.contrib.auth.models import User
@@ -122,23 +122,21 @@ def search_all_view(request):
         'result': result,
     }, status.HTTP_200_OK)
 
-
-@api_view(['POST'])
-def login_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return Response({
-            'success': True,
-            'token': f"Token {token}"
-        }, status.HTTP_200_OK)
-    else:
-        return Response({'success': False}, status.HTTP_401_UNAUTHORIZED)
-
-
 @api_view(['GET'])
 def logout_view(request):
     logout(request)
     return Response({'success': True}, status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def update_user_view(request):
+    username = request.data['username']
+    old_pass = request.data['old_pass']
+    new_pass = request.data['new_pass']
+    user = authenticate(username=username, password=old_pass)
+    if user is not None:
+        user.set_password(new_pass)
+        user.save()
+        return Response({'status': "changed password successfully"}, status.HTTP_200_OK)
+    else:
+        return Response({'status': "Credentials do not match user profile"}, status.HTTP_401_UNAUTHORIZED)

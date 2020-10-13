@@ -13,6 +13,7 @@ import OpenVideo from "./openVideo";
 import EditSnippet from "./editSnippet";
 import EditPermissions from "./editPermissions";
 import EditTags from "./editTags";
+import UpdateUser from "./updateUser";
 
 function Modal() {
   const [{ modal, form }, dispatch] = useStateValue();
@@ -26,6 +27,7 @@ function Modal() {
     edit_snippet: EditSnippet,
     open_video: OpenVideo,
     edit_tags: EditTags,
+    update_user: UpdateUser,
   };
 
   const closeModal = (e) => {

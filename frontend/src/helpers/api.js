@@ -31,6 +31,9 @@ export function postLogin(data) {
 export function postRegister(data) {
   return api.post("/register", data);
 }
+export function updateUser(data) {
+  return api.post("/update_user", data);
+}
 export function postNewCollection(data) {
   return api.post("/collections/", data);
 }
@@ -119,11 +122,3 @@ export function postUserFollow(user) {
   return api.post(`users/${user}/follow`);
 }
 
-export async function getQuote() {
-  try {
-    const response = await axios.get("/user?ID=12345");
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-}

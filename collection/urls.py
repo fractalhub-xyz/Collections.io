@@ -39,6 +39,8 @@ urlpatterns = [
     path('search_all', search_all_view),
     path('login', auth.obtain_auth_token),
     path('logout', logout_view),
+    path('update_user', update_user_view),
     path('register', UserCreateAPIView.as_view()),
     path('', include(router.urls))
+
 ]

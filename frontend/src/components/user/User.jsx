@@ -6,6 +6,7 @@ import { getUserFromID, postUserFollow } from "../../helpers/api";
 //modules
 import { useHistory, useParams } from "react-router-dom";
 import YourCollection from "./yourCollection";
+import { useStateValue } from "../../helpers/stateProvider";
 
 function User() {
   const params = useParams();
@@ -22,6 +23,7 @@ function User() {
 
   const [refresh, setRefresh] = useState(true);
 
+  const [, dispatch] = useStateValue();
   let history = useHistory();
 
   useEffect(() => {
@@ -112,7 +114,16 @@ function User() {
           </div>
           {user.username === localStorage.getItem("user") ? (
             <div>
-              <button>Edit Profile</button>
+              <button
+                onClick={() => {
+                  dispatch({
+                    type: "OPEN_FORM",
+                    form: "update_user",
+                  });
+                }}
+              >
+                Edit Profile
+              </button>
               <button
                 onClick={() => {
                   history.push("/");
