@@ -43,7 +43,6 @@ function Modal() {
   };
 
   const onEscapeclick = (e) => {
-    console.log(e.key, modal);
     if (formEl.current && e.key === "Escape") {
       closeModal();
     }
@@ -67,7 +66,7 @@ function Modal() {
         {SelectedForm ? <SelectedForm /> : "Error finding your form"}
       </div>
       <div className="close-modal" onClick={closeModal}>
-        <Close fontSize="medium" />
+        <Close fontSize="default" />
       </div>
     </div>
   );

@@ -4,13 +4,11 @@ import { updateUser } from "../../helpers/api";
 //modules
 import { useForm } from "react-hook-form";
 import { useStateValue } from "../../helpers/stateProvider";
-import { useHistory } from "react-router-dom";
 import SubmitButton from "./submitBtn";
 
 function UpdateUser() {
   const { register, handleSubmit, errors, formState } = useForm();
   const [, dispatch] = useStateValue();
-  let history = useHistory();
   const [error, setError] = useState("");
   const updateUserCreds = async (data, e) => {
     e.preventDefault();
@@ -21,7 +19,7 @@ function UpdateUser() {
         new_pass: data.new_pass,
       };
       try {
-        const response = await updateUser(payload);
+        await updateUser(payload);
         console.log("Successfully created new collection");
         dispatch({ type: "CLOSE_MODAL" });
       } catch (error) {

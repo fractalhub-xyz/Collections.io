@@ -48,7 +48,6 @@ function Search() {
 
         if (response.data.result.users) {
           setUserMatches(response.data.result.users);
-          console.log(response.data.result.users);
         }
         setQuery(params.search);
         setIsLoading(false);

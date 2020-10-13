@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./tag.sass";
 //API
 import { getCollectionsFromTag } from "../../helpers/api";
 import Tag2Collection from "./tag2Collection";
 
 function Tag() {
-  let history = useHistory();
   let params = useParams();
 
   const [tag, setTag] = useState(params.tagname);

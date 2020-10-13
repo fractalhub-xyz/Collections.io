@@ -10,7 +10,6 @@ import {
 import { useStateValue } from "../../helpers/stateProvider";
 import PopCollection from "./popCollection";
 import PopSnippet from "./PopSnippet";
-import { LocalOffer } from "@material-ui/icons";
 import RandomTag from "./randomTag";
 
 function Explore() {
@@ -90,7 +89,7 @@ function Explore() {
               <h1>Tags</h1>
               <div className="tags">
                 {randomTags.map((tag) => (
-                  <RandomTag id={tag.id} tag={tag} />
+                  <RandomTag key={tag.name} tag={tag} />
                 ))}
               </div>
             </div>

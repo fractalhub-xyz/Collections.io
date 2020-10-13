@@ -1,7 +1,7 @@
 import React from "react";
 import "./explore.sass";
 //icons
-import { Favorite, Mic, Description, Link, Movie } from "@material-ui/icons";
+import { Mic, Description, Link, Movie } from "@material-ui/icons";
 //modules
 import { useHistory } from "react-router-dom";
 
@@ -26,22 +26,22 @@ function PopSnippet({ snippet }) {
     >
       {snippet.type_of === "podcast" && (
         <div className="mat-icon center">
-          <Mic fontSize="medium" />
+          <Mic fontSize="default" />
         </div>
       )}
       {snippet.type_of === "article" && (
         <div className="mat-icon center">
-          <Description fontSize="medium" />
+          <Description fontSize="default" />
         </div>
       )}
       {snippet.type_of === "video" && (
         <div className="mat-icon center">
-          <Movie fontSize="medium" />
+          <Movie fontSize="default" />
         </div>
       )}
       {snippet.type_of === "link" && (
         <div className="mat-icon center">
-          <Link fontSize="medium" />
+          <Link fontSize="default" />
         </div>
       )}
       <div className="title">{snippet.title}</div>
@@ -59,22 +59,22 @@ export default PopSnippet;
 //       >
 //         {snippet.type_of === "podcast" && (
 //           <div className="mat-icon center c4">
-//             <Mic fontSize="medium" />
+//             <Mic fontSize="default" />
 //           </div>
 //         )}
 //         {snippet.type_of === "article" && (
 //           <div className="mat-icon center c2">
-//             <Description fontSize="medium" />
+//             <Description fontSize="default" />
 //           </div>
 //         )}
 //         {snippet.type_of === "video" && (
 //           <div className="mat-icon center c3">
-//             <Movie fontSize="medium" />
+//             <Movie fontSize="default" />
 //           </div>
 //         )}
 //         {snippet.type_of === "link" && (
 //           <div className="mat-icon center c1">
-//             <Link fontSize="medium" />
+//             <Link fontSize="default" />
 //           </div>
 //         )}
 //         <div className="info">

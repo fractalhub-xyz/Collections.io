@@ -17,7 +17,7 @@ function SnippetRow({ snippet }) {
   useEffect(() => {
     setIsLiked(snippet.hearts.includes(localStorage.getItem("user")));
     setLikes(snippet.hearts.length);
-  }, []);
+  }, [snippet.hearts]);
 
   //functions
   const heartSnippet = async (e) => {
@@ -47,22 +47,22 @@ function SnippetRow({ snippet }) {
       >
         {snippet.type_of === "podcast" && (
           <div className="mat-icon center c1">
-            <Mic fontSize="medium" />
+            <Mic fontSize="default" />
           </div>
         )}
         {snippet.type_of === "article" && (
           <div className="mat-icon center c2">
-            <Description fontSize="medium" />
+            <Description fontSize="default" />
           </div>
         )}
         {snippet.type_of === "video" && (
           <div className="mat-icon center c3">
-            <Movie fontSize="medium" />
+            <Movie fontSize="default" />
           </div>
         )}
         {snippet.type_of === "link" && (
           <div className="mat-icon center c4">
-            <Link fontSize="medium" />
+            <Link fontSize="default" />
           </div>
         )}
         <div className="info">

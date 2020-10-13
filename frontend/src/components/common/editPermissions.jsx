@@ -2,7 +2,6 @@ import React, { useState } from "react";
 //api
 import { postCollectionSettings } from "../../helpers/api";
 //modules
-import { useForm } from "react-hook-form";
 import { useStateValue } from "../../helpers/stateProvider";
 import { Public, Lock } from "@material-ui/icons";
 import SubmitButton from "./submitBtn";

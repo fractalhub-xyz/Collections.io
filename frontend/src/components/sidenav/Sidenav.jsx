@@ -17,7 +17,7 @@ function Sidenav({ history }) {
       history.listen((location) => {
         setActiveUrl(location.pathname);
       }),
-    []
+    [history]
   );
 
   return (

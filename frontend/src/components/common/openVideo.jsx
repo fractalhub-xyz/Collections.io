@@ -14,15 +14,17 @@ function OpenVideo() {
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-        ></iframe>
-      ) : (
-        <iframe
-          width="350"
-          height="200"
-          src={id}
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          title="video-player-mobile"
+          ></iframe>
+          ) : (
+            <iframe
+            width="350"
+            height="200"
+            src={id}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            title="video-player"
         ></iframe>
       )}
     </div>

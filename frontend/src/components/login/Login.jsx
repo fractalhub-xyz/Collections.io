@@ -3,10 +3,7 @@ import "./login.sass";
 //components
 import LoginForm from "./loginForm";
 import RegisterForm from "./registerForm";
-import { useStateValue } from "../../helpers/stateProvider";
-import logo from "../../assets/svgs/Logo.png";
 function Login() {
-  const [, dispatch] = useStateValue();
   const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {

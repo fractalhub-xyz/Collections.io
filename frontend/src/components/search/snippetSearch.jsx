@@ -24,22 +24,22 @@ function SnippetSearch({ snippet }) {
       <div className="info">
         {snippet.type_of === "podcast" && (
           <div className="icon">
-            <Mic fontSize="medium" />
+            <Mic fontSize="default" />
           </div>
         )}
         {snippet.type_of === "article" && (
           <div className="icon">
-            <Description fontSize="medium" />
+            <Description fontSize="default" />
           </div>
         )}
         {snippet.type_of === "video" && (
           <div className="icon">
-            <Movie fontSize="medium" />
+            <Movie fontSize="default" />
           </div>
         )}
         {snippet.type_of === "link" && (
           <div className="icon">
-            <Link fontSize="medium" />
+            <Link fontSize="default" />
           </div>
         )}
         <div className="title">{snippet.title}</div>

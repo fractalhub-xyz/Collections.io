@@ -32,7 +32,6 @@ function Home() {
         try {
           const response = await getAllFollowedCollections();
           setFollowedCollections(response.data);
-          console.log(response.data);
         } catch (error) {
           console.log(`[ERROR] >> ${error.response}`);
           setGetError("Error communicating with server");
@@ -57,8 +56,6 @@ function Home() {
       fetchFollowedCollection();
     }
   }, [showall]);
-
-  console.log(followedCollections);
 
   return (
     <div>

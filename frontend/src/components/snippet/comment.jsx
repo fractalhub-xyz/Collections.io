@@ -17,7 +17,7 @@ function Comment({ comment, setUpdateComments }) {
   useEffect(() => {
     setUpvotes(comment.upvotes.length);
     setIsupvoted(comment.upvotes.includes(localStorage.getItem("user")));
-  }, []);
+  }, [comment.upvotes]);
 
   const DeleteComm = async (e) => {
     e.preventDefault();

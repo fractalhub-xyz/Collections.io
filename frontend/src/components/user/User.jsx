@@ -53,7 +53,7 @@ function User() {
     }
     fetchUser();
     setRefresh(false);
-  }, [refresh, params]);
+  }, [refresh, params, userID]);
 
   const followUser = async (e) => {
     e.preventDefault();

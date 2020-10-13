@@ -8,7 +8,6 @@ import SnippetRow from "./snippetRow";
 import { isMobile } from "react-device-detect";
 //icons
 import {
-  Favorite,
   Link,
   Mic,
   Movie,
@@ -34,7 +33,6 @@ function Collection() {
   const [collection, setCollection] = useState({});
   const [colid, setColid] = useState(null);
   const [snippets, setSnippets] = useState([]);
-  const [isOwner, setIsOwner] = useState(false);
   const [tags, setTags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isPrivate, setIsPrivate] = useState(false);
@@ -101,7 +99,6 @@ function Collection() {
 
   useEffect(() => {
     if (user === collection.owner) {
-      setIsOwner(true);
       setIsWhitelist(true);
     }
     if (collection.permission === "all") {
@@ -285,7 +282,7 @@ function Collection() {
                   setFilter("podcast");
                 }}
               >
-                <Mic fontSize="medium" className="mat-icon a1" />
+                <Mic fontSize="default" className="mat-icon a1" />
                 <p>{podcasts}</p>
               </div>
               <div
@@ -294,7 +291,7 @@ function Collection() {
                   setFilter("article");
                 }}
               >
-                <Description fontSize="medium" className="mat-icon a2" />
+                <Description fontSize="default" className="mat-icon a2" />
                 <p>{articles}</p>
               </div>
               <div
@@ -303,7 +300,7 @@ function Collection() {
                   setFilter("link");
                 }}
               >
-                <Link fontSize="medium" className="mat-icon a4" />
+                <Link fontSize="default" className="mat-icon a4" />
                 <p>{links}</p>
               </div>
               <div
@@ -312,7 +309,7 @@ function Collection() {
                   setFilter("video");
                 }}
               >
-                <Movie fontSize="medium" className="mat-icon a3" />
+                <Movie fontSize="default" className="mat-icon a3" />
                 <p>{videos}</p>
               </div>
             </div>
@@ -368,7 +365,7 @@ function Collection() {
                   setFilter("podcast");
                 }}
               >
-                <Mic fontSize="medium" className="mat-icon a1" />
+                <Mic fontSize="default" className="mat-icon a1" />
                 <p>{podcasts}</p>
               </div>
               <div
@@ -377,7 +374,7 @@ function Collection() {
                   setFilter("article");
                 }}
               >
-                <Description fontSize="medium" className="mat-icon a2" />
+                <Description fontSize="default" className="mat-icon a2" />
                 <p>{articles}</p>
               </div>
               <div
@@ -386,7 +383,7 @@ function Collection() {
                   setFilter("link");
                 }}
               >
-                <Link fontSize="medium" className="mat-icon a4" />
+                <Link fontSize="default" className="mat-icon a4" />
                 <p>{links}</p>
               </div>
               <div
@@ -395,7 +392,7 @@ function Collection() {
                   setFilter("video");
                 }}
               >
-                <Movie fontSize="medium" className="mat-icon a3" />
+                <Movie fontSize="default" className="mat-icon a3" />
                 <p>{videos}</p>
               </div>
             </div>

@@ -11,7 +11,7 @@ function EditTags() {
   const [error, setError] = useState("");
   const prevTags = prefill_data.tags;
 
-  const { register, handleSubmit, formState,er } = useForm({
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: {
       tags: prevTags,
     },

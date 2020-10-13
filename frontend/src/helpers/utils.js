@@ -1,4 +1,4 @@
-import { DEFAULT_COVER_IMAGE } from './constants'
+import { DEFAULT_COVER_IMAGE } from "./constants";
 
 /**
  * Helper to ease including conditional classes
@@ -44,10 +44,22 @@ export function getCoverForCollection(collection) {
   return {
     background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${coverImg}) center / cover`,
   };
-};
+}
+export function getCoverForTag(tag) {
+  let coverImg = DEFAULT_COVER_IMAGE;
+
+  const images = tag.image_urls.split(",");
+  if (images.length) {
+    coverImg = images[getRandomInt(images.length)];
+  }
+
+  return {
+    background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(${coverImg}) center / cover`,
+  };
+}
 
 export function setLen(len, total) {
   return {
-    width: `calc(${len/total*84}% + 4%)` 
-  }
+    width: `calc(${(len / total) * 84}% + 4%)`,
+  };
 }

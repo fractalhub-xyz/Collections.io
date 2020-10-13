@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./navbar.sass";
 //modueles
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { debounce } from "../../helpers/debounce";
 //icons
 import { Search } from "@material-ui/icons";
@@ -14,7 +14,6 @@ function Navbar() {
   //init
   let history = useHistory();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const params = useParams();
 
   const debouncedHandler = useCallback(
     debounce((value) => {

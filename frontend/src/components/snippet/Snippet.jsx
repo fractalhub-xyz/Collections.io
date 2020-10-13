@@ -253,6 +253,7 @@ function Snippet() {
               frameborder="0"
               allowtransparency="true"
               allow="encrypted-media"
+              title="spotify-player"
             />{" "}
           </div>
         )}
