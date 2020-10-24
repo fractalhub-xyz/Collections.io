@@ -100,11 +100,27 @@ function User() {
     setNumCollection(collections.length);
   }, [collections]);
 
+  function getImg() {
+    if (!user.profile || !user.profile.avatar_in_base64) {
+      return ''
+    }
+
+    let base = user.profile.avatar_in_base64
+    base = base.substr(3, base.length - 5)
+    base = "data:image/jpeg;base64, " + base
+    
+    return base
+  }
+
+  console.log("USER", user)
+
   return (
     <main className="user">
       <div className="info">
         <div className="card">
-          <div className="propic"></div>
+          <div className="propic">
+            <img src={getImg()} />
+          </div>
           <div className="username">{user.username}</div>
           <div className="email">{user.email}</div>
           <div className="stats">

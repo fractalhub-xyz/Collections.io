@@ -1,5 +1,5 @@
 import io
-import logic
+from avatar import logic
 import base64
 from PIL import Image, ImageDraw
 
