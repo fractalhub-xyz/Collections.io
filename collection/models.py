@@ -35,6 +35,7 @@ COLLECTION_VISIBILITY = (
 class Profile(models.Model):
     user = models.OneToOneField(User, to_field='id',
                                 on_delete=models.CASCADE, primary_key=True)
+    avatar_in_base64 = models.TextField()
     followers = models.ManyToManyField(
         User, related_name="following_users", blank=True)
 

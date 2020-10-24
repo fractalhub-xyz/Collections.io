@@ -69,7 +69,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['followers']
+        fields = ['followers', 'avatar_in_base64']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
