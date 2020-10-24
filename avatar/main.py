@@ -1,7 +1,7 @@
 import random
 import hashlib
 
-from utils import generate_identicon
+from .utils import generate_identicon
 
 
 def generate_unique_identicon(name):

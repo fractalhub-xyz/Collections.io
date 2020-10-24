@@ -5,6 +5,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from avatar.main import generate_unique_identicon
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -35,7 +36,7 @@ COLLECTION_VISIBILITY = (
 class Profile(models.Model):
     user = models.OneToOneField(User, to_field='id',
                                 on_delete=models.CASCADE, primary_key=True)
-    avatar_in_base64 = models.TextField()
+    avatar_in_base64 = models.TextField(default='')
     followers = models.ManyToManyField(
         User, related_name="following_users", blank=True)
 
@@ -46,7 +47,9 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        avatar = generate_unique_identicon(instance.username)
+        print('avatar', avatar)
+        Profile.objects.create(user=instance, avatar_in_base64=avatar)
     instance.profile.save()
 
 
