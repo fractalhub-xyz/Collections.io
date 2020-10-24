@@ -19,7 +19,7 @@ ipaddress==1.0.17
 keyring==10.6.0
 keyrings.alt==3.0
 powerline-status==2.6
-psutil==5.4.2
+psutil==5.6.6
 pycrypto==2.6.1
 pygobject==3.26.1
 python-decouple==3.3
