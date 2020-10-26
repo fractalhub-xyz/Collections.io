@@ -7,6 +7,7 @@ import { getUserFromID, postUserFollow } from "../../helpers/api";
 import { useHistory, useParams } from "react-router-dom";
 import YourCollection from "./yourCollection";
 import { useStateValue } from "../../helpers/stateProvider";
+import { getImg } from "../../helpers/utils";
 
 function User() {
   const params = useParams();
@@ -100,15 +101,6 @@ function User() {
     setNumCollection(collections.length);
   }, [collections]);
 
-  function getImg() {
-    if (!user.profile || !user.profile.avatar_in_base64) {
-      return "";
-    }
-
-    let base = user.profile.avatar_in_base64;
-    return base;
-  }
-
   console.log("USER", user);
 
   return (
@@ -116,7 +108,7 @@ function User() {
       <div className="info">
         <div className="card">
           <div className="propic">
-            <img src={getImg()} />
+            <img src={getImg(user)} alt="propic" />
           </div>
           <div className="username">{user.username}</div>
           <div className="email">{user.email}</div>

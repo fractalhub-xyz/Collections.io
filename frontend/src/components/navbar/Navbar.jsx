@@ -9,6 +9,8 @@ import { Search } from "@material-ui/icons";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import logo from "../../assets/svgs/Logo.png";
+import { getImg } from "../../helpers/utils";
+import { getUserFromID } from "../../helpers/api";
 
 function Navbar() {
   //init
@@ -21,6 +23,22 @@ function Navbar() {
     }, 500),
     []
   );
+
+  const [user, setUser] = useState({});
+
+  // lifecycle functions
+  useEffect(() => {
+    async function fetchUser() {
+      const user = localStorage.getItem("user");
+      try {
+        const response = await getUserFromID(user);
+        setUser(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUser();
+  }, []);
 
   const inputOnChange = (e) => {
     const value = e.target.value;
@@ -69,7 +87,9 @@ function Navbar() {
           onClick={() => {
             history.push(`/user/${localStorage.getItem("user")}`);
           }}
-        ></div>
+        >
+          <img src={getImg(user)} alt="propic" />
+        </div>
       </div>
     </main>
   );
