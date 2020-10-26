@@ -16,9 +16,10 @@ def generate_identicon(hash_in_hexa):
 
     byte_array = io.BytesIO()
     identicon.save(byte_array, format='PNG')
-    img_base64 = base64.b64encode(byte_array.getvalue())
+    img_base64 = base64.b64encode(byte_array.getvalue()).decode('ascii')
+    url = "data:image/png;base64,"+img_base64
 
-    return img_base64
+    return url
 
 
 def flat_matrix(matrix):

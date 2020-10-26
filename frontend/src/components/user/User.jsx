@@ -102,17 +102,14 @@ function User() {
 
   function getImg() {
     if (!user.profile || !user.profile.avatar_in_base64) {
-      return ''
+      return "";
     }
 
-    let base = user.profile.avatar_in_base64
-    base = base.substr(3, base.length - 5)
-    base = "data:image/jpeg;base64, " + base
-    
-    return base
+    let base = user.profile.avatar_in_base64;
+    return base;
   }
 
-  console.log("USER", user)
+  console.log("USER", user);
 
   return (
     <main className="user">
