@@ -9,17 +9,6 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ["name", "image_urls"]
 
 
-class CommentSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-    upvotes = serializers.StringRelatedField(many=True, read_only=True)
-
-    class Meta:
-        model = Comment
-        fields = [
-            'id', 'comment', 'owner', 'snippet', 'upvotes'
-        ]
-
-
 class SnippetSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     hearts = serializers.StringRelatedField(many=True, read_only=True)
@@ -91,7 +80,23 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class ShortUserSerializer(serializers.ModelSerializer):
+class ShortUserSerializer(serializers.HyperlinkedModelSerializer):
+    profile = ProfileSerializer(read_only=True)
+
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = [
+            'username', 'profile', 'email'
+        ]
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    upvotes = serializers.StringRelatedField(many=True, read_only=True)
+    owner = serializers.ReadOnlyField(source='owner.username')
+    avatar = serializers.ReadOnlyField(
+        source='owner.profile.avatar_in_base64')
+    class Meta:
+        model = Comment
+        fields = [
+            'id', 'comment', 'owner', 'avatar', 'snippet', 'upvotes',
+        ]

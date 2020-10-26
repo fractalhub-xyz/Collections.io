@@ -102,7 +102,8 @@ class CommentViewSet(ModelNoListViewset):
     ]
 
     def perform_create(self, serializer):
-        s = serializer.save(owner=self.request.user)
+        s = serializer.save(owner=self.request.user,
+                            avatar=self.request.user.profile.avatar_in_base64)
         print(s)
 
 

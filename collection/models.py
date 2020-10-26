@@ -105,6 +105,7 @@ class Comment(models.Model):
     comment = models.CharField(max_length=1000)
     owner = models.ForeignKey(
         User, related_name='comments', on_delete=models.CASCADE)
+    avatar = models.TextField(default='')
     snippet = models.ForeignKey(
         Snippet, related_name='comments', on_delete=models.CASCADE)
     upvotes = models.ManyToManyField(User, related_name="upvoted_comments")

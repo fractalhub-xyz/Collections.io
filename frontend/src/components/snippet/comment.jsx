@@ -8,6 +8,7 @@ import {
   postUpvoteComment,
   putEditComment,
 } from "../../helpers/api";
+import { getImg } from "../../helpers/utils";
 
 function Comment({ comment, setUpdateComments }) {
   const [upvotes, setUpvotes] = useState(0);
@@ -67,7 +68,9 @@ function Comment({ comment, setUpdateComments }) {
     <div className="comment">
       <div className="top">
         <div className="left">
-          <div className="icon" />
+          <div className="icon">
+            <img src={comment.avatar} alt="propic" />
+          </div>
           <div className="by">{comment.owner}</div>
         </div>
         <div className="right">

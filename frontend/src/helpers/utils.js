@@ -68,7 +68,6 @@ export function getImg(user) {
   if (!user.profile || !user.profile.avatar_in_base64) {
     return "";
   }
-
   let base = user.profile.avatar_in_base64;
   return base;
 }
