@@ -25,7 +25,7 @@ function Tag2Collection({ collection }) {
       className="bg"
       style={coll_bg}
       onClick={() => {
-        history.push(`collection/${collection.id}`);
+        history.push(`/collection/${collection.id}`);
       }}
     >
       <div className={"tag2collection"}>

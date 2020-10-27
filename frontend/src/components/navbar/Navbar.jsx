@@ -63,7 +63,14 @@ function Navbar() {
   return (
     <main className="navbar-desk">
       <div className="container-left">
-        <img src={logo} alt="logo" className="colelctions-logo" />
+        <img
+          src={logo}
+          alt="logo"
+          className="colelctions-logo"
+          onClick={() => {
+            history.push("/");
+          }}
+        />
         <div className="searchbox">
           <Search />
           <input placeholder="Search" onChange={inputOnChange} />

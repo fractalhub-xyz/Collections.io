@@ -11,11 +11,14 @@ def get_images_for_tag(tag_name):
         return []
 
     url = f'{BASE_URL}?query={tag_name}&client_id={client_id}&per_page=4'
+    
+    print(url)
+
 
     response = requests.get(url)
     results = response.json()['results']
 
-    thumbs = [res['urls']['thumb'] for res in results]
+    thumbs = [res['urls']['small'] for res in results]
     print(thumbs)
 
     return ','.join(thumbs)
