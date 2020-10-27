@@ -1,7 +1,5 @@
 import React from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-// import { ToastsContainer, ToastsStore } from "react-toasts";
+import { Switch, Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 
 import Login from "./components/login/Login";
 import Navbar from "./components/navbar/Navbar";
@@ -17,6 +15,10 @@ import Tag from "./components/tag/Tag";
 import Search from "./components/search/Search";
 
 function AuthenticatedRoutes() {
+  if (!localStorage.getItem('token')) {
+    return <Redirect to="/" />
+  }
+
   return (
     <>
       <Navbar />

@@ -114,7 +114,6 @@ function User() {
           <div className="email">{user.email}</div>
           <div className="stats">
             <div className="stat"> {no_followers} Follower</div>
-            {/* <div className="stat"> 1 Following</div> */}
             <div className="stat"> {numCollectionFollows} ★</div>
           </div>
           {user.username === localStorage.getItem("user") ? (
@@ -131,6 +130,8 @@ function User() {
               </button>
               <button
                 onClick={() => {
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('user');
                   history.push("/");
                 }}
               >
