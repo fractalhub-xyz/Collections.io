@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import "./login.sass";
 //components
 import LoginForm from "./loginForm";
 import RegisterForm from "./registerForm";
+
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
 
-  useEffect(() => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-  }, []);
+  if (localStorage.getItem('token')) {
+    return <Redirect to="/home" />
+  }
 
   return (
     <main className="login">
