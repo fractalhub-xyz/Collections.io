@@ -180,23 +180,25 @@ function Collection() {
                     {tag.name}
                   </div>
                 ))}
-                <div
-                  className="addtag"
-                  onClick={() => {
-                    dispatch({
-                      type: "OPEN_FORM",
-                      form: "edit_tags",
-                      id: collection.id,
-                      prefill_data: {
-                        tags: collection.tags
-                          .map((tag) => tag.name.trim())
-                          .join(","),
-                      },
-                    });
-                  }}
-                >
-                  <Add />
-                </div>
+                {collection.owner === user && (
+                  <div
+                    className="addtag"
+                    onClick={() => {
+                      dispatch({
+                        type: "OPEN_FORM",
+                        form: "edit_tags",
+                        id: collection.id,
+                        prefill_data: {
+                          tags: collection.tags
+                            .map((tag) => tag.name.trim())
+                            .join(","),
+                        },
+                      });
+                    }}
+                  >
+                    <Add />
+                  </div>
+                )}
               </div>
               <div className="btn center" onClick={followCollection}>
                 {isFollowed ? <p>UNFOLLOW</p> : <p>FOLLOW</p>}
@@ -222,7 +224,7 @@ function Collection() {
                         form: "edit_permissions",
                         id: collection.id,
                         prefill_data: {
-                          allowed_users: collection.allowed_users,
+                          allowed_users: collection.allowed_users.join(","),
                           permission: collection.permission,
                         },
                       });
