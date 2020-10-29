@@ -18,7 +18,8 @@ import {
   Favorite,
   PlayArrow,
   NavigateBefore,
-  Report
+  Report,
+  OpenInBrowser,
 } from "@material-ui/icons";
 import OtherSnippets from "./otherSnippets";
 import { useStateValue } from "../../helpers/stateProvider";
@@ -69,7 +70,7 @@ function Snippet() {
       } catch (error) {
         console.error(error);
         if (error.response.status === 403) {
-          setIsPrivate(true)
+          setIsPrivate(true);
         }
       }
     }
@@ -177,10 +178,12 @@ function Snippet() {
   };
 
   if (isPrivate) {
-    return <main className="error-page">
-      <Report fontSize="large" />
-      <div>You can't access this collection</div>
-    </main>
+    return (
+      <main className="error-page">
+        <Report fontSize="large" />
+        <div>You can't access this collection</div>
+      </main>
+    );
   }
 
   return (
@@ -214,7 +217,7 @@ function Snippet() {
             <div className="btns">
               {(snippet.owner === user || collection.owner === user) && (
                 <div
-                  className="ctrl-btn center"
+                  className="ctrl-btn center mb"
                   onClick={() => {
                     dispatch({
                       type: "OPEN_FORM",
@@ -233,13 +236,20 @@ function Snippet() {
                   <Create />
                 </div>
               )}
+              <a
+                className="ctrl-btn center"
+                href={snippet.link}
+                target="_blank"
+              >
+                <OpenInBrowser fontSize="medium" />
+              </a>
               <div
                 className="ctrl-btn center"
                 onClick={() => {
                   history.push(`/collection/${collection.id}`);
                 }}
               >
-                <NavigateBefore fontSize="large"/>
+                <NavigateBefore fontSize="large" />
               </div>
             </div>
           </div>
