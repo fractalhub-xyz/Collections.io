@@ -19,10 +19,16 @@ function EditTags() {
 
   const addTagHandler = async (data, e) => {
     e.preventDefault();
+
     const tags = data.tags
       .split(",")
       .map((t) => t.trim())
       .join(",");
+
+    if (tags === '') {
+      dispatch({ type: "CLOSE_MODAL" });
+    }
+
     const payload = {
       tags,
     };
