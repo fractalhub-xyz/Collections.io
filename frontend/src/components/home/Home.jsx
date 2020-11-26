@@ -6,7 +6,7 @@ import {
   getAllFollowedCollections,
 } from "../../helpers/api";
 //componentss
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { Add, ExpandMore, ExpandLess } from "@material-ui/icons";
 import { useStateValue } from "../../helpers/stateProvider";
@@ -56,6 +56,10 @@ function Home() {
       fetchFollowedCollection();
     }
   }, [showall]);
+
+  if (!isLoading && followedCollections?.length === 0) {
+    return <Redirect to="/explore" />
+  }
 
   return (
     <div>
